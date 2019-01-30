@@ -1,11 +1,181 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <title>Admin History Of Student Requests </title>
+
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" type="text/css" href="/CSS/styles.css">
+    <!-- Bootstrap 4.1 CND -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Font Awsome icons -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+    integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    
 </head>
 
 <body>
+    <header class="jumbotron text-center">
+        <div class="row">
+            <div class="col-lg-6">
+                <h2>Welcome (Name)</h2>
+                <p>Course details</p>
+            </div>
+            <div class="col-lg-6">
+                 <h1>LCG Logo</h1>
+                 <a href="" class="btn btn-outline-success btn-sm">Log out</a>
+            </div>
+        </div>
+    </header>
+    
+<div class="row">
+    <div class="dropdown col-3 ml-4">
+                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-list-ul"></i></a>
+                       
+                    <div class="dropdown-menu bg-secondary" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="Review Student Submissions.html">Review Student Submissions</a>
+                <a class="dropdown-item" href="Review Staff Submissions.html">Review Staff Submissions</a>
+                <a class="dropdown-item" href="History Student Requests.html">History Student Requests</a>
+                <a class="dropdown-item" href="History Staff Requests.html">History Staff Requests</a>
+                <a class="dropdown-item" href="FAQ.html">FAQ</a>
+                <a class="dropdown-item" href="Agreement Form.html">Agreement Form</a>
+            </div>
+             </div>
+                
+        <div class="col-3">
+            <ul class="list-group">
+                     <li class="list-group-item  border-0">Submitted: <span>10</span></li>
+                     <li class="list-group-item  border-0">Approved: <span>8</span></li>
+                <li class="list-group-item  border-0">Awaiting delivery: <span>YES</span></li>
+            </ul>
+        </div>
+</div>
+
+<section class="container-fluid">
+    
+ <!-- Choose course -->
+    <div class="row">
+        <div class="col-2">
+            <div class="btn-group split">
+              <button type="button" class="btn btn-secondary ">
+                Choose course
+              </button>
+              <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="sr-only">Toggle Dropright</span>
+              </button>
+                  <div class="dropdown-menu dropdown-menu-right">
+                    <button class="dropdown-item" type="button">Computer Science</button>
+                    <button class="dropdown-item" type="button">Construction</button>
+                    <button class="dropdown-item" type="button">Hairdressing & Stuff</button>
+                  </div>
+            </div>
+        </div>
+  <!-- Choose date -->       
+        <div class="col-2">
+            <div class="col-2">
+            <div class="btn-group split">
+              <button type="button" class="btn btn-secondary ">
+                Level
+              </button>
+              <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="sr-only">Toggle Dropright</span>
+              </button>
+                  <div class="dropdown-menu dropdown-menu-right">
+                    <button class="dropdown-item" type="button">Level 4 19/20</button>
+                    <button class="dropdown-item" type="button">Level 5 20/21</button>
+                    <button class="dropdown-item" type="button">Level 6 21/22</button>
+                  </div>
+            </div>
+        </div>
+        </div>
+ <!-- Student Name -->       
+        <div class="col-2">
+            <div class="col-2">
+            <div class="btn-group split">
+              <button type="button" class="btn btn-secondary ">
+                Student Name
+              </button>
+              <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="sr-only">Toggle Dropright</span>
+              </button>
+                  <div class="dropdown-menu dropdown-menu-right">
+                    <button class="dropdown-item" type="button">John Jony</button>
+                    <button class="dropdown-item" type="button">Crisp</button>
+                    <button class="dropdown-item" type="button">Natasha</button>
+                  </div>
+            </div>
+        </div>
+        </div>
+        <!--Order status -->
+        <div class="col-2">
+            <div class="col-2">
+            <div class="btn-group split">
+              <button type="button" class="btn btn-secondary ">
+                Delivery status
+              </button>
+              <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="sr-only">Toggle Dropright</span>
+              </button>
+                  <div class="dropdown-menu dropdown-menu-right">
+                    <button class="dropdown-item" type="button">Awaiting</button>
+                    <button class="dropdown-item" type="button">Confirmed</button>
+                    <button class="dropdown-item" type="button">Delivered</button>
+                  </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    
+    <!-- Table -->
+    <table class="table table-hover table-striped table-bordered mt-5 w-50">
+        <thead class="bg-info text-white">
+            <tr>
+                <th scope="col">Student ID</th>
+                <th scope="col">BursaryID</th>
+                <th scope="col">Submission date</th>
+                <th scope="col">Item ID</th>
+                <th scope="col">Total Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>351515</td>
+                <td>521521</td>
+                <td>10/10/10</td>
+                <td>23</td>
+                <td>£300</td>
+            </tr>
+            <tr>
+                <td>351515</td>
+                <td>521521</td>
+                <td>10/10/10</td>
+                <td>10</td>
+                <td>£100</td>
+            </tr>
+            <tr>
+                <td>351515</td>
+                <td>521521</td>
+                <td>10/10/10</td>
+                <td>5</td>
+                <td>£50</td>
+            </tr>
+        </tbody>
+    </table>
+    
+</section>
+    
+    
+    
+    
+    
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
 </body>
 
