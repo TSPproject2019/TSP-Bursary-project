@@ -20,17 +20,18 @@
 
 <body>
     <header class="jumbotron text-center">
-        <div class="row">
-            <div class="col-lg-6">
+        <div class="row text-center">
+        <div class="col-lg-6">
                 <h2>Welcome (Name)</h2>
                 <p>Course details</p>
-            </div>
-            <div class="col-lg-6">
-                 <h1>LCG Logo</h1>
-                 <a href="" class="btn btn-outline-success btn-sm">Log out</a>
-            </div>
         </div>
-    </header>
+        
+        <div class="col-lg-6">
+            <img src="../Staff/Images/logo1.png" class="img-fluid" width="100px", height="50px" alt="Responsive image"></img>
+            <a href="" class="btn btn-outline-success btn-sm">Log out</a>
+        </div>
+    </div>
+</header>
     
 <div class="row">
     <div class="dropdown col-3 ml-4">
@@ -38,12 +39,12 @@
                 <i class="fas fa-list-ul"></i></a>
                        
                     <div class="dropdown-menu bg-secondary" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="Review Student Submissions.html">Review Student Submissions</a>
-                <a class="dropdown-item" href="Review Staff Submissions.html">Review Staff Submissions</a>
-                <a class="dropdown-item" href="History Student Requests.html">History Student Requests</a>
-                <a class="dropdown-item" href="History Staff Requests.html">History Staff Requests</a>
-                <a class="dropdown-item" href="FAQ.html">FAQ</a>
-                <a class="dropdown-item" href="Agreement Form.html">Agreement Form</a>
+                        <a class="dropdown-item" href="Review Student Submissions.html">Review Student Submissions</a>
+                        <a class="dropdown-item" href="Review Staff Submissions.html">Review Staff Submissions</a>
+                        <a class="dropdown-item" href="History Student Requests.html">History Student Requests</a>
+                        <a class="dropdown-item" href="History Staff Requests.html">History Staff Requests</a>
+                        <a class="dropdown-item" href="FAQ.html">FAQ</a>
+                        <a class="dropdown-item" href="Agreement Form.html">Agreement Form</a>
             </div>
              </div>
                 
@@ -60,79 +61,171 @@
     
  <!-- Choose course -->
     <div class="row">
-        <div class="col-2">
-            <div class="btn-group split">
-              <button type="button" class="btn btn-secondary ">
-                Choose course
-              </button>
-              <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="sr-only">Toggle Dropright</span>
-              </button>
-                  <div class="dropdown-menu dropdown-menu-right">
-                    <button class="dropdown-item" type="button">Computer Science</button>
-                    <button class="dropdown-item" type="button">Construction</button>
-                    <button class="dropdown-item" type="button">Hairdressing & Stuff</button>
-                  </div>
-            </div>
-        </div>
-  <!-- Choose date -->       
-        <div class="col-2">
-            <div class="col-2">
-            <div class="btn-group split">
-              <button type="button" class="btn btn-secondary ">
-                Level
-              </button>
-              <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="sr-only">Toggle Dropright</span>
-              </button>
-                  <div class="dropdown-menu dropdown-menu-right">
-                    <button class="dropdown-item" type="button">Level 4 19/20</button>
-                    <button class="dropdown-item" type="button">Level 5 20/21</button>
-                    <button class="dropdown-item" type="button">Level 6 21/22</button>
-                  </div>
-            </div>
-        </div>
-        </div>
- <!-- Student Name -->       
-        <div class="col-2">
-            <div class="col-2">
-            <div class="btn-group split">
-              <button type="button" class="btn btn-secondary ">
-                Student Name
-              </button>
-              <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="sr-only">Toggle Dropright</span>
-              </button>
-                  <div class="dropdown-menu dropdown-menu-right">
-                    <button class="dropdown-item" type="button">John Jony</button>
-                    <button class="dropdown-item" type="button">Crisp</button>
-                    <button class="dropdown-item" type="button">Natasha</button>
-                  </div>
-            </div>
-        </div>
-        </div>
-        <!--Order status -->
-        <div class="col-2">
-            <div class="col-2">
-            <div class="btn-group split">
-              <button type="button" class="btn btn-secondary ">
-                Delivery status
-              </button>
-              <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="sr-only">Toggle Dropright</span>
-              </button>
-                  <div class="dropdown-menu dropdown-menu-right">
-                    <button class="dropdown-item" type="button">Awaiting</button>
-                    <button class="dropdown-item" type="button">Confirmed</button>
-                    <button class="dropdown-item" type="button">Delivered</button>
-                  </div>
-            </div>
-        </div>
-        </div>
-    </div>
+        <select class="custom-select col-2 ml-2">
+          <option selected>Name of Group Selected</option>
+          <option value="1">BTECT IT</option>
+          <option value="2">BSc Computer Science</option>
+      </select>
+       
+  <!-- Choose Year -->       
+    <select class="custom-select col-2 ml-2">
+          <option selected>Year Selected</option>
+          <option value="1">Level 4 19/20</option>
+          <option value="2">Level 4 18/19</option>
+          <option value="3">Level 5 19/20</option>
+          <option value="3">Level 5 20/21</option>
+      </select>    
+ <!-- Choose staff name --> 
+    <select class="custom-select col-2 ml-2">
+          <option selected>Name of student Selected</option>
+          <option value="1">Ben Stimson</option>
+          <option value="2">David Williams</option>
+          <option value="3">Danny McCombs</option>
+    </select>
+ <!-- Sort By -->       
+    <select class="custom-select col-2 ml-2">
+          <option selected>Sort By</option>
+          <option value="1">Accepted</option>
+          <option value="2">Rejected</option>
+          <option value="3">Ordered</option>
+          <option value="3">Delivered</option>
+          <option value="3">All</option>
+    </select>
+
     
     <!-- Table -->
-    <table class="table table-hover table-striped table-bordered mt-5 w-50">
+    <table class="table table-hover table-striped table-bordered mt-5 w-75">
+        <thead class="bg-info text-white">
+            <tr>
+                <th scope="col">Student ID</th>
+                <th scope="col">BursaryID</th>
+                <th scope="col">Submission date</th>
+                <th scope="col">Item ID</th>
+                <th scope="col">Total Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>351515</td>
+                <td>521521</td>
+                <td>10/10/10</td>
+                <td>23</td>
+                <td>£300</td>
+                <td><button class="btn btn-warning">Ordered</button></td>
+            </tr>
+            <tr>
+                <td>351515</td>
+                <td>521521</td>
+                <td>10/10/10</td>
+                <td>10</td>
+                <td>£100</td>
+                <td><button class="btn btn-warning">Ordered</button></td>
+            </tr>
+            <tr>
+                <td>351515</td>
+                <td>521521</td>
+                <td>10/10/10</td>
+                <td>5</td>
+                <td>£50</td>
+                <td><button class="btn btn-warning">Ordered</button></td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- Rejected table -->
+    
+    <table class="table table-hover table-striped table-bordered mt-5 w-75">
+        <thead class="bg-info text-white">
+            <tr>
+                <th scope="col">Student Number</th>
+                <th scope="col">Web Form</th>
+                <th scope="col">Submitted Date</th>
+                <th scope="col">Staff Approval Date</th>
+                <th scope="col">Item Count</th>
+                <th scope="col">Total (Price)</th>
+                <th scope="col">Status</th>
+                <th scope="col">Admin Rejected Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>351515</td>
+                <td><a href="#">Link</a></td>
+                <td>10/10/2018</td>
+                <td>15/10/2018</td>
+                <td>2</td>
+                <td>£100.00</td>
+                <td>Rejected</td>
+                <td>20/10/2018</td>
+            </tr>
+            
+            <tr>
+                <td>351515</td>
+                <td><a href="#">Link</a></td>
+                <td>11/10/2018</td>
+                <td>15/10/2018</td>
+                <td>1</td>
+                <td>£340.00</td>
+                <td>Rejected</td>
+                <td>20/10/2018</td>
+            </tr>
+            
+            <tr>
+                <td>351515</td>
+                <td><a href="#">Link</a></td>
+                <td>11/10/2018</td>
+                <td>15/10/2018</td>
+                <td>4</td>
+                <td>£25.60</td>
+                <td>Rejected</td>
+                <td>20/10/2018</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- Ordered Table -->
+    
+    <table class="table table-hover table-striped table-bordered mt-5 w-75">
+        <thead class="bg-info text-white">
+            <tr>
+                <th scope="col">Student ID</th>
+                <th scope="col">BursaryID</th>
+                <th scope="col">Submission date</th>
+                <th scope="col">Item ID</th>
+                <th scope="col">Total Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>351515</td>
+                <td>521521</td>
+                <td>10/10/10</td>
+                <td>23</td>
+                <td>£300</td>
+                <td><button class="btn btn-success">Delivered</button></td>
+            </tr>
+            <tr>
+                <td>351515</td>
+                <td>521521</td>
+                <td>10/10/10</td>
+                <td>10</td>
+                <td>£100</td>
+                <td><button class="btn btn-success">Delivered</button></td>
+            </tr>
+            <tr>
+                <td>351515</td>
+                <td>521521</td>
+                <td>10/10/10</td>
+                <td>5</td>
+                <td>£50</td>
+                <td><button class="btn btn-success">Delivered</button></td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- Delivered Table -->
+    
+    <table class="table table-hover table-striped table-bordered mt-5 w-75">
         <thead class="bg-info text-white">
             <tr>
                 <th scope="col">Student ID</th>
@@ -166,7 +259,6 @@
             </tr>
         </tbody>
     </table>
-    
 </section>
     
     

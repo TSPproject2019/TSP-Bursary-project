@@ -30,17 +30,18 @@
 <body>
     
 <header class="jumbotron text-center">
-        <div class="row">
-            <div class="col-lg-6">
+        <div class="row text-center">
+        <div class="col-lg-6">
                 <h2>Welcome (Name)</h2>
                 <p>Course details</p>
-            </div>
-            <div class="col-lg-6">
-                 <h1>LCG Logo</h1>
-                 <a href="" class="btn btn-outline-success btn-sm">Log out</a>
-            </div>
         </div>
-    </header>
+        
+        <div class="col-lg-6">
+            <img src="../Staff/Images/logo1.png" class="img-fluid" width="100px", height="50px" alt="Responsive image"></img>
+            <a href="" class="btn btn-outline-success btn-sm">Log out</a>
+        </div>
+    </div>
+</header>
     
 <div class="row">
     <div class="dropdown col-2 ml-4">
@@ -48,12 +49,12 @@
             <i class="fas fa-list-ul"></i></a>
                        
             <div class="dropdown-menu bg-secondary" aria-labelledby="dropdownMenuLink">
-            <a class="dropdown-item" href="Review Student Submissions.html">Review Student Submissions</a>
-            <a class="dropdown-item" href="Review Staff Submissions.html">Review Staff Submissions</a>
-            <a class="dropdown-item" href="History Student Requests.html">History Student Requests</a>
-            <a class="dropdown-item" href="History Staff Requests.html">History Staff Requests</a>
-            <a class="dropdown-item" href="FAQ.html">FAQ</a>
-            <a class="dropdown-item" href="Agreement Form.html">Agreement Form</a>
+                        <a class="dropdown-item" href="Review Student Submissions.html">Review Student Submissions</a>
+                        <a class="dropdown-item" href="Review Staff Submissions.html">Review Staff Submissions</a>
+                        <a class="dropdown-item" href="History Student Requests.html">History Student Requests</a>
+                        <a class="dropdown-item" href="History Staff Requests.html">History Staff Requests</a>
+                        <a class="dropdown-item" href="FAQ.html">FAQ</a>
+                        <a class="dropdown-item" href="Agreement Form.html">Agreement Form</a>>
         </div>
     </div>
     
@@ -73,7 +74,15 @@
 <section class="container-fluid mt-5">
     <section class="row">
      <div class="col-6">
-            <h6>Category field(Qualification, Equipment, Events, Professional accreditation, Vocational placement)</h6>
+            <div class="col-12 mt-2 mb-5">
+                                <select class="custom-select" id="categoryField">
+                                    <option selected>Qualification</option>
+                                    <option value="1">Equipment</option>
+                                    <option value="2">Events</option>
+                                    <option value="3">Professional acccreditation</option>
+                                    <option value="4">Vocational placement</option>
+                                </select>
+                            </div>
          <form>
              <div class="form-group">
                  <div>
@@ -87,6 +96,43 @@
                  </div>
                 </div>
             
+                <div class="form-group row justify-content-between">
+                    <div class="input-group col-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="price">Price:</span>
+                        </div>
+                        <input type="text" class="form-control"   aria-describedby="price">
+                    </div>
+                    
+                    <div class="input-group col-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="price">Postage:</span>
+                        </div>
+                        <input type="text" class="form-control"   aria-describedby="postage">
+                    </div>
+                    
+                    <div class="input-group col-4">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="additionalFees">Additional fees:</span>
+                        </div>
+                        <input type="text" class="form-control"   aria-describedby="additionalFees">
+                    </div>
+                    <input class="col-1" type="checkbox" value="">
+                </div>
+                
+                <h6>ITEM 2</h6>
+                 <div class="form-group">
+                 <div>
+                     <input type="text" class="form-control" placeholder="Item description:">
+                  </div>
+              </div>
+            
+              <div class="form-group">
+                 <div>
+                     <input type="text" class="form-control" placeholder="URL to the item:">
+                 </div>
+                </div>
+            <!--Put Price, Postage and Additional fees label above inut field -->>
                 <div class="form-group row justify-content-between">
                     <div class="input-group col-3">
                         <div class="input-group-prepend">
@@ -127,7 +173,7 @@
                 <div class="text-right">
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
-            </form>
+        </form>
         
         </div>
         <section class="col-6">
@@ -150,46 +196,41 @@
                 <input class="col-1 m-0" type="checkbox" id="checkbox3" value="">
                 <label class="form-check-label" for="checkbox3">Select All Students</label>
             </div>
-            <div class="row justify-content-around mt-4 text-center">
+            
+            <section>
+            <table class="table table-hover table-striped table-bordered mt-5">
+                <thead>
+                    <th>Student ID</th>
+                    <th>Student Name</th>
+                    <th>Submission Date</th>
+                    <th>Status</th>
+                </thead>
+                <tr>
+                    <td>317717</td>
+                    <td>Andrius Markusenka</td>
+                    <td>06/01/19</td>
+                    <td>Pending</td>
+                </tr>
                 
-                <ul class="list-group col-3 border-0">
-                    <h5 class="mb-1">Student's'</h5>
-                    <li class="list-group-item">No</li>
-                    <li class="list-group-item">Idea</li>
-                    <li class="list-group-item">Why</li>
-                    <li class="list-group-item">This table</li>
-                    <li class="list-group-item">exist</li>
-                </ul>
+                <tr>
+                    <td>123456</td>
+                    <td>Liviu Pussy Destroyer 300</td>
+                    <td>06/01/2018</td>
+                    <td>Confirmed</td>
+                </tr>
                 
-                <ul class="list-group col-3 border-0">
-                    <h5 class="mb-1">Student by ID</h5>
-                    <li class="list-group-item">121451654654</li>
-                    <li class="list-group-item">654987789458</li>
-                    <li class="list-group-item">879846546545</li>
-                    <li class="list-group-item">465456465546</li>
-                    <li class="list-group-item">654465564455</li>
-                </ul>
-                
-                <ul class="list-group col-3 border-0">
-                    <h5 class="mb-1">Student by Name</h5>
-                    <li class="list-group-item">Tonicha Hodges</li>
-                    <li class="list-group-item">STheresa Hines</li>
-                    <li class="list-group-item">Liyana Povey</li>
-                    <li class="list-group-item">Shamima Tran</li>
-                    <li class="list-group-item">Rhianna Heath</li>
-                </ul>
-            </div>
-            <section class="row mt-4 text-center justify-content-center">
-                <ul class="list-group col-3 border-0">
-                        <h5 class="mb-1">Student's'</h5>
-                        <li class="list-group-item">Submitted</li>
-                        <li class="list-group-item">Approved</li>
-                        <li class="list-group-item">Rejected</li>
-                        <li class="list-group-item">Submitted</li>
-                        <li class="list-group-item">Submitted</li>
-                </ul>
-            </section>
+                <tr>
+                    <td>213456</td>
+                    <td>Nikita The Spy</td>
+                    <td>03/12/2018</td>
+                    <td>Pending</td>
+                </tr>
+            </table>
+            
         </section>
+    </section>
+        
+        
     </section>
 </section>
 

@@ -20,31 +20,31 @@
 
 <body>
     <header class="jumbotron text-center">
-        <div class="row">
-            <div class="col-lg-6">
+        <div class="row text-center">
+        <div class="col-lg-6">
                 <h2>Welcome (Name)</h2>
                 <p>Course details</p>
-            </div>
-            <div class="col-lg-6">
-                 <h1>LCG Logo</h1>
-                 <a href="" class="btn btn-outline-success btn-sm">Log out</a>
-            </div>
         </div>
-    </header>
+        
+        <div class="col-lg-6">
+            <img src="../Staff/Images/logo1.png" class="img-fluid" width="100px", height="50px" alt="Responsive image"></img>
+            <a href="" class="btn btn-outline-success btn-sm">Log out</a>
+        </div>
+    </div>
+</header>
     
 <div class="row">
     <div class="dropdown col-3 ml-4">
                 <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-list-ul"></i></a>
-                       
-                    <div class="dropdown-menu bg-secondary" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="Review Student Submissions.html">Review Student Submissions</a>
-                <a class="dropdown-item" href="Review Staff Submissions.html">Review Staff Submissions</a>
-                <a class="dropdown-item" href="History Student Requests.html">History Student Requests</a>
-                <a class="dropdown-item" href="History Staff Requests.html">History Staff Requests</a>
-                <a class="dropdown-item" href="FAQ.html">FAQ</a>
-                <a class="dropdown-item" href="Agreement Form.html">Agreement Form</a>
-            </div>
+                <div class="dropdown-menu bg-secondary" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" href="Review Student Submissions.html">Review Student Submissions</a>
+                    <a class="dropdown-item" href="Review Staff Submissions.html">Review Staff Submissions</a>
+                    <a class="dropdown-item" href="History Student Requests.html">History Student Requests</a>
+                    <a class="dropdown-item" href="History Staff Requests.html">History Staff Requests</a>
+                    <a class="dropdown-item" href="FAQ.html">FAQ</a>
+                    <a class="dropdown-item" href="Agreement Form.html">Agreement Form</a>
+                </div>
              </div>
                 
         <div class="col-3">
@@ -59,93 +59,308 @@
 <section class="container-fluid">
     
  <!-- Choose course -->
+    <div class="row ml-2 mb-5">
+        <select class="custom-select col-2">
+          <option selected>Name of Group Selected</option>
+          <option value="1">BTEC IT</option>
+          <option value="2">BSc Computer Science</option>
+      </select>
+       
+  <!-- Choose Year -->       
+    <select class="custom-select col-2 ml-2">
+          <option selected>Year</option>
+          <option value="1">16/17</option>
+          <option value="2">17/18</option>
+          <option value="3">18/19</option>
+      </select>    
+ <!-- Choose staff name --> 
+    <select class="custom-select col-2 ml-2">
+          <option selected>Name of Staff Selected</option>
+          <option value="1">Ben Stimson</option>
+          <option value="2">David Williams</option>
+          <option value="3">Danny McCoombs</option>
+    </select>
+ <!-- Sort By -->       
+    <select class="custom-select col-2 ml-2">
+          <option selected>Sort By</option>
+          <option value="1">Accepted</option>
+          <option value="2">Rejected</option>
+          <option value="3">Ordered</option>
+          <option value="3">Delivered</option>
+    </select>
+    </div>
+    
+<hr>
+     <!-- ACCEPTED PAGE -->
+     <div class="row">
+        <select class="custom-select col-2 ml-2">
+          <option value="1" selected>BTEC IT</option>
+          <option value="2">BSc Computer Science</option>
+      </select>
+       
+  <!-- Choose Year -->       
+    <select class="custom-select col-2 ml-2">
+          <option value="1" selected>16/17</option>
+          <option value="2">17/18</option>
+          <option value="3">18/19</option>
+      </select>
+
+    <!-- StudentID -->
+     <select class="custom-select col-2 ml-2">
+          <option value="1" selected>290250</option>
+          <option value="2">2458792</option>
+          <option value="3">9875157</option>
+      </select>
+ <!-- Choose staff name --> 
+    <select class="custom-select col-2 ml-2">
+          <option value="1">Ben Stimson</option>
+          <option value="2" selected>David Williams</option>
+          <option value="3">Danny McCoombs</option>
+    </select>
+ <!-- Sort By -->       
+    <select class="custom-select col-2 ml-2">
+          <option value="1" selected>Accepted</option>
+          <option value="2">Rejected</option>
+          <option value="3">Ordered</option>
+          <option value="3">Delivered</option>
+    </select>
+   
+    </div>
+    
+    <!-- Table -->
+    <table class="table table-hover table-striped table-bordered mt-5 w-75">
+        <thead class="bg-info text-white">
+            <tr>
+                <th scope="col">StaffID</th>
+                <th scope="col">BursaryID</th>
+                <th scope="col">Submission date</th>
+                <th scope="col">StudentID</th>
+                <th scope="col">Item ID</th>
+                <th scope="col">Total Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>351515</td>
+                <td>521521</td>
+                <td>10/10/10</td>
+                <td>64364</td>
+                <td>23</td>
+                <td>£300</td>
+                <td><button class="btn btn-warning">Ordered</button></td>
+            </tr>
+            <tr>
+                <td>351515</td>
+                <td>521521</td>
+                <td>10/10/10</td>
+                <td>52525</td>
+                <td>10</td>
+                <td>£100</td>
+                <td><button class="btn btn-warning">Ordered</button></td>
+            </tr>
+            <tr>
+                <td>351515</td>
+                <td>521521</td>
+                <td>10/10/10</td>
+                <td>42642</td>
+                <td>5</td>
+                <td>£50</td>
+                <td><button class="btn btn-warning">Ordered</button></td>
+            </tr>
+        </tbody>
+    </table>
+    
+<hr>
+<!-- REJECTED Page -->
+<div class="row">
+        <select class="custom-select col-2 ml-2">
+          <option value="1" selected>BTEC IT</option>
+          <option value="2">BSc Computer Science</option>
+      </select>
+       
+  <!-- Choose Year -->       
+    <select class="custom-select col-2 ml-2">
+          <option value="1" selected>16/17</option>
+          <option value="2">17/18</option>
+          <option value="3">18/19</option>
+      </select>
+
+    <!-- StudentID -->
+     <select class="custom-select col-2 ml-2">
+          <option value="1" selected>290250</option>
+          <option value="2">2458792</option>
+          <option value="3">9875157</option>
+      </select>
+ <!-- Choose staff name --> 
+    <select class="custom-select col-2 ml-2">
+          <option value="1">Ben Stimson</option>
+          <option value="2" selected>David Williams</option>
+          <option value="3">Danny McCoombs</option>
+    </select>
+ <!-- Sort By -->       
+    <select class="custom-select col-2 ml-2">
+          <option value="1">Accepted</option>
+          <option value="2" selected>Rejected</option>
+          <option value="3">Ordered</option>
+          <option value="3">Delivered</option>
+    </select>
+   
+    </div>
+    
+    <!-- Table -->
+    <table class="table table-hover table-striped table-bordered mt-5 w-75">
+        <thead class="bg-info text-white">
+            <tr>
+                <th scope="col">StaffID</th>
+                <th scope="col">BursaryID</th>
+                <th scope="col">Submission date</th>
+                <th scope="col">StudentID</th>
+                <th scope="col">Item ID</th>
+                <th scope="col">Total Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>351515</td>
+                <td>521521</td>
+                <td>10/10/10</td>
+                <td>64364</td>
+                <td>23</td>
+                <td>£300</td>
+            </tr>
+            <tr>
+                <td>351515</td>
+                <td>521521</td>
+                <td>10/10/10</td>
+                <td>52525</td>
+                <td>10</td>
+                <td>£100</td>
+            </tr>
+            <tr>
+                <td>351515</td>
+                <td>521521</td>
+                <td>10/10/10</td>
+                <td>42642</td>
+                <td>5</td>
+                <td>£50</td>
+            </tr>
+        </tbody>
+    </table>
+<hr>
+    <!-- ORDERED PAGE -->
+ <div class="row">
+        <select class="custom-select col-2 ml-2">
+          <option value="1" selected>BTEC IT</option>
+          <option value="2">BSc Computer Science</option>
+      </select>
+       
+  <!-- Choose Year -->       
+    <select class="custom-select col-2 ml-2">
+          <option value="1" selected>16/17</option>
+          <option value="2">17/18</option>
+          <option value="3">18/19</option>
+      </select>
+
+    <!-- StudentID -->
+     <select class="custom-select col-2 ml-2">
+          <option value="1" selected>290250</option>
+          <option value="2">2458792</option>
+          <option value="3">9875157</option>
+      </select>
+ <!-- Choose staff name --> 
+    <select class="custom-select col-2 ml-2">
+          <option value="1">Ben Stimson</option>
+          <option value="2" selected>David Williams</option>
+          <option value="3">Danny McCoombs</option>
+    </select>
+ <!-- Sort By -->       
+    <select class="custom-select col-2 ml-2">
+          <option value="1">Accepted</option>
+          <option value="2">Rejected</option>
+          <option value="3" selected>Ordered</option>
+          <option value="3">Delivered</option>
+    </select>
+   
+    </div>
+    
+    <!-- Table -->
+    <table class="table table-hover table-striped table-bordered mt-5 w-75">
+        <thead class="bg-info text-white">
+            <tr>
+                <th scope="col">StaffID</th>
+                <th scope="col">BursaryID</th>
+                <th scope="col">Submission date</th>
+                <th scope="col">StudentID</th>
+                <th scope="col">Item ID</th>
+                <th scope="col">Total Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>351515</td>
+                <td>521521</td>
+                <td>10/10/10</td>
+                <td>64364</td>
+                <td>23</td>
+                <td>£300</td>
+                <td><button class="btn btn-success">Delivered</button></td>
+            </tr>
+            <tr>
+                <td>351515</td>
+                <td>521521</td>
+                <td>10/10/10</td>
+                <td>52525</td>
+                <td>10</td>
+                <td>£100</td>
+                <td><button class="btn btn-success">Delivered</button></td>
+            </tr>
+            <tr>
+                <td>351515</td>
+                <td>521521</td>
+                <td>10/10/10</td>
+                <td>42642</td>
+                <td>5</td>
+                <td>£50</td>
+                <td><button class="btn btn-success">Delivered</button></td>
+            </tr>
+        </tbody>
+    </table>   
+    
+<hr>
+    <!-- Delivered PAGE-->
     <div class="row">
-        <div class="col-2">
-            <div class="btn-group split">
-              <button type="button" class="btn btn-secondary ">
-                Choose course
-              </button>
-              <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="sr-only">Toggle Dropright</span>
-              </button>
-                  <div class="dropdown-menu dropdown-menu-right">
-                    <button class="dropdown-item" type="button">Computer Science</button>
-                    <button class="dropdown-item" type="button">Construction</button>
-                    <button class="dropdown-item" type="button">Hairdressing & Stuff</button>
-                  </div>
-            </div>
-        </div>
-  <!-- Choose date -->       
-        <div class="col-2">
-            <div class="col-2">
-            <div class="btn-group split">
-              <button type="button" class="btn btn-secondary ">
-                Date
-              </button>
-              <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="sr-only">Toggle Dropright</span>
-              </button>
-                  <div class="dropdown-menu dropdown-menu-right">
-                    <button class="dropdown-item" type="button">19/20</button>
-                    <button class="dropdown-item" type="button">20/21</button>
-                    <button class="dropdown-item" type="button">21/22</button>
-                  </div>
-            </div>
-        </div>
-        </div>
-    <!-- Choose student ID --> 
-        <div class="col-2">
-            <div class="col-2">
-                <div class="btn-group split">
-                  <button type="button" class="btn btn-secondary ">
-                    StudentID
-                  </button>
-                  <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="sr-only">Toggle Dropright</span>
-                  </button>
-                      <div class="dropdown-menu dropdown-menu-right">
-                        <button class="dropdown-item" type="button">37717</button>
-                        <button class="dropdown-item" type="button">56874</button>
-                        <button class="dropdown-item" type="button">788764</button>
-                      </div>
-                </div>
-            </div>
-        </div>
- <!-- Student Name -->       
-        <div class="col-2">
-            <div class="col-2">
-            <div class="btn-group split">
-              <button type="button" class="btn btn-secondary ">
-                Student Name
-              </button>
-              <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="sr-only">Toggle Dropright</span>
-              </button>
-                  <div class="dropdown-menu dropdown-menu-right">
-                    <button class="dropdown-item" type="button">John Jony</button>
-                    <button class="dropdown-item" type="button">Crisp</button>
-                    <button class="dropdown-item" type="button">Natasha</button>
-                  </div>
-            </div>
-        </div>
-        </div>
-        <!--Order status -->
-        <div class="col-2">
-            <div class="col-2">
-            <div class="btn-group split">
-              <button type="button" class="btn btn-secondary ">
-                Delivery status
-              </button>
-              <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="sr-only">Toggle Dropright</span>
-              </button>
-                  <div class="dropdown-menu dropdown-menu-right">
-                    <button class="dropdown-item" type="button">Awaiting</button>
-                    <button class="dropdown-item" type="button">Confirmed</button>
-                  </div>
-            </div>
-        </div>
-        </div>
+        <select class="custom-select col-2 ml-2">
+          <option value="1" selected>BTEC IT</option>
+          <option value="2">BSc Computer Science</option>
+      </select>
+       
+  <!-- Choose Year -->       
+    <select class="custom-select col-2 ml-2">
+          <option value="1" selected>16/17</option>
+          <option value="2">17/18</option>
+          <option value="3">18/19</option>
+      </select>
+
+    <!-- StudentID -->
+     <select class="custom-select col-2 ml-2">
+          <option value="1" selected>290250</option>
+          <option value="2">2458792</option>
+          <option value="3">9875157</option>
+      </select>
+ <!-- Choose staff name --> 
+    <select class="custom-select col-2 ml-2">
+          <option value="1">Ben Stimson</option>
+          <option value="2" selected>David Williams</option>
+          <option value="3">Danny McCoombs</option>
+    </select>
+ <!-- Sort By -->       
+    <select class="custom-select col-2 ml-2">
+          <option value="1">Accepted</option>
+          <option value="2">Rejected</option>
+          <option value="3">Ordered</option>
+          <option value="3" selected>Delivered</option>
+    </select>
+   
     </div>
     
     <!-- Table -->
