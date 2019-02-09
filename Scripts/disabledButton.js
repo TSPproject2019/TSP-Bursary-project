@@ -1,13 +1,6 @@
-EnableSubmit = function(val)
-        {
-            var sbmt = document.getElementById("Submit");
+var checker = document.getElementById('agreeCheckbox');
+var sendbtn = document.getElementById('send');
 
-            if (val.checked == true)
-            {
-             sbmt.disabled = false;
-            }
-            else
-            {
-                sbmt.disabled = true;
-            }
-        }
+checker.onchange = function() {
+  sendbtn.disabled = !this.checked;
+};
