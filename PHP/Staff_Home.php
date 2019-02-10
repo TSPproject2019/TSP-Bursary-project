@@ -1,5 +1,5 @@
 <?php
-    // file: index.php
+    // file: staff_Home.php
     session_start();
     if (!isset($_SESSION['firstName'])){
         echo "<p> No user details found</p>";
