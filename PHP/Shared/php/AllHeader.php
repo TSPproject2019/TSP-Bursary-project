@@ -1,3 +1,6 @@
+<?php
+  session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +11,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="stylesheet" type="text/css" href="../CSS/styles.css">
+    <link rel="stylesheet" type="text/css" href="../../../CSS/styles.css">
 
     <!-- Bootstrap 4.1 CND -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -23,17 +26,24 @@
 </head>
 
 <body>
-    <!-- <?php include('header.php'); ?> -->
     
  <header class="jumbotron">
     <div class="row text-center">
-        <div class="col-lg-6">
-                <h2>Welcome (Name)</h2>
-                <p>Course details</p>
-        </div>
+          <?php
+                //$firstName = $_SESSION['firstName'];
+                //$lastName = $_SESSION['lastName'];
+            if (isset($_SESSION['lastName'])){
+                //echo '<div id="loggedIn">';
+                //echo '<p style="margin-left: 30px;">Welcome '
+                echo '<div class="col-lg-6">';
+                  echo "<h2 class=\"header2\">Welcome " . $_SESSION['firstName'] . " " . $_SESSION['lastName'] . "</h2>";
+                  echo "<p>To the Bursary Request System</p>";
+                echo '</div>';
+              }
+          ?>
         
         <div class="col-lg-6">
-            <img src="../Staff/Images/logo1.png" class="img-fluid" width="100px", height="50px" alt="Responsive image"></img>
+            <img src="../images/logo.png" class="img-fluid" width="100px", height="50px" alt="Responsive image"></img>
             <a href="" class="btn btn-outline-success btn-sm">Log out</a>
         </div>
     </div>

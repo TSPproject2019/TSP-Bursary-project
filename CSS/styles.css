@@ -9,7 +9,15 @@ body {
 
 .container {
     text-align: center;
-    color: white;
+    color: black;
+}
+  .text-center {
+      color: blue;
+  }
+
+.header2 {
+    text-align: center;
+    color: black;
 }
 
 .purpleOpacity {
@@ -18,6 +26,11 @@ body {
 
 .nobull {
     list-style-type: none;
+}
+
+p {
+    text-align: center;
+    color: black;
 }
 
 
