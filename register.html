@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en-gb" style="height: 100%">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="CSS/styles.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+</head>
+
+<body id="backG">
+<form id="form" style="position: absolute; left: 30%; top: 20%; width: 50%; height: 59%; text-align: right; border-radius: 25px;">
+  <div class="row" style="height: 50px;">
+    <p></p>
+  </div>
+  <div class="row">
+    <div class="col-5">
+      <label class="formText" for="collegeID">College ID</label>
+      <input style="position: absolute; left: 15%;" type="text" class="form-control" id="collegeID" placeholder="Enter your college ID">
+    </div>
+    <div class="col-5">
+      <label class="formText" for="inputEmail">Email address</label>
+      <input style="position: absolute; left: 25%;" type="email" class="form-control" id="inputEmail" placeholder="Enter email">
+    </div>
+  </div>
+  <div class="row" style="height: 50px;">
+    <p></p>
+  </div>
+  <div class="row">
+    <div class="col-5">
+      <label class="formText" for="fName">First name</label>
+      <input style="position: absolute; left: 15%;" type="text" class="form-control" id="fName" placeholder="Enter your first name">
+    </div>
+    <div class="col-5">
+      <label class="formText" for="lName">Last name</label>
+      <input style="position: absolute; left: 25%;" type="text" class="form-control" id="lName" placeholder="Enter your last name">
+    </div>
+  </div>
+  <div class="row" style="height: 50px;">
+    <p></p>
+  </div>
+  <div class="row">
+    <div class="col-5">
+      <label class="formText" for="collegeID">Password</label>
+      <input style="position: absolute; left: 15%;" type="password" class="form-control" id="password" placeholder="Enter your new password" onclick="pop()">
+    </div>
+    <div class="col-5">
+      <label style="height: 29px;"></label>
+      <input style="position: absolute; left: 25%;" type="password" class="form-control" id="rePassword" placeholder="Re-enter your password">
+    </div>
+  </div>
+  <button id="but1" style="position: absolute; left: 80%; top: 85%; background-color: orange; border: orange;" type="submit" class="btn btn-primary btn-lg">Register</button>
+</form>
+    
+</body>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script>
+  function name(){
+    document.getElementById('password').style.border = "red";
+  }
+  
+  function pop(){
+    document.getElementById('pBox').style.display = "display";
+  }
+</script>
+</html>
