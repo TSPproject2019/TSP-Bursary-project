@@ -33,6 +33,7 @@
         <div class="col-lg-6">
                 <h2>Welcome (Name)</h2>
                 <p>Course details</p>
+                 <h1>New Bursary Request</h1>
         </div>
         
         <div class="col-lg-6">
@@ -66,76 +67,94 @@
                 </div>
           </div>
           
-    <div class="stud-info" style="text-align: center">
-    <fieldset>
-      <legend>Your Information</legend>
-    </fieldset>
-    <p>
-      <label for="name">
-        <span>Name: </span>
-        <strong><abbr title="required">*</abbr></strong>
-      </label>
-      <input type="text" id="name" name="username">
-    </p>
-    <p>
-      <label for="ID">
-        <span>Student Number: </span>
-        <strong><abbr title="required">*</abbr></strong>
-      </label>
-      <input type="number" id="ID" name="studentNumber">
-    </p>
-    <p>
-      <label for="course">
-        <span>Course Name: </span>
-        <strong><abbr title="required">*</abbr></strong>
-      </label>
-      <input type="text" id="course" name="courseName">
-    </p>
-    <fieldset>
-        <legend>Item 1</legend>
-    </fieldset>
-    <p>
-        <label for="category">
-           <span>Category field: </span>
-        <strong><abbr title="required">*</abbr></strong>
-      </label>
-      <input type="text" id="category" name="categoryField">
-    </p>
-    
-     <p>
-        <label for="description">
-           <span>Item description: </span>
-        <strong><abbr title="required">*</abbr></strong>
-      </label>
-      <input type="text" id="description" name="itemDescription">
-    </p>
-    
-    <p>
-        <label for="url">
-           <span>URL to the item: </span>
-        <strong><abbr title="required">*</abbr></strong>
-      </label>
-      <input type="text" id="url" name="url">
-    </p>
-      
-    <p>
-        <label for="price">
-           <span>Price: </span>
-        <strong><abbr title="required">*</abbr></strong>
-      </label>
-      <input type="decimal" id="price" name="price">
-    </p>
-      <p style="text-align: center">Justification:</p>
-      <textarea name="justification" cols="20" row="4">Enter your justification here...</textarea>
-      
-    <p style="text-align: center">Status of the form:</p>
-     <p style="text-align: center">Tutor's comments:</p>
-      <textarea name="justification" cols="20" row="4">Comments</textarea>  
-      <p></p>
-    <button class="btn success" style="text-align: left">Send to admin</button>
-    <button class="btn success" style="text-align: left">Cancel</button>
+     <section class="container-fluid mt-5">
+    <section class="row">
+     <div class="col-6">
+            
+         <form>
+              <div class="form-group row">
+    <label for="fullName" class="col-sm-2 col-form-label">Full Name:</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="fullName" placeholder="Auto-generated field">
     </div>
-    
+  </div>
+            
+             <div class="form-group row">
+    <label for="course" class="col-sm-2 col-form-label">Course:</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="course" placeholder="Auto-generated field">
+    </div>
+  </div>
+  
+              
+              <div class="form-group row">
+    <label for="tutor" class="col-sm-2 col-form-label">Tutor:</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="tutor" placeholder="Auto-generated field">
+    </div>
+  </div>
+  
+  <h5> Item 1 </h5>
+  
+  
+  <h6>Category field(Qualification, Equipment, Events, Professional accreditation, Vocational placement)</h6>
+         <form>
+             <div class="form-group">
+                 <div>
+                     <input type="text" class="form-control" placeholder="Item description:">
+                  </div>
+              </div>
+            
+              <div class="form-group">
+                 <div>
+                     <input type="text" class="form-control" placeholder="URL to the item:">
+                 </div>
+                </div>
+            
+                <div class="form-group row justify-content-between">
+                    <div class="input-group col-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="price">Price:</span>
+                        </div>
+                        <input type="text" class="form-control"   aria-describedby="price">
+                    </div>
+                    
+                    <div class="input-group col-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="price">Postage:</span>
+                        </div>
+                        <input type="text" class="form-control"   aria-describedby="postage">
+                    </div>
+                    
+                    <div class="input-group col-4">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="additionalFees">Additional fees:</span>
+                        </div>
+                        <input type="text" class="form-control"   aria-describedby="additionalFees">
+                    </div>
+                    
+                </div>
+                
+                <div class="form-group">
+                    <textarea class="form-control" type="textarea" name="justification" rows="3" placeholder="Justification:"></textarea>
+                </div>
+                <div class="form-group">
+                    <h6>Status of the form: <span>Status</span></h6>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control" type="textarea" name="tutorComments" rows="3" placeholder="Tutor Comments:"></textarea>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control" type="textarea" name="additionalComments" rows="4" placeholder="Additional Comments:"></textarea>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control" type="textarea" name="staffComments" rows="5" placeholder="Staff Comments (Additional comments to students)"></textarea>
+                </div>
+                
+               <button type="button" class="btn btn-primary btn-lg">Save as Draft</button>
+               <button type="button" class="btn btn-secondary btn-lg">Submit</button>
+                
+            </form>
      
     
     
