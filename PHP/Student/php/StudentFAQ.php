@@ -3,7 +3,7 @@
 ?>
         <!-- <div class="row col-lg-6 justify-content-start align-items-center"> -->
         <div>
-                <li class="list-group-item  border-1">New Bursary Request</li>
+                <li class="list-group-item  border-1">FAQ's</li>
         </div>
         <div class="col-md-4 ml-3">
                     <p>Outstanding balance:</p>
