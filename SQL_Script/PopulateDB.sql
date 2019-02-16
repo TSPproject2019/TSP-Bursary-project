@@ -30,7 +30,7 @@ DROP USER 'WEBAuth';
 CREATE USER 'WEBAuth' IDENTIFIED BY 'WEBAuthPW';
 
 /*give web admin SELECT and INSERT*/
-GRANT INSERT, SELECT, UPDATE ON users TO 'WEBAuth';
+GRANT INSERT, SELECT, UPDATE ON bursary_database.* TO 'WEBAuth';
 
 /*
 Adding users to the DB

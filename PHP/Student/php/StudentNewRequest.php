@@ -1,5 +1,30 @@
 <?php
     session_start();
+    require_once 'connect.php';//connects to the SQL database.
+    // Get the _SESSION user details.
+    if (isset($_SESSION['lastName'])){
+        echo " start Step 2.0..<br>"; // for testing purposes
+        $firstName = $_SESSION['firstName'];
+        $lastName = $_SESSION['lastName'];
+        $userid = $_SESSION['userid'];
+        $userName = $firstName . " " . $lastName;
+        // get course title
+        $SQL_stmt = "SELECT DISTINCT courseTitle FROM course 
+        INNER JOIN studentToCourse ON course.courseID = studentToCourse.stcCourseID
+        INNER JOIN users ON users.userID = " . $userid . " and studentToCourse.stcStudentID = '" . $userid . "'";
+        // now to run the query
+        echo " start Step 2.0..<br>"; // for testing purposes
+        // first prepare and excecurte
+        $result = $DBconnection->query($SQL_stmt);
+        echo " start Step 2.1..<br>"; // for testing purposes
+        // now get the data
+        if ($row = $result->fetch()){
+            // varify that it is a valid userID
+            echo " start Step 2.1.1..<br>"; // for testing purposes
+            // Bind results by column name
+            $courseTitle = $row['courseTitle'];
+    }
+
 ?>
         <!-- <div class="row col-lg-6 justify-content-start align-items-center"> -->
         <div>
@@ -22,14 +47,20 @@
               <div class="form-group row">
     <label for="fullName" class="col-sm-2 col-form-label">Full Name:</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="fullName" placeholder="Auto-generated field">
+        <?php
+            echo '<input type="text" class="form-control" id="fullName" value="' . $userName . '" placeholder="Auto-generated field">'
+        ?>
+      <!-- <input type="text" class="form-control" id="fullName" value="$userName" placeholder="Auto-generated field"> -->
     </div>
   </div>
             
              <div class="form-group row">
     <label for="course" class="col-sm-2 col-form-label">Course:</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="course" placeholder="Auto-generated field">
+        <?php
+            echo '<input type="text" class="form-control" id="course" value="' . $courseTitle . '" placeholder="Auto-generated field">'
+        ?>
+        <!-- <input type="text" class="form-control" id="course" placeholder="Auto-generated field"> -->
     </div>
   </div>
   
