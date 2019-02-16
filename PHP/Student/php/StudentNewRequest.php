@@ -23,6 +23,7 @@
             echo " start Step 2.1.1..<br>"; // for testing purposes
             // Bind results by column name
             $courseTitle = $row['courseTitle'];
+        }
     }
 
 ?>
