@@ -53,6 +53,25 @@
             $_SESSION['courseTutorId'] =  $courseTutorId;
             // this varisable is also used for posting.
         }
+        // get the data for the submitted requests
+        echo " start Step 4.0..<br>"; // for testing purposes
+        $SQL_stmt = "SELECT COUNT(*) AS 'Total' FROM bursaryRequests
+        INNER JOIN itemsAndRequests WHERE itemsAndRequests.RequestID = bursaryRequests.bRequestsID 
+        AND itemsAndRequests.StudentID = " . $userid . " AND bursaryRequests.bRequestsStaffApproved is NULL 
+        AND bursaryRequests.bRequestsAdminApproved is NULL 
+        AND bRequestsStatus = 'Submitted'";
+        // now to run the query
+        echo " start Step 4.1..<br>"; // for testing purposes
+        // first prepare and excecurte
+        $result = $DBconnection->query($SQL_stmt);
+        echo " start Step 4.2..<br>"; // for testing purposes
+        // now get the data
+        if ($row = $result->fetch()){
+            // varify that it is a valid userID
+            echo " start Step 4.2.1..<br>"; // for testing purposes
+            // Bind results by column name
+            $submitTotal = $row['Total'];
+        }
     }
 
 ?>
@@ -62,9 +81,11 @@
         </div>
         <div class="col-3">
                     <ul class="list-group">
-                       <li class="list-group-item  border-0">Submitted: <span>10</span></li>
-                        <li class="list-group-item  border-0">Approved: <span>8</span></li>
-                        <li class="list-group-item  border-0">Awaiting delivery: <span>YES</span></li>
+                        <?php
+                            echo '<li class="list-group-item  border-0">Submitted: <span>' . $submitTotal . '</span></li>';
+                            echo '<li class="list-group-item  border-0">Approved: <span>8</span></li>';
+                            echo '<li class="list-group-item  border-0">Awaiting delivery: <span>YES</span></li>';
+                        ?>
                     </ul>
                 </div>
           </div>
