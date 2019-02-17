@@ -13,6 +13,8 @@
         INNER JOIN studentToCourse ON course.courseID = studentToCourse.stcCourseID
         INNER JOIN users ON users.userID = " . $userid . " and studentToCourse.stcStudentID = '" . $userid . "'";
         // now to run the query
+
+        //
         echo " start Step 2.0..<br>"; // for testing purposes
         // first prepare and excecurte
         $result = $DBconnection->query($SQL_stmt);
@@ -23,6 +25,33 @@
             echo " start Step 2.1.1..<br>"; // for testing purposes
             // Bind results by column name
             $courseTitle = $row['courseTitle'];
+            // store session variables
+            $_SESSION['courseTitle'] =  $courseTitle;
+            // this varisable is also used for posting.
+
+        }
+        // get student course tutor
+        $SQL_stmt = "SELECT DISTINCT userid, userFirstName, userLastName FROM users
+        INNER JOIN departmentsStaffCourseStudents ON users.userID = departmentsStaffCourseStudents.bscsStaffID
+        AND departmentsStaffCourseStudents.bscsStudentID  = '" . $userid . "'";
+        // now to run the query
+        echo " start Step 3.0..<br>"; // for testing purposes
+        // first prepare and excecurte
+        $result = $DBconnection->query($SQL_stmt);
+        echo " start Step 3.1..<br>"; // for testing purposes
+        // now get the data
+        if ($row = $result->fetch()){
+            // varify that it is a valid userID
+            echo " start Step 3.1.1..<br>"; // for testing purposes
+            // Bind results by column name
+            $courseTutorFirstName = $row['userFirstName'];
+            $courseTutorLastName = $row['userLastName'];
+            $courseTutorId = $row['userid'];
+            // store session variables
+            $_SESSION['courseTutorFirstName'] =  $courseTutorFirstName;
+            $_SESSION['courseTutorLastName'] =  $courseTutorLastName;
+            $_SESSION['courseTutorId'] =  $courseTutorId;
+            // this varisable is also used for posting.
         }
     }
 
@@ -69,7 +98,10 @@
               <div class="form-group row">
     <label for="tutor" class="col-sm-2 col-form-label">Tutor:</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="tutor" placeholder="Auto-generated field">
+        <?php
+            echo '<input type="text" class="form-control" id="tutor" value="' . $courseTutorFirstName . ' ' . $courseTutorLastName . '" placeholder="Auto-generated field">'
+        ?>
+      <!-- <input type="text" class="form-control" id="tutor" placeholder="Auto-generated field"> -->
     </div>
   </div>
   

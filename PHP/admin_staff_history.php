@@ -1,9 +1,10 @@
 <?php
-  // file: admin_student_history.php
+  // file: admin_staff_history.php
   session_start();
   if (!isset($_SESSION['firstName'])){
     echo "<p> No user details found</p>";
   }
+  $_SESSION['htmlTitle'] =  "History Staff Requests";
 // for testing purposes only
   /*if (isset($_SESSION['firstName'])){
     $firstName = $_SESSION['firstName'];

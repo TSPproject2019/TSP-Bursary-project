@@ -4,6 +4,7 @@
   if (!isset($_SESSION['firstName'])){
     echo "<p> No user details found</p>";
   }
+  $_SESSION['htmlTitle'] =  "FAQ's";
 // for testing purposes only
   /*if (isset($_SESSION['firstName'])){
     $firstName = $_SESSION['firstName'];
