@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title><?php echo $page_title;?></title>
+
+ <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" type="text/css" href="../CSS/styles.css">
+
+    <!-- Bootstrap 4.1 CND -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Font Awsome icons -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+    integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+   
+   <!--Include page name in header -->
+  
+    
+</head>
+
+<body>
+    <!-- <?php include('header.php'); ?> -->
+    
+ <header class="jumbotron">
+    <div class="row text-center">
+        <div class="col-lg-6">
+                <h2>Welcome (Name)</h2>
+                <p>Course details</p>
+        </div>
+        
+        <div class="col-lg-6">
+            <img src="../../HTML/Staff/Images/logo1.png" class="img-fluid" width="100px", height="50px" alt="Responsive image"></img>
+            <a href="" class="btn btn-outline-success btn-sm">Log out</a>
+        </div>
+    </div>
+ </header>
+ 
+        <div class="row">
+            <div class="dropdown col-3 ml-4">
+                  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                     <i class="fas fa-list-ul"></i></a>
+                       
+                      <div class="dropdown-menu bg-secondary" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item" href="/php_files/Admin_php/reviewStudentSubmissions.php">Review Student Submissions</a>
+                        <a class="dropdown-item" href="/php_files/Admin_php/reviewStaffSubmissions.php">Review Staff Submissions</a>
+                        <a class="dropdown-item" href="/php_files/Admin_php/historyStaffRequests.php">History Staff Requests</a>
+                        <a class="dropdown-item" href="/php_files/Admin_php/historyStudentRequests.php">History Student Requests</a>
+                        <a class="dropdown-item" href="/php_files/Admin_php/faq.php">FAQ</a>
+                        <a class="dropdown-item" href="/php_files/Admin_php/agreementForm.php">Agreement Form</a>
+                    </div>
+               </div>
+                
+                <div class="col-3">
+                    <ul class="list-group">
+                       <li class="list-group-item  border-0">Submitted: <span>10</span></li>
+                        <li class="list-group-item  border-0">Approved: <span>8</span></li>
+                        <li class="list-group-item  border-0">Awaiting delivery: <span>YES</span></li>
+                    </ul>
+                </div>
+          </div>

@@ -1,0 +1,39 @@
+[13-Feb-2019 10:46:55 UTC] PHP Warning:  require_once(connect.php): failed to open stream: No such file or directory in /home/ubuntu/workspace/PHP/login.php on line 13
+[13-Feb-2019 10:46:55 UTC] PHP Stack trace:
+[13-Feb-2019 10:46:55 UTC] PHP   1. {main}() /home/ubuntu/workspace/PHP/login.php:0
+[13-Feb-2019 10:46:55 UTC] PHP Fatal error:  require_once(): Failed opening required 'connect.php' (include_path='.:/usr/share/php:/usr/share/pear') in /home/ubuntu/workspace/PHP/login.php on line 13
+[13-Feb-2019 10:46:55 UTC] PHP Stack trace:
+[13-Feb-2019 10:46:55 UTC] PHP   1. {main}() /home/ubuntu/workspace/PHP/login.php:0
+[13-Feb-2019 10:54:15 UTC] PHP Fatal error:  Call to a member function query() on a non-object in /home/ubuntu/workspace/PHP/login.php on line 32
+[13-Feb-2019 10:54:15 UTC] PHP Stack trace:
+[13-Feb-2019 10:54:15 UTC] PHP   1. {main}() /home/ubuntu/workspace/PHP/login.php:0
+[13-Feb-2019 11:05:47 UTC] PHP Warning:  require_once(../Shared/php/connect.php): failed to open stream: No such file or directory in /home/ubuntu/workspace/PHP/login.php on line 13
+[13-Feb-2019 11:05:47 UTC] PHP Stack trace:
+[13-Feb-2019 11:05:47 UTC] PHP   1. {main}() /home/ubuntu/workspace/PHP/login.php:0
+[13-Feb-2019 11:05:47 UTC] PHP Fatal error:  require_once(): Failed opening required '../Shared/php/connect.php' (include_path='.:/usr/share/php:/usr/share/pear') in /home/ubuntu/workspace/PHP/login.php on line 13
+[13-Feb-2019 11:05:47 UTC] PHP Stack trace:
+[13-Feb-2019 11:05:47 UTC] PHP   1. {main}() /home/ubuntu/workspace/PHP/login.php:0
+[13-Feb-2019 11:08:34 UTC] PHP Warning:  require_once(PHP/Shared/php/connect.php): failed to open stream: No such file or directory in /home/ubuntu/workspace/PHP/login.php on line 13
+[13-Feb-2019 11:08:34 UTC] PHP Stack trace:
+[13-Feb-2019 11:08:34 UTC] PHP   1. {main}() /home/ubuntu/workspace/PHP/login.php:0
+[13-Feb-2019 11:08:34 UTC] PHP Fatal error:  require_once(): Failed opening required 'PHP/Shared/php/connect.php' (include_path='.:/usr/share/php:/usr/share/pear') in /home/ubuntu/workspace/PHP/login.php on line 13
+[13-Feb-2019 11:08:34 UTC] PHP Stack trace:
+[13-Feb-2019 11:08:34 UTC] PHP   1. {main}() /home/ubuntu/workspace/PHP/login.php:0
+[13-Feb-2019 11:09:57 UTC] PHP Warning:  require_once(/PHP/Shared/php/connect.php): failed to open stream: No such file or directory in /home/ubuntu/workspace/PHP/login.php on line 13
+[13-Feb-2019 11:09:57 UTC] PHP Stack trace:
+[13-Feb-2019 11:09:57 UTC] PHP   1. {main}() /home/ubuntu/workspace/PHP/login.php:0
+[13-Feb-2019 11:09:57 UTC] PHP Fatal error:  require_once(): Failed opening required '/PHP/Shared/php/connect.php' (include_path='.:/usr/share/php:/usr/share/pear') in /home/ubuntu/workspace/PHP/login.php on line 13
+[13-Feb-2019 11:09:57 UTC] PHP Stack trace:
+[13-Feb-2019 11:09:57 UTC] PHP   1. {main}() /home/ubuntu/workspace/PHP/login.php:0
+[13-Feb-2019 11:11:58 UTC] PHP Warning:  require_once(/PHP/Shared/php/connect.php): failed to open stream: No such file or directory in /home/ubuntu/workspace/PHP/login.php on line 13
+[13-Feb-2019 11:11:58 UTC] PHP Stack trace:
+[13-Feb-2019 11:11:58 UTC] PHP   1. {main}() /home/ubuntu/workspace/PHP/login.php:0
+[13-Feb-2019 11:11:58 UTC] PHP Fatal error:  require_once(): Failed opening required '/PHP/Shared/php/connect.php' (include_path='.:/usr/share/php:/usr/share/pear') in /home/ubuntu/workspace/PHP/login.php on line 13
+[13-Feb-2019 11:11:58 UTC] PHP Stack trace:
+[13-Feb-2019 11:11:58 UTC] PHP   1. {main}() /home/ubuntu/workspace/PHP/login.php:0
+[13-Feb-2019 11:13:12 UTC] PHP Warning:  require_once(/PHP/Shared/php/connect.php): failed to open stream: No such file or directory in /home/ubuntu/workspace/PHP/login.php on line 13
+[13-Feb-2019 11:13:12 UTC] PHP Stack trace:
+[13-Feb-2019 11:13:12 UTC] PHP   1. {main}() /home/ubuntu/workspace/PHP/login.php:0
+[13-Feb-2019 11:13:12 UTC] PHP Fatal error:  require_once(): Failed opening required '/PHP/Shared/php/connect.php' (include_path='.:/usr/share/php:/usr/share/pear') in /home/ubuntu/workspace/PHP/login.php on line 13
+[13-Feb-2019 11:13:12 UTC] PHP Stack trace:
+[13-Feb-2019 11:13:12 UTC] PHP   1. {main}() /home/ubuntu/workspace/PHP/login.php:0
