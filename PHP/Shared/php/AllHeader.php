@@ -1,7 +1,7 @@
 <?php
   // ensure session ID's are retrievable
   session_start();
-  
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -33,7 +33,7 @@
 
 <body>
     
- <header class="jumbotron">
+<header class="jumbotron">
     <div class="row text-center">
           <?php
                 //$firstName = $_SESSION['firstName'];
@@ -44,13 +44,15 @@
                 echo '<div class="col-lg-6">';
                   echo "<h2 class=\"header2\">Welcome " . $_SESSION['firstName'] . " " . $_SESSION['lastName'] . "</h2>";
                   echo "<p>To the Bursary Request System</p>";
+                  //echo'<h1>' . $_SESSION['htmlTitle'] .'</h1>'; //Display page name in header
                 echo '</div>';
               }
+            
           ?>
-        
         <div class="col-lg-6">
             <img src="Shared/images/logo.png" class="img-fluid" width="100px", height="50px" alt="Responsive image"></img>
+            <!-- <img src="../images/logo.png" ></img> -->
             <a href="logout.php" class="btn btn-outline-success btn-sm">Log out</a>
         </div>
     </div>
- </header>
+</header>

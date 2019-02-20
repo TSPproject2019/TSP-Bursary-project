@@ -1,9 +1,9 @@
 <?php
-    session_start();
+   session_start();
    # echo " start Step 0.0..<br>"; // for testing purposes
-    require_once 'connect.php';//connects to the SQL database.
+   require_once 'connect.php';//connects to the SQL database.
    # echo " start Step 1.0..<br>"; // for testing purposes
-    require 'functions.php'; // connects to the functions.
+   require 'functions.php'; // connects to the functions.
     
     // Get the _SESSION user details.
     if (isset($_SESSION['lastName'])){
@@ -11,11 +11,12 @@
         $firstName = $_SESSION['firstName'];
         $lastName = $_SESSION['lastName'];
         $userid = $_SESSION['userid'];
+        $userType = $_SESSION['userType'];
         $userName = $firstName . " " . $lastName;
-        // get course title
-        $SQL_stmt = "SELECT DISTINCT courseTitle FROM course 
-        INNER JOIN studentToCourse ON course.courseID = studentToCourse.stcCourseID
-        INNER JOIN users ON users.userID = " . $userid . " and studentToCourse.stcStudentID = '" . $userid . "'";
+        // get course title of a staff member
+        $SQL_stmt = "SELECT DISTINCT courseTitle from course 
+        inner join departmentsStaffCourseStudents on course.courseID = departmentsStaffCourseStudents.bscsCourseID
+        and departmentsStaffCourseStudents.bscsStaffID = '" . $userid . "'";
         // now to run the query
 
         //
@@ -30,33 +31,26 @@
             // Bind results by column name
             $courseTitle = $row['courseTitle'];
             // store session variables
-            $_SESSION['courseTitle'] =  $courseTitle;
+            $_SESSION['courseTitle'] =  $courseTitle; // Course title is defined for staff to display
             // this varisable is also used for posting.
 
         }
-        // get the data for the submitted requests
-        $submitTotal = getTotals ($userid, "Submitted");
-        $approved = getTotals ($userid, "Approved");
-        $pending = getTotals ($userid, "Pending");
-        $availableBalance = getStudentAvailableBalance($userid);
+         $submittedTotal = getStaffTotals($userid,$userType,"Submitted");
+         $approvedTotal = getStaffApproved($userid,$userType,"Approved");
+         $awaitingDelivery = getStaffAwaitingDelivery($userid,$userType);
     }
+
 ?>
-<div class="col-md-4 ml-3">
-                    <?php
-                        echo '<p>Outstanding balance: <span>' . $availableBalance . '</span></p>';
-                    ?>
-                </div>
                 <div class="col-md-4 ml-4">
                     <ul class="list-group list-group-flush">
                       <?php
-                        echo '<li class="list-group-item">Submitted: <span>' . $submitTotal . '</span></li>';
-                        echo '<li class="list-group-item">Approved: <span>' . $approved . '</span></li>';
-                        echo '<li class="list-group-item">Awaiting delivery: <span>' . $pending . '</span></li>';
-                      ?>
+                       echo'<li class="list-group-item">Submitted: '. $submittedTotal .'</li>';
+                       echo'<li class="list-group-item">Approved: '. $approvedTotal .'</li>';
+                       echo'<li class="list-group-item">Awaiting delivery: '. $awaitingDelivery .'</li>';
+                          ?>
                     </ul>
                 </div>
-          </div>
-         <div class="accordion" id="accordionExample">
+         <div class="accordion z-depth-9" id="accordionExample">
   <div class="card">
     <div class="card-header" id="headingOne">
       <h5 class="mb-0">

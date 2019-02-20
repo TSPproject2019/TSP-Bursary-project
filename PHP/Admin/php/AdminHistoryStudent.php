@@ -1,10 +1,10 @@
 <?php
     session_start();
-?>
+    require_once 'connect.php';//connects to the SQL database.
 
-    <div>
-        <li class="list-group-item  border-1">Admin Studengt History Page</li>
-    </div>
+    // drop down requirements on initial load (will run queries)
+    // # - select
+?>
     <div class="col-3">
         <ul class="list-group">
                     <li class="list-group-item  border-0">Submitted: <span>10</span></li>

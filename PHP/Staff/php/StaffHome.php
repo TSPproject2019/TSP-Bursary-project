@@ -1,38 +1,55 @@
-        <?php
-            session_start();
-        ?>
-        <div class="row col-lg-6 justify-content-start align-items-center">
-            
-            <div class="dropdown">
-               <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="fas fa-list-ul"></i></a>
-                   
-                   <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item" href="Agreement form.html">Agreement form</a>
-                        <a class="dropdown-item" href="FAQ.html">FAQ</a>
-                        <a class="dropdown-item" href="History Student Requests.html">History Student Requests</a>
-                        <a class="dropdown-item" href="Home Page.html">Home Page</a>
-                        <a class="dropdown-item" href="My History.html">My History</a>
-                        <a class="dropdown-item" href="My Submitted Forms.html">My Submitted Forms</a>
-                        <a class="dropdown-item" href="Review My Drafts.html">Review My Drafts</a>
-                        <a class="dropdown-item" href="New Bursary Request.html">New Bursary Request</a>
-                        <a class="dropdown-item" href="Student Submissions.html">Student Submissions</a>
-                    </div>
-            </div>
-            <div>
-                  <li class="list-group-item  border-1">Staff Home Page</li>
-            </div>
-            <div class="col-md-4 ml-3">
-                <p>Outstanding balance:</p>
-            </div>
+<?php
+   session_start();
+   # echo " start Step 0.0..<br>"; // for testing purposes
+   require_once 'connect.php';//connects to the SQL database.
+   # echo " start Step 1.0..<br>"; // for testing purposes
+   require 'functions.php'; // connects to the functions.
+    
+    // Get the _SESSION user details.
+    if (isset($_SESSION['lastName'])){
+       # echo " start Step 2.0..<br>"; // for testing purposes
+        $firstName = $_SESSION['firstName'];
+        $lastName = $_SESSION['lastName'];
+        $userid = $_SESSION['userid'];
+        $userType = $_SESSION['userType'];
+        $userName = $firstName . " " . $lastName;
+        // get course title of a staff member
+        $SQL_stmt = "SELECT DISTINCT courseTitle from course 
+        inner join departmentsStaffCourseStudents on course.courseID = departmentsStaffCourseStudents.bscsCourseID
+        and departmentsStaffCourseStudents.bscsStaffID = '" . $userid . "'";
+        // now to run the query
+
+        //
+       # echo " start Step 2.0..<br>"; // for testing purposes
+        // first prepare and excecurte
+        $result = $DBconnection->query($SQL_stmt);
+       # echo " start Step 2.1..<br>"; // for testing purposes
+        // now get the data
+        if ($row = $result->fetch()){
+            // varify that it is a valid userID
+           # echo " start Step 2.1.1..<br>"; // for testing purposes
+            // Bind results by column name
+            $courseTitle = $row['courseTitle'];
+            // store session variables
+            $_SESSION['courseTitle'] =  $courseTitle; // Course title is defined for staff to display
+            // this varisable is also used for posting.
+
+        }
+         $submittedTotal = getStaffTotals($userid,$userType,"Submitted");
+         $approvedTotal = getStaffApproved($userid,$userType,"Approved");
+         $awaitingDelivery = getStaffAwaitingDelivery($userid,$userType);
+    }
+?>
             <div class="col-md-4 ml-4">
                 <ul class="list-group list-group-flush">
-                   <li class="list-group-item">Submitted:</li>
-                    <li class="list-group-item">Approved:</li>
-                    <li class="list-group-item">Awaiting delivery:</li>
-                </ul>
+                  <?php
+                    echo '<li class="list-group-item">Submitted: ' . $submittedTotal . ' </li>';
+                    echo '<li class="list-group-item">Approved: '. $approvedTotal . ' </li>';
+                    echo '<li class="list-group-item">Awaiting delivery: '. $awaitingDelivery . '</li>';
+                  ?>
+                  </ul>
             </div>
-      </div>
+      <!-- try add another </div> here, should move the list over -->
       <section class="content">
           <div class="row justify-content-center">
               <article class="border col-lg-6 mt-2">

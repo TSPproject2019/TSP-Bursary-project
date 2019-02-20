@@ -7,6 +7,6 @@ session_unset();
 session_destroy();
 # mysqli_close ($connection); // won't need this as going to be pdo and pdo disconnects at page shut
 # header('Location: ../index.html');
-redirect('Location: ../index.html');
+header('Location: ../index.html');
 
 ?>

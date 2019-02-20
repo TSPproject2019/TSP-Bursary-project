@@ -1,12 +1,12 @@
 <?php
     session_start();
 ?>
-        <div class="row">
+<div class="row">
             <div class="dropdown col-3 ml-4">
                   <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                      <i class="fas fa-list-ul"></i></a>
                        
-                      <div class="dropdown-menu bg-secondary" aria-labelledby="dropdownMenuLink">
+                      <div class="dropdown-menu bg-primary" aria-labelledby="dropdownMenuLink">
                         <a class="dropdown-item" href="student_review_draft.php">Review my drafts</a></a>
                         <a class="dropdown-item" href="student_agreement.php">Agreement form</a></a>
                         <a class="dropdown-item" href="student_new_request.php">New Bursary Request</a></a></a>
