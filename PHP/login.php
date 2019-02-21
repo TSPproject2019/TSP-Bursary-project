@@ -87,7 +87,7 @@
                                 echo "<p>Welcome back to the " . $userType . " area of the Bursary Request system </p>";
                                 //open the admin page. user information will be retrieved through session variable rather than the URL
                                 //header("Location: ../admin.php");
-                                header("Location: admin_home.php");
+                                header("Location: HTML/Admin/Home Page.html");
                             }
                         }else{
                             echo "<p>password is invalid</p>";

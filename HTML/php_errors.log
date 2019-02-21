@@ -1,0 +1,64 @@
+[15-Feb-2019 12:29:59 UTC] PHP Warning:  include(partials/header.html): failed to open stream: No such file or directory in /home/ubuntu/workspace/HTML/Admin/homePage.php on line 3
+[15-Feb-2019 12:29:59 UTC] PHP Stack trace:
+[15-Feb-2019 12:29:59 UTC] PHP   1. {main}() /home/ubuntu/workspace/HTML/Admin/homePage.php:0
+[15-Feb-2019 12:29:59 UTC] PHP Warning:  include(): Failed opening 'partials/header.html' for inclusion (include_path='.:/usr/share/php:/usr/share/pear') in /home/ubuntu/workspace/HTML/Admin/homePage.php on line 3
+[15-Feb-2019 12:29:59 UTC] PHP Stack trace:
+[15-Feb-2019 12:29:59 UTC] PHP   1. {main}() /home/ubuntu/workspace/HTML/Admin/homePage.php:0
+[15-Feb-2019 12:29:59 UTC] PHP Warning:  include(partials/footer.html): failed to open stream: No such file or directory in /home/ubuntu/workspace/HTML/Admin/homePage.php on line 61
+[15-Feb-2019 12:29:59 UTC] PHP Stack trace:
+[15-Feb-2019 12:29:59 UTC] PHP   1. {main}() /home/ubuntu/workspace/HTML/Admin/homePage.php:0
+[15-Feb-2019 12:29:59 UTC] PHP Warning:  include(): Failed opening 'partials/footer.html' for inclusion (include_path='.:/usr/share/php:/usr/share/pear') in /home/ubuntu/workspace/HTML/Admin/homePage.php on line 61
+[15-Feb-2019 12:29:59 UTC] PHP Stack trace:
+[15-Feb-2019 12:29:59 UTC] PHP   1. {main}() /home/ubuntu/workspace/HTML/Admin/homePage.php:0
+[15-Feb-2019 12:30:39 UTC] PHP Warning:  include(partials/header.html): failed to open stream: No such file or directory in /home/ubuntu/workspace/HTML/Admin/homePage.php on line 3
+[15-Feb-2019 12:30:39 UTC] PHP Stack trace:
+[15-Feb-2019 12:30:39 UTC] PHP   1. {main}() /home/ubuntu/workspace/HTML/Admin/homePage.php:0
+[15-Feb-2019 12:30:39 UTC] PHP Warning:  include(): Failed opening 'partials/header.html' for inclusion (include_path='.:/usr/share/php:/usr/share/pear') in /home/ubuntu/workspace/HTML/Admin/homePage.php on line 3
+[15-Feb-2019 12:30:39 UTC] PHP Stack trace:
+[15-Feb-2019 12:30:39 UTC] PHP   1. {main}() /home/ubuntu/workspace/HTML/Admin/homePage.php:0
+[15-Feb-2019 12:30:39 UTC] PHP Warning:  include(partials/footer.html): failed to open stream: No such file or directory in /home/ubuntu/workspace/HTML/Admin/homePage.php on line 61
+[15-Feb-2019 12:30:39 UTC] PHP Stack trace:
+[15-Feb-2019 12:30:39 UTC] PHP   1. {main}() /home/ubuntu/workspace/HTML/Admin/homePage.php:0
+[15-Feb-2019 12:30:39 UTC] PHP Warning:  include(): Failed opening 'partials/footer.html' for inclusion (include_path='.:/usr/share/php:/usr/share/pear') in /home/ubuntu/workspace/HTML/Admin/homePage.php on line 61
+[15-Feb-2019 12:30:39 UTC] PHP Stack trace:
+[15-Feb-2019 12:30:39 UTC] PHP   1. {main}() /home/ubuntu/workspace/HTML/Admin/homePage.php:0
+[15-Feb-2019 12:31:10 UTC] PHP Warning:  include(partials/header.html): failed to open stream: No such file or directory in /home/ubuntu/workspace/HTML/Admin/homePage.php on line 3
+[15-Feb-2019 12:31:10 UTC] PHP Stack trace:
+[15-Feb-2019 12:31:10 UTC] PHP   1. {main}() /home/ubuntu/workspace/HTML/Admin/homePage.php:0
+[15-Feb-2019 12:31:10 UTC] PHP Warning:  include(): Failed opening 'partials/header.html' for inclusion (include_path='.:/usr/share/php:/usr/share/pear') in /home/ubuntu/workspace/HTML/Admin/homePage.php on line 3
+[15-Feb-2019 12:31:10 UTC] PHP Stack trace:
+[15-Feb-2019 12:31:10 UTC] PHP   1. {main}() /home/ubuntu/workspace/HTML/Admin/homePage.php:0
+[15-Feb-2019 12:31:10 UTC] PHP Warning:  include(../partials/footer.html): failed to open stream: No such file or directory in /home/ubuntu/workspace/HTML/Admin/homePage.php on line 61
+[15-Feb-2019 12:31:10 UTC] PHP Stack trace:
+[15-Feb-2019 12:31:10 UTC] PHP   1. {main}() /home/ubuntu/workspace/HTML/Admin/homePage.php:0
+[15-Feb-2019 12:31:10 UTC] PHP Warning:  include(): Failed opening '../partials/footer.html' for inclusion (include_path='.:/usr/share/php:/usr/share/pear') in /home/ubuntu/workspace/HTML/Admin/homePage.php on line 61
+[15-Feb-2019 12:31:10 UTC] PHP Stack trace:
+[15-Feb-2019 12:31:10 UTC] PHP   1. {main}() /home/ubuntu/workspace/HTML/Admin/homePage.php:0
+[15-Feb-2019 12:31:44 UTC] PHP Warning:  include(../partials/header.html): failed to open stream: No such file or directory in /home/ubuntu/workspace/HTML/Admin/homePage.php on line 3
+[15-Feb-2019 12:31:44 UTC] PHP Stack trace:
+[15-Feb-2019 12:31:44 UTC] PHP   1. {main}() /home/ubuntu/workspace/HTML/Admin/homePage.php:0
+[15-Feb-2019 12:31:44 UTC] PHP Warning:  include(): Failed opening '../partials/header.html' for inclusion (include_path='.:/usr/share/php:/usr/share/pear') in /home/ubuntu/workspace/HTML/Admin/homePage.php on line 3
+[15-Feb-2019 12:31:44 UTC] PHP Stack trace:
+[15-Feb-2019 12:31:44 UTC] PHP   1. {main}() /home/ubuntu/workspace/HTML/Admin/homePage.php:0
+[15-Feb-2019 12:31:44 UTC] PHP Warning:  include(../partials/footer.html): failed to open stream: No such file or directory in /home/ubuntu/workspace/HTML/Admin/homePage.php on line 61
+[15-Feb-2019 12:31:44 UTC] PHP Stack trace:
+[15-Feb-2019 12:31:44 UTC] PHP   1. {main}() /home/ubuntu/workspace/HTML/Admin/homePage.php:0
+[15-Feb-2019 12:31:44 UTC] PHP Warning:  include(): Failed opening '../partials/footer.html' for inclusion (include_path='.:/usr/share/php:/usr/share/pear') in /home/ubuntu/workspace/HTML/Admin/homePage.php on line 61
+[15-Feb-2019 12:31:44 UTC] PHP Stack trace:
+[15-Feb-2019 12:31:44 UTC] PHP   1. {main}() /home/ubuntu/workspace/HTML/Admin/homePage.php:0
+[15-Feb-2019 12:32:14 UTC] PHP Warning:  include(header.php): failed to open stream: No such file or directory in /home/ubuntu/workspace/partials/header.html on line 26
+[15-Feb-2019 12:32:14 UTC] PHP Stack trace:
+[15-Feb-2019 12:32:14 UTC] PHP   1. {main}() /home/ubuntu/workspace/HTML/Admin/homePage.php:0
+[15-Feb-2019 12:32:14 UTC] PHP   2. include() /home/ubuntu/workspace/HTML/Admin/homePage.php:3
+[15-Feb-2019 12:32:14 UTC] PHP Warning:  include(): Failed opening 'header.php' for inclusion (include_path='.:/usr/share/php:/usr/share/pear') in /home/ubuntu/workspace/partials/header.html on line 26
+[15-Feb-2019 12:32:14 UTC] PHP Stack trace:
+[15-Feb-2019 12:32:14 UTC] PHP   1. {main}() /home/ubuntu/workspace/HTML/Admin/homePage.php:0
+[15-Feb-2019 12:32:14 UTC] PHP   2. include() /home/ubuntu/workspace/HTML/Admin/homePage.php:3
+[15-Feb-2019 12:32:14 UTC] PHP Warning:  include(footer.php): failed to open stream: No such file or directory in /home/ubuntu/workspace/partials/footer.html on line 6
+[15-Feb-2019 12:32:14 UTC] PHP Stack trace:
+[15-Feb-2019 12:32:14 UTC] PHP   1. {main}() /home/ubuntu/workspace/HTML/Admin/homePage.php:0
+[15-Feb-2019 12:32:14 UTC] PHP   2. include() /home/ubuntu/workspace/HTML/Admin/homePage.php:61
+[15-Feb-2019 12:32:14 UTC] PHP Warning:  include(): Failed opening 'footer.php' for inclusion (include_path='.:/usr/share/php:/usr/share/pear') in /home/ubuntu/workspace/partials/footer.html on line 6
+[15-Feb-2019 12:32:14 UTC] PHP Stack trace:
+[15-Feb-2019 12:32:14 UTC] PHP   1. {main}() /home/ubuntu/workspace/HTML/Admin/homePage.php:0
+[15-Feb-2019 12:32:14 UTC] PHP   2. include() /home/ubuntu/workspace/HTML/Admin/homePage.php:61

@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="stylesheet" type="text/css" href="../CSS/styles.css">
+    <link rel="stylesheet" type="text/css" href="/CSS/styles.css">
 
     <!-- Bootstrap 4.1 CND -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -26,15 +26,14 @@
     
 </head>
 
+
 <body>
-    <!-- <?php include('header.php'); ?> -->
-    
- <header class="jumbotron bg-secondary">
+      <header class="jumbotron bg-secondary">
     <div class="row text-center">
         <div class="col-lg-6">
                 <h2>Welcome (Name)</h2>
                 <p>Course details</p>
-                 <h1>Agreement Form</h1>
+                 <h1>Review My Drafts</h1>
         </div>
         
         <div class="col-lg-6">
@@ -43,12 +42,12 @@
         </div>
     </div>
  </header>
- 
-        <div class="row">
-            <div class="dropdown col-3 ml-4">
-                  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+         
+        <div class="row col-lg-6 justify-content-start align-items-center">
+            
+                <div class="dropdown">
+                   <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                      <i class="fas fa-list-ul"></i></a>
-                       
                       <div class="dropdown-menu bg-secondary" aria-labelledby="dropdownMenuLink">
                         <a class="dropdown-item" href="Review My Drafts.html">Review my drafts</a></a>
                         <a class="dropdown-item" href="Agreement Form.html">Agreement form</a></a>
@@ -60,14 +59,19 @@
                     </div>
                </div>
                 
-                <div class="col-3">
-                    <ul class="list-group">
-                       <li class="list-group-item  border-0">Submitted: <span>10</span></li>
-                        <li class="list-group-item  border-0">Approved: <span>8</span></li>
-                        <li class="list-group-item  border-0">Awaiting delivery: <span>YES</span></li>
+                
+                  <div class="col-md-4 ml-3">
+                    <p>Outstanding balance:</p>
+                </div>
+                <div class="col-md-4 ml-4">
+                    <ul class="list-group list-group-flush">
+                       <li class="list-group-item">Submitted:</li>
+                        <li class="list-group-item">Approved:</li>
+                        <li class="list-group-item">Awaiting delivery:</li>
                     </ul>
                 </div>
           </div>
+          
           
           <section class="content">
               <div class="row justify-content-center border">

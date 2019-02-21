@@ -7,48 +7,53 @@
 
 </head>
 
-<body id="backG">
-<form id="form" style="position: absolute; left: 30%; top: 20%; width: 50%; height: 59%; text-align: right; border-radius: 25px;">
-  <div class="row" style="height: 50px;">
-    <p></p>
-  </div>
-  <div class="row">
-    <div class="col-5">
-      <label class="formText" for="collegeID">College ID</label>
-      <input style="position: absolute; left: 15%;" type="text" class="form-control" id="collegeID" placeholder="Enter your college ID">
+<body id="backG" style="resize: both; overflow: auto;">
+<form id="form" class="flex-box-column" style="position: absolute; left: 30%; top: 20%; width: 50%; height: 370px; border-radius: 25px;" action="PHP/register.php" method="POST">
+
+  <div class="flex-box-column" style="position: absolute; left: 5%; top: 10%;">
+    <label style="height: 5%;"></label>
+      
+    <div class="flex-box-row">
+      <label class="formText" for="collegeID" style="width: 50%;">College ID</label>
+      <label class="formText" for="inputEmail" style="width: 50%;">Email address</label>
     </div>
-    <div class="col-5">
-      <label class="formText" for="inputEmail">Email address</label>
-      <input style="position: absolute; left: 25%;" type="email" class="form-control" id="inputEmail" placeholder="Enter email">
+      
+    <div class="flex-box-row">
+      <input type="text" class="form-control" id="collegeID" name="userid" style="width: 40%;" placeholder="Enter your college ID">
+      <label style="width: 10%;"></label>
+      <input type="email" class="form-control" id="inputEmail" name="email" style="width: 40%;" placeholder="Enter email">
     </div>
-  </div>
-  <div class="row" style="height: 50px;">
-    <p></p>
-  </div>
-  <div class="row">
-    <div class="col-5">
-      <label class="formText" for="fName">First name</label>
-      <input style="position: absolute; left: 15%;" type="text" class="form-control" id="fName" placeholder="Enter your first name">
+      
+    <label style="height: 5%;"></label>
+    
+    <div class="flex-box-row">
+      <label class="formText" for="fName" style="width: 50%;">First name</label>
+      <label class="formText" for="lName" style="width: 50%;">Last name</label>
     </div>
-    <div class="col-5">
-      <label class="formText" for="lName">Last name</label>
-      <input style="position: absolute; left: 25%;" type="text" class="form-control" id="lName" placeholder="Enter your last name">
+    
+    <div class="flex-box-row">
+      <input type="text" class="form-control" id="fName" name="firstname" style="width: 40%;" placeholder="Enter your first name">
+      <label style="width: 10%;"></label>
+      <input type="text" class="form-control" id="lName" name="lastname"  style="width: 40%;" placeholder="Enter your last name">
     </div>
-  </div>
-  <div class="row" style="height: 50px;">
-    <p></p>
-  </div>
-  <div class="row">
-    <div class="col-5">
-      <label class="formText" for="collegeID">Password</label>
-      <input style="position: absolute; left: 15%;" type="password" class="form-control" id="password" placeholder="Enter your new password" onclick="pop()">
+  
+    <label style="height: 5%;"></label>
+    
+    <div class="flex-box-row">
+      <label class="formText" for="collegeID" style="width: 50%;">Password</label>
     </div>
-    <div class="col-5">
-      <label style="height: 29px;"></label>
-      <input style="position: absolute; left: 25%;" type="password" class="form-control" id="rePassword" placeholder="Re-enter your password">
-    </div>
-  </div>
-  <button id="but1" style="position: absolute; left: 80%; top: 85%; background-color: orange; border: orange;" type="submit" class="btn btn-primary btn-lg">Register</button>
+    
+    <div class="flex-box-row">
+      <input type="password" class="form-control" id="password" name="password" style="width: 40%;" placeholder="Enter your new password" onclick="pop()">
+      <label style="width: 10%;"></label>
+      <input type="password" class="form-control" id="rePassword" style="width: 40%;" placeholder="Re-enter your password">
+    </div>  
+    
+    <label style="height: 5%;"></label>
+  </div>  
+  
+  <button id="but1" style="position: absolute; top: 90%; width: 100%; background-color: orange; border: orange; border-radius: 25px;" type="submit" class="btn btn-primary btn-lg">Register</button>
+    
 </form>
     
 </body>
