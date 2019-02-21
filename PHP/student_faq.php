@@ -1,10 +1,10 @@
 <?php
-    // file: staff_Home.php
+    // file: student_faq.php
     session_start();
     if (!isset($_SESSION['firstName'])){
         echo "<p> No user details found</p>";
     }
-    $_SESSION['htmlTitle'] =  "Home";
+    $_SESSION['htmlTitle'] =  "FAQ's";
     // for testing purposes only
     /*if (isset($_SESSION['firstName'])){
         $firstName = $_SESSION['firstName'];
@@ -17,9 +17,10 @@
     try
     {
         //require_once 'connect.php';//connects to the SQL database.
-        require_once 'Shared/php/Header.php';//connects to the header section for all pages
-        require_once 'Staff/php/StaffHome.php';//connects to the main Home scripit and page section for Admin
-        require_once 'Staff/php/StaffFooter.php';//connects to the footer section for all pages for Admin
+        require_once 'Shared/php/AllHeader.php';//connects to the header section for all pages
+        require_once 'Student/php/StudentMenu.php';// Drop Down Menu for all student pages
+        require_once 'Student/php/StudentFAQ.php';//connects to the main Home scripit and page section for Admin
+        require_once 'Student/php/StudentFooter.php';//connects to the footer section for all pages for Admin
     }
     catch(PDOException $e)
     {

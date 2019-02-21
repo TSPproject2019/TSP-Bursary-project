@@ -1,71 +1,89 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+    session_start();
+   # echo " start Step 0.0..<br>"; // for testing purposes
+    require_once 'connect.php';//connects to the SQL database.
+   # echo " start Step 1.0..<br>"; // for testing purposes
+    // functions
     
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    function getTotals ($uID, $stat){
+        global $totalResult;
+        require 'connect.php';//connects to the SQL database.
+       # echo " start Step 4.0..<br>"; // for testing purposes
+        $SQL_stmt = "SELECT COUNT(*) AS 'Total' FROM bursaryRequests
+          INNER JOIN itemsAndRequests WHERE itemsAndRequests.RequestID = bursaryRequests.bRequestsID 
+          AND itemsAndRequests.StudentID = " . $uID . " AND bursaryRequests.bRequestsStaffApproved is NULL 
+          AND bursaryRequests.bRequestsAdminApproved is NULL 
+          AND bRequestsStatus = '" . $stat . "'";
+        $totalResult = 0;
+        // now to run the query
+        # echo " start Step 4.1..<br>"; // for testing purposes
+        // first prepare and excecurte
+        $result = $DBconnection->query($SQL_stmt);
+        # echo " start Step 4.2..<br>"; // for testing purposes
+        // now get the data
+        if ($row = $result->fetch()){
+            // varify that it is a valid userID
+            # echo " start Step 4.2.1..<br>"; // for testing purposes
+            // Bind results by column name
+            $totalResult = $row['Total'];
+            #return $submitTotal;
+        }
+        return $totalResult;
+    }
+    // end functions
+    
+    // Get the _SESSION user details.
+    if (isset($_SESSION['lastName'])){
+       # echo " start Step 2.0..<br>"; // for testing purposes
+        $firstName = $_SESSION['firstName'];
+        $lastName = $_SESSION['lastName'];
+        $userid = $_SESSION['userid'];
+        $userName = $firstName . " " . $lastName;
+        // get course title
+        $SQL_stmt = "SELECT DISTINCT courseTitle FROM course 
+        INNER JOIN studentToCourse ON course.courseID = studentToCourse.stcCourseID
+        INNER JOIN users ON users.userID = " . $userid . " and studentToCourse.stcStudentID = '" . $userid . "'";
+        // now to run the query
 
-    <link rel="stylesheet" type="text/css" href="../CSS/styles.css">
-    <!-- Bootstrap 4.1 CND -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <!-- Font Awsome icons -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
-    integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+        //
+       # echo " start Step 2.0..<br>"; // for testing purposes
+        // first prepare and excecurte
+        $result = $DBconnection->query($SQL_stmt);
+       # echo " start Step 2.1..<br>"; // for testing purposes
+        // now get the data
+        if ($row = $result->fetch()){
+            // varify that it is a valid userID
+           # echo " start Step 2.1.1..<br>"; // for testing purposes
+            // Bind results by column name
+            $courseTitle = $row['courseTitle'];
+            // store session variables
+            $_SESSION['courseTitle'] =  $courseTitle;
+            // this varisable is also used for posting.
 
-<title>Student FAQ </title>
-</head>
-
-
-
-<body>
-      <header class="jumbotron bg-secondary">
-    <div class="row text-center">
-        <div class="col-lg-6">
-                <h2>Welcome (Name)</h2>
-                <p>Course details</p>
-                 <h1>Review My Drafts</h1>
+        }
+        // get the data for the submitted requests
+        $submitTotal = getTotals ($userid, "Submitted");
+        $approved = getTotals ($userid, "Approved");
+        $pending = getTotals ($userid, "Pending");
+    }
+?>
+        <!-- <div class="row col-lg-6 justify-content-start align-items-center"> -->
+        <div>
+                <li class="list-group-item  border-1">FAQ's</li>
         </div>
-        
-        <div class="col-lg-6">
-            <img src="../Staff/Images/logo1.png" class="img-fluid" width="100px", height="50px" alt="Responsive image"></img>
-            <a href="" class="btn btn-success">Log out</a>
-        </div>
-    </div>
- </header>
-         
-        <div class="row col-lg-6 justify-content-start align-items-center">
-            
-                <div class="dropdown">
-                   <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                     <i class="fas fa-list-ul"></i></a>
-                       
-                      <div class="dropdown-menu bg-secondary" aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item" href="Review My Drafts.html">Review my drafts</a></a>
-                        <a class="dropdown-item" href="Agreement Form.html">Agreement form</a></a>
-                        <a class="dropdown-item" href="New Bursary Request.html">New Bursary Request</a></a></a>
-                        <a class="dropdown-item" href="Student Home Page.html">Home</a></a>
-                        <a class="dropdown-item" href="My Submitted Forms.html">My submitted Forms</a></a>
-                        <a class="dropdown-item" href="FAQ.html">FAQ's</a></a>
-                        
-                    </div>
-               </div>
-                
-                
-                 <div class="col-md-4 ml-3">
+        <div class="col-md-4 ml-3">
                     <p>Outstanding balance:</p>
                 </div>
                 <div class="col-md-4 ml-4">
                     <ul class="list-group list-group-flush">
-                       <li class="list-group-item">Submitted:</li>
-                        <li class="list-group-item">Approved:</li>
-                        <li class="list-group-item">Awaiting delivery:</li>
+                      <?php
+                        echo '<li class="list-group-item">Submitted: <span>' . $submitTotal . '</span></li>';
+                        echo '<li class="list-group-item">Approved: <span>' . $approved . '</span></li>';
+                        echo '<li class="list-group-item">Awaiting delivery: <span>' . $pending . '</span></li>';
+                      ?>
                     </ul>
                 </div>
           </div>
-          
-          
          <div class="accordion" id="accordionExample">
   <div class="card">
     <div class="card-header" id="headingOne">
@@ -111,15 +129,3 @@
     </div>
   </div>
 </div>
-<footer class="jumbotron mt-4 mb-0">
-        
-    </footer>
-<!-- JQuery and Poper.js library for dropdown menu-->
-
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-
-</body>
-
-</html>

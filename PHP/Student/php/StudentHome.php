@@ -1,62 +1,138 @@
 <?php
-            session_start();
-        ?>
-        <div class="row col-lg-6 justify-content-start align-items-center">
-            
-            <div class="dropdown">
-               <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="fas fa-list-ul"></i></a>
-                   
-                   <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item" href="Agreement form.html">Agreement form</a>
-                        <a class="dropdown-item" href="FAQ.html">FAQ</a>
-                        <a class="dropdown-item" href="History Student Requests.html">History Student Requests</a>
-                        <a class="dropdown-item" href="Home Page.html">Home Page</a>
-                        <a class="dropdown-item" href="My History.html">My History</a>
-                        <a class="dropdown-item" href="My Submitted Forms.html">My Submitted Forms</a>
-                        <a class="dropdown-item" href="Review My Drafts.html">Review My Drafts</a>
-                        <a class="dropdown-item" href="New Bursary Request.html">New Bursary Request</a>
-                        <a class="dropdown-item" href="Student Submissions.html">Student Submissions</a>
-                    </div>
-            </div>
+    session_start();
+
+   # echo " start Step 0.0..<br>"; // for testing purposes
+    require_once 'connect.php';//connects to the SQL database.
+   # echo " start Step 1.0..<br>"; // for testing purposes
+    // functions
+    
+    function getTotals ($uID, $stat){
+        global $totalResult;
+        require 'connect.php';//connects to the SQL database.
+       # echo " start Step 4.0..<br>"; // for testing purposes
+        $SQL_stmt = "SELECT COUNT(*) AS 'Total' FROM bursaryRequests
+          INNER JOIN itemsAndRequests WHERE itemsAndRequests.RequestID = bursaryRequests.bRequestsID 
+          AND itemsAndRequests.StudentID = " . $uID . " AND bursaryRequests.bRequestsStaffApproved is NULL 
+          AND bursaryRequests.bRequestsAdminApproved is NULL 
+          AND bRequestsStatus = '" . $stat . "'";
+        $totalResult = 0;
+        // now to run the query
+        # echo " start Step 4.1..<br>"; // for testing purposes
+        // first prepare and excecurte
+        $result = $DBconnection->query($SQL_stmt);
+        # echo " start Step 4.2..<br>"; // for testing purposes
+        // now get the data
+        if ($row = $result->fetch()){
+            // varify that it is a valid userID
+            # echo " start Step 4.2.1..<br>"; // for testing purposes
+            // Bind results by column name
+            $totalResult = $row['Total'];
+            #return $submitTotal;
+        }
+        return $totalResult;
+    }
+    // end functions
+    
+    // Get the _SESSION user details.
+    if (isset($_SESSION['lastName'])){
+       # echo " start Step 2.0..<br>"; // for testing purposes
+        $firstName = $_SESSION['firstName'];
+        $lastName = $_SESSION['lastName'];
+        $userid = $_SESSION['userid'];
+        $userName = $firstName . " " . $lastName;
+        // get course title
+        $SQL_stmt = "SELECT DISTINCT courseTitle FROM course 
+        INNER JOIN studentToCourse ON course.courseID = studentToCourse.stcCourseID
+        INNER JOIN users ON users.userID = " . $userid . " and studentToCourse.stcStudentID = '" . $userid . "'";
+        // now to run the query
+
+        //
+       # echo " start Step 2.0..<br>"; // for testing purposes
+        // first prepare and excecurte
+        $result = $DBconnection->query($SQL_stmt);
+       # echo " start Step 2.1..<br>"; // for testing purposes
+        // now get the data
+        if ($row = $result->fetch()){
+            // varify that it is a valid userID
+           # echo " start Step 2.1.1..<br>"; // for testing purposes
+            // Bind results by column name
+            $courseTitle = $row['courseTitle'];
+            // store session variables
+            $_SESSION['courseTitle'] =  $courseTitle;
+            // this varisable is also used for posting.
+
+        }
+        // get the data for the submitted requests
+        $submitTotal = getTotals ($userid, "Submitted");
+        $approved = getTotals ($userid, "Approved");
+        $pending = getTotals ($userid, "Pending");
+    }
+?>
+        <!-- <div class="row col-lg-6 justify-content-start align-items-center"> -->
             <div>
                   <li class="list-group-item  border-1">Student Home Page</li>
             </div>
-            <div class="col-md-4 ml-3">
-                <p>Outstanding balance:</p>
-            </div>
-            <div class="col-md-4 ml-4">
-                <ul class="list-group list-group-flush">
-                   <li class="list-group-item">Submitted:</li>
-                    <li class="list-group-item">Approved:</li>
-                    <li class="list-group-item">Awaiting delivery:</li>
-                </ul>
-            </div>
-      </div>
-      <section class="content">
-          <div class="row justify-content-center">
-              <article class="border col-lg-6 mt-2">
-                  
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-                  sed diam nonummy nibh euismod tincidunt ut laoreet dolore
-                  magna aliquam erat volutpat. Ut wisi enim ad minim veniam,
-                  quis nostrud exerci tation ullamcorper suscipit lobortis nisl
-                  ut aliquip ex ea commodo consequat. Duis autem vel eum iriure
-                  dolor in hendrerit in vulputate velit esse molestie consequat,
-                  vel illum dolore eu feugiat nulla facilisis at vero eros et
-                  accumsan et iusto odio dignissim qui blandit praesent luptatum
-                  zzril delenit augue duis dolore te feugait nulla facilisi.
-                  Nam liber tempor cum soluta nobis eleifend option congue
-                  nihil imperdiet doming id quod mazim placerat facer possim
-                  assum. Typi non habent claritatem insitam; est usus legentis
-                  in iis qui facit eorum claritatem. Investigationes
-                  demonstraverunt lectores legere me lius quod ii legunt saepius.
-                  Claritas est etiam processus dynamicus, qui sequitur mutationem
-                  consuetudium lectorum. Mirum est notare quam littera gothica,
-                  quam nunc putamus parum claram, anteposuerit litterarum formas
-                  humanitatis per seacula quarta decima et quinta decima. Eodem
-                  modo typi, qui nunc nobis videntur parum clari, fiant sollemnes
-                  in futurum.
-                  
-              </article>
+            <div class="col-3">
+                    <ul class="list-group">
+                      <?php
+                         echo '<li class="list-group-item  border-0">Submitted: <span>' . $submitTotal . '</span></li>';
+                         echo '<li class="list-group-item  border-0">Approved: <span>' . $approved . '</span></li>';
+                         echo '<li class="list-group-item  border-0">Awaiting delivery: <span>' . $pending . '</span></li>';
+                      ?>
+                    </ul>
+                </div>
           </div>
+          
+ <section class="container">         
+            <h1 class="text-center">Student Home</h1>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi et voluptate nam, aliquid amet maiores fuga,
+                    facilis ipsam soluta,
+                    reprehenderit, explicabo repellat. Maiores libero mollitia esse illo. Nam, officia, quisquam!
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi et voluptate nam, aliquid amet maiores fuga,
+                    facilis ipsam soluta,
+                    reprehenderit, explicabo repellat. Maiores libero mollitia esse illo. Nam, officia, quisquam!
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi et voluptate nam, aliquid amet maiores fuga,
+                    facilis ipsam soluta,
+                    reprehenderit, explicabo repellat. Maiores libero mollitia esse illo. Nam, officia, quisquam!
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi et voluptate nam, aliquid amet maiores fuga,
+                    facilis ipsam soluta,
+                    reprehenderit, explicabo repellat. Maiores libero mollitia esse illo. Nam, officia, quisquam!
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi et voluptate nam, aliquid amet maiores fuga,
+                    facilis ipsam soluta,
+                    reprehenderit, explicabo repellat. Maiores libero mollitia esse illo. Nam, officia, quisquam!
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi et voluptate nam, aliquid amet maiores fuga,
+                    facilis ipsam soluta,
+                    reprehenderit, explicabo repellat. Maiores libero mollitia esse illo. Nam, officia, quisquam!
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi et voluptate nam, aliquid amet maiores fuga,
+                    facilis ipsam soluta,
+                    reprehenderit, explicabo repellat. Maiores libero mollitia esse illo. Nam, officia, quisquam!
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi et voluptate nam, aliquid amet maiores fuga,
+                    facilis ipsam soluta,
+                    reprehenderit, explicabo repellat. Maiores libero mollitia esse illo. Nam, officia, quisquam!
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi et voluptate nam, aliquid amet maiores fuga,
+                    facilis ipsam soluta,
+                    reprehenderit, explicabo repellat. Maiores libero mollitia esse illo. Nam, officia, quisquam!
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi et voluptate nam, aliquid amet maiores fuga,
+                    facilis ipsam soluta,
+                    reprehenderit, explicabo repellat. Maiores libero mollitia esse illo. Nam, officia, quisquam!
+                </p>
+   </section>   

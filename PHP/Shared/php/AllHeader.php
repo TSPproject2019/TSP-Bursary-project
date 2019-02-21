@@ -1,11 +1,17 @@
 <?php
+  // ensure session ID's are retrievable
   session_start();
+  
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Admin Home Page </title>
+<?php
+  // get the headed page htmlPagename from session variables
+  echo "<title>" . $_SESSION['htmlTitle'] . "</title>";
+?>
+<!-- <title>Admin Home Page </title> -->
 
  <!-- Required meta tags -->
     <meta charset="utf-8">
