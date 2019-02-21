@@ -50,7 +50,7 @@
             
           ?>
         <div class="col-lg-6">
-            <img src="Shared/images/logo.png" class="img-fluid" width="100px", height="50px" alt="Responsive image"></img>
+            <img src="Shared/images/logo.png" class="img-fluid" width="100px" height="50px" alt="Responsive image">
             <!-- <img src="../images/logo.png" ></img> -->
             <a href="logout.php" class="btn btn-outline-success btn-sm">Log out</a>
         </div>

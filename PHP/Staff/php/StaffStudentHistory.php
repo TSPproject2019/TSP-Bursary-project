@@ -56,19 +56,7 @@
                   </button>
                   <div class="dropdown-menu dropdown-menu-lg-right">
                   <?php
-                        $SQL_stmt = "SELECT DISTINCT courseTitle AS 'Course' FROM course
-                        INNER JOIN departmentsStaffCourseStudents ON departmentsStaffCourseStudents.bscsCourseID = course.courseID
-                        WHERE bscsStaffID = '".$uID"'";
-      
-                        $result = $DBconnection->query($SQL_stmt);
-                         
-                        while($row = mysqli_fetch_assoc($result)) 
-                        {
-                          foreach($row as $field =>$value)
-                          {
-                             echo '<button class="dropdown-item" type="button">'.$value.'</button>';
-                          }
-                        }
+                       echo getStaffAllCourses($userid);
                     ?>
           </div>
           </div>
@@ -77,10 +65,9 @@
                     Year Selected
                   </button>
                   <div class="dropdown-menu dropdown-menu-lg-right">
-                  <button class="dropdown-item" type="button">Year 3 18/19</button>
-                  <button class="dropdown-item" type="button">year 2 17/19</button>
-                  <button class="dropdown-item" type="button">Year 1 16/17</button>
-    
+                  <?php
+                       echo getStaffAllCourseYears($userid);
+                    ?>
                   </div>
                </div>
     

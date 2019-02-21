@@ -58,37 +58,21 @@
                   <?php
                        echo getStaffAllCourses($userid);
                     ?>
+    
           </div>
           </div>
-          
-          
-
         <div class="btn-group" style="text-align: center">
                   <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="true" align=right>
                     Year Selected
                   </button>
                   <div class="dropdown-menu dropdown-menu-lg-right">
-                   <?php
+                  <?php
                        echo getStaffAllCourseYears($userid);
                     ?>
                   </div>
                </div>
     
-        <div class="btn-group" style="text-align: center">
-                  <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="true" align=right>
-                    Sort by
-                  </button>
-                  <div class="dropdown-menu dropdown-menu-lg-right">
-                  <button class="dropdown-item" type="button">Pending</button>
-                  <button class="dropdown-item" type="button">Delivered</button>
-                  <button class="dropdown-item" type="button">Accepted</button>
-    
-                  </div>
-            </div>
-          
-          
-          
-          <table class="table table-striped">
+        <table class="table table-striped">
    <thead class="thead-dark">
     <tr>
       <th scope="col">Student ID</th>

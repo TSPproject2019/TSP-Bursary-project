@@ -1,9 +1,54 @@
 <?php
     session_start();
-    require_once 'connect.php';//connects to the SQL database.
 
-    // drop down requirements on initial load (will run queries)
-    // # - select
+    require_once 'mysql_connect.php';//connects to the SQL database.
+
+   /* ----------------------TESTING CONNECTION TO DATABASE --------------------------
+    //----Database connection credentials-------
+    * DEFINE ('DB_USER', 'WEBAuth');
+    DEFINE ('DB_PASSWORD', 'WEBAuthPW');
+    DEFINE ('DB_HOST', 'localhost');
+    DEFINE ('DB_NAME', 'bursary_database');
+    $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME) OR die('Could not connect to MySQL: ' . mysqli_connect_error() );
+    
+    //--- Query to select all user from database ---
+    $query = "SELECT CONCAT(userFirstName, ', ', userLastName) AS name FROM users";
+    $result = mysqli_query($dbc, $query);
+    //---If query ran Ok, display records. -----
+    if ($result) {
+      echo '<table align="center" cellspacing="3" cellpadding="3" width="25%">
+              <tr>
+                <td align="left"><strong>Name</strong></td>
+                </tr>
+      ';
+      //---Fetch and print all records: ---
+      while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+        echo '<tr>
+                <td align="left">' . $row['name'] . '</td>
+              </tr>
+              ';
+      }
+      
+      echo '</table>'; //close table
+      mysqli_free_results($result); // Free up resources
+      
+    } else { //if it did not ran OK.
+         //Public message:
+        echo '<p><strong>Query failed: </strong></p>';
+        //Debugging message:
+        echo '<p>' . mysqli_error($dbc) . '<br /><br />Query: ' . $query . '</p>';
+    }
+   */
+
+    //Query course titles from database
+    $query = 'SELECT courseTitle FROM course';
+    $results = mysqli_query($dbc, $query);
+    //Query course year from database
+    $queryYear = 'SELECT courseYear from course';
+    $resultsYear = mysqli_query($dbc, $queryYear);
+    //Query Staff member name
+    $queryStaff = "SELECT CONCAT(userFirstName, ', ', userLastName) AS name FROM users WHERE userType='Staff'";
+    $resultsStaff = mysqli_query($dbc, $queryStaff);
 ?>     
     <div class="col-3">
         <ul class="list-group">
@@ -19,24 +64,22 @@
  <!-- Choose course -->
     <div class="row ml-2 mb-5">
         <select class="custom-select col-2">
-          <option selected>Name of Group Selected</option>
-          <option value="1">BTEC IT</option>
-          <option value="2">BSc Computer Science</option>
+          <?php while($row = mysqli_fetch_array($results)):; ?>
+          <option value="<?php echo $row[0]; ?>"><?php echo $row[0]; ?></option>
+          <?php endwhile; ?>
       </select>
        
   <!-- Choose Year -->       
     <select class="custom-select col-2 ml-2">
-          <option selected>Year</option>
-          <option value="1">16/17</option>
-          <option value="2">17/18</option>
-          <option value="3">18/19</option>
+          <?php while($row2 = mysqli_fetch_array($resultsYear)):; ?>
+          <option value="<?php echo $row2[0]; ?>"><?php echo $row2[0]; ?></option>
+          <?php endwhile; ?>
       </select>    
  <!-- Choose staff name --> 
     <select class="custom-select col-2 ml-2">
-          <option selected>Name of Staff Selected</option>
-          <option value="1">Ben Stimson</option>
-          <option value="2">David Williams</option>
-          <option value="3">Danny McCoombs</option>
+          <?php while($row3 = mysqli_fetch_array($resultsStaff)):; ?>
+          <option value="<?php echo $row3[0]; ?>"><?php echo $row3[0]; ?></option>
+          <?php endwhile; ?>
     </select>
  <!-- Sort By -->       
     <select class="custom-select col-2 ml-2">

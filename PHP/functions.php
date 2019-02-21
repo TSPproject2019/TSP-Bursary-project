@@ -57,6 +57,8 @@
         }
         return $staffTotalResult;
     }
+
+    // COUNT all staff requests that have been approved
     function getStaffApproved($uID,$usrType,$stat){
       global $staffTotalApprovedResult;
         require 'connect.php';//connects to the SQL database.
@@ -85,6 +87,8 @@
         }
         return $staffTotalApprovedResult;
     }
+
+    // COUNT all staff requests items that are not delivered yet
     function getStaffAwaitingDelivery($uID,$usrType){
       global $staffTotalOrderedResult;
         require 'connect.php';//connects to the SQL database.
@@ -116,8 +120,9 @@
         }
         return $staffTotalOrderedResult;
     }
-    function getStudentAvailableBalance($uID)
-    {
+
+    // Get student availableBalance
+    function getStudentAvailableBalance($uID){
         global $studentAvailBalance;
         require 'connect.php';
         
@@ -139,20 +144,35 @@
         }
       return $studentAvailBalance;
     }
-/*
-    getStaffAllCourses($uID)
-    {
+
+    // Gets all course titles of a particular staff member
+    function getStaffAllCourses($uID){
       require 'connect.php';
       $SQL_stmt = "SELECT DISTINCT courseTitle AS 'Course' FROM course
-      INNER JOIN departmentsStaffCourseStudents
-      ON departmentsStaffCourseStudents.bscsCourseID = course.courseID
-      WHERE bscsStaffID = '".$uID"'";
+      INNER JOIN departmentsStaffCourseStudents ON departmentsStaffCourseStudents.bscsCourseID = course.courseID
+      WHERE bscsStaffID = '". $uID ."'";
       
       $result = $DBconnection->query($SQL_stmt);
-      
-      while($row = mysqli_fetch_array($result)) 
+                        
+      while ($row = $result->fetch())
       {
-         echo '<button class="dropdown-item" type="button">'.$row['courseTitle'].'</button>';
-      }
-    }*/
+        echo '<button class="dropdown-item" type="button">  '.$row['Course']. '</button>';
+      }                  
+    }
+
+    // Gets all course years of a particular staff member
+    function getStaffAllCourseYears($uID){
+      require 'connect.php';
+      $SQL_stmt = "SELECT courseYear AS 'Year' FROM course
+      INNER JOIN departmentsStaffCourseStudents
+      ON departmentsStaffCourseStudents.bscsCourseID = course.courseID
+      WHERE bscsStaffID = '". $uID ."'";
+      
+      $result = $DBconnection->query($SQL_stmt);
+                        
+      while ($row = $result->fetch())
+      {
+        echo '<button class="dropdown-item" name="group" type="button" method="POST">  '.$row['Year']. '</button>';
+      }          
+    }
 ?>
