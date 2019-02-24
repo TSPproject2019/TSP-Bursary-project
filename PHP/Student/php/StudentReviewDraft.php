@@ -35,6 +35,29 @@
             // this varisable is also used for posting.
 
         }
+      // get student course tutor
+        $SQL_stmt = "SELECT DISTINCT userid, userFirstName, userLastName FROM users
+        INNER JOIN departmentsStaffCourseStudents ON users.userID = departmentsStaffCourseStudents.bscsStaffID
+        AND departmentsStaffCourseStudents.bscsStudentID  = '" . $userid . "'";
+        // now to run the query
+       # echo " start Step 3.0..<br>"; // for testing purposes
+        // first prepare and excecurte
+        $result = $DBconnection->query($SQL_stmt);
+       # echo " start Step 3.1..<br>"; // for testing purposes
+        // now get the data
+        if ($row = $result->fetch()){
+            // varify that it is a valid userID
+           # echo " start Step 3.1.1..<br>"; // for testing purposes
+            // Bind results by column name
+            $courseTutorFirstName = $row['userFirstName'];
+            $courseTutorLastName = $row['userLastName'];
+            $courseTutorId = $row['userid'];
+            // store session variables
+            $_SESSION['courseTutorFirstName'] =  $courseTutorFirstName;
+            $_SESSION['courseTutorLastName'] =  $courseTutorLastName;
+            $_SESSION['courseTutorId'] =  $courseTutorId;
+            // this varisable is also used for posting.
+        }
         
         // get the data for the submitted requests
         $submitTotal = getTotals ($userid, "Submitted");
@@ -63,42 +86,15 @@
           <table class="table table-striped">
    <thead class="thead-dark">
     <tr>
-      <th scope="col">Date Saved</th>
-      <th scope="col">Item Count</th>
+      <th scope="col">Date saved</th>
+      <th scope="col">Item</th>
       <th scope="col">Price (Total)</th>
-     
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">20/01/2019</th>
-      <td>2</td>
-      <td>£420.00</td>
-     <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalLong">
-  Edit
-</button></td>
-     <td><button type="button" class="btn btn-primary" >Delete</button></td>
-    <tr>
-      <th scope="row">21/01/2019</th>
-      <td>1</td>
-      <td>£150.00</td>
-      <th><span style="float:left"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalLong">
-  Edit
-</button></span></th>
-      <td><button type="button" class="btn btn-primary" >Delete</button></td>
-      
-    </tr>
-    <tr>
-      <th scope="row-3">03/01/2019</th>
-      <td>1</td>
-      <td>£100.00</td>
-      <th><span style="float:left"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalLong">
-  Edit
-</button></span></th>
-      <td><button type="button" class="btn btn-primary" >Delete</button></td>
-     
-    </tr>
-    
+    <?php
+          echo getStudentDraftItems($userid);
+    ?>
   </tbody>
 </table> 
 
@@ -116,21 +112,26 @@
                         <div class="form-group row">
                              <label for="fullName" class="col-sm-2 col-form-label">Full Name:</label>
                              <div class="col-sm-10">
-                                  <input type="text" class="form-control" id="fullName">
+                               <?php
+                                  echo '<input type="text" class="form-control" id="fullName" disabled value="' . $userName . '" placeholder="Auto-generated field">';
+                                    ?>
                              </div>
 
                         </div>
                         <div class="form-group row">
                              <label for="course" class="col-sm-2 col-form-label">Course:</label>
                              <div class="col-sm-10">
-                                  <input type="text" class="form-control" id="course">
+                               <?php
+                                  echo '<input type="text" class="form-control" id="course" disabled value="' . $courseTitle . '" placeholder="Auto-generated field">';
+                                    ?>
                              </div>
                         </div>
-                        
                         <div class="form-group row">
                              <label for="tutor" class="col-sm-2 col-form-label">Tutor:</label>
                              <div class="col-sm-10">
-                                  <input type="text" class="form-control" id="tutor">
+                               <?php
+                                 echo '<input type="text" class="form-control" id="tutor" disabled value="' . $courseTutorFirstName . ' ' . $courseTutorLastName . '" placeholder="Auto-generated field">';
+                                    ?>
                              </div>
                         </div>
                         <div class="row">

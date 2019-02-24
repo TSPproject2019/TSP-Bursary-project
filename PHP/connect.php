@@ -10,7 +10,7 @@
   try{
     $DBconnection = new PDO("mysql:host=$DB_Host; dbname=$DB_Name" , $DB_User, $DB_Pass);
     $DBconnection -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    # echo "<p>Database connection established and open</p>";// for testing ourposes.
+    // echo "<p>Database connection established and open</p>";// for testing ourposes.
   }catch(PDOException $ex){
     echo "Exception error: " . $ex->getMessage();// for testing ourposes.
     die($ex->getMessage());

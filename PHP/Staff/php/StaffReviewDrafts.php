@@ -60,35 +60,9 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">20/01/2019</th>
-      <td>2</td>
-      <td>£420.00</td>
-     <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalLong">
-  Edit
-</button></td>
-     <td><button type="button" class="btn btn-primary" >Delete</button></td>
-    <tr>
-      <th scope="row">21/01/2019</th>
-      <td>1</td>
-      <td>£150.00</td>
-      <th><span style="float:left"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalLong">
-  Edit
-</button></span></th>
-      <td><button type="button" class="btn btn-primary" >Delete</button></td>
-      
-    </tr>
-    <tr>
-      <th scope="row-3">03/01/2019</th>
-      <td>1</td>
-      <td>£100.00</td>
-      <th><span style="float:left"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalLong">
-  Edit
-</button></span></th>
-      <td><button type="button" class="btn btn-primary" >Delete</button></td>
-     
-    </tr>
-    
+    <?php
+          echo getStaffDraftItems($userid);
+    ?>
   </tbody>
 </table> 
 

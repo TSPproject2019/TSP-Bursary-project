@@ -3,7 +3,7 @@
     require_once 'connect.php';//connects to the SQL database.
     require 'functions.php';
 
-/*
+
        //Query usernames  
       $SQL_stmt = "SELECT userFirstName FROM users";
       
@@ -17,7 +17,7 @@
           {
             echo $row['userFirstName'];
           }
-          */
+          
 
 //This query is for student. Change to Admin query
   $total =  getTotals($_SESSION['userid'], 'Submitted');

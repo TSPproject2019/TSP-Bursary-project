@@ -35,7 +35,6 @@
             // this varisable is also used for posting.
 
         }
-      
         // get the data for the submitted requests
         $submitTotal = getTotals ($userid, "Submitted");
         $approved = getTotals ($userid, "Approved");
@@ -71,35 +70,8 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">27/01/2019</td>
-      <td>1</td>
-      <td>£230.00</td>
-      <td>ACCEPTED</td>
-    </tr>
-    <tr>
-      <th scope="row">28/01/2019</td>
-       <td>1</td>
-      <td>£78.00</td>
-      <td>DELIVERED</td>
-    </tr>
-    <tr>
-      <th scope="row">27/01/2019</td>
-      <td>2</td>
-      <td>£499.99</td>
-      <td>PENDING</td>
-    </tr>
-     <tr>
-      <th scope="row">27/01/2019</td>
-      <td>4</td>
-      <td>£79.50</td>
-      <td>PENDING</td>
-    </tr>
-     <tr>
-      <th scope="row">27/01/2019</td>
-      <td>1</td>
-      <td>£99.99</td>
-      <td>PENDING</td>
-    </tr>
+    <?php
+        echo getStudentSubmittedForms($userid);
+    ?>
   </tbody>
 </table>         

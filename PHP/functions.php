@@ -175,4 +175,100 @@
         echo '<button class="dropdown-item" name="group" type="button" method="POST">  '.$row['Year']. '</button>';
       }          
     }
+    //Get all student requests that are under status of submitted or approved
+    function getStudentSubmittedForms($uID)
+    {
+          require 'connect.php';
+          $SQL_stmt = "SELECT bRequestsRequestDate as 'Date_submitted', COUNT(itemsAndRequests.ItemID) AS 'Item_count',
+          SUM(IFNULL(brItemPrice,0) + IFNULL(brItemPostage,0) + IFNULL(brItemAdditionalCharges,0))
+          AS 'Cost', bRequestsStatus AS 'Status' from bursaryRequests INNER JOIN itemsAndRequests
+          ON itemsAndRequests.RequestID = bursaryRequests.bRequestsID
+          AND itemsAndRequests.StudentID = ".$uID." INNER JOIN bursaryRequestItems ON
+          itemsAndRequests.ItemID = bursaryRequestItems.brItemID 
+          AND bursaryRequests.bRequestsStatus = 'Submitted' OR bursaryRequests.bRequestsStatus = 'Approved'
+          GROUP BY bursaryRequests.bRequestsID ORDER BY bursaryRequests.bRequestsRequestDate ASC";
+            
+          $result = $DBconnection->query($SQL_stmt);
+          
+          while ($row = $result->fetch())
+          {
+            echo '<tr>
+            <th scope="row">'.$row['Date_submitted'].'</td>
+            <td>'.$row['Item_count'].'</td>
+            <td>£'.$row['Cost'].'</td>
+            <td>'.$row['Status'].'</td>
+            </tr>';
+          }           
+    }
+    //Outputs draft request items for student
+    function getStudentDraftItems($uID)
+    {
+          require 'connect.php';
+          $SQL_stmt = "SELECT bursaryRequests.bRequestsRequestDate AS 'Date_submitted', brItemDesc AS 'Item', 
+          SUM(IFNULL(brItemPrice,0) + IFNULL(brItemPostage,0) + IFNULL(brItemAdditionalCharges,0))
+          AS 'Total_price' FROM bursaryRequestItems INNER JOIN itemsAndRequests 
+          ON bursaryRequestItems.brItemID = itemsAndRequests.ItemID 
+          AND itemsAndRequests.StudentID = ".$uID."
+          INNER JOIN bursaryRequests ON bursaryRequests.bRequestsID = itemsAndRequests.RequestID
+          AND bursaryRequests.bRequestsStatus = 'Draft'";
+            
+          $result = $DBconnection->query($SQL_stmt);
+    
+          while ($row = $result->fetch())
+          {
+            if(!isset($result->$row['Date_submitted']))//If the student does not have drafts
+            {
+              echo '<tr>
+              <th scope="row">No Drafts</th>
+              <td>No Drafts</td>
+              <td>No Drafts</td>
+              </tr>';
+            }
+            if(isset($result->$row['Item']))//If he/she does have drafts
+            {
+                echo '<tr>
+                <th scope="row">'.$row['Date_submitted'].'</th>
+                <td>'.$row['Item'].'</td>
+                <td>'.$row['Total_price'].'</td>
+                <th><span style="float:left"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalLong">Edit</button></span></th>
+                <td><button type="button" class="btn btn-primary" >Delete</button></td></tr>';
+            }
+          }
+    }
+    //Gets staff draft items on staff review drafts page.
+    function getStaffDraftItems($uID)
+    {
+          require 'connect.php';
+          $SQL_stmt = "SELECT bRequestsRequestDate AS 'Request_Date', COUNT(itemsAndRequests.ItemID) AS 'Item_count',
+          SUM(IFNULL(bursaryRequestItems.brItemPrice,0) + IFNULL(bursaryRequestItems.brItemPostage,0) + 
+          IFNULL(bursaryRequestItems.brItemAdditionalCharges,0)) AS 'Total_price' FROM bursaryRequests
+          INNER JOIN itemsAndRequests ON itemsAndRequests.RequestID = bursaryRequests.bRequestsID
+          INNER JOIN bursaryRequestItems ON itemsAndRequests.ItemID = bursaryRequestItems.brItemID
+          AND bursaryRequests.bRequestsStaffRequest = 'TRUE'
+          AND bursaryRequests.bRequestsStatus = 'Draft'
+          AND bursaryRequests.bRequestsStaffID = '" . $uID . "'";
+            
+          $result = $DBconnection->query($SQL_stmt);
+    
+          while ($row = $result->fetch())
+          {
+            if(!isset($result->$row['Request_Date']))//If the staff does not have drafts
+            {
+              echo '<tr>
+              <th scope="row">No Drafts</th>
+              <td>No Drafts</td>
+              <td>No Drafts</td>
+              </tr>';
+            }
+            if(isset($result->$row['Request_Date']))//If he/she does have drafts
+            {
+                echo '<tr>
+                <th scope="row">'.$row['Request_Date'].'</th>
+                <td>'.$row['Item_count'].'</td>
+                <td>£'.$row['Total_price'].'</td>
+                <th><span style="float:left"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalLong">Edit </button></span></th>
+                <td><button type="button" class="btn btn-primary" >Delete</button></td></tr>';
+            }
+          }
+    }
 ?>
