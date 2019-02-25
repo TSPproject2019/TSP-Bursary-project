@@ -200,7 +200,7 @@
                                               <div class="form-group">
                                                   <div>';
                                                       echo '<label for="itemDescription' . $count . '">Item description:</label>';
-                                                      echo '<textarea class="form-control" id="itemDescription' . $count . '" name="itemdescription' . $count . '" rows="5">' . $itemdescription . '</textarea>';
+                                                      echo '<textarea class="form-control" id="itemDescription' . $count . '" name="itemdescription' . $count . '" rows="2">' . $itemdescription . '</textarea>';
                                                       echo '</div>
                                               </div>
                                   

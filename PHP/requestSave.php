@@ -15,36 +15,45 @@
 
     echo " start Step 1.1..<br>"; // for testing purposes
 
+    // Get the session variables
+    $userid = $_SESSION['userid'];
+    $userFirstName = $_SESSION['firstName'];
+    $userLastName = $_SESSION['lastName'];
+    // create initial SQL query to add the Items to the table/s
+    $SQL_stmt="";
     // assign a counter
     $count = 1;
     # -loop through items which are in the form
-    while (isset($_POST['itemcategory' . $count]) & !empty($_POST['itemcategory' . $count])
-        if (isset($_POST['itemcategory' . $count]) && isset($_POST['itemdescription' . $count]) && isset($_POST['itemUrl' . $count]) && isset($_POST['itemprice' . $count]) && isset($_POST['itempostage' . $count]) && isset($_POST['itemadditionalcharges' . $count])){
-            echo " start Step 2...<br>"; // for testing purposes
+    while (isset($_POST["'itemdescription" . $count . "'"]) & !empty($_POST["'itemdescription" . $count . "'"])
+        // add count to POST item variables
+        $itemCategory = "'itemcategory" . $count . "'";
+        $itemDescription = "'itemdescription" . $count. "'";
+        $itemURL = "'itemUrl" . $count . "'";
+        $itemPrice = "'itemprice" . $count . "'";
+        $itemPostage = "'itempostage" . $count . "'";
+        $itemAdditionalCharges = "'itemadditionalcharges" . $count . "'";
 
-            #if(isset($_POST) & !empty($_POST)){
+        if (isset($_POST[$itemCategory]) && isset($_POST[$itemDescription]) && isset($_POST[$itemURL]) && isset($_POST[$itemPrice]) && isset($_POST[$itemPostage]) && isset($_POST[$itemAdditionalCharges])){
+            echo " start Step 2...<br>"; // for testing purposes
                 
             //  If the form is submitted assign variables..
-            $itemcategory . $count = $_POST['itemcategory' . $count];
-            $itemdescription . $count = $_POST['itemdescription' . $count];
-            $itemUrl . $count = $_POST['itemUrl' . $count];
-            $itemprice . $count = $_POST['itemprice' . $count];
-            $itempostage . $count = $_POST['itempostage' . $count];
-            $itemadditionalcharges . $count = $_POST['itemadditionalcharges' . $count];
+            $itemcategory = $_POST[$itemCategory];
+            $itemdescription = $_POST[$itemDescription];
+            $itemUrl = $_POST[$itemURL];
+            $itemprice = $_POST[$itemPrice];
+            $itempostage = $_POST[$itemPostage];
+            $itemadditionalcharges = $_POST[$itemAdditionalCharges];
             // cycle counter
             $counter++;
         }
-        if (empty($_POST['itemcategory' . $count . 1]){
+        if (empty($_POST["'"$itemDescription . 1"'"]) && empty($_POST["'"$itemPrice . 1"'"])){
             // now need to get the final secion of the request form
             if (isset($_POST['justification']) && isset($_POST['tutorComments'])){
                 //  assign last variables..
                 $justification = $_POST['justification'];
                 $tutorComments = $_POST['tutorComments'];
 
-                // now get the session variables need for posting the request to SQL
-                $userid = $_SESSION['userid'];
-                $userFirstName = $_SESSION['firstName'];
-                $userLastName = $_SESSION['lastName'];
+
 
                 // now start the SQL script to post the request
             }
