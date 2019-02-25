@@ -114,7 +114,7 @@
                              <div class="col-sm-10">
                                <?php
                                   echo '<input type="text" class="form-control" id="fullName" disabled value="' . $userName . '" placeholder="Auto-generated field">';
-                                    ?>
+                                ?>
                              </div>
 
                         </div>
@@ -123,7 +123,7 @@
                              <div class="col-sm-10">
                                <?php
                                   echo '<input type="text" class="form-control" id="course" disabled value="' . $courseTitle . '" placeholder="Auto-generated field">';
-                                    ?>
+                                ?>
                              </div>
                         </div>
                         <div class="form-group row">
@@ -131,11 +131,11 @@
                              <div class="col-sm-10">
                                <?php
                                  echo '<input type="text" class="form-control" id="tutor" disabled value="' . $courseTutorFirstName . ' ' . $courseTutorLastName . '" placeholder="Auto-generated field">';
-                                    ?>
+                                ?>
                              </div>
                         </div>
                         <div class="row">
-                            <h5 class="m-2">ITEMs</h5>
+                            <h5 class="m-2">Item/s</h5>
                         </div>
                         <div class="form-group row">
                             <label for="categoryField" class="col-sm-2 col-form-label">Category field:</label>
@@ -164,7 +164,6 @@
                                         $requestid = $row['requestid'];
                                     }
 
-
                                     //Using the request id, find the item info 
                                     $SQL_stmt = "SELECT brItemCategory AS 'category', brItemDesc AS 'item_description',
                                     brItemURL AS 'URL', brItemPrice AS 'price', brItemPostage AS 'postage',
@@ -179,74 +178,60 @@
                                     $count = 0;
                                     while ($row = $result->fetch()){
                                         // loop through the request results
-                                        $itemcategory = $row['category' . $count . ''];
-                                        $itemdescription = $row['item_description' . $count . ''];
-                                        $itemUrl . $count = $row['URL' . $count . ''];
-                                        $itemprice . $count = $row['price' . $count . ''];
-                                        $itempostage . $count = $row['postage' . $count . ''];
-                                        $itemadditionalcharges . $count = $row['additional_charges' . $count . ''];
+                                        $itemcategory = $row['category'];
+                                        $itemdescription = $row['item_description'];
+                                        $itemUrl = $row['URL'];
+                                        $itemprice = $row['price'];
+                                        $itempostage = $row['postage'];
+                                        $itemadditionalcharges = $row['additional_charges'];
 
                                         // output data from query                         
-                                        echo '<option selected name="itemcategory' . $count . '">' . $category . '</option>';
+                                        echo '<option selected name="itemcategory' . $count . '">' . $itemcategory . '</option>';
                                         echo '<option value="1">Equipment</option>';
                                         echo '<option value="2">Events</option>';
                                         echo '<option value="3">Professional accreditation</option>';
                                         echo '<option value="4">Vocational placement</option>';
-                                        //NOT SURE HOW TO PUT variables into the INPUT tags? text area tag works fine.
                                         echo '</select>';
 
                                         // now output the data
-                                        echo '</div>
-                                        </div>
-                                        <div class="form-group">
-                                             <div>
-                                                <label for="itemDescription' . $count . '">Item description:</label>
-                                                <textarea class="form-control" id="itemDescription' . $count . '" name="itemdescription' . $count . '" rows="5">' . $itemdescription . '</textarea>
+                                        echo '      </div>
                                               </div>
-                                        </div>
-                            
-                                         <div class="form-group">
-                                             <div>
-                                                 <input type="text" class="form-control" name="itemprice' . $count . '" placeholder="URL to the item:" value="' . $itemUrl . '">
-                                             </div>
-                                        </div>
-                                        
-                                        <div class="form-row justify-content-between text-center">
-                                            <div class="form-group col-md-2">
-                                              <label for="price">Price:</label>
-                                              <input type="text" class="form-control" id="price">
-                                            </div>
-                                            <div class="form-group col-md-2">
-                                              <label for="postage">Postage:</label>
-                                              <input type="text" class="form-control" id="postage">
-                                            </div>
-                                            <div class="form-group col-md-3">
-                                              <label for="additionalFees">Additional Fees:</label>
-                                              <input type="text" class="form-control" id="additionalFees">
-                                            </div>
-                                          </div> 
-                
-                                        <div class="row mt-3 mb-5">
-                                            
-                                            <div class="col-5 mb-5 text-right">
-                                                <button type="submit" class="btn btn-primary" id="test">Save</button>
-                                            </div>
-                                        </div>
-                                       
-                                    </form>';
+                                              <div class="form-group">
+                                                  <div>';
+                                                      echo '<label for="itemDescription' . $count . '">Item description:</label>';
+                                                      echo '<textarea class="form-control" id="itemDescription' . $count . '" name="itemdescription' . $count . '" rows="5">' . $itemdescription . '</textarea>';
+                                                      echo '</div>
+                                              </div>
+                                  
+                                              <div class="form-group">
+                                                  <div>
+                                                      <input type="text" class="form-control" name="itemUrl' . $count . '" placeholder="URL to the item:" value="' . $itemUrl . '">
+                                                  </div>
+                                              </div>
+                                              
+                                              <div class="form-row justify-content-between text-center">
+                                                  <div class="form-group col-md-2">
+                                                    <label for="price' . $count . '">Price:</label>
+                                                    <input type="text" class="form-control" name="itemprice' . $count . '" id="price" value="' . $itemprice . '">
+                                                  </div>
+                                                  <div class="form-group col-md-2">
+                                                    <label for="postage' . $count . '">Postage:</label>
+                                                    <input type="text" class="form-control" name="itempostage' . $count . '" id="postage" value="' . $itempostage . '">
+                                                  </div>
+                                                  <div class="form-group col-md-3">
+                                                    <label for="additionalFees' . $count . '">Additional Fees:</label>
+                                                    <input type="text" class="form-control" name="itemadditionalcharges' . $count . '" id="additionalFees" value="' . $itemadditionalcharges . '">
+                                                  </div>';
                                           // cycle counter
-                                          &count++;
+                                          $count++;
                                     }
-
-
                                   ?>
-
-                        <div class="row mt-3 mb-5">
-                            
-                            <div class="col-5 mb-5 text-right">
-                                <button type="submit" class="btn btn-primary" id="test">Save</button>
-                            </div>
-                          <!-- need to add button for adding new item (+)-->
-                        </div>
-                       
+                                </div>
+                                <div class="row mt-3 mb-5">
+                                    
+                                    <div class="col-5 mb-5 text-right">
+                                        <button type="submit" class="btn btn-primary" id="test">Save</button>
+                                    </div>
+                                  <!-- need to add button for adding new item (+)-->
+                                </div>
                     </form>

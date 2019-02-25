@@ -77,8 +77,8 @@
     
           //Will need to add one more column called 'Item name/Description' for the functions below
           
-          #echo getStudentForms ($userid, "Submitted"); //For new function test to display item name as well
-          #echo getStudentForms ($userid, "Approved");
+          echo getStudentForms ($userid, "Submitted"); //For new function test to display item name as well
+          echo getStudentForms ($userid, "Approved");
       ?>
     
   </tbody>
