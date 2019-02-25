@@ -231,8 +231,9 @@
                                 <div class="row mt-3 mb-5">
                                     
                                     <div class="col-5 mb-5 text-right">
-                                        <button type="submit" class="btn btn-primary" id="test">Save</button>
+                                        <button type="submit" name="submit" value="saveRequest" class="btn btn-primary" id="test">Save</button>
                                     </div>
                                   <!-- need to add button for adding new item (+)-->
+                                  <button type="submit" name="submit" value="submitRequest" class="btn btn-success btn-lg">Submit</button>
                                 </div>
                     </form>
