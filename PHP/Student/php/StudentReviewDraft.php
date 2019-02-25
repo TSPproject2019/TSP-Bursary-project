@@ -108,7 +108,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form class="ml-2">
+                    <form class="ml-2" action="requestSave.php" method="POST">
                         <div class="form-group row">
                              <label for="fullName" class="col-sm-2 col-form-label">Full Name:</label>
                              <div class="col-sm-10">
@@ -135,53 +135,118 @@
                              </div>
                         </div>
                         <div class="row">
-                            <h5 class="m-2">ITEM 1</h5>
+                            <h5 class="m-2">ITEMs</h5>
                         </div>
                         <div class="form-group row">
                             <label for="categoryField" class="col-sm-2 col-form-label">Category field:</label>
                             <div class="col-sm-10 mt-2">
-                                <select class="custom-select" id="categoryField">
-                                    <option selected>Qualification</option>
-                                    <option value="1">Equipment</option>
-                                    <option value="2">Events</option>
-                                    <option value="3">Professional accreditation</option>
-                                    <option value="4">Vocational placement</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                             <div>
-                                <label for="itemDescription">Item description:</label>
-                                <textarea class="form-control" id="itemDescription" rows="5"></textarea>
-                              </div>
-                        </div>
-            
-                         <div class="form-group">
-                             <div>
-                                 <input type="text" class="form-control" placeholder="URL to the item:">
-                             </div>
-                        </div>
-                        
-                        <div class="form-row justify-content-between text-center">
-                            <div class="form-group col-md-2">
-                              <label for="price">Price:</label>
-                              <input type="text" class="form-control" id="price">
-                            </div>
-                            <div class="form-group col-md-2">
-                              <label for="postage">Postage:</label>
-                              <input type="text" class="form-control" id="postage">
-                            </div>
-                            <div class="form-group col-md-3">
-                              <label for="additionalFees">Additional Fees:</label>
-                              <input type="text" class="form-control" id="additionalFees">
-                            </div>
-                          </div> 
+                                <select class="custom-select" id="categoryField">      
+                                  <?php
+                                    //Outputting draft request item info when edit button is pressed UNDER TESTING
+                                    //Fetch request id for the draft
+                                    $SQL_stmt = "SELECT brItemID AS 'itemID', bursaryRequests.bRequestsID AS 'requestid' FROM bursaryRequests
+                                    INNER JOIN itemsAndRequests ON bursaryRequests.bRequestsID = itemsAndRequests.RequestID
+                                    INNER JOIN bursaryRequestItems ON bursaryRequestItems.brItemID = itemsAndRequests.ItemID
+                                    AND itemsAndRequests.StudentID = ".$userid." AND bursaryRequests.bRequestsStatus = 'Draft'";
+                                    $requestid = 0;
+                                    $category = 0;
+                                    $itemDesc = 0;
+                                    $url = 0;
+                                    $price = 0;
+                                    $postage = 0;
+                                    $addCharges = 0;
+                                    
+                                    $result = $DBconnection->query($SQL_stmt);
+                                    
+                                    // now get the data
+                                    if ($row = $result->fetch()){
+                                       
+                                        $requestid = $row['requestid'];
+                                    }
+
+
+                                    //Using the request id, find the item info 
+                                    $SQL_stmt = "SELECT brItemCategory AS 'category', brItemDesc AS 'item_description',
+                                    brItemURL AS 'URL', brItemPrice AS 'price', brItemPostage AS 'postage',
+                                    brItemAdditionalCharges AS 'additional_charges' FROM bursaryRequestItems
+                                    INNER JOIN itemsAndRequests ON itemsAndRequests.ItemID = bursaryRequestItems.brItemID 
+                                    AND itemsAndRequests.RequestID = " . $requestid . "
+                                    AND itemsAndRequests.StudentID = '" . $userid . "'";
+                                    
+                                    $result = $DBconnection->query($SQL_stmt);
+                                   
+                                    // now get the data
+                                    $count = 0;
+                                    while ($row = $result->fetch()){
+                                        // loop through the request results
+                                        $itemcategory = $row['category' . $count . ''];
+                                        $itemdescription = $row['item_description' . $count . ''];
+                                        $itemUrl . $count = $row['URL' . $count . ''];
+                                        $itemprice . $count = $row['price' . $count . ''];
+                                        $itempostage . $count = $row['postage' . $count . ''];
+                                        $itemadditionalcharges . $count = $row['additional_charges' . $count . ''];
+
+                                        // output data from query                         
+                                        echo '<option selected name="itemcategory' . $count . '">' . $category . '</option>';
+                                        echo '<option value="1">Equipment</option>';
+                                        echo '<option value="2">Events</option>';
+                                        echo '<option value="3">Professional accreditation</option>';
+                                        echo '<option value="4">Vocational placement</option>';
+                                        //NOT SURE HOW TO PUT variables into the INPUT tags? text area tag works fine.
+                                        echo '</select>';
+
+                                        // now output the data
+                                        echo '</div>
+                                        </div>
+                                        <div class="form-group">
+                                             <div>
+                                                <label for="itemDescription' . $count . '">Item description:</label>
+                                                <textarea class="form-control" id="itemDescription' . $count . '" name="itemdescription' . $count . '" rows="5">' . $itemdescription . '</textarea>
+                                              </div>
+                                        </div>
+                            
+                                         <div class="form-group">
+                                             <div>
+                                                 <input type="text" class="form-control" name="itemprice' . $count . '" placeholder="URL to the item:" value="' . $itemUrl . '">
+                                             </div>
+                                        </div>
+                                        
+                                        <div class="form-row justify-content-between text-center">
+                                            <div class="form-group col-md-2">
+                                              <label for="price">Price:</label>
+                                              <input type="text" class="form-control" id="price">
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                              <label for="postage">Postage:</label>
+                                              <input type="text" class="form-control" id="postage">
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                              <label for="additionalFees">Additional Fees:</label>
+                                              <input type="text" class="form-control" id="additionalFees">
+                                            </div>
+                                          </div> 
+                
+                                        <div class="row mt-3 mb-5">
+                                            
+                                            <div class="col-5 mb-5 text-right">
+                                                <button type="submit" class="btn btn-primary" id="test">Save</button>
+                                            </div>
+                                        </div>
+                                       
+                                    </form>';
+                                          // cycle counter
+                                          &count++;
+                                    }
+
+
+                                  ?>
 
                         <div class="row mt-3 mb-5">
                             
                             <div class="col-5 mb-5 text-right">
                                 <button type="submit" class="btn btn-primary" id="test">Save</button>
                             </div>
+                          <!-- need to add button for adding new item (+)-->
                         </div>
                        
                     </form>
