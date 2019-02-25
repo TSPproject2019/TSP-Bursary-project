@@ -102,7 +102,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="ModalLongTitle">Student Name</h5>
+                    <h5 class="modal-title" id="ModalLongTitle">Bursary request</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
@@ -144,7 +144,7 @@
                                     <option selected>Qualification</option>
                                     <option value="1">Equipment</option>
                                     <option value="2">Events</option>
-                                    <option value="3">Professional acccreditation</option>
+                                    <option value="3">Professional accreditation</option>
                                     <option value="4">Vocational placement</option>
                                 </select>
                             </div>

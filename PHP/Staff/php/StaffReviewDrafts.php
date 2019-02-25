@@ -56,7 +56,6 @@
       <th scope="col">Date Saved</th>
       <th scope="col">Item Count</th>
       <th scope="col">Price (Total)</th>
-     
     </tr>
   </thead>
   <tbody>

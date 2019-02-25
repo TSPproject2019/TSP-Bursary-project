@@ -55,7 +55,21 @@
             $_SESSION['courseTutorLastName'] =  $courseTutorLastName;
             $_SESSION['courseTutorId'] =  $courseTutorId;
             // this varisable is also used for posting.
+            
         }
+      
+      //query student courseID
+        $SQL_stmt = "SELECT stcCourseID AS 'courseid', stcStudentStatus AS 'status'
+        FROM studentToCourse WHERE stcStudentID = '" . $userid . "' and stcStudentStatus = 'Continuing'";
+      
+        $result = $DBconnection->query($SQL_stmt);
+      
+        if ($row = $result->fetch()) {
+          $courseid = $row['courseid'];
+          $_SESSION['courseid'] = $courseid;
+          
+        }
+      
         // get the data for the submitted requests
         $submitTotal = getTotals ($userid, "Submitted");
         $approved = getTotals ($userid, "Approved");
@@ -115,9 +129,11 @@
   <!-- FORM START -->
   <form action="Student/php/ProcessForm.php" method="post">
     <!--Student ID using id stored in session storage at login page -->
-    <input type="hidden" name="userid" value="<?php echo $_SESSION['userid'] ?>" />
-    <!-- Student Course id stored in session storage at login page -->
+    <input type="hidden" name="courseTutorId" value="<?php echo $_SESSION['courseTutorId'] ?>" />
+    <!-- Turtor Course id stored in session storage at login page -->
     <input type="hidden" name="courseid" value="<?php echo $_SESSION['courseid'] ?>" />
+    <!--Student id -->
+    <input type="hidden" name="userid" value="<?php echo $_SESSION['userid'] ?>" />
     <h5> Item 1 </h5>
     <!--Category selection -->
     <div class="col-12 mt-2 mb-5">
