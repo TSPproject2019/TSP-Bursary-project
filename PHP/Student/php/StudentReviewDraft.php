@@ -206,7 +206,7 @@
                                   
                                               <div class="form-group">
                                                   <div>
-                                                      <input type="text" class="form-control" name="itemUrl' . $count . '" placeholder="URL to the item:" value="' . $itemUrl . '">
+                                                      <input type="text" class="form-control" name="itemUrl' . $count . '" placeholder="URL to the item:" value="' . $itemUrl . '" >
                                                   </div>
                                               </div>
                                               
@@ -231,9 +231,11 @@
                                 <div class="row mt-3 mb-5">
                                     
                                     <div class="col-5 mb-5 text-right">
-                                        <button type="submit" name="submit" value="saveRequest" class="btn btn-primary" id="test">Save</button>
+                                        <button type="submit" name="submit" value="saveRequest" style="width: 38%;" class="btn btn-primary" id="Save" wide="45">Save</button>
                                     </div>
                                   <!-- need to add button for adding new item (+)-->
-                                  <button type="submit" name="submit" value="submitRequest" class="btn btn-success btn-lg">Submit</button>
+                                    <div class="col-5 mb-5 text-right">
+                                        <button type="submit" name="submit" value="submitRequest" style="width: 38%;" class="btn btn-success" id="Submit">Submit</button>
+                                    </div>
                                 </div>
                     </form>
