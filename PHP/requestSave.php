@@ -16,7 +16,7 @@
     echo " start Step 1.1..<br>"; // for testing purposes
 
     // assign a counter
-    $count = 0;
+    $count = 1;
     # -loop through items which are in the form
     while (isset($_POST['itemcategory' . $count]) & !empty($_POST['itemcategory' . $count])
         if (isset($_POST['itemcategory' . $count]) && isset($_POST['itemdescription' . $count]) && isset($_POST['itemUrl' . $count]) && isset($_POST['itemprice' . $count]) && isset($_POST['itempostage' . $count]) && isset($_POST['itemadditionalcharges' . $count])){

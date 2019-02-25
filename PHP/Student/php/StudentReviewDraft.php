@@ -134,13 +134,7 @@
                                 ?>
                              </div>
                         </div>
-                        <div class="row">
-                            <h5 class="m-2">Item/s</h5>
-                        </div>
-                        <div class="form-group row">
-                            <label for="categoryField" class="col-sm-2 col-form-label">Category field:</label>
-                            <div class="col-sm-10 mt-2">
-                                <select class="custom-select" id="categoryField">      
+                              
                                   <?php
                                     //Outputting draft request item info when edit button is pressed UNDER TESTING
                                     //Fetch request id for the draft
@@ -175,7 +169,7 @@
                                     $result = $DBconnection->query($SQL_stmt);
                                    
                                     // now get the data
-                                    $count = 0;
+                                    $count = 1;
                                     while ($row = $result->fetch()){
                                         // loop through the request results
                                         $itemcategory = $row['category'];
@@ -185,7 +179,14 @@
                                         $itempostage = $row['postage'];
                                         $itemadditionalcharges = $row['additional_charges'];
 
-                                        // output data from query                         
+                                        // output data from query
+                                        echo '<div class="row">
+                                              <h5 class="m-2">Item ' . $count . '</h5>
+                                          </div>
+                                          <div class="form-group row">
+                                              <label for="categoryField" class="col-sm-2 col-form-label">Category field:</label>
+                                              <div class="col-sm-10 mt-2">
+                                                  <select class="custom-select" id="categoryField">';                    
                                         echo '<option selected name="itemcategory' . $count . '">' . $itemcategory . '</option>';
                                         echo '<option value="1">Equipment</option>';
                                         echo '<option value="2">Events</option>';
