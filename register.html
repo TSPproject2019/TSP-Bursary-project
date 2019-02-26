@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-gb" style="height: 100%">
+<html lang="en-gb" style="height: 100%;">
 
 <head>
     <link rel="stylesheet" type="text/css" href="CSS/styles.css">
@@ -8,7 +8,7 @@
 </head>
 
 <body id="backG" style="resize: both; overflow: auto;">
-<form id="form" class="flex-box-column" style="position: absolute; left: 30%; top: 20%; width: 50%; height: 370px; border-radius: 25px;" action="PHP/register.php" method="POST">
+<form id="form" class="flex-box-column" style="position: absolute; left: 27%; top: 20%; width: 50%; height: 370px; border-radius: 25px;" action="PHP/register.php" method="POST">
 
   <div class="flex-box-column" style="position: absolute; left: 5%; top: 10%;">
     <label style="height: 5%;"></label>
@@ -43,16 +43,23 @@
       <label class="formText" for="collegeID" style="width: 50%;">Password</label>
     </div>
     
+    <div id="pPop">
+      <p style="color: #7d08d1;">A new password should have:</p>
+      <p class="popTxt">- at least 6 characters</p>
+      <p class="popTxt">- at least 1 number</p>
+      <p class="popTxt">- at least 1 special character e.g. !?#</p>
+    </div>
+    
     <div class="flex-box-row">
-      <input type="password" class="form-control" id="password" name="password" style="width: 40%;" placeholder="Enter your new password" onclick="pop()">
+      <input type="password" class="form-control" id="password" name="password" style="width: 40%;" placeholder="Enter your new password" onclick="pop()" onblur="popDown()">
       <label style="width: 10%;"></label>
-      <input type="password" class="form-control" id="rePassword" style="width: 40%;" placeholder="Re-enter your password">
+      <input type="password" class="form-control" id="repassword" name="repassword" style="width: 40%;" placeholder="Re-enter your password">
     </div>  
     
     <label style="height: 5%;"></label>
   </div>  
   
-  <button id="but1" style="position: absolute; top: 90%; width: 100%; background-color: orange; border: orange; border-radius: 25px;" type="submit" class="btn btn-primary btn-lg">Register</button>
+  <button id="but1" style="position: absolute; top: 90%; width: 100%; background-color: blue; border: blue; border-radius: 10px;" type="submit" class="btn btn-primary btn-lg">Register</button>
     
 </form>
     
@@ -61,12 +68,16 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script>
-  function name(){
-    document.getElementById('password').style.border = "red";
-  }
+  var pass = document.getElementById('password');
+  var popBox = document.getElementById('pPop');
+  var sub = document.getElementById('but1');
   
   function pop(){
-    document.getElementById('pBox').style.display = "display";
+    popBox.style.display = "block";
+  }
+  
+  function popDown(){
+    popBox.style.display = "none";
   }
 </script>
 </html>
