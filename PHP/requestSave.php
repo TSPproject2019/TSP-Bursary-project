@@ -44,8 +44,8 @@
                 $itemPostage = "'itempostage" . $count . "'";
                 $itemAdditionalCharges = "'itemadditionalcharges" . $count . "'";
                 echo " test echo 2.1.b :" . $itemPrice . "<br>"; // for testing purposes
-/*
-                if (isset($_POST[$itemCategory]) && isset($_POST[$itemDescription]) && isset($_POST[$itemURL]) && isset($_POST[$itemPrice]) && isset($_POST[$itemPostage]) && isset($_POST[$itemAdditionalCharges])){
+
+                if (isset($_POST[$itemDescription]) && isset($_POST[$itemPrice])){
                     echo " start Step 2...<br>"; // for testing purposes
                         
                     //  If the form is submitted assign variables..
@@ -55,10 +55,10 @@
                     $itemprice = $_POST[$itemPrice];
                     $itempostage = $_POST[$itemPostage];
                     $itemadditionalcharges = $_POST[$itemAdditionalCharges];
-                    // cycle counter
-                    #$count++;
+                    echo " test echo 2.1.1.a :" . $itemprice . "<br>"; // for testing purposes
+                    // run SQL script to post the information..
                 }
-                if (empty($_POST["'"$itemDescription . 1"'"]) && empty($_POST["'"$itemPrice . 1"'"])){
+/*                if (empty($_POST["'"$itemDescription . 1"'"]) && empty($_POST["'"$itemPrice . 1"'"])){
                     // now need to get the final secion of the request form
                     if (isset($_POST['justification']) && isset($_POST['tutorComments'])){
                         //  assign last variables..
@@ -95,7 +95,7 @@
                 $itemAdditionalCharges = "'itemadditionalcharges" . $count . "'";
                 echo " test echo 2.2.b :" . $itemPrice . "<br>"; // for testing purposes
 
-                if (isset($_POST[$itemCategory]) && isset($_POST[$itemDescription]) && isset($_POST[$itemURL]) && isset($_POST[$itemPrice]) && isset($_POST[$itemPostage]) && isset($_POST[$itemAdditionalCharges])){
+                if (isset($_POST[$itemDescription]) && isset($_POST[$itemPrice])){
                     echo " start Step 2...<br>"; // for testing purposes
                         
                     //  If the form is submitted assign variables..
@@ -106,7 +106,7 @@
                     $itempostage = $_POST[$itemPostage];
                     $itemadditionalcharges = $_POST[$itemAdditionalCharges];
                     echo " test echo 2.2.1.a :" . $itemprice . "<br>"; // for testing purposes
-                    // cycle counter
+                    // run SQL script to post the information..
                     
                 }
 /*                if (empty($_POST["'"$itemDescription . 1"'"]) && empty($_POST["'"$itemPrice . 1"'"])){
