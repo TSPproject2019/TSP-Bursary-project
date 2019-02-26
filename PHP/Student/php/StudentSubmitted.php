@@ -4,7 +4,7 @@
    # echo " start Step 0.0..<br>"; // for testing purposes
     require_once 'connect.php';//connects to the SQL database.
    # echo " start Step 1.0..<br>"; // for testing purposes
-   require 'functions.php'; // connects to the functions.
+    require 'functions.php'; // connects to the functions.
     
     // Get the _SESSION user details.
     if (isset($_SESSION['lastName'])){
@@ -39,12 +39,15 @@
         $submitTotal = getTotals ($userid, "Submitted");
         $approved = getTotals ($userid, "Approved");
         $pending = getTotals ($userid, "Pending");
+        $availableBalance = getStudentAvailableBalance($userid);
     }
 ?>
+<div class="col-md-4 ml-3">
+                    <?php
+                        echo '<p>Outstanding balance: <span>' . $availableBalance . '</span></p>';
+                    ?>
+                </div>
         <!-- <div class="row col-lg-6 justify-content-start align-items-center"> -->
-        <div>
-                <li class="list-group-item  border-1">My submitted Forms</li>
-        </div>
         <div class="col-3">
                     <ul class="list-group">
                       <?php
@@ -67,35 +70,16 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">27/01/2019</td>
-      <td>1</td>
-      <td>£230.00</td>
-      <td>ACCEPTED</td>
-    </tr>
-    <tr>
-      <th scope="row">28/01/2019</td>
-       <td>1</td>
-      <td>£78.00</td>
-      <td>DELIVERED</td>
-    </tr>
-    <tr>
-      <th scope="row">27/01/2019</td>
-      <td>2</td>
-      <td>£499.99</td>
-      <td>PENDING</td>
-    </tr>
-     <tr>
-      <th scope="row">27/01/2019</td>
-      <td>4</td>
-      <td>£79.50</td>
-      <td>PENDING</td>
-    </tr>
-     <tr>
-      <th scope="row">27/01/2019</td>
-      <td>1</td>
-      <td>£99.99</td>
-      <td>PENDING</td>
-    </tr>
+    
+      <?php
+          # just testing somthing.. 
+          echo getStudentSubmittedForms($userid);//Standard wireframe function
+    
+          //Will need to add one more column called 'Item name/Description' for the functions below
+          
+          echo getStudentForms ($userid, "Submitted"); //For new function test to display item name as well
+          echo getStudentForms ($userid, "Approved");
+      ?>
+    
   </tbody>
 </table>         

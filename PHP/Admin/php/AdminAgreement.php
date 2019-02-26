@@ -1,17 +1,18 @@
 <?php
     session_start();
-?>
+    require_once 'connect.php';//connects to the SQL database.
 
-            <div>
-                <li class="list-group-item  border-1">Admin Agreement Page</li>
-            </div>
-            <div class="col-3">
-                <ul class="list-group">
-                    <li class="list-group-item  border-0">Submitted: <span>10</span></li>
-                    <li class="list-group-item  border-0">Approved: <span>8</span></li>
-                    <li class="list-group-item  border-0">Awaiting delivery: <span>YES</span></li>
-                </ul>
-            </div>
+    // drop down requirements on initial load (will run queries)
+    // # - selectthat 
+?>
+     <div class="col-3">
+         <ul class="list-group">
+             <li class="list-group-item  border-0">Submitted: <span>10</span></li>
+             <li class="list-group-item  border-0">Approved: <span>8</span></li>
+             <li class="list-group-item  border-0">Awaiting delivery: <span>YES</span></li>
+         </ul>
+     </div>
+</div>
             
     <section class="container">
         <div class="row justify-content-center border">

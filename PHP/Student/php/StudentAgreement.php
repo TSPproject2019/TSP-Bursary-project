@@ -3,7 +3,7 @@
    # echo " start Step 0.0..<br>"; // for testing purposes
     require_once 'connect.php';//connects to the SQL database.
    # echo " start Step 1.0..<br>"; // for testing purposes
-   require 'functions.php'; // connects to the functions.
+    require 'functions.php'; // connects to the functions.
     
     // Get the _SESSION user details.
     if (isset($_SESSION['lastName'])){
@@ -34,16 +34,18 @@
             // this varisable is also used for posting.
 
         }
-        // get the data for the submitted requests
         $submitTotal = getTotals ($userid, "Submitted");
         $approved = getTotals ($userid, "Approved");
         $pending = getTotals ($userid, "Pending");
+        $availableBalance = getStudentAvailableBalance($userid);
     }
 ?>
+<div class="col-md-4 ml-3">
+                    <?php
+                        echo '<p>Outstanding balance: <span>' . $availableBalance . '</span></p>';
+                    ?>
+                </div>
         <!-- <div class="row col-lg-6 justify-content-start align-items-center"> -->
-        <div>
-                <li class="list-group-item  border-1">Agreement form</li>
-        </div>
         <div class="col-3">
                     <ul class="list-group">
                       <?php

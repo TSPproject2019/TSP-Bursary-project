@@ -3,8 +3,7 @@
    # echo " start Step 0.0..<br>"; // for testing purposes
     require_once 'connect.php';//connects to the SQL database.
    # echo " start Step 1.0..<br>"; // for testing purposes
-   require 'functions.php'; // connects to the functions.
-    // end functions
+    require 'functions.php'; // connects to the functions.
     
     // Get the _SESSION user details.
     if (isset($_SESSION['lastName'])){
@@ -35,37 +34,14 @@
             // this varisable is also used for posting.
 
         }
-
-        // get available balance
-        # echo " start Step 4.0..<br>"; // for testing purposes
-        $SQL_stmt = "SELECT availableBalance FROM student
-        INNER JOIN users ON student.studentID = users.userID
-        WHERE userID = '" . $userid . "'";
-        $totalResult = 0;
-        // now to run the query
-        # echo " start Step 4.1..<br>"; // for testing purposes
-        // first prepare and excecurte
-        $result = $DBconnection->query($SQL_stmt);
-        # echo " start Step 4.2..<br>"; // for testing purposes
-        // now get the data
-        if ($row = $result->fetch()){
-            // varify that it is a valid userID
-            # echo " start Step 4.2.1..<br>"; // for testing purposes
-            // Bind results by column name
-            $availableBalance = $row['availableBalance'];
-        }
-
         // get the data for the submitted requests
         $submitTotal = getTotals ($userid, "Submitted");
         $approved = getTotals ($userid, "Approved");
         $pending = getTotals ($userid, "Pending");
+        $availableBalance = getStudentAvailableBalance($userid);
     }
 ?>
-        <!-- <div class="row col-lg-6 justify-content-start align-items-center"> -->
-        <div>
-                <li class="list-group-item  border-1">FAQ's</li>
-        </div>
-        <div class="col-md-4 ml-3">
+<div class="col-md-4 ml-3">
                     <?php
                         echo '<p>Outstanding balance: <span>' . $availableBalance . '</span></p>';
                     ?>

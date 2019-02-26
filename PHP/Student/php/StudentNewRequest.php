@@ -2,8 +2,8 @@
     session_start();
     require_once 'connect.php';//connects to the SQL database.
    # echo " start Step 1.0..<br>"; // for testing purposes
-   require 'functions.php'; // connects to the functions.
-   
+    require 'functions.php'; // connects to the functions.
+
     // Get the _SESSION user details.
     if (isset($_SESSION['lastName'])){
        # echo " start Step 2.0..<br>"; // for testing purposes
@@ -55,124 +55,145 @@
             $_SESSION['courseTutorLastName'] =  $courseTutorLastName;
             $_SESSION['courseTutorId'] =  $courseTutorId;
             // this varisable is also used for posting.
+            
         }
-
+      
+      //query student courseID
+        $SQL_stmt = "SELECT stcCourseID AS 'courseid', stcStudentStatus AS 'status'
+        FROM studentToCourse WHERE stcStudentID = '" . $userid . "' and stcStudentStatus = 'Continuing'";
+      
+        $result = $DBconnection->query($SQL_stmt);
+      
+        if ($row = $result->fetch()) {
+          $courseid = $row['courseid'];
+          $_SESSION['courseid'] = $courseid;
+          
+        }
+      
         // get the data for the submitted requests
         $submitTotal = getTotals ($userid, "Submitted");
         $approved = getTotals ($userid, "Approved");
         $pending = getTotals ($userid, "Pending");
+        $availableBalance = getStudentAvailableBalance($userid);
     }
-
 ?>
+
+<div class="col-md-4 ml-3">
+     <?php
+        echo '<p>Outstanding balance: <span>' . $availableBalance . '</span></p>';
+      ?>
+ </div>
         <!-- <div class="row col-lg-6 justify-content-start align-items-center"> -->
-        <div>
-                <li class="list-group-item  border-1">New Bursary Request</li>
-        </div>
-        <div class="col-3">
-                    <ul class="list-group">
-                        <?php
-                            echo '<li class="list-group-item  border-0">Submitted: <span>' . $submitTotal . '</span></li>';
-                            echo '<li class="list-group-item  border-0">Approved: <span>' . $approved . '</span></li>';
-                            echo '<li class="list-group-item  border-0">Awaiting delivery: <span>' . $pending . '</span></li>';
-                        ?>
-                    </ul>
-                </div>
+     <div class="col-3">
+          <ul class="list-group">
+                  <?php
+                      echo '<li class="list-group-item  border-0">Submitted: <span>' . $submitTotal . '</span></li>';
+                      echo '<li class="list-group-item  border-0">Approved: <span>' . $approved . '</span></li>';
+                      echo '<li class="list-group-item  border-0">Awaiting delivery: <span>' . $pending . '</span></li>';
+                  ?>
+              </ul>
           </div>
+        </div>
           
-     <section class="container-fluid mt-5">
-    <section class="row">
-     <div class="col-6">
-            
-         <form>
-              <div class="form-group row">
+<section class="container mt-5 w-50">
+   <!--Student Name -->          
+  <div class="form-group row">
     <label for="fullName" class="col-sm-2 col-form-label">Full Name:</label>
     <div class="col-sm-10">
         <?php
-            echo '<input type="text" class="form-control" id="fullName" value="' . $userName . '" placeholder="Auto-generated field">'
-        ?>
-      <!-- <input type="text" class="form-control" id="fullName" value="$userName" placeholder="Auto-generated field"> -->
-    </div>
+            echo '<input type="text" class="form-control" id="fullName" disabled value="' . $userName . '" placeholder="Auto-generated field">'
+        ?>     
+    </div>    
   </div>
-            
-             <div class="form-group row">
+  
+    <!--Course Name -->        
+  <div class="form-group row">
     <label for="course" class="col-sm-2 col-form-label">Course:</label>
     <div class="col-sm-10">
         <?php
-            echo '<input type="text" class="form-control" id="course" value="' . $courseTitle . '" placeholder="Auto-generated field">'
+            echo '<input type="text" class="form-control" id="course" disabled value="' . $courseTitle . '" placeholder="Auto-generated field">'
         ?>
-        <!-- <input type="text" class="form-control" id="course" placeholder="Auto-generated field"> -->
     </div>
   </div>
   
-              
-              <div class="form-group row">
+   <!--Tutor Name -->            
+  <div class="form-group row">
     <label for="tutor" class="col-sm-2 col-form-label">Tutor:</label>
     <div class="col-sm-10">
         <?php
-            echo '<input type="text" class="form-control" id="tutor" value="' . $courseTutorFirstName . ' ' . $courseTutorLastName . '" placeholder="Auto-generated field">'
-        ?>
-      <!-- <input type="text" class="form-control" id="tutor" placeholder="Auto-generated field"> -->
+            echo '<input type="text" class="form-control" id="tutor" disabled value="' . $courseTutorFirstName . ' ' . $courseTutorLastName . '" placeholder="Auto-generated field">'
+        ?>  
     </div>
   </div>
   
-  <h5> Item 1 </h5>
-  
-  
-  <h6>Category field(Qualification, Equipment, Events, Professional accreditation, Vocational placement)</h6>
-         <form>
-             <div class="form-group">
-                 <div>
-                     <input type="text" class="form-control" placeholder="Item description:">
-                  </div>
+  <!-- FORM START -->
+  <form action="Student/php/ProcessForm.php" method="post">
+    <!--Student ID using id stored in session storage at login page -->
+    <input type="hidden" name="courseTutorId" value="<?php echo $_SESSION['courseTutorId'] ?>" />
+    <!-- Turtor Course id stored in session storage at login page -->
+    <input type="hidden" name="courseid" value="<?php echo $_SESSION['courseid'] ?>" />
+    <!--Student id -->
+    <input type="hidden" name="userid" value="<?php echo $_SESSION['userid'] ?>" />
+    <h5> Item 1 </h5>
+    <!--Category selection -->
+    <div class="col-12 mt-2 mb-5">
+            <select class="custom-select" id="categoryField" name="itemcategory">
+                <option value ="" selected>Choose...</option>
+                <option value="Qualification">Qualification</option>
+                <option value="Equipment">Equipment</option>
+                <option value="Events">Events</option>
+                <option value="Professional accreditation">Professional accreditation</option>
+                <option value="Vocational placement">Vocational placement</option>
+            </select>
+        </div>    
+    <!--Item description -->
+    <div class="form-group row">
+        <div class="col-12">
+            <input type="text" name="itemdescription" class="form-control" placeholder="Item description:" required>
+         </div>
+    </div> 
+    <!--Item URL-->
+    <div class="form-group row">
+       <div class="col-12">
+           <input type="text" name="itemUrl" class="form-control" placeholder="URL to the item:" required
+                  value="<?php if (isset($_POST['itemUrl'])) echo $_POST['itemUrl']; ?>">
+       </div>
+    </div>
+    <!--FORM FEES ROW-->
+    <div class="form-group row justify-content-between">
+    <!--Form Price field -->
+      <div class="input-group col-3">
+          <div class="input-group-prepend">
+              <span class="input-group-text" id="price" required>Price:</span>
+          </div>
+          <input type="text" class="form-control" name="itemprice" aria-describedby="price">
+      </div>
+     <!--Form Postage field -->              
+      <div class="input-group col-3">
+          <div class="input-group-prepend">
+             <span class="input-group-text" id="price">Postage:</span>
+          </div>
+          <input type="text" class="form-control" name="itempostage" aria-describedby="postage">
+       </div>
+      <!--Form Additional Fees -->
+          <div class="input-group col-4">
+              <div class="input-group-prepend">
+                  <span class="input-group-text" id="additionalFees">Additional fees:</span>
               </div>
-            
-              <div class="form-group">
-                 <div>
-                     <input type="text" class="form-control" placeholder="URL to the item:">
-                 </div>
-                </div>
-            
-                <div class="form-group row justify-content-between">
-                    <div class="input-group col-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="price">Price:</span>
-                        </div>
-                        <input type="text" class="form-control"   aria-describedby="price">
-                    </div>
-                    
-                    <div class="input-group col-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="price">Postage:</span>
-                        </div>
-                        <input type="text" class="form-control"   aria-describedby="postage">
-                    </div>
-                    
-                    <div class="input-group col-4">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="additionalFees">Additional fees:</span>
-                        </div>
-                        <input type="text" class="form-control"   aria-describedby="additionalFees">
-                    </div>
-                    
-                </div>
+              <input type="text" class="form-control" name="itemadditionalcharges" aria-describedby="additionalFees">
+          </div>                   
+     </div> <!--End of Fees row -->
+       
+    <!--Form Justification textarea -->
+      <div class="form-group">
+          <textarea class="form-control" type="textarea" name="justification" rows="3" placeholder="Justification:" required></textarea>
+      </div>
+    <!--Form Tutor Comments textarea -->
+      <div class="form-group">
+          <textarea class="form-control" type="textarea" name="tutorComments" rows="3" placeholder="Tutor Comments:"></textarea>
+      </div>    
                 
-                <div class="form-group">
-                    <textarea class="form-control" type="textarea" name="justification" rows="3" placeholder="Justification:"></textarea>
-                </div>
-                <div class="form-group">
-                    <h6>Status of the form: <span>Status</span></h6>
-                </div>
-                <div class="form-group">
-                    <textarea class="form-control" type="textarea" name="tutorComments" rows="3" placeholder="Tutor Comments:"></textarea>
-                </div>
-                <div class="form-group">
-                    <textarea class="form-control" type="textarea" name="additionalComments" rows="4" placeholder="Additional Comments:"></textarea>
-                </div>
-                <div class="form-group">
-                    <textarea class="form-control" type="textarea" name="staffComments" rows="5" placeholder="Staff Comments (Additional comments to students)"></textarea>
-                </div>
-                
-               <button type="button" class="btn btn-primary btn-lg">Save as Draft</button>
-               <button type="button" class="btn btn-secondary btn-lg">Submit</button>
-                
-            </form>
+     <!--<button type="submit" class="btn btn-warning btn-lg">Save as Draft</button>-->
+     <button type="submit" name="submit" value="insertRequestToDB" class="btn btn-success btn-lg">Submit</button>                
+  </form>
+</section>

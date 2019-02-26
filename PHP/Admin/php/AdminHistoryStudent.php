@@ -1,15 +1,34 @@
 <?php
     session_start();
-?>
+    require_once 'connect.php';//connects to the SQL database.
+    require 'functions.php';
 
-    <div>
-        <li class="list-group-item  border-1">Admin Studengt History Page</li>
-    </div>
+
+       //Query usernames  
+      $SQL_stmt = "SELECT userFirstName FROM users";
+      
+       
+
+      //Establish connection
+        $result = $DBconnection->query($SQL_stmt);
+      
+      //Run and output results      
+       while ($row = $result->fetch())
+          {
+            echo $row['userFirstName'];
+          }
+          
+
+//This query is for student. Change to Admin query
+  $total =  getTotals($_SESSION['userid'], 'Submitted');
+?>
     <div class="col-3">
         <ul class="list-group">
-                    <li class="list-group-item  border-0">Submitted: <span>10</span></li>
-                    <li class="list-group-item  border-0">Approved: <span>8</span></li>
-            <li class="list-group-item  border-0">Awaiting delivery: <span>YES</span></li>
+          <?php 
+                  echo  '<li class="list-group-item  border-0">Submitted: <span>' . $total . '</span></li>';
+                  echo  '<li class="list-group-item  border-0">Approved: <span>8</span></li>';
+                  echo '<li class="list-group-item  border-0">Awaiting delivery: <span>YES</span></li>';
+              ?>
         </ul>
     </div>
 </div>

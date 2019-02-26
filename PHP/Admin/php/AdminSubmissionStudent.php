@@ -1,9 +1,15 @@
 <?php
     session_start();
-?>   
+    require_once 'connect.php';//connects to the SQL database.
 
+    // drop down requirements on initial load (will run queries)
+    // # - select group (assume this is course group) all of them
+    
+    // # - select year, all available years irrelivant of group at this point
+    
+    
+?>   
     <div>
-        <li class="list-group-item  border-1">Admin Student Submissions Page</li>
         <li class="list-group-item  border-1">Outstanding balance: <span>£500.00</span></li>
     </div>       
     <div class="col-3">
@@ -13,8 +19,6 @@
             <li class="list-group-item  border-0">Awaiting delivery: <span>YES</span></li>
         </ul>
     </div>
-</div>
-
 <section class="container-fluid mt-5">
     <section class="row">
      <div class="col-6">
