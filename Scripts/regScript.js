@@ -11,8 +11,8 @@
   }
   
   function butHov(){
-    sub.style.backgroundColor = black;
-    sub.style.borderColor = black;
+    sub.style.backgroundColor = "#93427c";
+    sub.style.borderColor = "#93427c";
   }
   
   function butLeave(){
