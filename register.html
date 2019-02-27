@@ -59,7 +59,7 @@
     <label style="height: 5%;"></label>
   </div>  
   
-  <button id="but1" style="position: absolute; top: 90%; width: 100%; background-color: rgba(32, 19, 76); border: blue; border-radius: 10px;" type="submit" class="btn btn-primary btn-lg" onmouseover="butHov()" onmouseout="butLeave()">Register</button>
+  <button id="but1" style="position: absolute; top: 90%; width: 100%; border-radius: 10px; background-color: #20134c; border-color: #20134c;" type="submit" class="btn btn-primary btn-lg" onmouseover="butHov()" onmouseout="butLeave()">Register</button>
     
 </form>
     
@@ -67,25 +67,5 @@
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script>
-  var pass = document.getElementById('password');
-  var popBox = document.getElementById('pPop');
-  var sub = document.getElementById('but1');
-  
-  function pop(){
-    popBox.style.display = "block";
-  }
-  
-  function popDown(){
-    popBox.style.display = "none";
-  }
-  
-  function butHov(){
-    sub.style.backgroundColor = "rgb(147, 66, 124)";
-  }
-  
-  function butLeave(){
-    sub.style.backgroundColor = "rgba(32, 19, 76)";
-  }
-</script>
+<script src="../Scripts/regScript.js"></script>
 </html>
