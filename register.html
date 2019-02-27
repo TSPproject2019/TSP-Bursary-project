@@ -59,7 +59,7 @@
     <label style="height: 5%;"></label>
   </div>  
   
-  <button id="but1" style="position: absolute; top: 90%; width: 100%; background-color: rgba(32, 19, 76); border: blue; border-radius: 10px;" type="submit" class="btn btn-primary btn-lg" onmouseover="butHov()">Register</button>
+  <button id="but1" style="position: absolute; top: 90%; width: 100%; background-color: rgba(32, 19, 76); border: blue; border-radius: 10px;" type="submit" class="btn btn-primary btn-lg" onmouseover="butHov()" onmouseout="butLeave()">Register</button>
     
 </form>
     
@@ -81,7 +81,11 @@
   }
   
   function butHov(){
-    sub.style.background-color = "background-color: rgb(147, 66, 124)";
+    sub.style.backgroundColor = "rgb(147, 66, 124)";
+  }
+  
+  function butLeave(){
+    sub.style.backgroundColor = "rgba(32, 19, 76)";
   }
 </script>
 </html>
