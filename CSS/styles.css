@@ -92,6 +92,12 @@
     cursor: pointer;
 }
 
+#register:visited {
+  color: white;
+  text-decoration: none!important;
+  font-style: italic;
+}
+
 #register:hover {
     color: #00cc1b;
     text-decoration: none;
@@ -162,9 +168,9 @@ p {
     color: black;
 }
 
-/*#but1 {
-  
-}*/
+#but1 {
+  background-color: rgba(32, 19, 76);
+}
 
 
 /* ?? */
