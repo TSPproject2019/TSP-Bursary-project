@@ -222,12 +222,13 @@
                                                   <div class="form-group col-md-3">
                                                     <label for="additionalFees' . $count . '">Additional Fees:</label>
                                                     <input type="text" class="form-control" name="itemadditionalcharges' . $count . '" id="additionalFees" value="' . $itemadditionalcharges . '">
+                                                  </div>
                                                   </div>';
                                           // cycle counter
                                           $count++;
                                     }
                                   ?>
-                                </div>
+
                                 <div class="row mt-3 mb-5">
                                     
                                     <div class="col-5 mb-5 text-right">
