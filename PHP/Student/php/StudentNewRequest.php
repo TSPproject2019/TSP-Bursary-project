@@ -186,7 +186,7 @@
        
     <!--Form Justification textarea -->
       <div class="form-group">
-          <textarea class="form-control" type="textarea" name="justification1" rows="3" placeholder="Justification:" required></textarea>
+          <textarea class="form-control" type="textarea" name="justification" rows="3" placeholder="Justification:" required></textarea>
       </div>
     <!--Form Tutor Comments textarea -->
       <div class="form-group">

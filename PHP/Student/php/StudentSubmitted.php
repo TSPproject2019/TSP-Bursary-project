@@ -62,9 +62,9 @@
           <table class="table table-striped">
    <thead class="thead-dark">
     <tr>
-      
       <th scope="col">Date Submitted</th>
       <th scope="col">Item Count</th>
+      <!---<th scope="col">Item Description</th> ---->
       <th scope="col">Cost</th>
       <th scope="col">Status</th>
     </tr>
@@ -77,8 +77,8 @@
     
           //Will need to add one more column called 'Item name/Description' for the functions below
           
-          echo getStudentForms ($userid, "Submitted"); //For new function test to display item name as well
-          echo getStudentForms ($userid, "Approved");
+         //echo getStudentForms ($userid, "Submitted"); //For new function test to display item name as well
+         //echo getStudentForms ($userid, "Approved");
       ?>
     
   </tbody>

@@ -159,7 +159,6 @@
         echo '<button class="dropdown-item" type="button">  '.$row['Course']. '</button>';
       }                  
     }
-
     // Gets all course years of a particular staff member
     function getStaffAllCourseYears($uID){
       require 'connect.php';
@@ -253,7 +252,7 @@
                   <td>'.$row['item'].'</td>
                   <td>£'.$row['total_price'].'</td>
                   <th><span style="float:left"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalLong">Edit </button></span></th>
-                  <td><button type="button" class="btn btn-primary" >Delete</button></td></tr>';
+                  <td><button type="button" class="btn btn-primary">Delete</button></td></tr>';
             }
           }
     }
@@ -290,7 +289,7 @@
                     <td>'.$row['item_count'].'</td>
                     <td>£'.$row['total_price'].'</td>
                     <th><span style="float:left"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalLong">Edit </button></span></th>
-                    <td><button type="button" class="btn btn-primary" >Delete</button></td></tr>';
+                    <td><button type="button" value="Delete" onClick="deleteStudentDraft();" class="btn btn-primary" >Delete</button></td></tr>';
               }
           }
       }

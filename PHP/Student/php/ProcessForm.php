@@ -1,16 +1,16 @@
 <!--Created by Andrius 20-02-2019 -->
 <!-- New student bursury request form submission processing -->
-<!--Version 1.0 -->
+<!--Version 2.0 -->
 
 <?php
 session_start();
-//require_once 'connect.php';
+require_once '../../connect.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   
   if(isset($_POST['submit'])) {
     $courseTutorId = $_POST['courseTutorId'];
-    $courseid = $_POST['courseid']; 
+    $courseId = $_POST['courseid']; 
     $userid = $_POST['userid'];
     $txbItemCategory = $_POST['itemcategory'];
     $txbItemDescription = $_POST['itemdescription'];
@@ -40,43 +40,63 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
               <li>Date and Time: $dateNow </li>
               <li>Request status: $bRequestsStatus</li>
             </ul>";
+   }
   }
-/*
-//Connect to database using PDO //Or just use require connect.php?
-$DB_Host = 'localhost';
-$DB_User = 'WEBAuth'; //'root';
-$DB_Pass = 'WEBAuthPW';
-$DB_Name = 'bursary_database';
+   
 
-try {
-    $DBconnection = new PDO("mysql:host=$DB_Host;dbname=$DB_Name", $DB_User, $DB_Pass);
-    // set the PDO error mode to exception
-    $DBconnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  
-    /*$SQL_stmt = "INSERT INTO bursaryRequestItems (brItemCategory,brItemDesc,brItemURL,brItemPrice,brItemPostage,brItemAdditionalCharges)
-    VALUES ('$txbItemCategory', '$txbItemDescription' ,'$itemURL', '$txbPrice', '$txbPostage', '$txbAdditionalCharges')";
-  
+ //Submit data to bursaryRequestItems table
     $SQL_stmt = "INSERT INTO bursaryRequests(bRequestsCourseID,bRequestsStaffID, bRequestsJustification, bRequestsRequestDate, bRequestsStatus,bRequestsStudentRequest)
     VALUES ('$courseid', '$courseTutorId', '$txbJustication', '$dateNow', '$bRequestsStatus', TRUE)";
-    
-    $SQL_stmt = get itemid, requestid and userid(student);
   
-    /*$SQL_stmt = "INSERT INTO itemsAndRequests(ItemID,RequestID,StudentID)
-    VALUES('$itemid', '$requestid', '$userid')"; 
-  
-    // use exec() because no results are returned
     $DBconnection->exec($SQL_stmt);
-    echo "New record created successfully";
-    }
-catch(PDOException $e)
-    {
-    echo $SQL_stmt . "<br>" . $e->getMessage();
-    }
+//Then, submit data to bursaryRequests table
+    
+    $SQL_stmt = "INSERT INTO bursaryRequestItems (brItemCategory,brItemDesc,brItemURL,brItemPrice,brItemPostage,brItemAdditionalCharges)
+    VALUES ('$txbItemCategory', '$txbItemDescription' ,'$itemURL', '$txbPrice', '$txbPostage', '$txbAdditionalCharges')";
 
-$conn = null;
-*/
-}  
+    $DBconnection->exec($SQL_stmt);
+    
+    //Select request id
+    $SQL_stmt = "SELECT bursaryRequests.bRequestsID AS 'requestId' FROM bursaryRequests
+    WHERE bRequestsCourseID = '$courseid' AND bRequestsStaffID = '$courseTutorId'
+    AND bRequestsJustification = '$txbJustication' AND bRequestsRequestDate = '$dateNow'
+    AND bRequestsStatus = '$bRequestsStatus'";
+    
+    $requestid = 0;
+    
+   
+    $result = $DBconnection->query($SQL_stmt);
+        // now get the data
+        if ($row = $result->fetch()){
+            // Bind results by column name
+            $requestid = $row['requestId'];
+        }
+    echo "<p>This is the request ID:$requestid</p>";
 
+    //Now retrieve item id
+    $SQL_stmt = "SELECT brItemID AS 'itemId' FROM bursaryRequestItems
+    WHERE brItemCategory = '$txbItemCategory' AND brItemDesc = '$txbItemDescription'
+    AND brItemURL = '$itemURL' AND brItemPrice = '$txbPrice'
+    AND brItemPostage = '$txbPostage' AND brItemAdditionalCharges = '$txbAdditionalCharges'";
+    
+    $itemid = 0;
+    
+    $result = $DBconnection->query($SQL_stmt);
+        // now get the data
+        if ($row = $result->fetch()){
+            // Bind results by column name
+            $itemid = $row['itemId'];
+        }
+    echo "<p>This is the itemId:$itemid</p>";
+   /*Finally, submit data to itemsAndRequests */
+   
+    
+    //Link item to request and to student.
+    $SQL_stmt = "INSERT INTO itemsAndRequests(ItemID,RequestID,StudentID)
+    VALUES('$itemid', '$requestid', '$userid')";
+    
+    $DBconnection->exec($SQL_stmt); //Everything is put. Check in my submitted forms page if request is there.
+   
 ?>
 
    

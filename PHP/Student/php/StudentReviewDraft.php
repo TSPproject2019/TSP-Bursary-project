@@ -66,6 +66,7 @@
         $availableBalance = getStudentAvailableBalance($userid);
     }
 ?>
+<script type="text/javascript" src="./Scripts/studentJava.js"></script>
 <div class="col-md-4 ml-3">
                     <?php
                         echo '<p>Outstanding balance: <span>' . $availableBalance . '</span></p>';
@@ -188,10 +189,11 @@
                                               <div class="col-sm-10 mt-2">
                                                   <select class="custom-select" id="categoryField">';                    
                                         echo '<option selected name="itemcategory' . $count . '">' . $itemcategory . '</option>';
-                                        echo '<option value="1">Equipment</option>';
-                                        echo '<option value="2">Events</option>';
-                                        echo '<option value="3">Professional accreditation</option>';
-                                        echo '<option value="4">Vocational placement</option>';
+                                        echo '<option value="1">Qualification</option>';
+                                        echo '<option value="2">Equipment</option>';
+                                        echo '<option value="3">Events</option>';
+                                        echo '<option value="4">Professional accreditation</option>';
+                                        echo '<option value="5">Vocational placement</option>';
                                         echo '</select>';
 
                                         // now output the data
@@ -206,29 +208,29 @@
                                   
                                               <div class="form-group">
                                                   <div>
-                                                      <input type="text" class="form-control" name="itemUrl' . $count . '" placeholder="URL to the item:" value="' . $itemUrl . '" >
+                                                      <input type="text" class="form-control" name="itemUrl' . $count . '" placeholder="URL to the item:" value="' . $itemUrl . '" />
                                                   </div>
                                               </div>
                                               
                                               <div class="form-row justify-content-between text-center">
                                                   <div class="form-group col-md-2">
                                                     <label for="price' . $count . '">Price:</label>
-                                                    <input type="text" class="form-control" name="itemprice' . $count . '" id="price" value="' . $itemprice . '">
+                                                    <input type="text" class="form-control" name="itemprice' . $count . '" id="price" value="' . $itemprice . '" />
                                                   </div>
                                                   <div class="form-group col-md-2">
                                                     <label for="postage' . $count . '">Postage:</label>
-                                                    <input type="text" class="form-control" name="itempostage' . $count . '" id="postage" value="' . $itempostage . '">
+                                                    <input type="text" class="form-control" name="itempostage' . $count . '" id="postage" value="' . $itempostage . '" />
                                                   </div>
                                                   <div class="form-group col-md-3">
                                                     <label for="additionalFees' . $count . '">Additional Fees:</label>
-                                                    <input type="text" class="form-control" name="itemadditionalcharges' . $count . '" id="additionalFees" value="' . $itemadditionalcharges . '">
+                                                    <input type="text" class="form-control" name="itemadditionalcharges' . $count . '" id="additionalFees" value="' . $itemadditionalcharges . '" />
                                                   </div>
                                                   </div>';
                                           // cycle counter
                                           $count++;
                                     }
                                   ?>
-
+                                </div>
                                 <div class="row mt-3 mb-5">
                                     
                                     <div class="col-5 mb-5 text-right">

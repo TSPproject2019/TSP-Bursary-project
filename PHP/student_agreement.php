@@ -1,10 +1,11 @@
 <?php
-    // file: student_agreement.php
+    // file: staff_Home.php
     session_start();
     if (!isset($_SESSION['firstName'])){
         echo "<p> No user details found</p>";
+      
     }
-    $_SESSION['htmlTitle'] =  "Agreement Form";
+    $_SESSION['htmlTitle'] =  "Agreement form";
     // for testing purposes only
     /*if (isset($_SESSION['firstName'])){
         $firstName = $_SESSION['firstName'];
@@ -18,7 +19,7 @@
     {
         //require_once 'connect.php';//connects to the SQL database.
         require_once 'Shared/php/AllHeader.php';//connects to the header section for all pages
-        require_once 'Student/php/StudentMenu.php';// Drop Down Menu for all student pages
+        require_once 'Student/php/StudentMenu.php'; //Menu for staff member
         require_once 'Shared/php/PageName.php';//For page name
         require_once 'Student/php/StudentAgreement.php';//connects to the main Home scripit and page section for Admin
         require_once 'Student/php/StudentFooter.php';//connects to the footer section for all pages for Admin
