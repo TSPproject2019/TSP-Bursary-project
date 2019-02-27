@@ -127,7 +127,7 @@
   </div>
   
   <!-- FORM START -->
-  <form action="Student/php/ProcessForm.php" method="post">
+  <form action="requestSave.php" method="POST">
     <!--Student ID using id stored in session storage at login page -->
     <input type="hidden" name="courseTutorId" value="<?php echo $_SESSION['courseTutorId'] ?>" />
     <!-- Turtor Course id stored in session storage at login page -->
@@ -137,7 +137,7 @@
     <h5> Item 1 </h5>
     <!--Category selection -->
     <div class="col-12 mt-2 mb-5">
-            <select class="custom-select" id="categoryField" name="itemcategory">
+            <select class="custom-select" id="categoryField" name="itemcategory1">
                 <option value ="" selected>Choose...</option>
                 <option value="Qualification">Qualification</option>
                 <option value="Equipment">Equipment</option>
@@ -149,13 +149,13 @@
     <!--Item description -->
     <div class="form-group row">
         <div class="col-12">
-            <input type="text" name="itemdescription" class="form-control" placeholder="Item description:" required>
+            <input type="text" name="itemdescription1" class="form-control" placeholder="Item description:" required>
          </div>
     </div> 
     <!--Item URL-->
     <div class="form-group row">
        <div class="col-12">
-           <input type="text" name="itemUrl" class="form-control" placeholder="URL to the item:" required
+           <input type="text" name="itemUrl1" class="form-control" placeholder="URL to the item:" required
                   value="<?php if (isset($_POST['itemUrl'])) echo $_POST['itemUrl']; ?>">
        </div>
     </div>
@@ -166,34 +166,34 @@
           <div class="input-group-prepend">
               <span class="input-group-text" id="price" required>Price:</span>
           </div>
-          <input type="text" class="form-control" name="itemprice" aria-describedby="price">
+          <input type="text" class="form-control" name="itemprice1" aria-describedby="price">
       </div>
      <!--Form Postage field -->              
       <div class="input-group col-3">
           <div class="input-group-prepend">
              <span class="input-group-text" id="price">Postage:</span>
           </div>
-          <input type="text" class="form-control" name="itempostage" aria-describedby="postage">
+          <input type="text" class="form-control" name="itempostage1" aria-describedby="postage">
        </div>
       <!--Form Additional Fees -->
           <div class="input-group col-4">
               <div class="input-group-prepend">
                   <span class="input-group-text" id="additionalFees">Additional fees:</span>
               </div>
-              <input type="text" class="form-control" name="itemadditionalcharges" aria-describedby="additionalFees">
+              <input type="text" class="form-control" name="itemadditionalcharges1" aria-describedby="additionalFees">
           </div>                   
      </div> <!--End of Fees row -->
        
     <!--Form Justification textarea -->
       <div class="form-group">
-          <textarea class="form-control" type="textarea" name="justification" rows="3" placeholder="Justification:" required></textarea>
+          <textarea class="form-control" type="textarea" name="justification1" rows="3" placeholder="Justification:" required></textarea>
       </div>
     <!--Form Tutor Comments textarea -->
       <div class="form-group">
           <textarea class="form-control" type="textarea" name="tutorComments" rows="3" placeholder="Tutor Comments:"></textarea>
       </div>    
                 
-     <!--<button type="submit" class="btn btn-warning btn-lg">Save as Draft</button>-->
-     <button type="submit" name="submit" value="insertRequestToDB" class="btn btn-success btn-lg">Submit</button>                
+     <button type="submit" name="submit" value="saveRequest" class="btn btn-warning btn-lg" id="Save">Save as Draft</button>
+     <button type="submit" name="submit" value="submitRequest" class="btn btn-success btn-lg" id="Submit">Submit</button>                
   </form>
 </section>
