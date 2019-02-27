@@ -44,7 +44,7 @@
     </div>
     
     <div id="pPop">
-      <p style="color: #7d08d1;">A new password should have:</p>
+      <p style="color: #7d08d1; font-weight: bold;">A new password should have:</p>
       <p class="popTxt">- at least 6 characters</p>
       <p class="popTxt">- at least 1 number</p>
       <p class="popTxt">- at least 1 special character e.g. !?#</p>
@@ -59,7 +59,7 @@
     <label style="height: 5%;"></label>
   </div>  
   
-  <button id="but1" style="position: absolute; top: 90%; width: 100%; background-color: blue; border: blue; border-radius: 10px;" type="submit" class="btn btn-primary btn-lg">Register</button>
+  <button id="but1" style="position: absolute; top: 90%; width: 100%; background-color: rgba(32, 19, 76); border: blue; border-radius: 10px;" type="submit" class="btn btn-primary btn-lg" onmouseover="butHov()">Register</button>
     
 </form>
     
@@ -78,6 +78,10 @@
   
   function popDown(){
     popBox.style.display = "none";
+  }
+  
+  function butHov(){
+    sub.style.background-color = "background-color: rgb(147, 66, 124)";
   }
 </script>
 </html>
