@@ -24,7 +24,7 @@
     switch ($_POST['submit']) {
         //echo " start Step 2.0..<br>"; // for testing purposes
 
-        // if pressed save
+        // if pressed save Drafts
         case 'saveRequest':
             echo " start Step 2.1..<br>"; // for testing purposes
             // create initial SQL query to add the Items to the table/s
@@ -34,16 +34,18 @@
             #$itemDescription = "'itemdescription" . $count. "'";
             #echo " test echo 2.1.a :" . $itemDescription . "<br>"; // for testing purposes
             # -loop through items which are in the form
-            while (!empty($_POST["'itemprice" . $count . "'"]) == FALSE){
+            while (isset($_POST['itemprice' . $count]) > 0){
                 // add count to POST item variables
-                $itemDescription = "'itemdescription" . $count. "'";
-                $itemCategory = "'itemcategory" . $count . "'";
-                $itemDescription = "'itemdescription" . $count. "'";
-                $itemURL = "'itemUrl" . $count . "'";
-                $itemPrice = "'itemprice" . $count . "'";
-                $itemPostage = "'itempostage" . $count . "'";
-                $itemAdditionalCharges = "'itemadditionalcharges" . $count . "'";
+                $itemDescription = 'itemdescription' . $count;
+                $itemCategory = 'itemcategory' . $count;
+                $itemDescription = 'itemdescription' . $count;
+                $itemURL = 'itemUrl' . $count;
+                $itemPrice = 'itemprice' . $count;
+                $itemPostage = 'itempostage' . $count;
+                $itemAdditionalCharges = 'itemadditionalcharges' . $count;
                 echo " test echo 2.1.b :" . $itemPrice . "<br>"; // for testing purposes
+                $itemprice = $_POST[$itemPrice];
+                echo " test echo 2.1.b :" . $itemprice . "<br>"; // for testing purposes
 
                 if (isset($_POST[$itemDescription]) && isset($_POST[$itemPrice])){
                     echo " start Step 2...<br>"; // for testing purposes
@@ -85,14 +87,14 @@
             #$itemDescription = "'itemdescription" . $count. "'";
             #echo " test echo 2.2.a :" . $itemDescription . "<br>"; // for testing purposes
             # -loop through items which are in the form
-            while (!empty($_POST["'itemprice" . $count . "'"]) == FALSE){
+            while (!empty($_POST['itemprice' . $count]) == FALSE){
                 // add count to POST item variables
-                $itemCategory = "'itemcategory" . $count . "'";
-                $itemDescription = "'itemdescription" . $count. "'";
-                $itemURL = "'itemUrl" . $count . "'";
-                $itemPrice = "'itemprice" . $count . "'";
-                $itemPostage = "'itempostage" . $count . "'";
-                $itemAdditionalCharges = "'itemadditionalcharges" . $count . "'";
+                $itemCategory = 'itemcategory' . $count;
+                $itemDescription = 'itemdescription' . $count;
+                $itemURL = 'itemUrl' . $count;
+                $itemPrice = 'itemprice' . $count;
+                $itemPostage = 'itempostage' . $count;
+                $itemAdditionalCharges = 'itemadditionalcharges' . $count;
                 echo " test echo 2.2.b :" . $itemPrice . "<br>"; // for testing purposes
 
                 if (isset($_POST[$itemDescription]) && isset($_POST[$itemPrice])){
