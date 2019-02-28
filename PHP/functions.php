@@ -224,7 +224,7 @@
     function getStudentDraftItems($uID)
     { 
           require 'connect.php';
-          $SQL_stmt = "SELECT bursaryRequests.bRequestsRequestDate AS 'date_submitted', brItemDesc AS 'item', 
+          $SQL_stmt = "SELECT bursaryRequests.bRequestsID AS 'id', bursaryRequests.bRequestsRequestDate AS 'date_submitted', brItemDesc AS 'item', 
           SUM(IFNULL(brItemPrice,0) + IFNULL(brItemPostage,0) + IFNULL(brItemAdditionalCharges,0))
           AS 'total_price' FROM bursaryRequestItems
           INNER JOIN itemsAndRequests ON bursaryRequestItems.brItemID = itemsAndRequests.ItemID 
@@ -232,7 +232,10 @@
           INNER JOIN bursaryRequests ON bursaryRequests.bRequestsID = itemsAndRequests.RequestID
           AND bursaryRequests.bRequestsStatus = 'Draft'
           GROUP BY bursaryRequests.bRequestsID ORDER BY bursaryRequests.bRequestsRequestDate ASC";
-            
+          
+          $requestid = 0;
+          $counter = 1;
+      
           $result = $DBconnection->query($SQL_stmt);
     
           if ($result->fetch()==FALSE){//if query returns nothing
@@ -244,18 +247,24 @@
           }
           else //If there is a result
           {
+            #$count = 1;
             $result = $DBconnection->query($SQL_stmt); //Need to execute query again!
             while ($row = $result->fetch())
             {
+                  //UNDER TESTING AND DEVELOPMENT
+                  //$requestid = $row['id']; //Capture request id each time in a loop for edit and delete buttons!
                   echo '<tr>
-                  <th scope="row">'.$row['date_submitted'].'</th>
-                  <td>'.$row['item'].'</td>
-                  <td>£'.$row['total_price'].'</td>
-                  <th><span style="float:left"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalLong">Edit </button></span></th>
-                  <td><button type="button" class="btn btn-primary">Delete</button></td></tr>';
+                  <th scope="row" name="requestDateSaved'.$counter.'">'.$row['date_submitted'].'</th>
+                  <td name="fieldRequestId'.$counter.'">'.$row['id'].'</td>
+                  <td name="fieldRequestItem'.$counter.'">'.$row['item'].'</td>
+                  <td name="fieldRequestTotalPrice'.$counter.'">£'.$row['total_price'].'</td> 
+                  <th><span style="float:left"><button type="button" name="submit" value="edit'.$counter.'" class="btn btn-primary" data-toggle="modal" data-target="#ModalLong">Edit </button></span></th>
+                  <td><button type="button" name="submit" value="delete'.$counter.'" class="btn btn-primary">Delete</button></td></tr>';
+                  $counter++;
             }
           }
     }
+    $_SESSION['draftCounter'] = $counter;
     //Gets staff draft items on staff review drafts page.
     function getStaffDraftItems($uID)
     { 

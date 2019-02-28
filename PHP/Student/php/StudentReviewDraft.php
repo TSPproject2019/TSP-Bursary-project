@@ -83,21 +83,26 @@
                 </ul>
             </div>
         </div>
-          
+           <form>
           <table class="table table-striped">
    <thead class="thead-dark">
     <tr>
       <th scope="col">Date saved</th>
+      <th scope="col">Request id</th>
       <th scope="col">Item</th>
       <th scope="col">Price (Total)</th>
     </tr>
   </thead>
-  <tbody>
-    <?php
+   <tbody>
+
+         <?php
           echo getStudentDraftItems($userid);
-    ?>
+          ?>
+
   </tbody>
-</table> 
+
+</table>
+</form>
 
 <div class="modal fade" id="ModalLong" tabindex="-1" role="dialog" aria-labelledby="ModalLongTitle" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
@@ -137,6 +142,7 @@
                         </div>
                               
                                   <?php
+
                                     //Outputting draft request item info when edit button is pressed UNDER TESTING
                                     //Fetch request id for the draft
                                     $SQL_stmt = "SELECT brItemID AS 'itemID', bursaryRequests.bRequestsID AS 'requestid' FROM bursaryRequests
@@ -158,7 +164,7 @@
                                        
                                         $requestid = $row['requestid'];
                                     }
-
+                                    
                                     //Using the request id, find the item info 
                                     $SQL_stmt = "SELECT brItemCategory AS 'category', brItemDesc AS 'item_description',
                                     brItemURL AS 'URL', brItemPrice AS 'price', brItemPostage AS 'postage',

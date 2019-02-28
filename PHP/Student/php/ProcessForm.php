@@ -1,6 +1,8 @@
 <!--Created by Andrius 20-02-2019 -->
 <!-- New student bursury request form submission processing -->
+
 <!--Version 2.0 -->
+<!-- Student can add and submit ONE item at the moment
 
 <?php
 session_start();
@@ -61,9 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     WHERE bRequestsCourseID = '$courseid' AND bRequestsStaffID = '$courseTutorId'
     AND bRequestsJustification = '$txbJustication' AND bRequestsRequestDate = '$dateNow'
     AND bRequestsStatus = '$bRequestsStatus'";
-    
-    $requestid = 0;
-    
+       
    
     $result = $DBconnection->query($SQL_stmt);
         // now get the data
@@ -78,8 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     WHERE brItemCategory = '$txbItemCategory' AND brItemDesc = '$txbItemDescription'
     AND brItemURL = '$itemURL' AND brItemPrice = '$txbPrice'
     AND brItemPostage = '$txbPostage' AND brItemAdditionalCharges = '$txbAdditionalCharges'";
-    
-    $itemid = 0;
+        
     
     $result = $DBconnection->query($SQL_stmt);
         // now get the data
