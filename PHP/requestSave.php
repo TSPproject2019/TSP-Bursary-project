@@ -63,7 +63,7 @@
             #echo " test echo 2.1.a :" . $itemDescription . "<br>"; // for testing purposes
         // -loop through items which are in the form for items
             while (isset($_POST['itemprice' . $count]) > 0){
-                // add count to POST item variables (this will be linkef to request ID)
+                // add count to POST item variables (this will be linked to request ID)
                 $itemDescription = 'itemdescription' . $count;
                 $itemCategory = 'itemcategory' . $count;
                 $itemDescription = 'itemdescription' . $count;
@@ -75,7 +75,7 @@
                 $itemprice = $_POST[$itemPrice];
                 echo " test echo 2.2.b :" . $itemprice . "<br>"; // for testing purposes
 
-                if (isset($_POST[$itemDescription]) && isset($_POST[$itemPrice])){
+#                if (isset($_POST[$itemDescription]) && isset($_POST[$itemPrice])){
                     echo " start Step 2.3..<br>"; // for testing purposes
                         
                     //  If the form is submitted assign variables..
@@ -118,9 +118,17 @@
 
                     $DBconnection->exec($SQL_stmt);//Link and loop again.
                   echo " test echo 2.3.1.d :" . $itemprice . "<br>"; // for testing purposes
+
                     
+#                }
+                if ($itemprice == NULL || $itemprice == 0 || $itemprice == ""){
+                    echo " test echo 2.3.1.end :" . $itemprice . "<br>"; // for testing purposes
+                    // return to page you were on as a fresh page
+                    goBack();
+                    break;
+                  
                 }
-/*                if (empty($_POST["'"$itemDescription . 1"'"]) && empty($_POST["'"$itemPrice . 1"'"])){
+/*                if (empty($_POST[$itemDescription]) && empty($_POST[$itemPrice])){
                     // now need to get the final secion of the request form
                     if (isset($_POST['justification']) && isset($_POST['tutorComments'])){
                         //  assign last variables..

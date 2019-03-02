@@ -20,7 +20,9 @@
         require_once 'Shared/php/AllHeader.php';//connects to the header section for all pages
         require_once 'Student/php/StudentMenu.php';// Drop Down Menu for all student pages
         require_once 'Shared/php/PageName.php';//For page name
-        require_once 'Student/php/StudentReviewDraft.php';//connects to the main Home scripit and page section for Admin
+        #require_once 'Student/php/StudentReviewDraft.php';//connects to the main Home scripit and page section for Admin
+        require_once 'Student/php/StudentReviewDraftA.php';//connects to the main Home scripit and page section for Admin
+        #require_once 'Student/php/StudentReviewDraftB.php';//connects to the main Home scripit and page section for Admin
         require_once 'Student/php/StudentFooter.php';//connects to the footer section for all pages for Admin
     }
     catch(PDOException $e)

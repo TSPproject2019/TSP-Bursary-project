@@ -1,7 +1,11 @@
 <?php
     session_start();
     // functions
-
+    // go back to previous page
+    function goBack (){
+        header("Location: {$_SERVER['HTTP_REFERER']}");
+        exit;
+    }
     // get the totals from the bursaryRequests table using user ID and the request status.  
     function getTotals ($uID, $stat){
         global $totalResult;
@@ -194,7 +198,7 @@
             echo '<tr>
             <th scope="row">'.$row['Date_submitted'].'</td>
             <td>'.$row['Item_count'].'</td>
-            <td>£'.$row['Cost'].'</td>
+            <td>'.$row['Cost'].'</td>
             <td>'.$row['Status'].'</td></tr>';
           }           
     }
@@ -234,7 +238,7 @@
           GROUP BY bursaryRequests.bRequestsID ORDER BY bursaryRequests.bRequestsRequestDate ASC";
           
           $requestid = 0;
-          $counter = 1;
+          $count = 1;
       
           $result = $DBconnection->query($SQL_stmt);
     
@@ -254,17 +258,18 @@
                   //UNDER TESTING AND DEVELOPMENT
                   //$requestid = $row['id']; //Capture request id each time in a loop for edit and delete buttons!
                   echo '<tr>
-                  <th scope="row" name="requestDateSaved'.$counter.'">'.$row['date_submitted'].'</th>
-                  <td name="fieldRequestId'.$counter.'">'.$row['id'].'</td>
-                  <td name="fieldRequestItem'.$counter.'">'.$row['item'].'</td>
-                  <td name="fieldRequestTotalPrice'.$counter.'">£'.$row['total_price'].'</td> 
-                  <th><span style="float:left"><button type="button" name="submit" value="edit'.$counter.'" class="btn btn-primary" data-toggle="modal" data-target="#ModalLong">Edit </button></span></th>
-                  <td><button type="button" name="submit" value="delete'.$counter.'" class="btn btn-primary">Delete</button></td></tr>';
-                  $counter++;
+                  <th scope="row" name="requestDateSaved'.$count.'">'.$row['date_submitted'].'</th>
+                  <td name="fieldRequestId'.$count.'" value="'.$row['id'].'">'.$row['id'].'</td>
+                  <td name="fieldRequestItem'.$count.'">'.$row['item'].'</td>
+                  <td name="fieldRequestTotalPrice'.$count.'">£'.$row['total_price'].'</td> 
+                  <th><span style="float:left"><button type="submit" name="submit" value="edit_'.$row['id'].'" class="btn btn-primary" data-toggle="modal" data-target="#ModalLong">Edit </button></span></th>
+                  <td><button type="submit" name="submit" value="delete_'.$row['id'].'" class="btn btn-primary">Delete</button></td></tr>';
+                  $count++;
             }
+           $_SESSION['draftCounter'] = $count;
           }
     }
-    $_SESSION['draftCounter'] = $counter;
+
     //Gets staff draft items on staff review drafts page.
     function getStaffDraftItems($uID)
     { 
@@ -298,7 +303,7 @@
                     <td>'.$row['item_count'].'</td>
                     <td>£'.$row['total_price'].'</td>
                     <th><span style="float:left"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalLong">Edit </button></span></th>
-                    <td><button type="button" value="Delete" onClick="deleteStudentDraft();" class="btn btn-primary" >Delete</button></td></tr>';
+                    <td><button type="button" class="btn btn-primary" >Delete</button></td></tr>';
               }
           }
       }
