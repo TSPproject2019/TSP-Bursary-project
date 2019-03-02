@@ -115,6 +115,7 @@
         $itemValue = $item[1];
 #        echo "Submit submit itemValue: ".$itemValue."<br>"; //No value (empty)
         $requestid = $itemValue;
+        $_SESSION['requestId'] = $requestid;
         // for editing drafts
         if ($itemName == 'edit'){
             //Using the request id, find the item info 

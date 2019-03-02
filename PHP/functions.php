@@ -6,6 +6,11 @@
         header("Location: {$_SERVER['HTTP_REFERER']}");
         exit;
     }
+    // split values from a string using a specified character
+    function doSplit($stringToSplit, $splitWithChar){
+      $itemArr = split($splitWithChar, $stringToSplit);
+      return $itemArr;
+    }
     // get the totals from the bursaryRequests table using user ID and the request status.  
     function getTotals ($uID, $stat){
         global $totalResult;
