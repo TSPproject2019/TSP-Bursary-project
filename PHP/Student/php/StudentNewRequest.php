@@ -149,11 +149,7 @@
     <!--Item description -->
     <div class="form-group row">
         <div class="col-12">
-            <input type="text" name="itemdescription[]" class="form-control" placeholder="Item description:" required>
-          <!--Second item -->
-            <input type="text" name="itemdescription[]" class="form-control" placeholder="Item description:" required>
-          <!--Third Item -->
-          <input type="text" name="itemdescription[]" class="form-control" placeholder="Item description:" required>
+            <input type="text" name="itemdescription1" class="form-control" placeholder="Item description:" required>
          </div>
     </div> 
     <!--Item URL-->

@@ -2,7 +2,7 @@
 <!-- New student bursury request form submission processing -->
 
 <!--Version 2.0 -->
-<!-- Student can add and submit ONE item at the moment
+<!-- Student can add and submit ONE item -->
 
 <?php
 session_start();

@@ -264,13 +264,14 @@
             $courseId = $_SESSION['courseid'];
             $txbJustication = $_POST['justification'];  
             $bRequestsStatus = 'Draft'; //Draft because of saving the request
+            $requestid = $_SESSION['requestId'];
             // assign a counter
             $count = 1;
             #$itemDescription = "'itemdescription" . $count. "'";
             echo " start Step 2.1.a.<br>"; // for testing purposes
             //Acquire request id for that request (To link the items)
-            $SQL_stmt = "SELECT bursaryRequests.bRequestsID AS 'requestId' FROM bursaryRequests
-            WHERE bRequestsCourseID = '$courseId' AND bRequestsStaffID = '$courseTutorId'
+            /*$SQL_stmt = "SELECT bursaryRequests.bRequestsID AS 'requestId' FROM bursaryRequests
+            WHERE bRequestsCourseID = '$courseId' AND bRequestsStaffID = '$courseTutorId' 
             AND bRequestsStatus = '$bRequestsStatus'";
     
             $requestid = 0;
@@ -280,6 +281,9 @@
             if ($row = $result->fetch()){
                 $requestid = $row['requestId'];
             }
+            else{
+              echo 'No request id found <br>';
+            }*/
             $dateNow = date('Y/m/d'); //Set date right now.
             // add new request section script here
             // create initial SQL query to update the Bursary request to the table/s
@@ -338,6 +342,9 @@
                             
                             $itemid = $row['itemId'];
                         }
+                        else{
+                          echo 'No item id found <br>';
+                        }
                     //echo $itemid;
                     //Add the item to the bursaryRequest items table
                     $SQL_stmt="UPDATE bursaryRequestItems SET brItemCategory = '$itemcategory',
@@ -346,15 +353,17 @@
                     WHERE brItemID = '".$itemid."'";
             
                     $DBconnection->exec($SQL_stmt); //update item to the items table
+                    
+
                     echo " test echo 2.3.1.b :" . $itemprice . "<br>"; // for testing purposes
-                  
+                    
                   
                     echo " test echo 2.3.1.c : Item id is:" . $itemid . "<br>"; // for testing purposes
                   echo " test echo 2.3.1.c : request id is:" . $requestid . "<br>";
                   
                     //Now update link items to the request and to student!
-                    $SQL_stmt = "UPDATE itemsAndRequests SET ItemID = '$itemid',StudentID = '$userid' 
-                    WHERE RequestID = '$requestid'";
+                    $SQL_stmt = "INSERT INTO itemsAndRequests(ItemID,RequestID,StudentID) VALUES('$itemid','$requestid','$userid')
+                    ON DUPLICATE KEY UPDATE ItemID = '$itemid' WHERE RequestID = '$requestid' AND StudentID = '$userid'";
 
                     $DBconnection->exec($SQL_stmt);//Link and loop again.
                   echo " test echo 2.3.1.d :" . $itemprice . "<br>"; // for testing purposes

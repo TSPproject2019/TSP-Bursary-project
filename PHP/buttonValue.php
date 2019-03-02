@@ -7,9 +7,12 @@
     //connect to the functions
     # echo " start Step 1.0..<br>"; // for testing purposes
     require 'functions.php'; // connects to the functions.
-    // 
-
-         
+    // Test
+    echo 'This is the edit button press <br>';
+    if(isset($_POST['submit']))
+    {
+      echo 'banana<br>';
+    }
 
 
 
