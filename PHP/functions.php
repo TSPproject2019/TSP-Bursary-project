@@ -270,6 +270,17 @@
           }
     }
 
+    function deleteStudentDraft($requestID) {
+      
+      require 'connect.php'; //still working on this 
+      $SQL_stmt = "DELETE FROM bursaryRequests WHERE bRequestsID = $requestID"; 
+      
+      //do i need a requestID variable here? such as $requestID = 0 
+      
+      $result = $DBconnection->query($SQL_stmt);
+      
+    }
+
     //Gets staff draft items on staff review drafts page.
     function getStaffDraftItems($uID)
     { 
@@ -303,7 +314,7 @@
                     <td>'.$row['item_count'].'</td>
                     <td>£'.$row['total_price'].'</td>
                     <th><span style="float:left"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalLong">Edit </button></span></th>
-                    <td><button type="button" class="btn btn-primary" >Delete</button></td></tr>';
+                    <td><button type="button" class="btn btn-primary onclick="deleteStudentDraft()" >Delete</button></td></tr>';
               }
           }
       }
