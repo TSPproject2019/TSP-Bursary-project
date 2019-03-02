@@ -89,6 +89,12 @@
                                 ?>
                              </div>
                         </div>
+                   <!-- For course tutor id, course id and user id --->
+                  <input type="hidden" name="courseTutorId" value="<?php echo $_SESSION['courseTutorId'] ?>" />
+                  <!-- Turtor Course id stored in session storage at login page -->
+                  <input type="hidden" name="courseid" value="<?php echo $_SESSION['courseid'] ?>" />
+                  <!--Student id -->
+                  <input type="hidden" name="userid" value="<?php echo $_SESSION['userid'] ?>" />
 <?php
     // check to see which button was pressed.
     //// set a counter for this purpose
@@ -131,6 +137,12 @@
                 $itemprice = $row['price'];
                 $itempostage = $row['postage'];
                 $itemadditionalcharges = $row['additional_charges'];
+                $itemSelectedOptionNumber = 0;
+                if ($itemcategory == 'Qualification'){$itemSelectedOptionNumber = 1;}
+                if ($itemcategory == 'Equipment'){$itemSelectedOptionNumber = 2;}
+                if ($itemcategory == 'Events'){$itemSelectedOptionNumber = 3;}
+                if ($itemcategory == 'Professional accreditation'){$itemSelectedOptionNumber = 4;}
+                if ($itemcategory == 'Vocational placement'){$itemSelectedOptionNumber = 5;}
 
                 // output data from query
                 echo '<div class="row">
@@ -140,7 +152,7 @@
                         <label for="categoryField" class="col-sm-2 col-form-label">Category field:</label>
                         <div class="col-sm-10 mt-2">
                             <select class="custom-select" id="categoryField">';                    
-                echo '<option selected name="itemcategory' . $count . '">' . $itemcategory . '</option>';
+                echo '<option selected="'.$itemSelectedOptionNumber.'" name="itemcategory' . $count . '">' . $itemcategory . '</option>';
                 echo '<option value="1">Qualification</option>';
                 echo '<option value="2">Equipment</option>';
                 echo '<option value="3">Events</option>';
@@ -183,13 +195,32 @@
             // break out of the for loop*/
             break;
             }
+            //Now select justification to display.
+            $SQL_stmt = "SELECT bRequestsJustification FROM bursaryRequests WHERE bRequestsID = '".$requestid."'";
+            $txbJustification = 0;
+            //Execute query
+            $result = $DBconnection->query($SQL_stmt);
+            
+            if ($row = $result->fetch()){
+                
+                $txbJustification = $row['bRequestsJustification'];
+            }
+            //Display justification
+            echo '<div class="form-group">
+            <textarea class="form-control" type="textarea" name="justification" value="'.$txbJustification.'" rows="3" placeholder="Justification:" required>'.$txbJustification.'</textarea>
+            </div>';
+          
         }
-        // for deleting selected file
+        // for deleting selected file (need HTML code)
         if ($itemName == 'delete'){
             //carry out this action
             echo " Loop .2. Step 1.0..<br>"; // for testing purposes
             ### now process the required actions for delete
-
+          
+            //Query for delete using request id
+            
+            //Refresh page?
+          
             // break out of the for loop
             break;
         }
@@ -199,11 +230,11 @@
 <div class="row mt-3 mb-5">
     
     <div class="col-5 mb-5 text-right">
-        <button type="submit" name="submit" value="saveRequest" style="width: 38%;" class="btn btn-primary" id="Save" wide="45">Save</button>
+        <button type="submit" name="submit" value="saveUpdated" style="width: 38%;" class="btn btn-primary" id="Save" wide="45">Save</button>
     </div>
   <!-- need to add button for adding new item (+)-->
     <div class="col-5 mb-5 text-right">
-        <button type="submit" name="submit" value="submitRequest" style="width: 38%;" class="btn btn-success" id="Submit">Submit</button>
+        <button type="submit" name="submit" value="submitUpdated" style="width: 38%;" class="btn btn-success" id="Submit">Submit</button>
     </div>
 </div>
 </form>
