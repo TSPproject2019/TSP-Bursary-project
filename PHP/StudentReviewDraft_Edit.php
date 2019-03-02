@@ -49,14 +49,17 @@
         </div>
 <!-- <div class="modal fade" id="ModalLong" tabindex="-1" role="dialog" aria-labelledby="ModalLongTitle" aria-hidden="false"> -->
  <!-- <section class="container mt-5 w-50"> -->
-    <div class="modal fade" id="ModalLong" tabindex="-1" role="dialog" aria-labelledby="ModalLongTitle" aria-hidden="false">
-        <div class="modal-dialog modal-lg" role="document">
+ <section class="container mt-5 w-50">
+   <!--Student Name -->          
+  <div class="form-group row">
+   <!--  <div class="modal fade" id="ModalLong" tabindex="-1" role="dialog" aria-labelledby="ModalLongTitle" aria-hidden="false"> -->
+        <!-- <div class="modal-dialog modal-lg" role="document"> -->
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="ModalLongTitle">Bursary request</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                   <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="false">&times;</span>
-                    </button>
+                    </button> -->
                 </div>
                 <div class="modal-body">
                 
@@ -204,6 +207,7 @@
     </div>
 </div>
 </form>
+</section>
 <!-- </section> -->
 <?php
     require_once 'Student/php/StudentFooter.php';//connects to the footer section for all pages for Admin

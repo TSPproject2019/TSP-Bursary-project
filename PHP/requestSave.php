@@ -142,6 +142,7 @@
                 }*/
                 $count++;
             }
+            goBack();
             #header("Location: student_review_draft.php? activity=request_saved");
             break;
 
