@@ -119,8 +119,9 @@
         // for editing drafts
         if ($itemName == 'edit'){
             //Using the request id, find the item info 
-            $SQL_stmt = "SELECT brItemCategory AS 'category', brItemDesc AS 'item_description',
-            brItemURL AS 'URL', brItemPrice AS 'price', brItemPostage AS 'postage',
+            $SQL_stmt = "SELECT brItemID AS 'itemId', brItemCategory AS 'category', 
+            brItemDesc AS 'item_description', brItemURL AS 'URL', 
+            brItemPrice AS 'price', brItemPostage AS 'postage',
             brItemAdditionalCharges AS 'additional_charges' FROM bursaryRequestItems
             INNER JOIN itemsAndRequests ON itemsAndRequests.ItemID = bursaryRequestItems.brItemID 
             AND itemsAndRequests.RequestID = " . $requestid . "
@@ -132,6 +133,7 @@
             $count = 1;
             while ($row = $result->fetch()){
                 // loop through the request results
+                $itemId = $row['itemId'];
                 $itemcategory = $row['category'];
                 $itemdescription = $row['item_description'];
                 $itemUrl = $row['URL'];
@@ -144,7 +146,8 @@
                 if ($itemcategory == 'Events'){$itemSelectedOptionNumber = 3;}
                 if ($itemcategory == 'Professional accreditation'){$itemSelectedOptionNumber = 4;}
                 if ($itemcategory == 'Vocational placement'){$itemSelectedOptionNumber = 5;}
-
+                
+                //echo "Item id is :$itemId"; //For testing
                 // output data from query
                 echo '<div class="row">
                         <h5 class="m-2">Item ' . $count . '</h5>
@@ -160,7 +163,7 @@
                 echo '<option value="4">Professional accreditation</option>';
                 echo '<option value="5">Vocational placement</option>';
                 echo '</select>';
-
+                echo '<input type="hidden" name="itemid" value="'.$itemId.'" />';
                 // now output the data
                 echo '      </div>
                         </div>
@@ -215,15 +218,52 @@
         // for deleting selected file (need HTML code)
         if ($itemName == 'delete'){
             //carry out this action
-            echo " Loop .2. Step 1.0..<br>"; // for testing purposes
-            ### now process the required actions for delete
-          
-            //Query for delete using request id
-            
-            //Refresh page?
-          
-            // break out of the for loop
+            echo " Loop .2. Step 1.0..<br>"; // for testing if it responds
+
+            echo " start Step 2.1..<br>"; // for testing purposes
+              $courseTutorId = $_POST['courseTutorId'];
+              $courseId = $_POST['courseid'];
+              $txbJustication = $_POST['justification'];  
+              $dateNow = date('Y/m/d');
+              $bRequestsStatus = 'Draft'; //acknowledges that the request is a draft 
+              // assign a counter
+              $count = 1;
+            //echo $requestid;
+            echo " Going to delete query now.<br>"; // for testing purposes
+            // query which deletes the Bursary Request ID from bursaryRequests 
+            // which in turn will cascade through the tables
+            $SQL_stmt = "DELETE FROM bursaryRequests WHERE bRequestsID = :requestID";
+            echo " Query correct.  stmt: " . $SQL_stmt . "<br>"; // for testing purposes
+            ## Execute query
+            $stmt = $DBconnection->prepare($SQL_stmt); //Delete this one?
+            echo " Query correct.  stmt: B . <br>";
+            $stmt -> bindParam(':requestID', $requestid, PDO::PARAM_INT); // this is the field selector
+            #$stmt -> bindParam($requestid, $_POST[$requestid]); // this is the field selector
+            echo " Query correct.  stmt: C . <br>";
+            $stmt -> execute(); // this is the excecute
+            echo "Request deleted.<br>"; // for testing purposes
+/*
+            $result = $DBconnection->query($SQL_stmt);
+            echo " Query correct.  stmt: B_B . <br>";
+            // now delete the data
+            if ($result->fetch()){
+                echo "Request deleted.<br>"; // for testing purposes
+            }
+*/            // Request is now deleted.
+
+            #echo " test echo 2.3.1.c : requestId id is:" . $requestid . "<br>"; //just to see if it returns the requestID 
+
+            //testing goBack();
+            //goBack(); does not work 
+            //testing location.reload();
+            //location.reload(); does not work 
+            //testing Location(homepage.php)
+                 #echo "<p>Welcome back to the " . $userType . " area of the Bursary Request system </p>";
+                 #header("Location: student_home.php activity=delete_request");
+            goBack();
+            // end the case.. 
             break;
+            
         }
     }
 ?>

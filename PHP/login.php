@@ -71,14 +71,14 @@
                             if ($userType == 'Staff'){
                                 // connect to staff area
                                 echo "<p>Welcome back to the " . $userType . " area of the Bursary Request system </p>";
-                                //open the admin page. user information will be retrieved through session variable rather than the URL
+                                //open the staff page. user information will be retrieved through session variable rather than the URL
                                 header("Location: staff_home.php");
                             }
                             echo " start Step 2.1.1.7..<br>"; // for testing purposes
                             if ($userType == 'Student'){
                                 // connect to Student area
                                 echo "<p>Welcome back to the " . $userType . " area of the Bursary Request system </p>";
-                                //open the admin page. user information will be retrieved through session variable rather than the URL
+                                //open the student page. user information will be retrieved through session variable rather than the URL
                                 header("Location: student_home.php");
                             }
                             echo " start Step 2.1.1.8..<br>"; // for testing purposes

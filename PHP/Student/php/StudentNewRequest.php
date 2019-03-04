@@ -138,7 +138,7 @@
     <!--Category selection -->
     <div class="col-12 mt-2 mb-5">
             <select class="custom-select" id="categoryField" name="itemcategory1">
-                <option value ="" selected>Choose...</option>
+                <option value ="" selected="">Choose...</option>
                 <option value="Qualification">Qualification</option>
                 <option value="Equipment">Equipment</option>
                 <option value="Events">Events</option>

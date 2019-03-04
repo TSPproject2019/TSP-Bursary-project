@@ -321,6 +321,165 @@
                     $itemprice = $_POST[$itemPrice];
                     $itempostage = $_POST[$itemPostage];
                     $itemadditionalcharges = $_POST[$itemAdditionalCharges];
+                    $itemid = $_POST['itemid'];
+                    echo " test echo 2.3.1.a :" . $itemprice . "<br>"; // for testing purposes
+                    echo " test echo 2.3.1.a :" . $itempostage . "<br>";
+                    echo " test echo 2.3.1.a :" . $itemdescription . "<br>";
+                    // run SQL script to post the information..
+                    // Find item id of each item to update each item
+                    
+                    echo "This is item category:".$itemcategory." "; //Category is currently empty
+                    //Now retrieve item id of each item in a loop
+                   /* $SQL_stmt = "SELECT brItemID AS 'itemId' FROM bursaryRequestItems
+                    WHERE brItemDesc = '$itemdescription' AND brItemURL = '$itemUrl' 
+                    AND brItemPrice = '$itemprice' AND brItemPostage = '$itempostage' 
+                    AND brItemAdditionalCharges = '$itemadditionalcharges'";
+
+                    $itemid = 0;
+
+                    $result = $DBconnection->query($SQL_stmt); //Run query
+                        
+                        if ($row = $result->fetch()){ //Retrieve item id result
+                            
+                            $itemid = $row['itemId'];
+                        }
+                        else{
+                          echo 'No item id found <br>';
+                        }*/
+                    echo $itemid; //For testing
+                    
+                    if(empty($itemid)) //If item id is empty, add the new item and link to request
+                    {
+                       $SQL_stmt="INSERT INTO bursaryRequestItems (brItemCategory,brItemDesc,brItemURL,brItemPrice,brItemPostage,brItemAdditionalCharges)
+                       VALUES ('$itemcategory', '$itemdescription' ,'$itemUrl', '$itemprice', '$itempostage', '$itemadditionalcharges')";
+            
+                       $DBconnection->exec($SQL_stmt); //Insert item to the items table
+                        
+                      //now select new item id of the added item
+                       $SQL_stmt = "SELECT brItemID AS 'itemId' FROM bursaryRequestItems
+                       WHERE brItemDesc = '$itemdescription' AND brItemCategory = '$itemcategory' 
+                       AND brItemURL = '$itemUrl' AND brItemPrice = '$itemprice'
+                       AND brItemPostage = '$itempostage' AND brItemAdditionalCharges = '$itemadditionalcharges'";
+
+                       $itemid = 0;
+
+                       $result = $DBconnection->query($SQL_stmt); //Run query
+
+                         if ($row = $result->fetch()){ //Retrieve item id result
+
+                                $itemid = $row['itemId'];
+                            }
+                      
+                       //Now link item to the request and to student!
+                       $SQL_stmt = "INSERT INTO itemsAndRequests(ItemID,RequestID,StudentID)
+                       VALUES('$itemid', '$requestid', '$userid')";
+
+                       $DBconnection->exec($SQL_stmt);//Link and loop again.
+                    }
+                    else //update item and insert/update to request and student
+                    {
+                      $SQL_stmt="UPDATE bursaryRequestItems SET brItemCategory = '$itemcategory',
+                      brItemDesc = '$itemdescription',brItemURL = '$itemUrl',brItemPrice = '$itemprice',
+                      brItemPostage = '$itempostage',brItemAdditionalCharges = '$itemadditionalcharges'
+                      WHERE brItemID = '".$itemid."'";
+
+                      $DBconnection->exec($SQL_stmt); //update item to the items table
+
+
+                      echo " test echo 2.3.1.b :" . $itemprice . "<br>"; // for testing purposes
+
+
+                      echo " test echo 2.3.1.c : Item id is:" . $itemid . "<br>"; // for testing purposes
+                      echo " test echo 2.3.1.c : request id is:" . $requestid . "<br>";
+
+                      //Now update link items to the request and to student!
+                      $SQL_stmt = "INSERT INTO itemsAndRequests(ItemID,RequestID,StudentID) VALUES('$itemid','$requestid','$userid')
+                      ON DUPLICATE KEY UPDATE ItemID = '$itemid' WHERE RequestID = '$requestid' AND StudentID = '$userid'";
+
+                      $DBconnection->exec($SQL_stmt);//Link and loop again.
+                      echo " test echo 2.3.1.d :" . $itemprice . "<br>"; // for testing purposes
+                    }
+                    //Add the item to the bursaryRequest items table
+                    
+
+                    
+#                }
+                if ($itemprice == NULL || $itemprice == 0 || $itemprice == ""){
+                    echo " test echo 2.3.1.end :" . $itemprice . "<br>"; // for testing purposes
+                    // return to page you were on as a fresh page
+                    goBack();
+                    break;
+                  
+                }
+/*                if (empty($_POST[$itemDescription]) && empty($_POST[$itemPrice])){
+                    // now need to get the final secion of the request form
+                    if (isset($_POST['justification']) && isset($_POST['tutorComments'])){
+                        //  assign last variables..
+                        $justification = $_POST['justification'];
+                        $tutorComments = $_POST['tutorComments'];
+
+
+
+                        // now start the SQL script to post the request
+                    }
+                }*/
+                $count++;
+            }
+           // goBack();
+            #header("Location: student_review_draft.php? activity=request_saved");
+            break;
+        
+        
+        case 'submitUpdated':
+            echo " start Step 2.1..<br>"; // for testing purposes
+            echo " We are in submit updated<br>";
+            $courseTutorId = $_SESSION['courseTutorId'];
+            $courseId = $_SESSION['courseid'];
+            $txbJustication = $_POST['justification'];  
+            $bRequestsStatus = 'Submitted'; //Submitted because of submitting the request
+            $requestid = $_SESSION['requestId'];
+            // assign a counter
+            $count = 1;
+            
+            echo " start Step 2.1.a.<br>"; // for testing purposes
+           
+            $dateNow = date('Y/m/d'); //Set date right now.
+            // add new request section script here
+            // create initial SQL query to update the Bursary request to the table/s
+            $SQL_stmt = "UPDATE bursaryRequests SET bRequestsCourseID = '$courseId', bRequestsStaffID = '$courseTutorId',
+            bRequestsJustification = '$txbJustication', bRequestsRequestDate = '$dateNow', bRequestsStatus = '$bRequestsStatus',
+            bRequestsStudentRequest = TRUE WHERE bRequestsID = '$requestid'";
+            
+            $DBconnection->exec($SQL_stmt); //Update request info
+            echo " start Step 2.1.b.<br>"; // for testing purposes
+            
+            echo " test echo 2.3.1.c : requestId id is:" . $requestid . "<br>";
+            echo " test echo 2.3.1.c : Justification  is:" . $txbJustication . "<br>";
+            echo " start Step 2.1.d.<br>"; // for testing purposes
+            #echo " test echo 2.1.a :" . $itemDescription . "<br>"; // for testing purposes
+        // -loop through items which are in the form for items
+            while (isset($_POST['itemprice' . $count]) > 0){
+                // add count to POST item variables (this will be linked to request ID)
+                $itemCategory = 'itemcategory' . $count;
+                $itemDescription = 'itemdescription' . $count;
+                $itemURL = 'itemUrl' . $count;
+                $itemPrice = 'itemprice' . $count;
+                $itemPostage = 'itempostage' . $count;
+                $itemAdditionalCharges = 'itemadditionalcharges' . $count;
+                echo " test echo 2.2.b :" . $itemPrice . "<br>"; // for testing purposes
+                //$itemprice = $_POST[$itemPrice];
+                echo " test echo 2.2.b :" . $itemprice . "<br>"; // for testing purposes
+
+#                if (isset($_POST[$itemDescription]) && isset($_POST[$itemPrice])){
+                    echo " start Step 2.3..<br>"; // for testing purposes
+                        
+                    //  If the form is submitted assign variables..
+                    $itemcategory = $_POST[$itemCategory];
+                    $itemdescription = $_POST[$itemDescription];
+                    $itemUrl = $_POST[$itemURL];
+                    $itemprice = $_POST[$itemPrice];
+                    $itempostage = $_POST[$itemPostage];
+                    $itemadditionalcharges = $_POST[$itemAdditionalCharges];
                     echo " test echo 2.3.1.a :" . $itemprice . "<br>"; // for testing purposes
                     echo " test echo 2.3.1.a :" . $itempostage . "<br>";
                     echo " test echo 2.3.1.a :" . $itemdescription . "<br>";
@@ -330,9 +489,9 @@
                     echo "This is item category:".$itemcategory." "; //Category is currently empty
                     //Now retrieve item id of each item in a loop
                     $SQL_stmt = "SELECT brItemID AS 'itemId' FROM bursaryRequestItems
-                    WHERE brItemDesc = '$itemdescription' AND brItemCategory = '$itemcategory'
-                    AND brItemURL = '$itemUrl' AND brItemPrice = '$itemprice'
-                    AND brItemPostage = '$itempostage' AND brItemAdditionalCharges = '$itemadditionalcharges'";
+                    WHERE brItemDesc = '$itemdescription' AND brItemURL = '$itemUrl' 
+                    AND brItemPrice = '$itemprice' AND brItemPostage = '$itempostage' 
+                    AND brItemAdditionalCharges = '$itemadditionalcharges'";
 
                     $itemid = 0;
 
