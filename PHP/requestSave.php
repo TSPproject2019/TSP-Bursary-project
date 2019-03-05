@@ -131,6 +131,7 @@
                     break;
                   
                 }
+                $_SESSION['testCounter'] = $testCounter;
                 if ($testCounter >= 100){break;}// for testing, Limits the overpopulation potential overflow loop occurring
 /*                if (empty($_POST[$itemDescription]) && empty($_POST[$itemPrice])){
                     // now need to get the final secion of the request form
@@ -245,6 +246,7 @@
                   echo " test echo 2.3.1.d :" . $itemprice . "<br>"; // for testing purposes
                     
                 }
+                $_SESSION['testCounter'] = $testCounter;
                 if ($testCounter >= 100){break;}// for testing, Limits the overpopulation potential overflow loop occurring
 /*                if (empty($_POST["'"$itemDescription . 1"'"]) && empty($_POST["'"$itemPrice . 1"'"])){
                     // now need to get the final secion of the request form
@@ -418,6 +420,7 @@
                     break;
                   
                 }
+                $_SESSION['testCounter'] = $testCounter;
                 if ($testCounter >= 100){break;}// for testing, Limits the overpopulation potential overflow loop occurring
 /*                if (empty($_POST[$itemDescription]) && empty($_POST[$itemPrice])){
                     // now need to get the final secion of the request form
@@ -545,6 +548,7 @@
                     break;
                   
                 }
+                $_SESSION['testCounter'] = $testCounter;
                 if ($testCounter >= 100){break;}// for testing, Limits the overpopulation potential overflow loop occurring
 /*                if (empty($_POST[$itemDescription]) && empty($_POST[$itemPrice])){
                     // now need to get the final secion of the request form
