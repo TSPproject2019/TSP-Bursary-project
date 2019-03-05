@@ -20,6 +20,7 @@
     $userFirstName = $_SESSION['firstName'];
     $userLastName = $_SESSION['lastName'];
     $requestid = 0;
+    $testCounter = 0; // this is for testing
  
 
     // see which buttin is pressed and excecute a method accordingly, using switch
@@ -60,9 +61,11 @@
             }
             echo " test echo 2.3.1.c : requestId id is:" . $requestid . "<br>";
             echo " start Step 2.1.d.<br>"; // for testing purposes
+            
             #echo " test echo 2.1.a :" . $itemDescription . "<br>"; // for testing purposes
         // -loop through items which are in the form for items
             while (isset($_POST['itemprice' . $count]) > 0){
+                $testCounter++;
                 // add count to POST item variables (this will be linked to request ID)
                 $itemDescription = 'itemdescription' . $count;
                 $itemCategory = 'itemcategory' . $count;
@@ -124,10 +127,11 @@
                 if ($itemprice == NULL || $itemprice == 0 || $itemprice == ""){
                     echo " test echo 2.3.1.end :" . $itemprice . "<br>"; // for testing purposes
                     // return to page you were on as a fresh page
-                    goBack();
+                    #goBack();
                     break;
                   
                 }
+                if ($testCounter >= 100){break;}// for testing, Limits the overpopulation potential overflow loop occurring
 /*                if (empty($_POST[$itemDescription]) && empty($_POST[$itemPrice])){
                     // now need to get the final secion of the request form
                     if (isset($_POST['justification']) && isset($_POST['tutorComments'])){
@@ -142,7 +146,7 @@
                 }*/
                 $count++;
             }
-            goBack();
+            #goBack();
             #header("Location: student_review_draft.php? activity=request_saved");
             break;
 
@@ -183,6 +187,7 @@
             #echo " test echo 2.1.a :" . $itemDescription . "<br>"; // for testing purposes
         // -loop through items which are in the form for items
             while (isset($_POST['itemprice' . $count]) > 0){
+                $testCounter++;
                 // add count to POST item variables (this will be linkef to request ID)
                 $itemDescription = 'itemdescription' . $count;
                 $itemCategory = 'itemcategory' . $count;
@@ -240,6 +245,7 @@
                   echo " test echo 2.3.1.d :" . $itemprice . "<br>"; // for testing purposes
                     
                 }
+                if ($testCounter >= 100){break;}// for testing, Limits the overpopulation potential overflow loop occurring
 /*                if (empty($_POST["'"$itemDescription . 1"'"]) && empty($_POST["'"$itemPrice . 1"'"])){
                     // now need to get the final secion of the request form
                     if (isset($_POST['justification']) && isset($_POST['tutorComments'])){
@@ -300,6 +306,7 @@
             #echo " test echo 2.1.a :" . $itemDescription . "<br>"; // for testing purposes
         // -loop through items which are in the form for items
             while (isset($_POST['itemprice' . $count]) > 0){
+                $testCounter++;
                 // add count to POST item variables (this will be linked to request ID)
                 $itemCategory = 'itemcategory' . $count;
                 $itemDescription = 'itemdescription' . $count;
@@ -407,10 +414,11 @@
                 if ($itemprice == NULL || $itemprice == 0 || $itemprice == ""){
                     echo " test echo 2.3.1.end :" . $itemprice . "<br>"; // for testing purposes
                     // return to page you were on as a fresh page
-                    goBack();
+                    #goBack();
                     break;
                   
                 }
+                if ($testCounter >= 100){break;}// for testing, Limits the overpopulation potential overflow loop occurring
 /*                if (empty($_POST[$itemDescription]) && empty($_POST[$itemPrice])){
                     // now need to get the final secion of the request form
                     if (isset($_POST['justification']) && isset($_POST['tutorComments'])){
@@ -459,6 +467,7 @@
             #echo " test echo 2.1.a :" . $itemDescription . "<br>"; // for testing purposes
         // -loop through items which are in the form for items
             while (isset($_POST['itemprice' . $count]) > 0){
+                $testCounter++;
                 // add count to POST item variables (this will be linked to request ID)
                 $itemCategory = 'itemcategory' . $count;
                 $itemDescription = 'itemdescription' . $count;
@@ -532,10 +541,11 @@
                 if ($itemprice == NULL || $itemprice == 0 || $itemprice == ""){
                     echo " test echo 2.3.1.end :" . $itemprice . "<br>"; // for testing purposes
                     // return to page you were on as a fresh page
-                    goBack();
+                    #goBack();
                     break;
                   
                 }
+                if ($testCounter >= 100){break;}// for testing, Limits the overpopulation potential overflow loop occurring
 /*                if (empty($_POST[$itemDescription]) && empty($_POST[$itemPrice])){
                     // now need to get the final secion of the request form
                     if (isset($_POST['justification']) && isset($_POST['tutorComments'])){
@@ -554,4 +564,5 @@
             #header("Location: student_review_draft.php? activity=request_saved");
             break;
     }
+    goBack();
 ?>
