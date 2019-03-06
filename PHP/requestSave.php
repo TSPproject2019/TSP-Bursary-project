@@ -131,7 +131,6 @@
                     break;
                   
                 }
-                $_SESSION['testCounter'] = $testCounter;
                 if ($testCounter >= 100){break;}// for testing, Limits the overpopulation potential overflow loop occurring
 /*                if (empty($_POST[$itemDescription]) && empty($_POST[$itemPrice])){
                     // now need to get the final secion of the request form
@@ -211,6 +210,7 @@
                     $itemprice = $_POST[$itemPrice];
                     $itempostage = $_POST[$itemPostage];
                     $itemadditionalcharges = $_POST[$itemAdditionalCharges];
+                    
                     echo " test echo 2.3.1.a :" . $itemprice . "<br>"; // for testing purposes
                     // run SQL script to post the information..
             
@@ -246,7 +246,6 @@
                   echo " test echo 2.3.1.d :" . $itemprice . "<br>"; // for testing purposes
                     
                 }
-                $_SESSION['testCounter'] = $testCounter;
                 if ($testCounter >= 100){break;}// for testing, Limits the overpopulation potential overflow loop occurring
 /*                if (empty($_POST["'"$itemDescription . 1"'"]) && empty($_POST["'"$itemPrice . 1"'"])){
                     // now need to get the final secion of the request form
@@ -334,10 +333,15 @@
                     echo " test echo 2.3.1.a :" . $itemprice . "<br>"; // for testing purposes
                     echo " test echo 2.3.1.a :" . $itempostage . "<br>";
                     echo " test echo 2.3.1.a :" . $itemdescription . "<br>";
+                    if ($itemcategory == 1){$itemcategory = 'Qualification';}
+                    if ($itemcategory == 2){$itemcategory = 'Equipment';}
+                    if ($itemcategory == 3){$itemcategory = 'Events';}
+                    if ($itemcategory == 4){$itemcategory = 'Professional accreditation';}
+                    if ($itemcategory == 5){$itemcategory = 'Vocation placement';}
                     // run SQL script to post the information..
                     // Find item id of each item to update each item
                     
-                    echo "This is item category:".$itemcategory." "; //Category is currently empty
+                    echo "This is item category:". $itemcategory. "<br>"; //Category is currently empty
                     //Now retrieve item id of each item in a loop
                    /* $SQL_stmt = "SELECT brItemID AS 'itemId' FROM bursaryRequestItems
                     WHERE brItemDesc = '$itemdescription' AND brItemURL = '$itemUrl' 
@@ -355,7 +359,7 @@
                         else{
                           echo 'No item id found <br>';
                         }*/
-                    echo $itemid; //For testing
+                    //echo $itemid; //For testing
                     
                     if(empty($itemid)) //If item id is empty, add the new item and link to request
                     {
@@ -420,7 +424,6 @@
                     break;
                   
                 }
-                $_SESSION['testCounter'] = $testCounter;
                 if ($testCounter >= 100){break;}// for testing, Limits the overpopulation potential overflow loop occurring
 /*                if (empty($_POST[$itemDescription]) && empty($_POST[$itemPrice])){
                     // now need to get the final secion of the request form
@@ -492,6 +495,12 @@
                     $itemprice = $_POST[$itemPrice];
                     $itempostage = $_POST[$itemPostage];
                     $itemadditionalcharges = $_POST[$itemAdditionalCharges];
+                
+                    if ($itemcategory == 1){$itemcategory = 'Qualification';}
+                    if ($itemcategory == 2){$itemcategory = 'Equipment';}
+                    if ($itemcategory == 3){$itemcategory = 'Events';}
+                    if ($itemcategory == 4){$itemcategory = 'Professional accreditation';}
+                    if ($itemcategory == 5){$itemcategory = 'Vocation placement';}
                     echo " test echo 2.3.1.a :" . $itemprice . "<br>"; // for testing purposes
                     echo " test echo 2.3.1.a :" . $itempostage . "<br>";
                     echo " test echo 2.3.1.a :" . $itemdescription . "<br>";
@@ -500,7 +509,7 @@
                     
                     echo "This is item category:".$itemcategory." "; //Category is currently empty
                     //Now retrieve item id of each item in a loop
-                    $SQL_stmt = "SELECT brItemID AS 'itemId' FROM bursaryRequestItems
+                    /*$SQL_stmt = "SELECT brItemID AS 'itemId' FROM bursaryRequestItems
                     WHERE brItemDesc = '$itemdescription' AND brItemURL = '$itemUrl' 
                     AND brItemPrice = '$itemprice' AND brItemPostage = '$itempostage' 
                     AND brItemAdditionalCharges = '$itemadditionalcharges'";
@@ -515,29 +524,63 @@
                         }
                         else{
                           echo 'No item id found <br>';
-                        }
+                        } */
                     //echo $itemid;
-                    //Add the item to the bursaryRequest items table
-                    $SQL_stmt="UPDATE bursaryRequestItems SET brItemCategory = '$itemcategory',
-                    brItemDesc = '$itemdescription',brItemURL = '$itemUrl',brItemPrice = '$itemprice',
-                    brItemPostage = '$itempostage',brItemAdditionalCharges = '$itemadditionalcharges'
-                    WHERE brItemID = '".$itemid."'";
+                    echo $itemid; //For testing
+                    
+                    if(empty($itemid)) //If item id is empty, add the new item and link to request
+                    {
+                       $SQL_stmt="INSERT INTO bursaryRequestItems (brItemCategory,brItemDesc,brItemURL,brItemPrice,brItemPostage,brItemAdditionalCharges)
+                       VALUES ('$itemcategory', '$itemdescription' ,'$itemUrl', '$itemprice', '$itempostage', '$itemadditionalcharges')";
             
-                    $DBconnection->exec($SQL_stmt); //update item to the items table
-                    
+                       $DBconnection->exec($SQL_stmt); //Insert item to the items table
+                        
+                      //now select new item id of the added item
+                       $SQL_stmt = "SELECT brItemID AS 'itemId' FROM bursaryRequestItems
+                       WHERE brItemDesc = '$itemdescription' AND brItemCategory = '$itemcategory' 
+                       AND brItemURL = '$itemUrl' AND brItemPrice = '$itemprice'
+                       AND brItemPostage = '$itempostage' AND brItemAdditionalCharges = '$itemadditionalcharges'";
 
-                    echo " test echo 2.3.1.b :" . $itemprice . "<br>"; // for testing purposes
-                    
-                  
-                    echo " test echo 2.3.1.c : Item id is:" . $itemid . "<br>"; // for testing purposes
-                  echo " test echo 2.3.1.c : request id is:" . $requestid . "<br>";
-                  
-                    //Now update link items to the request and to student!
-                    $SQL_stmt = "INSERT INTO itemsAndRequests(ItemID,RequestID,StudentID) VALUES('$itemid','$requestid','$userid')
-                    ON DUPLICATE KEY UPDATE ItemID = '$itemid' WHERE RequestID = '$requestid' AND StudentID = '$userid'";
+                       $itemid = 0;
 
-                    $DBconnection->exec($SQL_stmt);//Link and loop again.
-                  echo " test echo 2.3.1.d :" . $itemprice . "<br>"; // for testing purposes
+                       $result = $DBconnection->query($SQL_stmt); //Run query
+
+                         if ($row = $result->fetch()){ //Retrieve item id result
+
+                                $itemid = $row['itemId'];
+                            }
+                      
+                       //Now link item to the request and to student!
+                       $SQL_stmt = "INSERT INTO itemsAndRequests(ItemID,RequestID,StudentID)
+                       VALUES('$itemid', '$requestid', '$userid')";
+
+                       $DBconnection->exec($SQL_stmt);//Link and loop again.
+                    }
+                    else //update item and insert/update to request and student
+                    {
+                      $SQL_stmt="UPDATE bursaryRequestItems SET brItemCategory = '$itemcategory',
+                      brItemDesc = '$itemdescription',brItemURL = '$itemUrl',brItemPrice = '$itemprice',
+                      brItemPostage = '$itempostage',brItemAdditionalCharges = '$itemadditionalcharges'
+                      WHERE brItemID = '".$itemid."'";
+
+                      $DBconnection->exec($SQL_stmt); //update item to the items table
+
+
+                      echo " test echo 2.3.1.b :" . $itemprice . "<br>"; // for testing purposes
+
+
+                      echo " test echo 2.3.1.c : Item id is:" . $itemid . "<br>"; // for testing purposes
+                      echo " test echo 2.3.1.c : request id is:" . $requestid . "<br>";
+
+                      //Now update link items to the request and to student!
+                      $SQL_stmt = "INSERT INTO itemsAndRequests(ItemID,RequestID,StudentID) VALUES('$itemid','$requestid','$userid')
+                      ON DUPLICATE KEY UPDATE ItemID = '$itemid' WHERE RequestID = '$requestid' AND StudentID = '$userid'";
+
+                      $DBconnection->exec($SQL_stmt);//Link and loop again.
+                      echo " test echo 2.3.1.d :" . $itemprice . "<br>"; // for testing purposes
+                    }
+                    //Add the item to the bursaryRequest items table
+                    
 
                     
 #                }
@@ -548,7 +591,6 @@
                     break;
                   
                 }
-                $_SESSION['testCounter'] = $testCounter;
                 if ($testCounter >= 100){break;}// for testing, Limits the overpopulation potential overflow loop occurring
 /*                if (empty($_POST[$itemDescription]) && empty($_POST[$itemPrice])){
                     // now need to get the final secion of the request form
@@ -564,8 +606,6 @@
                 }*/
                 $count++;
             }
-           // goBack();
-            #header("Location: student_review_draft.php? activity=request_saved");
             break;
     }
     goBack();

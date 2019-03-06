@@ -30,7 +30,7 @@
     require_once 'Student/php/StudentMenu.php';// Drop Down Menu for all student pages
 ?>
 <!-- testing -->
-<script src="./Scripts/studentJava.js" type="text/javascript"></script>
+
 <div class="col-md-4 ml-3">
                     <?php
                         echo '<p>Outstanding balance: <span>' . $availableBalance . '</span></p>';
@@ -155,8 +155,8 @@
                     <div class="form-group row">
                         <label for="categoryField" class="col-sm-2 col-form-label">Category field:</label>
                         <div class="col-sm-10 mt-2">
-                            <select class="custom-select" id="categoryField">';                    
-                echo '<option selected="'.$itemSelectedOptionNumber.'" name="itemcategory' . $count . '">' . $itemcategory . '</option>';
+                            <select class="custom-select" id="categoryField" name="itemcategory' . $count . '">';                    
+                echo '<option selected="'.$itemSelectedOptionNumber.'">' . $itemcategory . '</option>';
                 echo '<option value="1">Qualification</option>';
                 echo '<option value="2">Equipment</option>';
                 echo '<option value="3">Events</option>';
@@ -229,9 +229,29 @@
               // assign a counter
               $count = 1;
             //echo $requestid;
-            echo " Going to delete query now.<br>"; // for testing purposes
+            //echo " Going to delete query now.<br>"; // for testing purposes
             // query which deletes the Bursary Request ID from bursaryRequests 
             // which in turn will cascade through the tables
+            $SQL_stmt = "DELETE FROM bursaryRequests WHERE bRequestsID = '".$requestid."'";
+            //echo $requestid;
+            //echo " Query correct.  stmt: " . $SQL_stmt . "<br>"; // for testing purposes
+            ## Execute query
+            
+            //echo " Query correct.  stmt: B . <br>";
+            try
+            {
+                    $DBconnection->exec($SQL_stmt);
+            }
+            catch(PDOException $e)
+            {
+                echo $e;
+            }
+            #$stmt -> bindParam($requestid, $_POST[$requestid]); // this is the field selector
+            //echo " Query correct.  stmt: C . <br>";
+            
+            
+            
+            /*
             $SQL_stmt = "DELETE FROM bursaryRequests WHERE bRequestsID = :requestID";
             echo " Query correct.  stmt: " . $SQL_stmt . "<br>"; // for testing purposes
             ## Execute query
@@ -248,7 +268,7 @@
             // now delete the data
             if ($result->fetch()){
                 echo "Request deleted.<br>"; // for testing purposes
-            }
+            }/*
 */            // Request is now deleted.
 
             #echo " test echo 2.3.1.c : requestId id is:" . $requestid . "<br>"; //just to see if it returns the requestID 
@@ -259,10 +279,12 @@
             //location.reload(); does not work 
             //testing Location(homepage.php)
                  #echo "<p>Welcome back to the " . $userType . " area of the Bursary Request system </p>";
-                 #header("Location: student_home.php activity=delete_request");
-            goBack();
+           //header("Location: student_home.php activity=delete_request");
+           goBack();
+           //goBack();
+           //echo 'Should of redirected';
             // end the case.. 
-            break;
+           break;
             
         }
     }

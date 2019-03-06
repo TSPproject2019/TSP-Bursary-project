@@ -66,7 +66,7 @@
         $availableBalance = getStudentAvailableBalance($userid);
     }
 ?>
-<script src="./Scripts/studentJava.js" type="text/javascript"></script>
+<!-- <script src="./Scripts/studentJava.js" type="text/javascript"></script> -->
 <div class="col-md-4 ml-3">
                     <?php
                         echo '<p>Outstanding balance: <span>' . $availableBalance . '</span></p>';

@@ -4,6 +4,7 @@
   //$DB_Host = 'smile-size.codio.io[:1024-9999]';
   $DB_Host = 'localhost';
   $DB_User = 'WEBAuth'; //'root';
+  //$DB_User = 'root';
   $DB_Pass = 'WEBAuthPW';
   $DB_Name = 'bursary_database';
   // now start connection to DB, catting any errors
