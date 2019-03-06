@@ -7,9 +7,11 @@
 ## last updated : 07/02/2019 by: Mike Wright
 ## last updated : 09/02/2019 by: Nick Skripnikov
 ## last updated : 13/02/2019 by: Nick Skripnikov
+## last updated : 06/03/2019 by: Nick Skripnikov (as advised by Stephen Smith)
 ## Change Log   :- Added course level into the ‘course’ table.
 ## Change Log   :- change "bRequestsDraft" to "bRequestsStatus ENUM" in "bursaryRequests" table
 ## Change Log   :- Added courseYear to the course table and changed stcStudentStatus to ENUM in studentToCourse table.
+## Change Log   :- switched engine from InnoDB to MyISAM, to resolve log file overflow errors[2002].
 
 DROP DATABASE IF EXISTS bursary_database;
 CREATE DATABASE bursary_database; /*Creating the database*/
@@ -29,7 +31,7 @@ CREATE TABLE users (
     userLastLoginDate DATE DEFAULT NULL,
     userAgreementGDPR TINYINT(1) DEFAULT 0,
     PRIMARY KEY(userID)
-);
+)ENGINE = MyISAM;
 
 # Creating students table*/
 DROP TABLE IF EXISTS student CASCADE;
@@ -40,7 +42,7 @@ CREATE TABLE student (
   availableBalance DECIMAL(5,2) NOT NULL, 
   PRIMARY KEY (studentID),
   FOREIGN KEY (studentID) REFERENCES users(userID) /*Linking to user CHILD TABLE OF USER*/
-);
+)ENGINE = MyISAM;
 
 # Creating tutors table */
 DROP TABLE IF EXISTS staff CASCADE;
@@ -48,7 +50,7 @@ CREATE TABLE staff (
   staffID INTEGER NOT NULL UNIQUE, 
   PRIMARY KEY (staffID),
   FOREIGN KEY (staffID) REFERENCES users(userID) /*Linking to user CHILD TABLE OF USER*/
-);
+)ENGINE = MyISAM;
 
 # Creating admins table*/
 DROP TABLE IF EXISTS admin CASCADE;
@@ -56,7 +58,7 @@ CREATE TABLE admin (
   adminID INTEGER NOT NULL UNIQUE,
   PRIMARY KEY (adminID),
   FOREIGN KEY(adminID) REFERENCES users(userID) /*Linking to user CHILD TABLE OF USER*/
-);
+)ENGINE = MyISAM;
 
 # Creating Courses table */
 DROP TABLE IF EXISTS course CASCADE;
@@ -70,7 +72,7 @@ CREATE TABLE course (
   courseStartDate DATE NOT NULL,
   courseEndDate DATE NOT NULL,
   PRIMARY KEY (courseID)
-); 
+)ENGINE = MyISAM;
 
 # Creating a table which links student to course.*/
 DROP TABLE IF EXISTS studentToCourse CASCADE;
@@ -81,7 +83,7 @@ CREATE TABLE studentToCourse (
   PRIMARY KEY (stcCourseID, stcStudentID),
   FOREIGN KEY (stcStudentID) REFERENCES student(studentID),
   FOREIGN KEY (stcCourseID) REFERENCES course(courseID)
-);
+)ENGINE = MyISAM;
 
 # Creating departments table
 DROP TABLE IF EXISTS department CASCADE;
@@ -90,7 +92,7 @@ CREATE TABLE department (
   departmentName VARCHAR(35) NOT NULL, 
   departmentCampusName ENUM('Lincoln', 'Gainsborough', 'Newark', 'Air_&_defence', 'Arabic', 'Construction') NOT NULL, 
   PRIMARY KEY (departmentID)
-);
+)ENGINE = MyISAM;
 
 # Creating a table that links Staff to department
 DROP TABLE IF EXISTS staffToDepartment CASCADE;
@@ -100,7 +102,7 @@ CREATE TABLE staffToDepartment (
   PRIMARY KEY (stDepartmentID, stStaffID),
   FOREIGN KEY (stDepartmentID) REFERENCES department(departmentID),
   FOREIGN KEY (stStaffID) REFERENCES staff(staffID)
-);
+)ENGINE = MyISAM;
 
 # Creating bursary requests table */
 DROP TABLE IF EXISTS bursaryRequests CASCADE;
@@ -120,7 +122,7 @@ CREATE TABLE bursaryRequests (
   PRIMARY KEY (bRequestsID),
   FOREIGN KEY (bRequestsCourseID) REFERENCES course(courseID),
   FOREIGN KEY (bRequestsStaffID) REFERENCES staff(staffID)
-);
+)ENGINE = MyISAM;
 
 # Creating bursary request items table */
 DROP TABLE IF EXISTS bursaryRequestItems CASCADE;
@@ -133,7 +135,7 @@ CREATE TABLE bursaryRequestItems (
   brItemPostage DECIMAL(5,2) DEFAULT NULL,
   brItemAdditionalCharges DECIMAL(5,2) DEFAULT NULL,   
   PRIMARY KEY (brItemID)
-);
+)ENGINE = MyISAM;
 
 # Creating items with requests table*/
 DROP TABLE IF EXISTS itemsAndRequests;
@@ -152,7 +154,7 @@ CREATE TABLE itemsAndRequests (
     ON DELETE CASCADE,
   FOREIGN KEY(StudentID) REFERENCES student(studentID)
     ON DELETE CASCADE
-);
+)ENGINE = MyISAM;
 
 # Creating a table that links departments, staff, courses and students together*/
 DROP TABLE IF EXISTS departmentsStaffCourseStudents CASCADE;
@@ -166,4 +168,4 @@ CREATE TABLE departmentsStaffCourseStudents (
   FOREIGN KEY (bscsStaffID) REFERENCES staff(staffID),
   FOREIGN KEY (bscsStudentID) REFERENCES student(studentID),
   FOREIGN KEY (bscsCourseID) REFERENCES course(courseID)
-);
+)ENGINE = MyISAM;
