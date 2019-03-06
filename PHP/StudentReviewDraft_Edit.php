@@ -213,32 +213,34 @@
             echo '<div class="form-group">
             <textarea class="form-control" type="textarea" name="justification" value="'.$txbJustification.'" rows="3" placeholder="Justification:" required>'.$txbJustification.'</textarea>
             </div>';
+            echo '                  </div>
+            <div class="row mt-3 mb-5">
+                
+                <div class="col-5 mb-5 text-right">
+                    <button type="submit" name="submit" value="saveUpdated" style="width: 38%;" class="btn btn-primary" id="Save" wide="45">Save</button>
+                </div>
+              <!-- need to add button for adding new item (+)-->
+                <div class="col-5 mb-5 text-right">
+                    <button type="submit" name="submit" value="submitUpdated" style="width: 38%;" class="btn btn-success" id="Submit">Submit</button>
+                </div>';
           
         }
         // for deleting selected file (need HTML code)
         if ($itemName == 'delete'){
             //carry out this action
-            echo " Loop .2. Step 1.0..<br>"; // for testing if it responds
+            #echo " Loop .2. Step 1.0..<br>"; // for testing if it responds
 
-            echo " start Step 2.1..<br>"; // for testing purposes
+            #echo " start Step 2.1..<br>"; // for testing purposes
               $courseTutorId = $_POST['courseTutorId'];
               $courseId = $_POST['courseid'];
               $txbJustication = $_POST['justification'];  
               $dateNow = date('Y/m/d');
               $bRequestsStatus = 'Draft'; //acknowledges that the request is a draft 
-              // assign a counter
-         #     $count = 1;
-             echo " start Step 2.2..<br>"; // for testing purposes
-            //echo $requestid;
-            //echo " Going to delete query now.<br>"; // for testing purposes
+             #echo " start Step 2.2..<br>"; // for testing purposes
             // query which deletes the Bursary Request ID from bursaryRequests 
             // which in turn will cascade through the tables
             $SQL_stmt = "DELETE FROM bursaryRequests WHERE bRequestsID = '".$requestid."'";
-            //echo $requestid;
-            //echo " Query correct.  stmt: " . $SQL_stmt . "<br>"; // for testing purposes
-            ## Execute query
-            
-            //echo " Query correct.  stmt: B . <br>";
+
             try
             {
                     $DBconnection->exec($SQL_stmt);
@@ -247,59 +249,16 @@
             {
                 echo $e;
             }
-            #$stmt -> bindParam($requestid, $_POST[$requestid]); // this is the field selector
-            //echo " Query correct.  stmt: C . <br>";
-            echo " start Step 2.3..<br>"; // for testing purposes
-            
-            
-            /*
-            $SQL_stmt = "DELETE FROM bursaryRequests WHERE bRequestsID = :requestID";
-            echo " Query correct.  stmt: " . $SQL_stmt . "<br>"; // for testing purposes
-            ## Execute query
-            $stmt = $DBconnection->prepare($SQL_stmt); //Delete this one?
-            echo " Query correct.  stmt: B . <br>";
-            $stmt -> bindParam(':requestID', $requestid, PDO::PARAM_INT); // this is the field selector
-            #$stmt -> bindParam($requestid, $_POST[$requestid]); // this is the field selector
-            echo " Query correct.  stmt: C . <br>";
-            $stmt -> execute(); // this is the excecute
-            echo "Request deleted.<br>"; // for testing purposes
-/*
-            $result = $DBconnection->query($SQL_stmt);
-            echo " Query correct.  stmt: B_B . <br>";
-            // now delete the data
-            if ($result->fetch()){
-                echo "Request deleted.<br>"; // for testing purposes
-            }/*
-*/            // Request is now deleted.
-
-            #echo " test echo 2.3.1.c : requestId id is:" . $requestid . "<br>"; //just to see if it returns the requestID 
-
-            //testing goBack();
-            //goBack(); does not work 
-            //testing location.reload();
-            //location.reload(); does not work 
-            //testing Location(homepage.php)
-                 #echo "<p>Welcome back to the " . $userType . " area of the Bursary Request system </p>";
-           header("Location: student_review_draft.php? activity=request_delete_success");
-           #goBack();
-           //goBack();
-           //echo 'Should of redirected';
-            // end the case.. 
-          # break;
-            
+            #echo " start Step 2.3..<br>"; // for testing purposes
+            echo '                            <div class="form-group">
+            <label for="DraftRequestDeleted">Draft Request Deleted</label>
+            </div>';
+            #header("Location: student_review_draft.php? activity=request_delete_success");
+            #goBack();          
         }
     }
 ?>
-                  </div>
-<div class="row mt-3 mb-5">
-    
-    <div class="col-5 mb-5 text-right">
-        <button type="submit" name="submit" value="saveUpdated" style="width: 38%;" class="btn btn-primary" id="Save" wide="45">Save</button>
-    </div>
-  <!-- need to add button for adding new item (+)-->
-    <div class="col-5 mb-5 text-right">
-        <button type="submit" name="submit" value="submitUpdated" style="width: 38%;" class="btn btn-success" id="Submit">Submit</button>
-    </div>
+
 </div>
 </form>
 </section>
