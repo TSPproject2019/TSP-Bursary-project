@@ -227,7 +227,8 @@
               $dateNow = date('Y/m/d');
               $bRequestsStatus = 'Draft'; //acknowledges that the request is a draft 
               // assign a counter
-              $count = 1;
+         #     $count = 1;
+             echo " start Step 2.2..<br>"; // for testing purposes
             //echo $requestid;
             //echo " Going to delete query now.<br>"; // for testing purposes
             // query which deletes the Bursary Request ID from bursaryRequests 
@@ -248,7 +249,7 @@
             }
             #$stmt -> bindParam($requestid, $_POST[$requestid]); // this is the field selector
             //echo " Query correct.  stmt: C . <br>";
-            
+            echo " start Step 2.3..<br>"; // for testing purposes
             
             
             /*
@@ -279,12 +280,12 @@
             //location.reload(); does not work 
             //testing Location(homepage.php)
                  #echo "<p>Welcome back to the " . $userType . " area of the Bursary Request system </p>";
-           //header("Location: student_home.php activity=delete_request");
-           goBack();
+           header("Location: student_review_draft.php? activity=request_delete_success");
+           #goBack();
            //goBack();
            //echo 'Should of redirected';
             // end the case.. 
-           break;
+          # break;
             
         }
     }
