@@ -98,26 +98,28 @@
 <?php
     // check to see which button was pressed.
     //// set a counter for this purpose
-    $count = 1;
+    //$count = 1;
     //// set the name="submit" variable
     //IF statement does not work with 2 == only 1 =
     //if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['submit']){
     if (isset($_POST['submit'])){
-#        echo " Loop .if.yes. Step B1.0..: " . $count . "<br>"; // for testing purposes
+
         $submitButtons = $_POST['submit'];
-#        echo "Submit submit Buttons: ".$submitButtons."<br>"; //No value (empty)
+
         // now let's split the result
         $item = split("_", $submitButtons);
         // form item name
         $itemName = $item[0];
-#        echo "Submit submit itemName: ".$itemName."<br>"; //No value (empty)
+
         // form item value
         $itemValue = $item[1];
-#        echo "Submit submit itemValue: ".$itemValue."<br>"; //No value (empty)
+
         $requestid = $itemValue;
         $_SESSION['requestId'] = $requestid;
+
         // for editing drafts
         if ($itemName == 'edit'){
+
             //Using the request id, find the item info 
             $SQL_stmt = "SELECT brItemID AS 'itemId', brItemCategory AS 'category', 
             brItemDesc AS 'item_description', brItemURL AS 'URL', 
@@ -128,9 +130,10 @@
             AND itemsAndRequests.StudentID = '" . $userid . "'";
             
             $result = $DBconnection->query($SQL_stmt);
-            
-            // now get the data
+            // set the counter, this is here as it is also used outside if the loop
             $count = 1;
+            // now get the data
+  
             while ($row = $result->fetch()){
                 // loop through the request results
                 $itemId = $row['itemId'];
@@ -209,6 +212,8 @@
                 
                 $txbJustification = $row['bRequestsJustification'];
             }
+            // set the number of items counter for javascript to read
+            echo '<input type="hidden" name="numberOfItems" value="'.$count.'" />';
             //Display justification
             echo '<div class="form-group">
             <textarea class="form-control" type="textarea" name="justification" value="'.$txbJustification.'" rows="3" placeholder="Justification:" required>'.$txbJustification.'</textarea>

@@ -127,7 +127,7 @@
   </div>
   
   <!-- FORM START -->
-  <form action="requestSave.php" method="POST">
+  <form onload="onFormLoad()" action="requestSave.php" method="POST">
     <!--Student ID using id stored in session storage at login page -->
     <input type="hidden" name="courseTutorId" value="<?php echo $_SESSION['courseTutorId'] ?>" />
     <!-- Turtor Course id stored in session storage at login page -->
@@ -194,7 +194,7 @@
           <textarea class="form-control" type="textarea" name="tutorComments" rows="3" placeholder="Tutor Comments:"></textarea>
       </div>
    </div>
-                
+     <input type="hidden" name="numberOfItems" value="1" />     
      <button type="submit" name="submit" value="saveRequest" class="btn btn-warning btn-lg" id="Save">Save as Draft</button>
      <button type="submit" name="submit" value="submitRequest" class="btn btn-success btn-lg" id="Submit">Submit</button>                
   </form>
