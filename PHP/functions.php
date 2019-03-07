@@ -202,6 +202,63 @@
             <td>'.$row['Status'].'</td></tr>';
           }           
     }
+
+    //IN DEVELOPMENT FOR STAFF TO VIEW STUDENT SUBMISSIONS (DANNY)
+    /* function getStaffStudentSubmitted($uID) 
+    {
+        require 'connect.php'; 
+            
+        $SQL_stmt = "SELECT itemsAndRequests.StudentID AS "Student_ID",  CONCAT (userFirstName,' ',userLastName) AS 'Student_Name', 
+        bursaryRequests.bRequestsID AS 'Request_ID',
+        bursaryRequests.bRequestsRequestDate AS 'Date_submitted',
+        SUM(IFNULL(bursaryRequestItems.brItemPrice,0) + IFNULL(bursaryRequestItems.brItemPostage,0) + 
+        IFNULL(bursaryRequestItems.brItemAdditionalCharges,0)) AS 'Total_price',
+        student.availableBalance AS ' Available_Balance',
+        bursaryRequests.bRequestsStatus AS 'Status' FROM bursaryRequests 
+        INNER JOIN itemsAndRequests ON itemsAndRequests.RequestID = bursaryRequests.bRequestsID 
+        AND bursaryRequests.bRequestsCourseID = '". $courseID ."' 
+        inner join course ON course.courseTitle = '". $courseTitle ."'
+        AND course.courseLevel = '". $courseLevel ."'
+        AND course.courseYear = '". $courseYear . "'
+        INNER JOIN bursaryRequestItems ON bursaryRequestItems.brItemID = itemsAndRequests.ItemID 
+        AND bursaryRequests.bRequestsStatus = '". $stat ."'
+        AND bursaryRequests.bRequestsStudentRequest IS TRUE
+        INNER JOIN users ON users.userID = itemsAndRequests.StudentID
+        INNER JOIN student ON student.studentID = itemsAndRequests.StudentID
+        GROUP BY itemsAndRequests.RequestID
+        ORDER BY bursaryRequests.bRequestsRequestDate ASC;"; 
+        
+        $result = $DBconnection->query($SQL_stmt); 
+        
+        if ($result->fetch()==FALSE){
+            echo '<tr>
+                <th scope="row">No Drafts</th>
+                <td>No Drafts</td>
+                <td>No Drafts</td>
+                <td>No Drafts</td>
+                <td>No Drafts</td>
+                <td>No Drafts</td>
+                <td>No Drafts</td>
+                </tr>';
+          }
+          else
+          {
+            $result = $DBconnection->query($SQL_stmt);
+        
+            while ($row = $result->fetch())
+            {
+                echo '<tr>
+                <th scope="row">'.$row['Student_ID'].'</td>
+                <td>'.$row['Student_Name'].'</td>
+                <td>'.$row['Request_ID'].'</td>
+                <td>'.$row['Date_submitted'].'</td>
+                <td>'.$row['Total_price'].'</td>
+                <td>'.$row['Available_Balance'].'</td>
+                <td>'.$row['Status'].'</tr>';
+            }  
+          }
+        
+    } */ 
     //Outputs Student request items for student dependant on status
     function getStudentForms($uID, $stat){
           require 'connect.php';

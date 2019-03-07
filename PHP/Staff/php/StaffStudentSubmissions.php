@@ -84,14 +84,14 @@ session_start();
       <th scope="col">Student Name</th>
       <th scope="col">File Name</th>
       <th scope="col">Date Submitted</th>
-      <th scope="col">Date Approved</th>
+      <!-- <th scope="col">Date Approved </th> WE DO NOT NEED THIS FIELD?? --> 
       <th scope="col">Cost</th>
       <th scope="col">Available Funds</th>
       <th scope="col">Status</th>
     </tr>
-  </thead>
+  </thead> 
   <tbody>
-    <tr>
+     <tr>
       <th scope="row">ID ONE</th>
       <td>NAME ONE</td>
       <td>WEBFORM 1</td>
