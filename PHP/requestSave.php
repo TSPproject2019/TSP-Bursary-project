@@ -21,6 +21,7 @@
     $userLastName = $_SESSION['lastName'];
     $requestid = 0;
     $testCounter = 0; // this is for testing
+    $goToPage = 0; // for switch end go back requirements
  
 
     // see which buttin is pressed and excecute a method accordingly, using switch
@@ -274,6 +275,8 @@
             $requestid = $_SESSION['requestId'];
             // assign a counter
             $count = 1;
+            // assign whitch page to go back to.
+            $goToPage = 2;
             #$itemDescription = "'itemdescription" . $count. "'";
             echo " start Step 2.1.a.<br>"; // for testing purposes
             //Acquire request id for that request (To link the items)
@@ -329,7 +332,7 @@
                     $itemprice = $_POST[$itemPrice];
                     $itempostage = $_POST[$itemPostage];
                     $itemadditionalcharges = $_POST[$itemAdditionalCharges];
-                    $itemid = $_POST['itemid'];
+                    $itemid = $_POST['itemid']; //Gets item id of that item
                     echo " test echo 2.3.1.a :" . $itemprice . "<br>"; // for testing purposes
                     echo " test echo 2.3.1.a :" . $itempostage . "<br>";
                     echo " test echo 2.3.1.a :" . $itemdescription . "<br>";
@@ -389,8 +392,9 @@
 
                        $DBconnection->exec($SQL_stmt);//Link and loop again.
                     }
-                    else //update item and insert/update to request and student
+                    if(!empty($itemid)) //update item and insert/update to request and student
                     {
+                      echo "Updating item<br>";
                       $SQL_stmt="UPDATE bursaryRequestItems SET brItemCategory = '$itemcategory',
                       brItemDesc = '$itemdescription',brItemURL = '$itemUrl',brItemPrice = '$itemprice',
                       brItemPostage = '$itempostage',brItemAdditionalCharges = '$itemadditionalcharges'
@@ -406,10 +410,13 @@
                       echo " test echo 2.3.1.c : request id is:" . $requestid . "<br>";
 
                       //Now update link items to the request and to student!
-                      $SQL_stmt = "INSERT INTO itemsAndRequests(ItemID,RequestID,StudentID) VALUES('$itemid','$requestid','$userid')
-                      ON DUPLICATE KEY UPDATE ItemID = '$itemid' WHERE RequestID = '$requestid' AND StudentID = '$userid'";
+                      //Removed for testing. Seems to be working fine without cause query doesnt execute
+                      /*$SQL_stmt = "INSERT INTO itemsAndRequests(ItemID,RequestID,StudentID) VALUES('$itemid','$requestid','$userid')
+                      ON DUPLICATE KEY UPDATE ItemID = '$itemid', RequestID = '$requestid', StudentID = '$userid' 
+                      WHERE RequestID = '$requestid' AND ItemID = '$itemid'";
 
-                      $DBconnection->exec($SQL_stmt);//Link and loop again.
+                      $DBconnection->exec($SQL_stmt);//Link and loop again. */
+                      echo "Query executed.<br>";
                       echo " test echo 2.3.1.d :" . $itemprice . "<br>"; // for testing purposes
                     }
                     //Add the item to the bursaryRequest items table
@@ -420,7 +427,6 @@
                 if ($itemprice == NULL || $itemprice == 0 || $itemprice == ""){
                     echo " test echo 2.3.1.end :" . $itemprice . "<br>"; // for testing purposes
                     // return to page you were on as a fresh page
-                    #goBack();
                     break;
                   
                 }
@@ -439,8 +445,7 @@
                 }*/
                 $count++;
             }
-           // goBack();
-            #header("Location: student_review_draft.php? activity=request_saved");
+
             break;
         
         
@@ -608,5 +613,14 @@
             }
             break;
     }
-    goBack();
+    echo " SWITCH..CASE..End....<br>"; // for testing purposes
+    #header("Location: student_home.php");
+    if ($goToPage == 2){
+         echo " SWITCH..CASE.2.End....<br>"; // for testing purposes
+         header ("Location: student_review_draft.php? activity=request_draft_updated");
+         echo " SWITCH..CASE.3.End....<br>"; // for testing purposes
+    }else{
+         goBack();
+    }
+    
 ?>
