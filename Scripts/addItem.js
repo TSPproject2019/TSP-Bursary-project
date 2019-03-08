@@ -11,48 +11,41 @@ function add_feed() //Maybe create elements each time the function runs? documen
         onFormLoad();
          runCount++;
     }
-    var icat = 'itemcategory' + itemCounter;
-    window.alert(icat);
-
     var div1 = document.createElement('div');
     div1.id = itemCounter;
     console.log(itemCounter);
     //var addelement = '<input>Description />';
     //Get template data
-    //div1.innerHTML = document.getElementById('newitem').innerHTML;
-    //var d = document.getElementById('newitem');
-    var h = document.createElement('h5');
-      h.id = 'hd05';
-      h.innerHTML = "Item" + itemCounter;
-
-    var s = document.createElement('select');
-      s.name = icat;
-      s.class = "custom-select";
-      s.id = "categoryField";
-
-    div1.appendChild(h);
-    div1.appendChild(s);
-    //document.getElementById('newlink').appendChild(div1);
+    div1.innerHTML = document.getElementById('newitem').innerHTML;
+    document.getElementById('newlink').appendChild(div1);
     //This name attribute change works
-
-    var e = document.getElementById('newitem');
+    var icat = 'itemcategory' + itemCounter;
+     window.alert(icat);
      // start test A
+    var h = document.createElement('h5');
+      h.setAttribute('id', "hd05");
+      h.innerHTML = "Item " + itemCounter;
+    div1.appendChild(h);
+    var d1 = document.createElement('div');
+      d1.id = "optionDiv";
+      d1.setAttribute('class',"col-12 mt-2 mb-5");
+    div1.appendChild(d1);
     var a = document.createElement('select');
       //element.appendChild('newlink');
       a.setAttribute('name',icat);
       a.setAttribute('class', "custom-select");
       a.setAttribute('id', "categoryField");
-      
+    d1.appendChild(a);
     // end test A
     // start test B
     //document.getElementsById('hd05')[itemCounter].innerHTML = 'Item ' + itemCounter;
       //z.innerHTML = 'Item ' + itemCounter;
-    //var b = document.getElementsByTagName('select')[itemCounter];
+    var b = document.getElementsByTagName('select')[itemCounter];
      window.alert(icat);
      window.alert(b);
-    //  b.setAttribute('name',icat);
-    //   b.setAttribute('class', "custom-select");
-    //   b.setAttribute('id', "categoryField");
+      b.setAttribute('name',icat);
+      b.setAttribute('class', "custom-select");
+      b.setAttribute('id', "categoryField");
    // var c = document.getElementsById('categoryField')[itemCounter];
    //   c.name = icat;
     // end test B //This line does not want to work.
