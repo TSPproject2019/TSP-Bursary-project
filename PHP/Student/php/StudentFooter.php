@@ -7,7 +7,7 @@
 </body>
 <script src="../../../Scripts/regScript.js"></script>
 <script src="../../../Scripts/pageFooterFunctions.js"></script>
-<script src="../../../Scripts/addItem.js"></script>
+<!-- <script src="../../../Scripts/addItem.js"></script> -->
 </html>
 
 

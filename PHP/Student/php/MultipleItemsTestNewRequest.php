@@ -186,7 +186,7 @@
     <div id="newitem" style="display: none">
       <h5>Item</h5>
       <div class="col-12 mt-2 mb-5">
-            <select class="custom-select" name="itemcategory1">
+            <select id="categoryField" class="custom-select" name="itemcategory">
                 <option value ="" selected>Choose...</option>
                 <option value="Qualification">Qualification</option>
                 <option value="Equipment">Equipment</option>

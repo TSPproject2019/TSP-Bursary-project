@@ -116,10 +116,8 @@
 
         $requestid = $itemValue;
         $_SESSION['requestId'] = $requestid;
-
         // for editing drafts
         if ($itemName == 'edit'){
-
             //Using the request id, find the item info 
             $SQL_stmt = "SELECT brItemID AS 'itemId', brItemCategory AS 'category', 
             brItemDesc AS 'item_description', brItemURL AS 'URL', 
@@ -133,7 +131,7 @@
             // set the counter, this is here as it is also used outside if the loop
             $count = 1;
             // now get the data
-  
+            $count = 1;
             while ($row = $result->fetch()){
                 // loop through the request results
                 $itemId = $row['itemId'];

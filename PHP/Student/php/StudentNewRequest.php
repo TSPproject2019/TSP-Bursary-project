@@ -194,7 +194,7 @@
           <textarea class="form-control" type="textarea" name="tutorComments" rows="3" placeholder="Tutor Comments:"></textarea>
       </div>
    </div>
-     <input type="hidden" name="numberOfItems" value="1" />     
+     <input type="hidden" name="numberOfItems" value="1" />
      <button type="submit" name="submit" value="saveRequest" class="btn btn-warning btn-lg" id="Save">Save as Draft</button>
      <button type="submit" name="submit" value="submitRequest" class="btn btn-success btn-lg" id="Submit">Submit</button>                
   </form>
@@ -211,7 +211,8 @@
   </div>
   
   <div id="newitem" style="display: none">
-      <h5>Item '+ct+'</h5>
+     <!-- <h5>Item '+ct+'</h5> -->
+      <h5>Item '+itemCounter+'</h5>
       <div class="col-12 mt-2 mb-5">
             <select class="custom-select" name="itemcategory">
                 <option value ="" selected>Choose...</option>

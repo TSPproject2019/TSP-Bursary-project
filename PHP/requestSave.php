@@ -19,11 +19,11 @@
     $userid = $_SESSION['userid'];
     $userFirstName = $_SESSION['firstName'];
     $userLastName = $_SESSION['lastName'];
+    $userType = $_SESSION['userType']; //user type
     $requestid = 0;
     $testCounter = 0; // this is for testing
     $goToPage = 0; // for switch end go back requirements
  
-
     // see which buttin is pressed and excecute a method accordingly, using switch
     switch ($_POST['submit']) {
         //echo " start Step 2.0..<br>"; // for testing purposes
@@ -38,6 +38,7 @@
             $bRequestsStatus = 'Draft'; //Draft because of saving the request
             // assign a counter
             $count = 1;
+            $goToPage = 2;
             #$itemDescription = "'itemdescription" . $count. "'";
             echo " start Step 2.1.a.<br>"; // for testing purposes
             // add new request section script here
@@ -161,6 +162,7 @@
             $bRequestsStatus = 'Submitted'; //Draft because of saving the request
             // assign a counter
             $count = 1;
+            $goToPage = 5;
             #$itemDescription = "'itemdescription" . $count. "'";
             echo " start Step 2.1.a.<br>"; // for testing purposes
             // add new request section script here
@@ -283,7 +285,7 @@
             /*$SQL_stmt = "SELECT bursaryRequests.bRequestsID AS 'requestId' FROM bursaryRequests
             WHERE bRequestsCourseID = '$courseId' AND bRequestsStaffID = '$courseTutorId' 
             AND bRequestsStatus = '$bRequestsStatus'";
-    
+    echo 'this is user:'$userType;
             $requestid = 0;
             echo " start Step 2.1.c.<br>"; // for testing purposes
             //Get request id from query
@@ -416,6 +418,9 @@
                       WHERE RequestID = '$requestid' AND ItemID = '$itemid'";
 
                       $DBconnection->exec($SQL_stmt);//Link and loop again. */
+                      
+                      //Does not need an update on the link because item exists
+                      
                       echo "Query executed.<br>";
                       echo " test echo 2.3.1.d :" . $itemprice . "<br>"; // for testing purposes
                     }
@@ -459,7 +464,7 @@
             $requestid = $_SESSION['requestId'];
             // assign a counter
             $count = 1;
-            
+            $goToPage = 5;
             echo " start Step 2.1.a.<br>"; // for testing purposes
            
             $dateNow = date('Y/m/d'); //Set date right now.
@@ -561,7 +566,7 @@
 
                        $DBconnection->exec($SQL_stmt);//Link and loop again.
                     }
-                    else //update item and insert/update to request and student
+                    if(!empty($itemid)) //update item and insert/update to request and student
                     {
                       $SQL_stmt="UPDATE bursaryRequestItems SET brItemCategory = '$itemcategory',
                       brItemDesc = '$itemdescription',brItemURL = '$itemUrl',brItemPrice = '$itemprice',
@@ -577,11 +582,13 @@
                       echo " test echo 2.3.1.c : Item id is:" . $itemid . "<br>"; // for testing purposes
                       echo " test echo 2.3.1.c : request id is:" . $requestid . "<br>";
 
-                      //Now update link items to the request and to student!
+                      /*//Now update link items to the request and to student!
                       $SQL_stmt = "INSERT INTO itemsAndRequests(ItemID,RequestID,StudentID) VALUES('$itemid','$requestid','$userid')
                       ON DUPLICATE KEY UPDATE ItemID = '$itemid' WHERE RequestID = '$requestid' AND StudentID = '$userid'";
 
-                      $DBconnection->exec($SQL_stmt);//Link and loop again.
+                      $DBconnection->exec($SQL_stmt);//Link and loop again. */
+                        
+                      //Does not need link here as the item exists already and is linked by default
                       echo " test echo 2.3.1.d :" . $itemprice . "<br>"; // for testing purposes
                     }
                     //Add the item to the bursaryRequest items table
@@ -615,12 +622,46 @@
     }
     echo " SWITCH..CASE..End....<br>"; // for testing purposes
     #header("Location: student_home.php");
-    if ($goToPage == 2){
+// start with the if ($gTooPage == 2){/then  / th;eif ($userType == 'watevere'...)}else
+    if($goToPage == 2)
+    {
+        echo $userType;
+        if($userType == "Student")//This does not work.
+        {
+             header ("Location: student_review_draft.php? activity=request_draft_updated");
+        }
+        if($userType == "Staff")
+        {
+            header ("Location: staff_review_drafts.php? activity=request_draft_updated");
+        }
+    }elseif($goToPage == 5){
+        if($userType == "Student")
+        {
+           header ("Location: student_submitted.php? activity=request_submitted");
+        }
+        if($userType == "Staff")
+        {
+            header ("Location: staff_submitted_forms.php? activity=request_submitted");
+        }
+    }else{goBack();}
+         // new if here
+/*    if($userType == "Student")
+    {
+        if ($goToPage == 2){
          echo " SWITCH..CASE.2.End....<br>"; // for testing purposes
          header ("Location: student_review_draft.php? activity=request_draft_updated");
          echo " SWITCH..CASE.3.End....<br>"; // for testing purposes
-    }else{
-         goBack();
+        }
+        if($goToPage == 5)
+        {
+             header ("Location: student_submitted.php? activity=request_submitted");
+        }
+        else{
+             goBack();
+        }
     }
-    
+    if($userType == "Staff")
+    {
+        
+    }*/
 ?>
