@@ -115,7 +115,7 @@
     <!--Student id -->
     <input type="hidden" name="userid" value="<?php echo $_SESSION['userid'] ?>" />
     <div id = "newlink">
-    <h5> Item 1 </h5>
+    <h5  id="hd05" name="numberOfItems"> Item 1 </h5>
     <!--Category selection -->
     <div class="col-12 mt-2 mb-5">
             <select class="custom-select" id="categoryField" name="itemcategory1">
@@ -184,7 +184,7 @@
   </div> -->
   <!-- TEMPLATE FOR NEW ITEMS -->
     <div id="newitem" style="display: none">
-      <h5>Item</h5>
+      <h5 id="hd05">Item</h5>
       <div class="col-12 mt-2 mb-5">
             <select id="categoryField" class="custom-select" name="itemcategory">
                 <option value ="" selected>Choose...</option>

@@ -11,13 +11,15 @@
         $lastName = $_SESSION['lastName'];
         $userid = $_SESSION['userid'];
         $userName = $firstName . " " . $lastName;
+        // counter
+        $count = 1;
         // get course title
         $SQL_stmt = "SELECT DISTINCT courseTitle FROM course 
         INNER JOIN studentToCourse ON course.courseID = studentToCourse.stcCourseID
         INNER JOIN users ON users.userID = " . $userid . " and studentToCourse.stcStudentID = '" . $userid . "'";
         // now to run the query
 
-        //
+
        # echo " start Step 2.0..<br>"; // for testing purposes
         // first prepare and excecurte
         $result = $DBconnection->query($SQL_stmt);
@@ -127,15 +129,16 @@
   </div>
   
   <!-- FORM START -->
-  <form onload="onFormLoad()" action="requestSave.php" method="POST">
+  <form action="requestSave.php" method="POST">
     <!--Student ID using id stored in session storage at login page -->
     <input type="hidden" name="courseTutorId" value="<?php echo $_SESSION['courseTutorId'] ?>" />
     <!-- Turtor Course id stored in session storage at login page -->
     <input type="hidden" name="courseid" value="<?php echo $_SESSION['courseid'] ?>" />
     <!--Student id -->
     <input type="hidden" name="userid" value="<?php echo $_SESSION['userid'] ?>" />
-   <div id="newlink">
-    <h5> Item 1 </h5>
+    
+    <div id="newlink">
+    <h5 name="numberOfItems"> Item 1 </h5>
     <!--Category selection -->
     <div class="col-12 mt-2 mb-5">
             <select class="custom-select" id="categoryField" name="itemcategory1">
@@ -194,7 +197,6 @@
           <textarea class="form-control" type="textarea" name="tutorComments" rows="3" placeholder="Tutor Comments:"></textarea>
       </div>
    </div>
-     <input type="hidden" name="numberOfItems" value="1" />
      <button type="submit" name="submit" value="saveRequest" class="btn btn-warning btn-lg" id="Save">Save as Draft</button>
      <button type="submit" name="submit" value="submitRequest" class="btn btn-success btn-lg" id="Submit">Submit</button>                
   </form>
@@ -212,7 +214,7 @@
   
   <div id="newitem" style="display: none">
      <!-- <h5>Item '+ct+'</h5> -->
-      <h5>Item '+itemCounter+'</h5>
+      <h5>Item '+ct+'</h5>
       <div class="col-12 mt-2 mb-5">
             <select class="custom-select" name="itemcategory">
                 <option value ="" selected>Choose...</option>
