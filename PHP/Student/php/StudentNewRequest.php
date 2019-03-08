@@ -145,7 +145,7 @@
     <!--Form Price field -->
       <div class="input-group col-3">
           <div class="input-group-prepend">
-              <span class="input-group-text" id="price" required>Price:</span>
+              <span class="input-group-text" id="price" required>Item Price:</span>
           </div>
           <input type="text" class="form-control" name="itemprice1" aria-describedby="price">
       </div>
