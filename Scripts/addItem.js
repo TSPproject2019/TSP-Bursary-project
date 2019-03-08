@@ -22,7 +22,7 @@ function add_feed(){ // to add item fields to a request
     var ipos = 'itempostage' + itemCounter; //
     var icha = 'itemadditionalcharges' + itemCounter; //
     // test message A
-    window.alert("A: " + icat + ", " + ides); // for testing only
+//    window.alert("A: " + icat + ", " + ides); // for testing only
      // start test A
     // item number header
     var h = document.createElement('h5');
@@ -110,7 +110,7 @@ function add_feed(){ // to add item fields to a request
       d4a1s.setAttribute('id', "price");
       d4a1s.innerHTML = "price";
     d4a1.appendChild(d4a1s);
-    var d4a1i = document.createElement('span');
+    var d4a1i = document.createElement('input');
       d4a1i.setAttribute('type', "text");
       d4a1i.setAttribute('class', "form-control");
       d4a1i.setAttribute('name', ipri);
@@ -128,7 +128,7 @@ function add_feed(){ // to add item fields to a request
       d4b1s.setAttribute('id', "price");
       d4b1s.innerHTML = "Postage:";
     d4b1.appendChild(d4b1s);
-    var d4b1i = document.createElement('span');
+    var d4b1i = document.createElement('input');
       d4b1i.setAttribute('type', "text");
       d4b1i.setAttribute('class', "form-control");
       d4b1i.setAttribute('name', ipos);
@@ -146,7 +146,7 @@ function add_feed(){ // to add item fields to a request
       d4c1s.setAttribute('id', "additionalFees");
       d4c1s.innerHTML = "Additional fees:";
     d4c1.appendChild(d4c1s);
-    var d4c1i = document.createElement('span');
+    var d4c1i = document.createElement('input');
       d4c1i.setAttribute('type', "text");
       d4c1i.setAttribute('class', "form-control");
       d4c1i.setAttribute('name', icha);
