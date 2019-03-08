@@ -18,6 +18,9 @@ function add_feed(){ // to add item fields to a request
     var iurl = 'itemUrl' + itemCounter; // 
     var ides = 'itemdescription' + itemCounter; // 
     var icat = 'itemcategory' + itemCounter; // 
+    var ipri = 'itemprice' + itemCounter; //
+    var ipos = 'itempostage' + itemCounter; //
+    var icha = 'itemadditionalcharges' + itemCounter; //
     // test message A
     window.alert("A: " + icat + ", " + ides); // for testing only
      // start test A
@@ -79,7 +82,7 @@ function add_feed(){ // to add item fields to a request
     d2a.appendChild(d2ai);
     // item URL section
     var d3 = document.createElement('div');
-    d3.setAttribute('class', "form-group row");
+      d3.setAttribute('class', "form-group row");
     div1.appendChild(d3);
     var d3a = document.createElement('div');
       d3a.setAttribute('class', "col-12");
@@ -91,6 +94,66 @@ function add_feed(){ // to add item fields to a request
       d3ai.setAttribute('placeholder', "URL to the item:");
       //d2ai.setAttribute('required',); // does not seem to work if the requried field is added
     d3a.appendChild(d3ai);
+    // item costing section
+    var d4 = document.createElement('div');
+      d4.setAttribute('class', "form-group row justify-content-between");
+    div1.appendChild(d4);
+    // itemprice section
+    var d4a = document.createElement('div');
+      d4a.setAttribute('class', "input-group col-3");
+    d4.appendChild(d4a);
+    var d4a1 = document.createElement('div');
+      d4a1.setAttribute('class', "input-group-prepend");
+    d4a.appendChild(d4a1);
+    var d4a1s = document.createElement('span');
+      d4a1s.setAttribute('class', "input-group-text");
+      d4a1s.setAttribute('id', "price");
+      d4a1s.innerHTML = "price";
+    d4a1.appendChild(d4a1s);
+    var d4a1i = document.createElement('span');
+      d4a1i.setAttribute('type', "text");
+      d4a1i.setAttribute('class', "form-control");
+      d4a1i.setAttribute('name', ipri);
+      d4a1i.setAttribute('aria-describedby', "price");
+    d4a.appendChild(d4a1i);
+    // item postage
+    var d4b = document.createElement('div');
+      d4b.setAttribute('class', "input-group col-3");
+    d4.appendChild(d4b);
+    var d4b1 = document.createElement('div');
+      d4b1.setAttribute('class', "input-group-prepend");
+    d4b.appendChild(d4b1);
+    var d4b1s = document.createElement('span');
+      d4b1s.setAttribute('class', "input-group-text");
+      d4b1s.setAttribute('id', "price");
+      d4b1s.innerHTML = "Postage:";
+    d4b1.appendChild(d4b1s);
+    var d4b1i = document.createElement('span');
+      d4b1i.setAttribute('type', "text");
+      d4b1i.setAttribute('class', "form-control");
+      d4b1i.setAttribute('name', ipos);
+      d4b1i.setAttribute('aria-describedby', "postage");
+    d4b.appendChild(d4b1i);
+    // item additional costs
+    var d4c = document.createElement('div');
+      d4c.setAttribute('class', "input-group col-3");
+    d4.appendChild(d4c);
+    var d4c1 = document.createElement('div');
+      d4c1.setAttribute('class', "input-group-prepend");
+    d4c.appendChild(d4c1);
+    var d4c1s = document.createElement('span');
+      d4c1s.setAttribute('class', "input-group-text");
+      d4c1s.setAttribute('id', "additionalFees");
+      d4c1s.innerHTML = "Additional fees:";
+    d4c1.appendChild(d4c1s);
+    var d4c1i = document.createElement('span');
+      d4c1i.setAttribute('type', "text");
+      d4c1i.setAttribute('class', "form-control");
+      d4c1i.setAttribute('name', icha);
+      d4c1i.setAttribute('aria-describedby', "additionalFees");
+    d4c.appendChild(d4c1i);
+
+
 
 
     // end test A
