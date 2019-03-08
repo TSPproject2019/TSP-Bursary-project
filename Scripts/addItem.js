@@ -108,7 +108,7 @@ function add_feed(){ // to add item fields to a request
     var d4a1s = document.createElement('span');
       d4a1s.setAttribute('class', "input-group-text");
       d4a1s.setAttribute('id', "price");
-      d4a1s.innerHTML = "price";
+      d4a1s.innerHTML = "Item price:";
     d4a1.appendChild(d4a1s);
     var d4a1i = document.createElement('input');
       d4a1i.setAttribute('type', "text");
@@ -136,7 +136,7 @@ function add_feed(){ // to add item fields to a request
     d4b.appendChild(d4b1i);
     // item additional costs
     var d4c = document.createElement('div');
-      d4c.setAttribute('class', "input-group col-3");
+      d4c.setAttribute('class', "input-group col-4");
     d4.appendChild(d4c);
     var d4c1 = document.createElement('div');
       d4c1.setAttribute('class', "input-group-prepend");
