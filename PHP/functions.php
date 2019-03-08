@@ -204,29 +204,42 @@
     }
 
     //IN DEVELOPMENT FOR STAFF TO VIEW STUDENT SUBMISSIONS (DANNY)
-    /* function getStaffStudentSubmitted($uID) 
+    function getStaffStudentSubmitted($uID) 
     {
         require 'connect.php'; 
-            
-        $SQL_stmt = "SELECT itemsAndRequests.StudentID AS "Student_ID",  CONCAT (userFirstName,' ',userLastName) AS 'Student_Name', 
+        $count = 0;
+        
+        //Retrieve course id first for the staff member using the parameter $uID
+        $SQL_stmt = "SELECT DISTINCT courseID from course
+        INNER JOIN departmentsStaffCourseStudents ON bscsCourseID = course.courseID
+        AND bscsStaffID = '". $uID ."'";
+        
+        $courseid = 0;
+        
+        $result = $DBconnection->query($SQL_stmt);
+        
+        if ($row = $result->fetch()){
+            $courseid = $row['courseID']; //Retrive course id
+        }
+        //Because that staff member is on a particular course, all requests belonging to that course should show
+        //Select all requests from all students that are on that course id and course title
+        $SQL_stmt = "SELECT itemsAndRequests.StudentID AS 'Student_ID',  CONCAT (userFirstName,' ',userLastName) AS 'Student_Name', 
         bursaryRequests.bRequestsID AS 'Request_ID',
         bursaryRequests.bRequestsRequestDate AS 'Date_submitted',
         SUM(IFNULL(bursaryRequestItems.brItemPrice,0) + IFNULL(bursaryRequestItems.brItemPostage,0) + 
         IFNULL(bursaryRequestItems.brItemAdditionalCharges,0)) AS 'Total_price',
-        student.availableBalance AS ' Available_Balance',
+        student.availableBalance AS 'Available_Balance',
         bursaryRequests.bRequestsStatus AS 'Status' FROM bursaryRequests 
         INNER JOIN itemsAndRequests ON itemsAndRequests.RequestID = bursaryRequests.bRequestsID 
-        AND bursaryRequests.bRequestsCourseID = '". $courseID ."' 
-        inner join course ON course.courseTitle = '". $courseTitle ."'
-        AND course.courseLevel = '". $courseLevel ."'
-        AND course.courseYear = '". $courseYear . "'
+        AND bursaryRequests.bRequestsCourseID = '". $courseid ."' 
+        INNER JOIN course ON course.courseTitle = '". $_SESSION['courseTitle'] ."'
+        AND bursaryRequests.bRequestsCourseID = course.courseID
         INNER JOIN bursaryRequestItems ON bursaryRequestItems.brItemID = itemsAndRequests.ItemID 
-        AND bursaryRequests.bRequestsStatus = '". $stat ."'
-        AND bursaryRequests.bRequestsStudentRequest IS TRUE
+        AND bursaryRequests.bRequestsStatus = 'Submitted'
+        AND bursaryRequests.bRequestsStudentRequest = TRUE
         INNER JOIN users ON users.userID = itemsAndRequests.StudentID
         INNER JOIN student ON student.studentID = itemsAndRequests.StudentID
-        GROUP BY itemsAndRequests.RequestID
-        ORDER BY bursaryRequests.bRequestsRequestDate ASC;"; 
+        GROUP BY bursaryRequests.bRequestsID";
         
         $result = $DBconnection->query($SQL_stmt); 
         
@@ -248,17 +261,18 @@
             while ($row = $result->fetch())
             {
                 echo '<tr>
-                <th scope="row">'.$row['Student_ID'].'</td>
+                <th>'.$row['Student_ID'].'</td>
                 <td>'.$row['Student_Name'].'</td>
                 <td>'.$row['Request_ID'].'</td>
                 <td>'.$row['Date_submitted'].'</td>
                 <td>'.$row['Total_price'].'</td>
                 <td>'.$row['Available_Balance'].'</td>
-                <td>'.$row['Status'].'</tr>';
-            }  
+                <td>'.$row['Status'].'</td>
+                <td><span style="float:left"><button type="submit" name="submit" value="open'.$row['Request_ID'].'" class="btn btn-primary" data-toggle="modal" data-target="#ModalLong">Open</button></span></td></tr>';
+            }
           }
-        
-    } */ 
+    }
+
     //Outputs Student request items for student dependant on status
     function getStudentForms($uID, $stat){
           require 'connect.php';
@@ -280,7 +294,7 @@
                 <td>'.$row['total_price'].'</td>
                 <td>'.$row['Status'].'</td></tr>';
             }
-    }
+    } 
     //Outputs draft request items for student
     function getStudentDraftItems($uID)
     { 
@@ -323,7 +337,7 @@
                   <td><button type="submit" name="submit" value="delete_'.$row['id'].'" class="btn btn-primary">Delete</button></td></tr>';
                   $count++;
             }
-           $_SESSION['draftCounter'] = $count;
+               $_SESSION['draftCounter'] = $count;
           }
     }
 /*

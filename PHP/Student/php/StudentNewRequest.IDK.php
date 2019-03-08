@@ -11,34 +11,56 @@
         $lastName = $_SESSION['lastName'];
         $userid = $_SESSION['userid'];
         $userName = $firstName . " " . $lastName;
+        // counter
+        $count = 1;
         // get course title
         $SQL_stmt = "SELECT DISTINCT courseTitle FROM course 
         INNER JOIN studentToCourse ON course.courseID = studentToCourse.stcCourseID
         INNER JOIN users ON users.userID = " . $userid . " and studentToCourse.stcStudentID = '" . $userid . "'";
-      
+        // now to run the query
+
+
+       # echo " start Step 2.0..<br>"; // for testing purposes
+        // first prepare and excecurte
         $result = $DBconnection->query($SQL_stmt);
-      
+       # echo " start Step 2.1..<br>"; // for testing purposes
+        // now get the data
         if ($row = $result->fetch()){
+            // varify that it is a valid userID
+           # echo " start Step 2.1.1..<br>"; // for testing purposes
+            // Bind results by column name
             $courseTitle = $row['courseTitle'];
+            // store session variables
             $_SESSION['courseTitle'] =  $courseTitle;
+            // this varisable is also used for posting.
+
         }
+        // get student course tutor
         $SQL_stmt = "SELECT DISTINCT userid, userFirstName, userLastName FROM users
         INNER JOIN departmentsStaffCourseStudents ON users.userID = departmentsStaffCourseStudents.bscsStaffID
         AND departmentsStaffCourseStudents.bscsStudentID  = '" . $userid . "'";
-
+        // now to run the query
+       # echo " start Step 3.0..<br>"; // for testing purposes
+        // first prepare and excecurte
         $result = $DBconnection->query($SQL_stmt);
-
+       # echo " start Step 3.1..<br>"; // for testing purposes
+        // now get the data
         if ($row = $result->fetch()){
-
+            // varify that it is a valid userID
+           # echo " start Step 3.1.1..<br>"; // for testing purposes
+            // Bind results by column name
             $courseTutorFirstName = $row['userFirstName'];
             $courseTutorLastName = $row['userLastName'];
             $courseTutorId = $row['userid'];
-           
+            // store session variables
             $_SESSION['courseTutorFirstName'] =  $courseTutorFirstName;
             $_SESSION['courseTutorLastName'] =  $courseTutorLastName;
-            $_SESSION['courseTutorId'] =  $courseTutorId;           
+            $_SESSION['courseTutorId'] =  $courseTutorId;
+            // this varisable is also used for posting.
+            
         }
-     
+      
+      //query student courseID
         $SQL_stmt = "SELECT stcCourseID AS 'courseid', stcStudentStatus AS 'status'
         FROM studentToCourse WHERE stcStudentID = '" . $userid . "' and stcStudentStatus = 'Continuing'";
       
@@ -114,8 +136,9 @@
     <input type="hidden" name="courseid" value="<?php echo $_SESSION['courseid'] ?>" />
     <!--Student id -->
     <input type="hidden" name="userid" value="<?php echo $_SESSION['userid'] ?>" />
-    <div id = "newlink">
-    <h5  id="hd05" name="numberOfItems"> Item 1 </h5>
+    
+    <div id="newlink">
+    <h5 id="hd05" name="numberOfItems"> Item 1 </h5>
     <!--Category selection -->
     <div class="col-12 mt-2 mb-5">
             <select class="custom-select" id="categoryField" name="itemcategory1">
@@ -164,29 +187,36 @@
               <input type="text" class="form-control" name="itemadditionalcharges1" aria-describedby="additionalFees">
           </div>                   
      </div> <!--End of Fees row -->
-  </div><!--newlink end -->
        
     <!--Form Justification textarea -->
       <div class="form-group">
           <textarea class="form-control" type="textarea" name="justification" rows="3" placeholder="Justification:" required></textarea>
       </div>
-            
+    <!--Form Tutor Comments textarea -->
+      <div class="form-group">
+          <textarea class="form-control" type="textarea" name="tutorComments" rows="3" placeholder="Tutor Comments:"></textarea>
+      </div>
+   </div>
      <button type="submit" name="submit" value="saveRequest" class="btn btn-warning btn-lg" id="Save">Save as Draft</button>
      <button type="submit" name="submit" value="submitRequest" class="btn btn-success btn-lg" id="Submit">Submit</button>                
   </form>
-    
+    <!--*************************************************************************-->
+<!-- NEW FORM ELEMENTS TO ADD                                               *-->
+<!--*************************************************************************-->
+
   <div align="right" style="margin-bottom:5px;">
     <a href="javascript:add_feed()">Add New</a>
   </div>
   
-  <!-- <div align="left" style="margin-bottom:5px;">
-    <a href="javascript:add_feed()">DELETE</a>
-  </div> -->
-  <!-- TEMPLATE FOR NEW ITEMS 
-    <div id="newitem" style="display: none">
-      <h5 id="hd05">Item</h5>
+  <div align="left" style="margin-bottom:5px;">
+    <a href="javascript:add_feed()">Add New</a>
+  </div>
+  
+  <div id="newitem" style="display: none">
+     <!-- <h5>Item '+ct+'</h5> -->
+      <h5>Item '+ct+'</h5>
       <div class="col-12 mt-2 mb-5">
-            <select id="categoryField" class="custom-select" name="itemcategory">
+            <select class="custom-select" name="itemcategory">
                 <option value ="" selected>Choose...</option>
                 <option value="Qualification">Qualification</option>
                 <option value="Equipment">Equipment</option>
@@ -196,42 +226,41 @@
             </select>
         </div>   
         
-    <!--Item description 
+    <!--Item description -->
     <div class="form-group row">
         <div class="col-12">
-            <input type="text" id="itemdescription" name="itemdescription" class="form-control" placeholder="Item description:" required />
+            <input type="text" name="itemdescription[]" class="form-control" placeholder="Item description:" required />
          </div>
     </div> 
-    <!--Item URL
+    <!--Item URL-->
     <div class="form-group row">
        <div class="col-12">
-           <input type="text" id="itemUrl" name="itemUrl" class="form-control" placeholder="URL to the item:" required />
+           <input type="text" name="itemUrl[]" class="form-control" placeholder="URL to the item:" required />
        </div>
     </div>
-    <!--FORM FEES ROW
+    <!--FORM FEES ROW-->
     <div class="form-group row justify-content-between">
-    <!--Form Price field 
+    <!--Form Price field -->
       <div class="input-group col-3">
           <div class="input-group-prepend">
-              <span class="input-group-text" id="priceSpan" required>Price:</span>
+              <span class="input-group-text" id="price" required>Price:</span>
           </div>
-          <input type="text" id= "price" class="form-control" name="itemprice" aria-describedby="price">
+          <input type="text" class="form-control" name="itemprice[]" aria-describedby="price">
       </div>
-     <!--Form Postage field               
+     <!--Form Postage field -->              
       <div class="input-group col-3">
           <div class="input-group-prepend">
-             <span class="input-group-text" id="postpriceSpan">Postage:</span>
+             <span class="input-group-text" id="postprice">Postage:</span>
           </div>
-          <input type="text" id="itempostage" class="form-control" name="itempostage" aria-describedby="postage">
+          <input type="text" class="form-control" name="itempostage[]" aria-describedby="postage">
        </div>
-      <!--Form Additional Fees 
+      <!--Form Additional Fees -->
           <div class="input-group col-4">
               <div class="input-group-prepend">
-                  <span class="input-group-text" id="additionalFeesSpan">Additional fees:</span>
+                  <span class="input-group-text" id="additionalFees">Additional fees:</span>
               </div>
-              <input type="text" class="form-con trol"id="itemadditionalcharges" name="itemadditionalcharges" aria-describedby="additionalFees">
+              <input type="text" class="form-control" name="itemadditionalcharges[]" aria-describedby="additionalFees">
           </div>                   
      </div> <!--End of Fees row -->
   </div>
-  
 </section>

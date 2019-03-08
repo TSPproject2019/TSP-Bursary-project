@@ -76,13 +76,13 @@ session_start();
                     ?>
                   </div>
                </div>
-    
+<form action="StaffReviewSubmission.php" method="POST">
         <table class="table table-striped">
    <thead class="thead-dark">
     <tr>
       <th scope="col">Student ID</th>
       <th scope="col">Student Name</th>
-      <th scope="col">File Name</th>
+      <th scope="col">Request ID</th>
       <th scope="col">Date Submitted</th>
       <!-- <th scope="col">Date Approved </th> WE DO NOT NEED THIS FIELD?? --> 
       <th scope="col">Cost</th>
@@ -91,7 +91,16 @@ session_start();
     </tr>
   </thead> 
   <tbody>
-     <tr>
+      
+     <?php 
+      
+      echo getStaffStudentSubmitted($userid); 
+      
+      ?>
+</tbody>
+</table> 
+</form>
+    <!-- <tr>
       <th scope="row">ID ONE</th>
       <td>NAME ONE</td>
       <td>WEBFORM 1</td>
@@ -100,12 +109,12 @@ session_start();
       <td>£230.00</td>
       <td>£300.00</td>
       <td>ACCEPTED</td>
-      <th><!-- Button trigger modal -->
+      <th><!-- Button trigger modal 
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
   Open
 </button>
 
-<!-- Modal -->
+<!-- Modal 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -135,12 +144,12 @@ session_start();
       <td>£78.00</td>
       <td>£500.00</td>
       <td>DELIVERED</td>
-      <th><!-- Button trigger modal -->
+      <th><!-- Button trigger modal
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
   Open
 </button>
 
-<!-- Modal -->
+<!-- Modal 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -170,12 +179,12 @@ session_start();
       <td>£499.99</td>
       <td>£500.00</td>
       <td>PENDING</td>
-      <th><!-- Button trigger modal -->
+      <th><!-- Button trigger modal 
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
   Open
 </button>
 
-<!-- Modal -->
+<!-- Modal 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -205,12 +214,12 @@ session_start();
       <td>£79.50</td>
       <td>£200.00</td>
       <td>PENDING</td>
-      <th><!-- Button trigger modal -->
+      <th><!-- Button trigger modal 
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
   Open
 </button>
 
-<!-- Modal -->
+<!-- Modal 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -240,12 +249,12 @@ session_start();
       <td>£99.99</td>
       <td>£250.00</td>
       <td>PENDING</td>
-      <th><!-- Button trigger modal -->
+      <th><!-- Button trigger modal 
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
   Open
 </button>
 
-<!-- Modal -->
+<!-- Modal 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -265,6 +274,4 @@ session_start();
     </div>
   </div>
 </div></th>
-    </tr>
-  </tbody>
-</table>         
+    </tr> --->        

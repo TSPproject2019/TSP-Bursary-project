@@ -182,7 +182,7 @@
   <!-- <div align="left" style="margin-bottom:5px;">
     <a href="javascript:add_feed()">DELETE</a>
   </div> -->
-  <!-- TEMPLATE FOR NEW ITEMS 
+  <!-- TEMPLATE FOR NEW ITEMS -->
     <div id="newitem" style="display: none">
       <h5 id="hd05">Item</h5>
       <div class="col-12 mt-2 mb-5">
@@ -196,35 +196,35 @@
             </select>
         </div>   
         
-    <!--Item description 
+    <!--Item description -->
     <div class="form-group row">
         <div class="col-12">
             <input type="text" id="itemdescription" name="itemdescription" class="form-control" placeholder="Item description:" required />
          </div>
     </div> 
-    <!--Item URL
+    <!--Item URL-->
     <div class="form-group row">
        <div class="col-12">
            <input type="text" id="itemUrl" name="itemUrl" class="form-control" placeholder="URL to the item:" required />
        </div>
     </div>
-    <!--FORM FEES ROW
+    <!--FORM FEES ROW-->
     <div class="form-group row justify-content-between">
-    <!--Form Price field 
+    <!--Form Price field -->
       <div class="input-group col-3">
           <div class="input-group-prepend">
               <span class="input-group-text" id="priceSpan" required>Price:</span>
           </div>
           <input type="text" id= "price" class="form-control" name="itemprice" aria-describedby="price">
       </div>
-     <!--Form Postage field               
+     <!--Form Postage field -->              
       <div class="input-group col-3">
           <div class="input-group-prepend">
              <span class="input-group-text" id="postpriceSpan">Postage:</span>
           </div>
           <input type="text" id="itempostage" class="form-control" name="itempostage" aria-describedby="postage">
        </div>
-      <!--Form Additional Fees 
+      <!--Form Additional Fees -->
           <div class="input-group col-4">
               <div class="input-group-prepend">
                   <span class="input-group-text" id="additionalFeesSpan">Additional fees:</span>
