@@ -73,7 +73,7 @@
                                     INNER JOIN itemsAndRequests ON itemsAndRequests.StudentID = users.userID
                                     INNER JOIN bursaryRequests ON itemsAndRequests.RequestID = bursaryRequests.bRequestsID
                                     AND bursaryRequests.bStaffID = '".$userid."' 
-                                    AND bursaryRequests.bRequestsID = '".$requestid."'"; 
+                                    AND bursaryRequests.bRequestsID = ".$requestid; 
 
                                     $firstName = 0;
                                     $lastName = 0;
@@ -251,6 +251,7 @@
                 </form>
                 </section>';
         }
+    }
         ?>
 <?php
     require_once 'Staff/php/StaffFooter.php';//connects to the footer section for all pages for Admin
