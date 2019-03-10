@@ -137,7 +137,7 @@ VALUES ("HEMNG001",27865,"Continuing");
 INSERT INTO studentToCourse(stcCourseID,stcStudentID,stcStudentStatus)
 VALUES ("HEMNG001",25789,"Continuing");
 INSERT INTO studentToCourse(stcCourseID,stcStudentID,stcStudentStatus)
-VALUES ("HEHAIR001",25432,"Continuing");
+VALUES ("HEHAIR001",25432,"Continuing");  
 
 INSERT INTO studentToCourse(stcCourseID,stcStudentID,stcStudentStatus)
 VALUES ("HEBCSIT131",29000,"Continuing");
@@ -148,7 +148,7 @@ VALUES ("HEMNG011",27865,"Continuing");
 INSERT INTO studentToCourse(stcCourseID,stcStudentID,stcStudentStatus)
 VALUES ("HEMNG011",25789,"Continuing");
 INSERT INTO studentToCourse(stcCourseID,stcStudentID,stcStudentStatus)
-VALUES ("HEHAIR021",25432,"Continuing");
+VALUES ("HEHAIR021",25432,"Continuing");  
 
 INSERT INTO studentToCourse(stcCourseID,stcStudentID,stcStudentStatus)
 VALUES ("HEBCSIT121",29000,"Continuing");
@@ -157,9 +157,9 @@ VALUES ("HEBCSIT122",293779,"Continuing");
 INSERT INTO studentToCourse(stcCourseID,stcStudentID,stcStudentStatus)
 VALUES ("HEMNG021",27865,"Continuing");
 INSERT INTO studentToCourse(stcCourseID,stcStudentID,stcStudentStatus)
-VALUES ("HEMNG021",25789,"Continuing");
+VALUES ("HEMNG021",25789,"Continuing"); 
 INSERT INTO studentToCourse(stcCourseID,stcStudentID,stcStudentStatus)
-VALUES ("HEHAIR011",25432,"Continuing");
+VALUES ("HEHAIR011",25432,"Continuing"); 
 
 #-------Staff to department table insertion------------#
 INSERT INTO staffToDepartment(stDepartmentID,stStaffID)
@@ -175,7 +175,7 @@ VALUES ("HEBCSIT111",52354,"Rasberry Pi for course work.","2019-10-01","Submitte
 INSERT INTO bursaryRequests(bRequestsCourseID,bRequestsStaffID,bRequestsJustification,bRequestsRequestDate,bRequestsStatus,bRequestsStudentRequest)
 VALUES ("HEBCSIT112",52354,"Replacement of my broken keyboard","2019-01-01","Submitted",TRUE); /*Student request for computer keyboard for part time computer course*/
 INSERT INTO bursaryRequests(bRequestsCourseID,bRequestsStaffID,bRequestsJustification,bRequestsRequestDate,bRequestsStatus,bRequestsStaffRequest)
-VALUES ("HEMNG001",59021,"Spanner for each student.","2019-01-01","Submitted",TRUE); /*Staff request for bulk order for mechanical engineering course for 2 people*/
+VALUES ("HEMNG001",59021,"Spanner for each student.","2019-01-01","Submitted",TRUE); /*Staff request for bulk order for mechanical engineering course for 2 people*/ 
 INSERT INTO bursaryRequests(bRequestsCourseID,bRequestsStaffID,bRequestsJustification,bRequestsRequestDate,bRequestsStatus,bRequestsStudentRequest)
 VALUES ("HEHAIR001",53270,"Shampoo and hair brush for practicals.","2019-01-01","Submitted",TRUE); /*Student reqeust for hair and beauty course 2 items*/
 
@@ -218,9 +218,9 @@ VALUES("CompLincCol1001",52354,293779,"HEBCSIT112");
 INSERT INTO departmentsStaffCourseStudents(bscsDepartmentID,bscsStaffID,bscsStudentID,bscsCourseID)
 VALUES("SiemensLincCol1002",59021,27865,"HEMNG001");
 INSERT INTO departmentsStaffCourseStudents(bscsDepartmentID,bscsStaffID,bscsStudentID,bscsCourseID)
-VALUES("SiemensLincCol1002",59021,25789,"HEMNG001");
+VALUES("SiemensLincCol1002",59021,25789,"HEMNG001"); 
 INSERT INTO departmentsStaffCourseStudents(bscsDepartmentID,bscsStaffID,bscsStudentID,bscsCourseID)
-VALUES("HairLincCol1111",53270,25432,"HEHAIR001");
+VALUES("HairLincCol1111",53270,25432,"HEHAIR001");  
 
 INSERT INTO departmentsStaffCourseStudents(bscsDepartmentID,bscsStaffID,bscsStudentID,bscsCourseID)
 VALUES("CompLincCol1001",52354,29000,"HEBCSIT131");

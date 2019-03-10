@@ -99,6 +99,7 @@ session_start();
 </tbody>
 </table> 
 </form>
+</div>
     <!-- <tr>
       <th scope="row">ID ONE</th>
       <td>NAME ONE</td>

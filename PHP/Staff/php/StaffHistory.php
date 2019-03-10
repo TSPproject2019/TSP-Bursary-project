@@ -59,7 +59,7 @@
                        echo getStaffAllCourses($userid);
                     ?>
           </div>
-          </div>
+        </div>
           
           
 
@@ -147,4 +147,5 @@
       <td>PENDING</td>
     </tr>
   </tbody>
-</table>         
+</table>
+</div>
