@@ -132,6 +132,7 @@
             $count = 1;
             // now get the data
             $count = 1;
+            echo '<div id = "newlink">';
             while ($row = $result->fetch()){
                 // loop through the request results
                 $itemId = $row['itemId'];
@@ -150,8 +151,7 @@
                 
                 //echo "Item id is :$itemId"; //For testing
                 // output data from query
-                echo '<!-- <div id = "newlink"> -->
-                       <div id = "newlink" class="row">
+                echo '<div class="row">
                         <h5 id="hd05" name="numberOfItems" class="m-2">Item ' . $count . '</h5>
                     </div>
                     <div class="form-group row">
@@ -177,8 +177,9 @@
                         </div>
             
                         <div class="form-group">
-                            <div>
-                                <input type="text" class="form-control" name="itemUrl' . $count . '" placeholder="URL to the item:" value="' . $itemUrl . '" />
+                            <div>';
+                                echo '<label for="itemUrl' . $count . '">Item URL:</label>';
+                                echo '<input type="text" class="form-control" name="itemUrl' . $count . '" placeholder="URL to the item:" value="' . $itemUrl . '" />
                             </div>
                         </div>
                         
@@ -196,7 +197,7 @@
                             <input type="text" class="form-control" name="itemadditionalcharges' . $count . '" id="additionalFees" value="' . $itemadditionalcharges . '" />
                             </div>
                             </div>';
-                            //</div><!--newlink end -->';
+                            
                     // cycle counter
                     $count++;
             // break out of the for loop*/
@@ -212,12 +213,13 @@
                 $txbJustification = $row['bRequestsJustification'];
             }
             // set the number of items counter for javascript to read
-            echo '<input type="hidden" name="numberOfItems" value="'.$count.'" />';
+            //echo '<input type="hidden" name="numberOfItems" value="'.$count.'" />';
+            echo '</div><!--newlink end -->';
             //Display justification
             echo '<div class="form-group">
             <textarea class="form-control" type="textarea" name="justification" value="'.$txbJustification.'" rows="3" placeholder="Justification:" required>'.$txbJustification.'</textarea>
             </div>';
-            echo '                  </div>
+            echo '</div>
             <div class="row mt-3 mb-5">
                 
                 <div class="col-5 mb-5 text-right">

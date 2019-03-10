@@ -44,7 +44,7 @@ function add_feed(){ // to add item fields to a request
     var o1 = document.createElement('option');
       o1.setAttribute('value', "");
       o1.setAttribute('selected', "");
-      o1.innerHTML = "Choose...";
+      o1.innerHTML = "Choose Category...";
     var o2 = document.createElement('option');
       o2.setAttribute('value', "Qualification");
       o2.innerHTML = "Qualification";

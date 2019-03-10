@@ -391,7 +391,7 @@
           }
       }
 
-       /* function getStudentInformation($uID) 
+        /* function getStudentInformation($uID) 
       
        require 'connect.php'; 
       
@@ -401,7 +401,7 @@
         and departmentsStaffCourseStudents.bscsStaffID = '.$userid.' 
         inner join course on departmentsStaffCourseStudents.bscsCourseID = course.courseID and 
         course.courseTitle = '.$txbCourseTitle.' and course.courseLevel = '.$txbCourseLevel.' and 
-        course.courseYear = '.$txbCourseYear.' GROUP BY userID"; 
+        course.courseYear = '.$txbCourseYear.' ORDER BY users.userID; 
         
         $result = $DBconnection->query($SQL_stmt); 
         
@@ -410,7 +410,7 @@
                 <th scope="row">N/A</th>
                 <td>N/A</td>
                 <td>N/A</td>
-                <td><input type="checkbox">
+                <td><input type="checkbox"></td>
                 </tr>';
           }
           else
@@ -422,7 +422,7 @@
                     <th scope="row">'.$row['Student_ID'].'</th>
                     <td>'.$row['Student_name'].'</td>
                     <td>'.$row['Available_Balance'].'</td>
-                    <td><input type="checkbox">
+                    <td><input type="checkbox"></td>
                     </tr>';
               }
           }
