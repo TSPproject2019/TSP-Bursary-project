@@ -2,30 +2,29 @@
   // file: admin_staff_submissions.php
   session_start();
   if (!isset($_SESSION['firstName'])){
-    echo "<p> No user details found</p>";
+      echo "<p> No user details found</p>";
+      header("Location: ../index.html? activity=Credentials_Missing_error");
   }
-  $_SESSION['htmlTitle'] =  "Review Staff Submissions";
-// for testing purposes only
-  /*if (isset($_SESSION['firstName'])){
-    $firstName = $_SESSION['firstName'];
-        if (isset($_SESSION['lastName'])){
-          $lastName = $_SESSION['lastName'];
-          echo "<p>The session usernameA " . $firstName . " " . $lastName . "</p>";
-          echo "<p>The session usernameB " . $_SESSION['firstName'] . " " . $_SESSION['lastName'] . "</p>";
-        }
-  }*/
-  try
-  {
-
-    //require_once 'connect.php';//connects to the SQL database.
-    require_once 'Shared/php/AllHeader.php';//connects to the header section for all pages
-    require_once 'Admin/php/AdminMenu.php';// Drop Down Menu for all student pages
-    require_once 'Shared/php/PageName.php';//For page name
-    require_once 'Admin/php/AdminSubmissionStaff.php';//connects to the main Home scripit and page section for Admin
-    require_once 'Admin/php/AdminFooter.php';//connects to the footer section for all pages for Admin
-  }
-  catch(PDOException $e)
-  {
-      echo $sql . "<br>" . $e->getMessage();
+  // ensure that the user is authorised, correct user type 
+  if ($_SESSION['userType'] == 'Admin'){
+    $_SESSION['htmlTitle'] =  "Review Staff Submissions";
+    try
+    {
+      //require_once 'connect.php';//connects to the SQL database.
+      require_once 'Shared/php/AllHeader.php';//connects to the header section for all pages
+      require_once 'Admin/php/AdminMenu.php';// Drop Down Menu for all student pages
+      require_once 'Shared/php/PageName.php';//For page name
+      require_once 'Admin/php/AdminSubmissionStaff.php';//connects to the main Home scripit and page section for Admin
+      require_once 'Admin/php/AdminFooter.php';//connects to the footer section for all pages for Admin
+    }
+    catch(PDOException $e)
+    {
+        echo $sql . "<br>" . $e->getMessage();
+    }
+  }else{
+    session_start();
+    session_unset();
+    session_destroy();
+    header("Location: ../index.html? activity=Credentials_Not_User_Type_error");
   }
 ?>
