@@ -358,7 +358,7 @@
     { 
           require 'connect.php';
           $SQL_stmt = "SELECT bursaryRequests.bRequestsRequestDate AS 'request_Date', COUNT(itemsAndRequests.ItemID) AS 'item_count',
-          SUM(IFNULL(bursaryRequestItems.brItemPrice,0) + IFNULL(bursaryRequestItems.brItemPostage,0) + 
+          SUM(IFNULL(bursaryRequestItems.brItemPrice,0) + IFNULL(bursaryRequestItems.brItemPostage,0) +
           IFNULL(bursaryRequestItems.brItemAdditionalCharges,0)) AS 'total_price' FROM bursaryRequests
           INNER JOIN itemsAndRequests ON itemsAndRequests.RequestID = bursaryRequests.bRequestsID
           INNER JOIN bursaryRequestItems ON itemsAndRequests.ItemID = bursaryRequestItems.brItemID
