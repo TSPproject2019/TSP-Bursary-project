@@ -320,6 +320,7 @@
                 $itemPrice = 'itemprice' . $count;
                 $itemPostage = 'itempostage' . $count;
                 $itemAdditionalCharges = 'itemadditionalcharges' . $count;
+                $itemID = 'itemid' . $count;
                 echo " test echo 2.2.b :" . $itemPrice . "<br>"; // for testing purposes
                 //$itemprice = $_POST[$itemPrice];
                 echo " test echo 2.2.b :" . $itemprice . "<br>"; // for testing purposes
@@ -334,7 +335,7 @@
                     $itemprice = $_POST[$itemPrice];
                     $itempostage = $_POST[$itemPostage];
                     $itemadditionalcharges = $_POST[$itemAdditionalCharges];
-                    $itemid = $_POST['itemid']; //Gets item id of that item
+                    $itemid = $_POST[$itemID]; //Gets item id of that item
                     echo " test echo 2.3.1.a :" . $itemprice . "<br>"; // for testing purposes
                     echo " test echo 2.3.1.a :" . $itempostage . "<br>";
                     echo " test echo 2.3.1.a :" . $itemdescription . "<br>";
@@ -343,10 +344,11 @@
                     if ($itemcategory == 3){$itemcategory = 'Events';}
                     if ($itemcategory == 4){$itemcategory = 'Professional accreditation';}
                     if ($itemcategory == 5){$itemcategory = 'Vocation placement';}
+                
                     // run SQL script to post the information..
                     // Find item id of each item to update each item
                     
-                    echo "This is item category:". $itemcategory. "<br>"; //Category is currently empty
+                   // echo "This is item category:". $itemcategory. "<br>"; //Category is currently empty
                     //Now retrieve item id of each item in a loop
                    /* $SQL_stmt = "SELECT brItemID AS 'itemId' FROM bursaryRequestItems
                     WHERE brItemDesc = '$itemdescription' AND brItemURL = '$itemUrl' 
@@ -450,7 +452,6 @@
                 }*/
                 $count++;
             }
-
             break;
         
         
@@ -491,6 +492,7 @@
                 $itemPrice = 'itemprice' . $count;
                 $itemPostage = 'itempostage' . $count;
                 $itemAdditionalCharges = 'itemadditionalcharges' . $count;
+                $itemID = 'itemid' . $count;
                 echo " test echo 2.2.b :" . $itemPrice . "<br>"; // for testing purposes
                 //$itemprice = $_POST[$itemPrice];
                 echo " test echo 2.2.b :" . $itemprice . "<br>"; // for testing purposes
@@ -505,6 +507,7 @@
                     $itemprice = $_POST[$itemPrice];
                     $itempostage = $_POST[$itemPostage];
                     $itemadditionalcharges = $_POST[$itemAdditionalCharges];
+                    $itemid = $_POST[$itemID];
                 
                     if ($itemcategory == 1){$itemcategory = 'Qualification';}
                     if ($itemcategory == 2){$itemcategory = 'Equipment';}
@@ -536,7 +539,7 @@
                           echo 'No item id found <br>';
                         } */
                     //echo $itemid;
-                    echo $itemid; //For testing
+                   // echo $itemid; //For testing
                     
                     if(empty($itemid)) //If item id is empty, add the new item and link to request
                     {
@@ -619,13 +622,107 @@
                 $count++;
             }
             break;
+            
+        case "submitStaffVerdict":
+            echo " start Step 2.1..<br>"; // for testing purposes
+            echo " We are in submit updated<br>";
+            $courseTutorId = $_SESSION['courseTutorId'];
+            $courseId = $_SESSION['courseid'];
+            $txbJustication = $_POST['justification'];  
+            $txbTutorComments = $_POST['tutorComments'];
+            $requestid = $_SESSION['requestId'];
+            $approveCounter = 0;
+            $rejectCounter = 0;
+            // assign a counter
+            $count = 1;
+            $goToPage = 8;
+            echo " start Step 2.1.a.<br>"; // for testing purposes
+   
+        // -loop through items which are in the form for items
+            while (isset($_POST['itemprice' . $count]) > 0){
+                $testCounter++;
+                // add count to POST item variables (this will be linked to request ID)
+                $itemCategory = 'itemcategory' . $count;
+                $itemDescription = 'itemdescription' . $count;
+                $itemURL = 'itemUrl' . $count;
+                $itemPrice = 'itemprice' . $count;
+                $itemPostage = 'itempostage' . $count;
+                $itemAdditionalCharges = 'itemadditionalcharges' . $count;
+                $itemID = 'itemid' . $count;
+                $buttonValue = 'radio' . $count; 
+                echo " test echo 2.2.b :" . $itemPrice . "<br>"; // for testing purposes
+                //$itemprice = $_POST[$itemPrice];
+                echo " test echo 2.2.b :" . $itemprice . "<br>";
+                echo " test echo 2.2.b :" . $accept . "<br>";// for testing purposes
+
+#                if (isset($_POST[$itemDescription]) && isset($_POST[$itemPrice])){
+                    echo " start Step 2.3..<br>"; // for testing purposes
+                        
+                    //  If the form is submitted assign variables..
+                    $itemcategory = $_POST[$itemCategory];
+                    $itemdescription = $_POST[$itemDescription];
+                    $itemUrl = $_POST[$itemURL];
+                    $itemprice = $_POST[$itemPrice];
+                    $itempostage = $_POST[$itemPostage];
+                    $itemadditionalcharges = $_POST[$itemAdditionalCharges];
+                    $itemid = $_POST[$itemID];
+                    $acceptReject = $_POST[$buttonValue]; //For approve/reject items
+                    
+                    if($acceptReject == "approved")
+                    {
+                        echo " start Step 2.3 approved..<br>";
+                        $approveCounter++;//Increment approved counter
+                        //Approve that specific item
+                        $SQL_stmt = "UPDATE itemsAndRequests SET StaffItemApproved = 'Yes'
+                        WHERE ItemID = '".$itemid."'";
+                        
+                        $DBconnection->exec($SQL_stmt);//Execute query
+                        echo " start Step 2.3 approved done.<br>";
+                    }
+                    if($acceptReject == "rejected")
+                    {
+                        echo " start Step 2.3 rejected..<br>";
+                        $rejectCounter++; //Increment reject counter
+                        //Reject that item
+                        $SQL_stmt = "UPDATE itemsAndRequests SET StaffItemApproved = 'No'
+                        WHERE ItemID = '".$itemid."'";
+                        
+                        $DBconnection->exec($SQL_stmt);//Execute query
+                        
+                        echo " start Step 2.3 rejected done.<br>";
+                        
+                        
+                    }
+                    if ($testCounter >= 100){break;}
+                $count++;
+            }
+            //If all items have been approved, approve the whole request 
+            //(-1 because counter increments one more time in the end)
+            if($approveCounter == $count-1)
+            {
+                $SQL_stmt = "UPDATE bursaryRequests SET bRequestsStaffApproved = 'Yes'
+                WHERE bRequestsID = '".$requestid."'";
+                        
+                $DBconnection->exec($SQL_stmt);//Execute query
+                echo 'Approved request';
+                
+            }elseif($rejectCounter >= 1){ //If at least one item has been rejected
+                //Reject the whole request.
+                $SQL_stmt = "UPDATE bursaryRequests SET bRequestsStaffApproved = 'No'
+                WHERE bRequestsID = '".$requestid."'";
+                        
+                $DBconnection->exec($SQL_stmt);//Execute query
+                
+                echo 'Rejected request';
+            }
+            break;
     }
-    echo " SWITCH..CASE..End....<br>"; // for testing purposes
+   // echo " SWITCH..CASE..End....<br>"; // for testing purposes
     #header("Location: student_home.php");
 // start with the if ($gTooPage == 2){/then  / th;eif ($userType == 'watevere'...)}else
     if($goToPage == 2)
     {
-        echo $userType;
+       // echo $userType;
         if($userType == "Student")//This does not work.
         {
              header ("Location: student_review_draft.php? activity=request_draft_updated");
@@ -639,18 +736,19 @@
         {
            header ("Location: student_submitted.php? activity=request_submitted");
         }
-        if($userType == "Staff")
-        {
-            header ("Location: staff_submitted_forms.php? activity=request_submitted");
-        }
+    }elseif($goToPage == 8){
+      if($userType == "Staff")
+      {
+         header ("Location: staff_student_submissions.php? activity=submitted");
+      }
     }else{goBack();}
          // new if here
-/*    if($userType == "Student")
+   /* if($userType == "Student")
     {
         if ($goToPage == 2){
-         echo " SWITCH..CASE.2.End....<br>"; // for testing purposes
+         //echo " SWITCH..CASE.2.End....<br>"; // for testing purposes
          header ("Location: student_review_draft.php? activity=request_draft_updated");
-         echo " SWITCH..CASE.3.End....<br>"; // for testing purposes
+         //echo " SWITCH..CASE.3.End....<br>"; // for testing purposes
         }
         if($goToPage == 5)
         {

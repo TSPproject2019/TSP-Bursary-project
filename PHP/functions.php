@@ -13,8 +13,7 @@
        # echo " start Step 4.0..<br>"; // for testing purposes
         $SQL_stmt = "SELECT COUNT(*) AS 'Total' FROM bursaryRequests
           INNER JOIN itemsAndRequests WHERE itemsAndRequests.RequestID = bursaryRequests.bRequestsID 
-          AND itemsAndRequests.StudentID = " . $uID . " AND bursaryRequests.bRequestsStaffApproved is NULL 
-          AND bursaryRequests.bRequestsAdminApproved is NULL 
+          AND itemsAndRequests.StudentID = " . $uID . "
           AND bRequestsStatus = '" . $stat . "'";
         $totalResult = 0; // just incase this variable is holding any data, but should not be the case
         // now to run the query
@@ -231,12 +230,14 @@
         student.availableBalance AS 'Available_Balance',
         bursaryRequests.bRequestsStatus AS 'Status' FROM bursaryRequests 
         INNER JOIN itemsAndRequests ON itemsAndRequests.RequestID = bursaryRequests.bRequestsID 
-        AND bursaryRequests.bRequestsCourseID = '". $courseid ."' 
+        AND bursaryRequests.bRequestsCourseID = '". $courseid ."'
+        AND itemsAndRequests.StaffItemApproved IS NULL
         INNER JOIN course ON course.courseTitle = '". $_SESSION['courseTitle'] ."'
         AND bursaryRequests.bRequestsCourseID = course.courseID
         INNER JOIN bursaryRequestItems ON bursaryRequestItems.brItemID = itemsAndRequests.ItemID 
         AND bursaryRequests.bRequestsStatus = 'Submitted'
         AND bursaryRequests.bRequestsStudentRequest = TRUE
+        AND bursaryRequests.bRequestsStaffApproved IS NULL
         INNER JOIN users ON users.userID = itemsAndRequests.StudentID
         INNER JOIN student ON student.studentID = itemsAndRequests.StudentID
         GROUP BY bursaryRequests.bRequestsID";
@@ -245,13 +246,13 @@
         
         if ($result->fetch()==FALSE){
             echo '<tr>
-                <th scope="row">No Drafts</th>
-                <td>No Drafts</td>
-                <td>No Drafts</td>
-                <td>No Drafts</td>
-                <td>No Drafts</td>
-                <td>No Drafts</td>
-                <td>No Drafts</td>
+                <th scope="row">No info</th>
+                <td>No info</td>
+                <td>No info</td>
+                <td>No info</td>
+                <td>No info</td>
+                <td>No info</td>
+                <td>No info</td>
                 </tr>';
           }
           else
@@ -268,7 +269,7 @@
                 <td>'.$row['Total_price'].'</td>
                 <td>'.$row['Available_Balance'].'</td>
                 <td>'.$row['Status'].'</td>
-                <td><span style="float:left"><button type="submit" name="submit" value="open'.$row['Request_ID'].'" class="btn btn-primary" data-toggle="modal" data-target="#ModalLong">Open</button></span></td></tr>';
+                <td><span style="float:left"><button type="submit" name="submit" value="open_'.$row['Request_ID'].'" class="btn btn-primary" data-toggle="modal" data-target="#ModalLong">Open</button></span></td></tr>';
             }
           }
     }

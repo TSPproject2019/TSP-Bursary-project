@@ -83,8 +83,7 @@ session_start();
       <th scope="col">Student ID</th>
       <th scope="col">Student Name</th>
       <th scope="col">Request ID</th>
-      <th scope="col">Date Submitted</th>
-      <!-- <th scope="col">Date Approved </th> WE DO NOT NEED THIS FIELD?? --> 
+      <th scope="col">Date Submitted</th> 
       <th scope="col">Cost</th>
       <th scope="col">Available Funds</th>
       <th scope="col">Status</th>

@@ -164,7 +164,7 @@
                 echo '<option value="4">Professional accreditation</option>';
                 echo '<option value="5">Vocational placement</option>';
                 echo '</select>';
-                echo '<input type="hidden" name="itemid" value="'.$itemId.'" />';
+                echo '<input type="hidden" name="itemid'. $count .'" value="'.$itemId.'" />';
                 // now output the data
                 echo '      </div>
                         </div>
@@ -198,7 +198,6 @@
                     // cycle counter
                     $count++;
             // break out of the for loop*/
-            break;
             }
             //Now select justification to display.
             $SQL_stmt = "SELECT bRequestsJustification FROM bursaryRequests WHERE bRequestsID = '".$requestid."'";

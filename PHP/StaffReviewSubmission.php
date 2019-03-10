@@ -2,7 +2,7 @@
     // start the session
     session_start();
     // connect to the database
-    # echo " start Step 0.0..<br>"; // for testing purposes
+    //echo " start Step 0.0..<br>"; // for testing purposes
     require_once 'connect.php';//connects to the SQL database.
     //include (Student/php/StudentReviewDraft_A.php);
     #require_once '../../Shared/php/AllHeader.php'; 
@@ -17,11 +17,12 @@
     $lastName = $_SESSION['lastName'];
     $userid = $_SESSION['userid'];
     $userName = $firstName . " " . $lastName;
-   // $courseTitle = $_SESSION['courseTitle'];
+    $courseTitle = $_SESSION['courseTitle'];
     //$courseTutorFirstName = $_SESSION['courseTutorFirstName'];
     //$courseTutorLastName = $_SESSION['courseTutorLastName'];
    // $courseTutorId = $_SESSION['courseTutorId'];
     $student_id = 0; //for student id capturing
+    $courseid = 0;
     // get the data for the submitted requests
     $submitTotal = getTotals ($userid, "Submitted");
     $approved = getTotals ($userid, "Approved");
@@ -29,13 +30,14 @@
     //$availableBalance = getStudentAvailableBalance($userid);
     require_once 'Shared/php/AllHeader.php';//connects to the header section for all pages
     require_once 'Staff/php/StaffMenu.php';// Drop Down Menu for all student pages
+
 ?>
 <!-- testing -->
 
 <div class="col-md-4 ml-3">
-                    <?php
+                  <?php
                        // echo '<p>Outstanding balance: <span>' . $availableBalance . '</span></p>';
-                    ?>
+                   ?>
                 </div>
             <div class="col-md-4 ml-4">
                 <ul class="list-group list-group-flush">
@@ -50,73 +52,8 @@
         </div>
 <!-- <div class="modal fade" id="ModalLong" tabindex="-1" role="dialog" aria-labelledby="ModalLongTitle" aria-hidden="false"> -->
  <!-- <section class="container mt-5 w-50"> -->
- <section class="container mt-5 w-50">
-   <!--Student Name -->          
-  <div class="form-group row">
-   <!--  <div class="modal fade" id="ModalLong" tabindex="-1" role="dialog" aria-labelledby="ModalLongTitle" aria-hidden="false"> -->
-        <!-- <div class="modal-dialog modal-lg" role="document"> -->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="ModalLongTitle">Bursary request</h5>
-                   <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="false">&times;</span>
-                    </button> -->
-                </div>
-                <div class="modal-body">
-                
-                <form class="ml-2" action="requestSave.php" method="POST">
-                        <div class="form-group row">
-                             <label for="fullName" class="col-sm-2 col-form-label">Full Name:</label>
-                             <div class="col-sm-10">
-                               <?php
-                                    $SQL_stmt = "SELECT users.userFirstName AS 'first', users.userLastName AS 'second', users.userID AS 'student_id' FROM users
-                                    INNER JOIN itemsAndRequests ON itemsAndRequests.StudentID = users.userID
-                                    INNER JOIN bursaryRequests ON itemsAndRequests.RequestID = bursaryRequests.bRequestsID
-                                    AND bursaryRequests.bStaffID = '".$userid."' 
-                                    AND bursaryRequests.bRequestsID = ".$requestid; 
-
-                                    $firstName = 0;
-                                    $lastName = 0;
-
-                                    $result = $DBconnection->query($SQL_stmt);
-                                    # echo " start Step 4.2..<br>"; // for testing purposes
-                                    // now get the data
-                                    if ($row = $result->fetch()){
-                                        
-                                        $firstName = $row['first'];
-                                        $lastName = $row['second'];
-                                        $student_id = $row['student_id'];
-                                        
-                                    }
-
-                                  echo '<input type="text" class="form-control" id="fullName" disabled value="' . $firstName .' '. $lastName . '" placeholder="Auto-generated field">';
-                                ?>
-                             </div>
-
-                        </div>
-                        <div class="form-group row">
-                             <label for="course" class="col-sm-2 col-form-label">Course:</label>
-                             <div class="col-sm-10">
-                               <?php
-                                  //echo '<input type="text" class="form-control" id="course" disabled value="' . $courseTitle . '" placeholder="Auto-generated field">';
-                                ?>
-                             </div>
-                        </div>
-                        <div class="form-group row">
-                             <label for="tutor" class="col-sm-2 col-form-label">Tutor:</label>
-                             <div class="col-sm-10">
-                               <?php
-                                 echo '<input type="text" class="form-control" id="tutor" disabled value="'.$userName.'" placeholder="Auto-generated field">';
-                                ?>
-                             </div>
-                        </div>
-                   <!-- For course tutor id, course id and user id --->
-                  <input type="hidden" name="courseTutorId" value="<?php //echo $_SESSION['courseTutorId'] ?>" />
-                  <!-- Turtor Course id stored in session storage at login page -->
-                  <input type="hidden" name="courseid" value="<?php //echo $_SESSION['courseid'] ?>" />
-                  <!--Student id -->
-                  <input type="hidden" name="userid" value="<?php echo $student_id ?>" />
 <?php
+    
     // check to see which button was pressed.
     //// set a counter for this purpose
     //$count = 1;
@@ -139,18 +76,83 @@
         $_SESSION['requestId'] = $requestid;
         // for editing drafts
         if ($itemName == 'open'){
+           
+           //Display content here because we need request id retrieved firstName
+           // to get student id and name 
+          echo '<section class="container mt-5 w-50">   
+          <div class="form-group row">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalLongTitle">Bursary request</h5>
+                </div>
+                <div class="modal-body"> ';
+                
+               echo ' <form class="ml-2" action="requestSave.php" method="POST">
+                        <div class="form-group row">
+                             <label for="fullName" class="col-sm-2 col-form-label">Full Name:</label>
+                             <div class="col-sm-10">';
+            
+                                    //Get user first and last name, id and course id of the student based on the request id
+                                    $SQL_stmt = "SELECT users.userFirstName AS 'first', users.userLastName AS 'second', users.userID AS 'student_id',
+                                    course.courseID AS 'courseid' FROM users
+                                    INNER JOIN itemsAndRequests ON itemsAndRequests.StudentID = users.userID
+                                    INNER JOIN bursaryRequests ON itemsAndRequests.RequestID = bursaryRequests.bRequestsID
+                                    INNER JOIN course ON course.courseID = bursaryRequests.bRequestsCourseID
+                                    AND bursaryRequests.bRequestsStaffID = '". $userid . "' 
+                                    AND bursaryRequests.bRequestsID = '". $requestid ."'"; 
+
+                                    $firstName = 0;
+                                    $lastName = 0;
+                                    
+
+                                    $result = $DBconnection->query($SQL_stmt);
+                                    # echo " start Step 4.2..<br>"; // for testing purposes
+                                    // now get the data
+                                    if ($row = $result->fetch()){
+                                        
+                                        $firstName = $row['first'];
+                                        $lastName = $row['second'];
+                                        $student_id = $row['student_id'];
+                                        $courseid = $row['courseid'];
+                                    }
+ 
+
+                                  echo '<input type="text" class="form-control" id="fullName" disabled value="' . $firstName .' '. $lastName . '" placeholder="Auto-generated field">';
+                           echo'  </div>
+
+                        </div>
+                        <div class="form-group row">
+                             <label for="course" class="col-sm-2 col-form-label">Course:</label>
+                             <div class="col-sm-10">';
+                                  echo '<input type="text" class="form-control" id="course" disabled value="' . $courseTitle . '" placeholder="Auto-generated field">';
+                         echo'    </div>
+                        </div>
+                        <div class="form-group row">
+                             <label for="tutor" class="col-sm-2 col-form-label">Tutor:</label>
+                             <div class="col-sm-10">';
+                                 echo '<input type="text" class="form-control" id="tutor" disabled value="'.$userName.'" placeholder="Auto-generated field">';
+                       echo '      </div>
+                        </div>';
+                 //  <!-- For course tutor id, course id and user id --->
+                 echo' <input type="hidden" name="courseTutorId" value="'.$userid.'" />';
+                  //<!-- Turtor Course id stored in session storage at login page -->
+                 echo ' <input type="hidden" name="courseid" value="' .$courseid.'" />';
+                 // <!--Student id -->
+                 echo ' <input type="hidden" name="userid" value="'.$student_id.'" />';
+            
+            
             //Using the request id, find the item info 
             $SQL_stmt = "SELECT brItemID AS 'itemId', brItemCategory AS 'category', 
             brItemDesc AS 'item_description', brItemURL AS 'URL', 
             brItemPrice AS 'price', brItemPostage AS 'postage',
             brItemAdditionalCharges AS 'additional_charges' FROM bursaryRequestItems
             INNER JOIN itemsAndRequests ON itemsAndRequests.ItemID = bursaryRequestItems.brItemID 
-            AND itemsAndRequests.RequestID = '". $requestid ."'
+            AND itemsAndRequests.RequestID = ". $requestid ."
             AND itemsAndRequests.StudentID = '". $student_id . "'";
             
             $result = $DBconnection->query($SQL_stmt);
             // set the counter, this is here as it is also used outside if the loop
-            $count = 1;
+            //$count = 1;
             // now get the data
             $count = 1;
             while ($row = $result->fetch()){
@@ -174,10 +176,14 @@
                 echo '<div class="row">
                         <h5 class="m-2">Item ' . $count . '</h5>
                     </div>
-                    <div class="form-group row">
-                        <label for="categoryField" class="col-sm-2 col-form-label">Category field:</label>
-                        <div class="col-sm-10 mt-2">
-                            <select class="custom-select" id="categoryField" name="itemcategory' . $count . '">';                    
+                    <div class="d-flex justify-content-between mb-3">
+                        
+                        
+                        <div class="p-2 a">
+                        
+                        <label for="categoryField" class="col-md-2 col-form-label">Category field:</label>
+                            <select class="custom-select" id="categoryField" name="itemcategory' . $count . '">'
+                    ;                    
                 echo '<option selected="'.$itemSelectedOptionNumber.'">' . $itemcategory . '</option>';
                 echo '<option value="1">Qualification</option>';
                 echo '<option value="2">Equipment</option>';
@@ -185,20 +191,38 @@
                 echo '<option value="4">Professional accreditation</option>';
                 echo '<option value="5">Vocational placement</option>';
                 echo '</select>';
-                echo '<input type="hidden" name="itemid" value="'.$itemId.'" />';
+                echo '<input type="hidden" name="itemid" value="'.$itemId.'" /></div>';
+                
+                echo '<div class="p-2 b">
+                        <input type="radio" class ="form-control" name="radio'. $count . '" id="accept'. $count .'" value="approved" checked = "checked"/> 
+                        
+                        <label for="accept'. $count .'">Approve</label>
+                     
+                        </div>
+                        
+                        <div class="p-2 c">
+                        <input type="radio" class ="form-control" name="radio'. $count . '" id="reject'. $count .'" value="rejected" /> 
+                        
+                        <label for="reject'. $count .'">Reject</label>
+                     
+                        </div>';
+                
+                
+            
+                
                 // now output the data
                 echo '      </div>
-                        </div>
+                        
                         <div class="form-group">
                             <div>';
                                 echo '<label for="itemDescription' . $count . '">Item description:</label>';
-                                echo '<textarea class="form-control" id="itemDescription' . $count . '" name="itemdescription' . $count . '" rows="2">' . $itemdescription . '</textarea>';
+                                echo '<textarea class="form-control" id="itemDescription' . $count . '" name="itemdescription' . $count . '" rows="2" disabled value="'.$itemdescription.'">' . $itemdescription . '</textarea>';
                                 echo '</div>
                         </div>';
                         echo '
                         <div class="form-group">
                             <div>
-                                <input type="text" class="form-control" name="itemUrl' . $count . '" placeholder="URL to the item:" value="' . $itemUrl . '" />
+                                <input type="text" class="form-control" name="itemUrl' . $count . '" placeholder="URL for item here" value='.$itemUrl.'/>
                             </div>
                         </div>
                         
@@ -214,15 +238,15 @@
                             <div class="form-group col-md-3">
                             <label for="additionalFees' . $count . '">Additional Fees:</label>
                             <input type="text" class="form-control" name="itemadditionalcharges' . $count . '" id="additionalFees" value="' . $itemadditionalcharges . '" />
+                            
                             </div>
                             </div>';
                     // cycle counter
                     $count++;
             // break out of the for loop*/
-            break;
             }
             //Now select justification to display.
-            $SQL_stmt = "SELECT bRequestsJustification, bRequestsTutorComments FROM bursaryRequests WHERE bRequestsID = '"$requestid"'";
+            $SQL_stmt = "SELECT bRequestsJustification, bRequestsTutorComments FROM bursaryRequests WHERE bRequestsID = '". $requestid . "'";
             $txbJustification = 0;
             $txbTutorComments = 0;
             //Execute query
@@ -235,9 +259,9 @@
             }
             // set the number of items counter for javascript to read
             echo '<input type="hidden" name="numberOfItems" value="'.$count.'" />';
-            //Display justification
+            //Display justification and tutor comments
             echo '<div class="form-group">
-            <textarea class="form-control" type="textarea" name="justification" value="'.$txbJustification.'" rows="3" placeholder="Justification:" required>'.$txbJustification.'</textarea>
+            <textarea class="form-control" type="textarea" name="justification" disabled value="'.$txbJustification.'" rows="3" placeholder="Justification:" required>'.$txbJustification.'</textarea>
             </div>';
             echo '                  </div>
             <div class="form-group">
@@ -252,7 +276,8 @@
                 </section>';
         }
     }
-        ?>
+?>
+                    
 <?php
     require_once 'Staff/php/StaffFooter.php';//connects to the footer section for all pages for Admin
 ?>
