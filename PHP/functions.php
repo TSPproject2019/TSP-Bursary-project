@@ -187,7 +187,7 @@
           ON itemsAndRequests.RequestID = bursaryRequests.bRequestsID
           AND itemsAndRequests.StudentID = ".$uID." INNER JOIN bursaryRequestItems ON
           itemsAndRequests.ItemID = bursaryRequestItems.brItemID 
-          AND bursaryRequests.bRequestsStatus = 'Submitted' OR bursaryRequests.bRequestsStatus = 'Approved'
+          AND bursaryRequests.bRequestsStatus = 'Submitted' OR bursaryRequests.bRequestsStatus = 'Approved' OR bursaryRequests.bRequestsStatus = 'Cancelled'
           GROUP BY bursaryRequests.bRequestsID ORDER BY bursaryRequests.bRequestsRequestDate ASC";
             
           $result = $DBconnection->query($SQL_stmt);
@@ -390,4 +390,42 @@
               }
           }
       }
+
+       /* function getStudentInformation($uID) 
+      
+       require 'connect.php'; 
+      
+       $SQL_stmt = "SELECT userID as 'Student_ID', CONCAT(userFirstName, " ",userLastName) as 'Student_name',
+        student.availableBalance as 'Available_Balance' from users inner join student on users.userID = student.studentID
+        inner join departmentsStaffCourseStudents on users.userID = departmentsStaffCourseStudents.bscsStudentID
+        and departmentsStaffCourseStudents.bscsStaffID = '.$userid.' 
+        inner join course on departmentsStaffCourseStudents.bscsCourseID = course.courseID and 
+        course.courseTitle = '.$txbCourseTitle.' and course.courseLevel = '.$txbCourseLevel.' and 
+        course.courseYear = '.$txbCourseYear.' GROUP BY userID"; 
+        
+        $result = $DBconnection->query($SQL_stmt); 
+        
+        if ($result->fetch()==FALSE){
+            echo '<tr>
+                <th scope="row">N/A</th>
+                <td>N/A</td>
+                <td>N/A</td>
+                <td><input type="checkbox">
+                </tr>';
+          }
+          else
+          {
+            $result = $DBconnection->query($SQL_stmt);
+              while ($row = $result->fetch())
+              {
+                    echo '<tr>
+                    <th scope="row">'.$row['Student_ID'].'</th>
+                    <td>'.$row['Student_name'].'</td>
+                    <td>'.$row['Available_Balance'].'</td>
+                    <td><input type="checkbox">
+                    </tr>';
+              }
+          }
+      } */ 
+       
 ?>

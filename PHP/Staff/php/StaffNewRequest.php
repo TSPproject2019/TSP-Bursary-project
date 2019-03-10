@@ -61,7 +61,7 @@ session_start();
               <div class="form-group row">
     <label for="fullName" class="col-sm-2 col-form-label">Full Name:</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="fullName" placeholder="Auto-generated field">
+      <input type="text" class="form-control" disabled value="" id="fullName">
     </div>
   </div>
             
@@ -125,9 +125,6 @@ session_start();
                     <textarea class="form-control" type="textarea" name="justification" rows="3" placeholder="Justification:"></textarea>
                 </div>
                 <div class="form-group">
-                    <h6>Status of the form: <span>Status</span></h6>
-                </div>
-                <div class="form-group">
                     <textarea class="form-control" type="textarea" name="tutorComments" rows="3" placeholder="Tutor Comments:"></textarea>
                 </div>
                 <div class="form-group">
@@ -173,7 +170,15 @@ session_start();
     </tr>
   </thead>
   <tbody>
-    <tr>
+    
+      <?php
+      
+      echo getStudentInformation($userid);   
+      
+      ?>
+      
+      <!--
+      <tr>
       <th scope="row-1">ID ONE</th>
       <td>NAME ONE</td>
       <td>£500.00</td>
@@ -207,6 +212,6 @@ session_start();
       <td>NAME FIVE</td>
       <td>00.00</td>
       <td><input type="checkbox"></td>
-    </tr>
+    </tr> -->
   </tbody>
 </table>         

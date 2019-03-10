@@ -162,7 +162,7 @@
             $bRequestsStatus = 'Submitted'; //Draft because of saving the request
             // assign a counter
             $count = 1;
-            $goToPage = 5;
+            $goToPage = 1;
             #$itemDescription = "'itemdescription" . $count. "'";
             echo " start Step 2.1.a.<br>"; // for testing purposes
             // add new request section script here

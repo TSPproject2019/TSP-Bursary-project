@@ -150,9 +150,8 @@
                 
                 //echo "Item id is :$itemId"; //For testing
                 // output data from query
-                echo '<!-- <div id = "newlink"> -->
-                       <div id = "newlink" class="row">
-                        <h5 id="hd05" name="numberOfItems" class="m-2">Item ' . $count . '</h5>
+                echo '<div class="row">
+                        <h5 class="m-2">Item ' . $count . '</h5>
                     </div>
                     <div class="form-group row">
                         <label for="categoryField" class="col-sm-2 col-form-label">Category field:</label>
@@ -196,7 +195,6 @@
                             <input type="text" class="form-control" name="itemadditionalcharges' . $count . '" id="additionalFees" value="' . $itemadditionalcharges . '" />
                             </div>
                             </div>';
-                            //</div><!--newlink end -->';
                     // cycle counter
                     $count++;
             // break out of the for loop*/
@@ -226,12 +224,8 @@
               <!-- need to add button for adding new item (+)-->
                 <div class="col-5 mb-5 text-right">
                     <button type="submit" name="submit" value="submitUpdated" style="width: 38%;" class="btn btn-success" id="Submit">Submit</button>
-                </div>
-                </div>
-                </form>
-                <div align="right" style="margin-bottom:5px;">
-                   <a href="javascript:add_feed()">Add New</a>
                 </div>';
+          
         }
         // for deleting selected file (need HTML code)
         if ($itemName == 'delete'){
@@ -267,8 +261,8 @@
     }
 ?>
 
-
-                 
+</div>
+</form>
 </section>
 <!-- </section> -->
 <?php

@@ -150,7 +150,8 @@
                 //echo "Item id is :$itemId"; //For testing
                 // output data from query
                 echo '<div class="row">
-                        <h5 class="m-2">Item ' . $count . '</h5>
+                       <div id = "newlink">
+                        <h5 id="hd05" name="numberOfItems" class="m-2">Item ' . $count . '</h5>
                     </div>
                     <div class="form-group row">
                         <label for="categoryField" class="col-sm-2 col-form-label">Category field:</label>
