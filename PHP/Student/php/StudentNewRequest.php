@@ -179,14 +179,14 @@
       <div class="form-group">
           <textarea class="form-control" type="textarea" name="justification" rows="3" placeholder="Justification:" required></textarea>
       </div>
-            
-     <button type="submit" name="submit" value="saveRequest" class="btn btn-warning btn-lg" id="Save">Save as Draft</button>
-     <button type="submit" name="submit" value="submitRequest" class="btn btn-success btn-lg" id="Submit">Submit</button>                
+       <div align="right" style="margin-bottom:5px;">
+         <a href="javascript:addItem()" style="width: 15; height: 15;" class="btn btn-success" title="Add an Item"><span>&#43;</span></a>
+       </div>
+         <button type="submit" name="submit" value="saveRequest" class="btn btn-warning btn-lg" id="Save">Save as Draft</button>
+         <button type="submit" name="submit" value="submitRequest" class="btn btn-success btn-lg" id="Submit">Submit</button>                
   </form>
     
-  <div align="right" style="margin-bottom:5px;">
-    <a href="javascript:addItem()" style="width: 15; height: 15;" class="btn btn-success" title="Add an Item"><span>&#43;</span></a>
-  </div>
+
   
   </div>
   

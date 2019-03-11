@@ -7,7 +7,7 @@
   }
   // ensure that the user is authorised, correct user type 
   if ($_SESSION['userType'] == 'Admin'){
-    $_SESSION['htmlTitle'] =  "FAQ's";
+    $_SESSION['htmlTitle'] =  "Frequently Asked Questions";
     try
     {
       //require_once 'connect.php';//connects to the SQL database.

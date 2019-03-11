@@ -7,7 +7,7 @@
     }
     // ensure that the user is authorised, correct user type 
     if ($_SESSION['userType'] == 'Staff'){
-         $_SESSION['htmlTitle'] =  "Agreement form";
+         $_SESSION['htmlTitle'] =  "Agreement Form";
          try
          {
              //require_once 'connect.php';//connects to the SQL database.

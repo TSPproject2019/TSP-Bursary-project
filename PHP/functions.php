@@ -230,20 +230,8 @@
         require 'connect.php'; 
         $count = 0;
         
-        //Retrieve course id first for the staff member using the parameter $uID
-        $SQL_stmt = "SELECT DISTINCT courseID from course
-        INNER JOIN departmentsStaffCourseStudents ON bscsCourseID = course.courseID
-        AND bscsStaffID = '". $uID ."'";
-        
-        $courseid = 0;
-        
-        $result = $DBconnection->query($SQL_stmt);
-        
-        if ($row = $result->fetch()){
-            $courseid = $row['courseID']; //Retrive course id
-        }
         //Because that staff member is on a particular course, all requests belonging to that course should show
-        //Select all requests from all students that are on that course id and course title
+        //Select all requests from all students that are on that course title and are linked to the staff member
         $SQL_stmt = "SELECT itemsAndRequests.StudentID AS 'Student_ID',  CONCAT (userFirstName,' ',userLastName) AS 'Student_Name', 
         bursaryRequests.bRequestsID AS 'Request_ID',
         bursaryRequests.bRequestsRequestDate AS 'Date_submitted',
@@ -252,7 +240,6 @@
         student.availableBalance AS 'Available_Balance',
         bursaryRequests.bRequestsStatus AS 'Status' FROM bursaryRequests 
         INNER JOIN itemsAndRequests ON itemsAndRequests.RequestID = bursaryRequests.bRequestsID 
-        AND bursaryRequests.bRequestsCourseID = '". $courseid ."'
         AND itemsAndRequests.StaffItemApproved IS NULL
         INNER JOIN course ON course.courseTitle = '". $_SESSION['courseTitle'] ."'
         AND bursaryRequests.bRequestsCourseID = course.courseID
@@ -261,7 +248,9 @@
         AND bursaryRequests.bRequestsStudentRequest = TRUE
         AND bursaryRequests.bRequestsStaffApproved IS NULL
         INNER JOIN users ON users.userID = itemsAndRequests.StudentID
-        INNER JOIN student ON student.studentID = itemsAndRequests.StudentID
+        INNER JOIN student ON student.studentID = users.userID
+        INNER JOIN departmentsStaffCourseStudents ON departmentsStaffCourseStudents.bscsStaffID = '".$uID."'
+        AND departmentsStaffCourseStudents.bscsStudentID = student.studentID
         GROUP BY bursaryRequests.bRequestsID";
         
         $result = $DBconnection->query($SQL_stmt); 

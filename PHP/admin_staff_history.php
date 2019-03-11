@@ -7,7 +7,7 @@
   }
   // ensure that the user is authorised, correct user type 
   if ($_SESSION['userType'] == 'Admin'){
-    $_SESSION['htmlTitle'] =  "History Staff Requests";
+    $_SESSION['htmlTitle'] =  "History of Staff Requests";
     try
     {
       //require_once 'connect.php';//connects to the SQL database.

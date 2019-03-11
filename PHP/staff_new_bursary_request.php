@@ -7,7 +7,7 @@
     }
     // ensure that the user is authorised, correct user type 
     if ($_SESSION['userType'] == 'Staff'){
-        $_SESSION['htmlTitle'] =  "New bursary request";
+        $_SESSION['htmlTitle'] =  "New Bursary Request";
         try
         {
             //require_once 'connect.php';//connects to the SQL database.

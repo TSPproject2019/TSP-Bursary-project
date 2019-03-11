@@ -12,7 +12,7 @@
 
     #require 'functions.php'; // connects to the functions. // seems to fails to load page if this is loaded.
     // get session variables.
-    $_SESSION['htmlTitle'] =  "Rejected form";
+    $_SESSION['htmlTitle'] =  "Rejected Form";
     $firstName = $_SESSION['firstName'];
     $lastName = $_SESSION['lastName'];
     $userid = $_SESSION['userid'];

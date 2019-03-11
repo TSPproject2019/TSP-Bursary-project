@@ -7,7 +7,7 @@
     }
     // ensure that the user is authorised, correct user type 
     if ($_SESSION['userType'] == 'Student'){
-        $_SESSION['htmlTitle'] =  "FAQ's";
+        $_SESSION['htmlTitle'] =  "Frequently Asked Qustionss";
         try
         {
             //require_once 'connect.php';//connects to the SQL database.

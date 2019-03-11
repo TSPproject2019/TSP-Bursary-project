@@ -7,7 +7,7 @@
     }
     // ensure that the user is authorised, correct user type 
     if ($_SESSION['userType'] == 'Student'){
-        $_SESSION['htmlTitle'] =  'My submitted Forms';
+        $_SESSION['htmlTitle'] =  'My Submitted Forms';
         try
         {
             //require_once 'connect.php';//connects to the SQL database.
