@@ -16,7 +16,8 @@ function addItem(){ // to add item fields to a request
     //Get div field to start propogating from
     document.getElementById('newlink').appendChild(div1);
     //This name attribute change works
-    var iurl = 'itemUrl' + itemCounter; // 
+    var idel = 'javascript:deleteItem(' + itemCounter + ')';
+    var iurl = 'itemUrl' + itemCounter; //    
     var ides = 'itemdescription' + itemCounter; // 
     var icat = 'itemcategory' + itemCounter; // 
     var ipri = 'itemprice' + itemCounter; //
@@ -28,13 +29,23 @@ function addItem(){ // to add item fields to a request
     // item number header
     var d0 = document.createElement('div');
       d0.setAttribute('class', "form-group row justify-content-between");
-    d0.appendChild('h5');
+    //d0.appendChild('h5');
     div1.appendChild(d0);
     var h = document.createElement('h5');
       h.setAttribute('id', "hd05"); // needs to be added to the source PHP
       h.setAttribute('name', "numberOfItems"); // needs to be added to the source PHP, as is used to count current items
       h.innerHTML = "Item " + itemCounter;
-    div1.appendChild(h);
+    
+    d0.appendChild('h5');
+    
+    var d0a = document.createElement('div');
+      d0a.setAttribute('class','delete-group col3')
+    d0.appendChild(d0a);
+      
+    var d0a1 = document.createElement('div');
+        d0a1.setAttribute('class', 'input-group-prepend')
+    d0a.appendChild(d0a1);
+    
     // select option section
     var d1 = document.createElement('div');
       d1.id = "optionDiv";

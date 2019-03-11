@@ -220,7 +220,7 @@
                     $count++;
             // break out of the for loop*/
             }
-            echo ' for test, while loop ended...</br>';
+            
             //Now select justification to display.
             $SQL_stmt = "SELECT bRequestsTutorComments AS 'staffc', bRequestsAdminComments AS 'adminc', bRequestsJustification
             FROM bursaryRequests WHERE bRequestsID = '". $requestid ."'";
@@ -230,8 +230,6 @@
             
             //Execute query
             $result = $DBconnection->query($SQL_stmt);
-            
-            echo 'I am here</br>';
             
             if ($row = $result->fetch()){
                 

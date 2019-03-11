@@ -415,7 +415,6 @@
       function getStudentInformation($uID, $courseTitle, $courseYear)
       {
           //is called within StaffNewRequest.php Line 176
-        //There is a mistake somewhere I cannot find it, like a missing semi colon or something
            //course title, year and level not defined here. SO i would just select 
            //from the course that the staff member is on instead.
         require 'connect.php';
