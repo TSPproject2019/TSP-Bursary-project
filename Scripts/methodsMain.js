@@ -180,7 +180,8 @@ function addItem(){ // to add item fields to a request
   itemCounter++;
 }
 function deleteItem(itemId){
-  var eId = document.getElementById(itemId);
+  var e = document.getElementById(itemId);
+  e.parentNode.removeChild(e)
 }
 
 // get the item count

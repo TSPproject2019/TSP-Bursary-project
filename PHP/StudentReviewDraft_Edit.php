@@ -151,7 +151,8 @@
                 
                 //echo "Item id is :$itemId"; //For testing
                 // output data from query
-                echo '<div class="form-group row justify-content-between">
+                echo '<div id="' . $count . '">
+                        <div class="form-group row justify-content-between">
                         <h5 id="hd05" name="numberOfItems" class="m-2">Item ' . $count . '</h5>
                         <div class="delete-group col-2">
                             <div class="input-group-prepend">
@@ -201,6 +202,7 @@
                             <div class="form-group col-md-3">
                             <label for="additionalFees' . $count . '">Additional Fees:</label>
                             <input type="text" class="form-control" name="itemadditionalcharges' . $count . '" id="additionalFees" value="' . $itemadditionalcharges . '" />
+                            </div>
                             </div>
                             </div>';
                             

@@ -57,6 +57,7 @@
                       ?>
                     </ul>
                 </div>
+</div>
  <section class="container">         
             <h1 class="text-center">Student Home</h1>
                 <p>
