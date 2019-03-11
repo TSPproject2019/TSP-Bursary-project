@@ -636,7 +636,8 @@
             // assign a counter
             $count = 1;
             $goToPage = 8;
-            echo " start Step 2.1.a.<br>"; // for testing purposes
+            echo " start Step 2.1.a.<br>";
+            echo " start Step 2.1.'$requestid'.<br>";// for testing purposes
    
         // -loop through items which are in the form for items
             while (isset($_POST['itemprice' . $count]) > 0){
@@ -668,24 +669,27 @@
                     $itemid = $_POST[$itemID];
                     $acceptReject = $_POST[$buttonValue]; //For approve/reject items
                     
+                    echo $acceptReject;
+                    echo "Item id is:'$itemid'";
+                    echo $requestid;
                     if($acceptReject == "approved")
                     {
                         echo " start Step 2.3 approved..<br>";
                         $approveCounter++;//Increment approved counter
                         //Approve that specific item
                         $SQL_stmt = "UPDATE itemsAndRequests SET StaffItemApproved = 'Yes'
-                        WHERE ItemID = '".$itemid."'";
+                        WHERE ItemID = '".$itemid."' AND RequestID = '".$requestid."'";
                         
                         $DBconnection->exec($SQL_stmt);//Execute query
                         echo " start Step 2.3 approved done.<br>";
                     }
-                    if($acceptReject == "rejected")
+                    elseif($acceptReject == "rejected")
                     {
                         echo " start Step 2.3 rejected..<br>";
                         $rejectCounter++; //Increment reject counter
                         //Reject that item
                         $SQL_stmt = "UPDATE itemsAndRequests SET StaffItemApproved = 'No'
-                        WHERE ItemID = '".$itemid."'";
+                        WHERE ItemID = '".$itemid."' AND RequestID = '".$requestid."'";
                         
                         $DBconnection->exec($SQL_stmt);//Execute query
                         
@@ -720,7 +724,7 @@
    // echo " SWITCH..CASE..End....<br>"; // for testing purposes
     #header("Location: student_home.php");
 // start with the if ($gTooPage == 2){/then  / th;eif ($userType == 'watevere'...)}else
-    if($goToPage == 2)
+ if($goToPage == 2)
     {
        // echo $userType;
         if($userType == "Student")//This does not work.

@@ -12,7 +12,7 @@
 
     #require 'functions.php'; // connects to the functions. // seems to fails to load page if this is loaded.
     // get session variables.
-    $_SESSION['htmlTitle'] =  "Review my drafts";
+    $_SESSION['htmlTitle'] =  "Rejected form";
     $firstName = $_SESSION['firstName'];
     $lastName = $_SESSION['lastName'];
     $userid = $_SESSION['userid'];
@@ -117,12 +117,14 @@
         $requestid = $itemValue;
         $_SESSION['requestId'] = $requestid;
         // for editing drafts
-        if ($itemName == 'edit'){
-            //Using the request id, find the item info 
+        if ($itemName == 'open'){
+            //Using the request id, find the item info (whether its approved or not)
             $SQL_stmt = "SELECT brItemID AS 'itemId', brItemCategory AS 'category', 
             brItemDesc AS 'item_description', brItemURL AS 'URL', 
             brItemPrice AS 'price', brItemPostage AS 'postage',
-            brItemAdditionalCharges AS 'additional_charges' FROM bursaryRequestItems
+            brItemAdditionalCharges AS 'additional_charges',
+            itemsAndRequests.StaffItemApproved AS 'staff',
+            itemsAndRequests.AdminItemApproved AS 'admin' FROM bursaryRequestItems
             INNER JOIN itemsAndRequests ON itemsAndRequests.ItemID = bursaryRequestItems.brItemID 
             AND itemsAndRequests.RequestID = " . $requestid . "
             AND itemsAndRequests.StudentID = '" . $userid . "'";
@@ -135,6 +137,8 @@
             echo '<div id = "newlink">';
             while ($row = $result->fetch()){
                 // loop through the request results
+                $staff = $row['staff']; //getting staff and admin approved values
+                $admin = $row['admin'];
                 $itemId = $row['itemId'];
                 $itemcategory = $row['category'];
                 $itemdescription = $row['item_description'];
@@ -149,9 +153,22 @@
                 if ($itemcategory == 'Professional accreditation'){$itemSelectedOptionNumber = 4;}
                 if ($itemcategory == 'Vocational placement'){$itemSelectedOptionNumber = 5;}
                 
+                $background = ""; //For background colour
+                
+                //echo $admin;
+                //echo $staff;
+                if($staff == 'No' || $admin == 'No')
+                {
+                    $background = "red";
+                }
+                else
+                {
+                    $background = "green";
+                }
                 //echo "Item id is :$itemId"; //For testing
                 // output data from query
-                echo '<div class="row">
+                echo '<div style="background-color: '.$background.';">
+                <div class="row">
                         <h5 id="hd05" name="numberOfItems" class="m-2">Item ' . $count . '</h5>
                     </div>
                     <div class="form-group row">
@@ -196,21 +213,31 @@
                             <label for="additionalFees' . $count . '">Additional Fees:</label>
                             <input type="text" class="form-control" name="itemadditionalcharges' . $count . '" id="additionalFees" value="' . $itemadditionalcharges . '" />
                             </div>
+                            </div>
                             </div>';
                             
                     // cycle counter
                     $count++;
             // break out of the for loop*/
             }
+            echo ' for test, while loop ended...</br>';
             //Now select justification to display.
-            $SQL_stmt = "SELECT bRequestsJustification FROM bursaryRequests WHERE bRequestsID = '".$requestid."'";
+            $SQL_stmt = "SELECT bRequestsTutorComments AS 'staffc', bRequestsAdminComments AS 'adminc', bRequestsJustification
+            FROM bursaryRequests WHERE bRequestsID = '". $requestid ."'";
             $txbJustification = 0;
+            $staffc = 0;
+            $adminc = 0;
+            
             //Execute query
             $result = $DBconnection->query($SQL_stmt);
+            
+            echo 'I am here</br>';
             
             if ($row = $result->fetch()){
                 
                 $txbJustification = $row['bRequestsJustification'];
+                $staffc = $row['staffc'];//Retrieving comments 
+                $adminc = $row['adminc'];
             }
             // set the number of items counter for javascript to read
             //echo '<input type="hidden" name="numberOfItems" value="'.$count.'" />';
@@ -219,52 +246,12 @@
             echo '<div class="form-group">
             <textarea class="form-control" type="textarea" name="justification" value="'.$txbJustification.'" rows="3" placeholder="Justification:" required>'.$txbJustification.'</textarea>
             </div>';
-            echo '</div>
-            <div class="row mt-3 mb-5">
-                
-                <div class="col-5 mb-5 text-right">
-                    <button type="submit" name="submit" value="saveUpdated" style="width: 38%;" class="btn btn-primary" id="Save" wide="45">Save</button>
-                </div>
-              <!-- need to add button for adding new item (+)-->
-                <div class="col-5 mb-5 text-right">
-                    <button type="submit" name="submit" value="submitUpdated" style="width: 38%;" class="btn btn-success" id="Submit">Submit</button>
-                </div>
-                </div>
-                </form>
-                <div align="right" style="margin-bottom:5px;">
-                   <a href="javascript:addItem()">Add New</a>
-                </div>';
-        }
-        // for deleting selected file (need HTML code)
-        if ($itemName == 'delete'){
-            //carry out this action
-            #echo " Loop .2. Step 1.0..<br>"; // for testing if it responds
-
-            #echo " start Step 2.1..<br>"; // for testing purposes
-              $courseTutorId = $_POST['courseTutorId'];
-              $courseId = $_POST['courseid'];
-              $txbJustication = $_POST['justification'];  
-              $dateNow = date('Y/m/d');
-              $bRequestsStatus = 'Draft'; //acknowledges that the request is a draft 
-             #echo " start Step 2.2..<br>"; // for testing purposes
-            // query which deletes the Bursary Request ID from bursaryRequests 
-            // which in turn will cascade through the tables
-            $SQL_stmt = "DELETE FROM bursaryRequests WHERE bRequestsID = '".$requestid."'";
-
-            try
-            {
-                    $DBconnection->exec($SQL_stmt);
-            }
-            catch(PDOException $e)
-            {
-                echo $e;
-            }
-            #echo " start Step 2.3..<br>"; // for testing purposes
-            echo '                            <div class="form-group">
-            <label for="DraftRequestDeleted">Draft Request Deleted</label>
+            echo '<div class="form-group">
+            <textarea class="form-control" type="textarea" name="tutorcomments" value="'.$staffc.'" rows="3" placeholder="Tutor comments:" required>'.$txbJustification.'</textarea>
             </div>';
-            #header("Location: student_review_draft.php? activity=request_delete_success");
-            #goBack();          
+            echo '<div class="form-group">
+            <textarea class="form-control" type="textarea" name="admincomments" value="'.$adminc.'" rows="3" placeholder="Admin comments:" required>'.$txbJustification.'</textarea>
+            </div>';  
         }
     }
 ?>

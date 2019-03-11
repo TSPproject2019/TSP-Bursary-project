@@ -58,7 +58,7 @@
                     </ul>
                 </div>
           </div>
-          
+<form action="Student_view_rejected.php" method="POST">
           <table class="table table-striped">
    <thead class="thead-dark">
     <tr>
@@ -82,4 +82,5 @@
       ?>
     
   </tbody>
-</table>         
+</table> 
+</form>

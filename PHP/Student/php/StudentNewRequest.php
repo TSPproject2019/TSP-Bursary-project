@@ -115,11 +115,20 @@
     <!--Student id -->
     <input type="hidden" name="userid" value="<?php echo $_SESSION['userid'] ?>" />
     <div id = "newlink">
+    <div class="form-group row justify-content-between">
     <h5  id="hd05" name="numberOfItems"> Item 1 </h5>
+    
+    <div class="delete-group col-3">
+         <div class="input-group-prepend">
+             <a href="javascript:addItem()" style="width: 5; height: 5;" class="btn btn-success"><span>&#43;</span></a>
+              <a href="javascript:deleteItem(1)" style="width: 5; height: 5;" class="btn btn-success"><span>&#45;</span></a>
+         </div>
+    </div>
+    </div>
     <!--Category selection -->
     <div class="col-12 mt-2 mb-5">
             <select class="custom-select" id="categoryField" name="itemcategory1">
-                <option value ="" selected="">Choose...</option>
+                <option value ="" selected="">Choose Category...</option>
                 <option value="Qualification">Qualification</option>
                 <option value="Equipment">Equipment</option>
                 <option value="Events">Events</option>
@@ -176,62 +185,9 @@
   </form>
     
   <div align="right" style="margin-bottom:5px;">
-    <a href="javascript:add_feed()">Add New</a>
+    <a href="javascript:addItem()">Add New</a>
   </div>
   
-  <!-- <div align="left" style="margin-bottom:5px;">
-    <a href="javascript:add_feed()">DELETE</a>
-  </div> -->
-  <!-- TEMPLATE FOR NEW ITEMS 
-    <div id="newitem" style="display: none">
-      <h5 id="hd05">Item</h5>
-      <div class="col-12 mt-2 mb-5">
-            <select id="categoryField" class="custom-select" name="itemcategory">
-                <option value ="" selected>Choose...</option>
-                <option value="Qualification">Qualification</option>
-                <option value="Equipment">Equipment</option>
-                <option value="Events">Events</option>
-                <option value="Professional accreditation">Professional accreditation</option>
-                <option value="Vocational placement">Vocational placement</option>
-            </select>
-        </div>   
-        
-    <!--Item description 
-    <div class="form-group row">
-        <div class="col-12">
-            <input type="text" id="itemdescription" name="itemdescription" class="form-control" placeholder="Item description:" required />
-         </div>
-    </div> 
-    <!--Item URL
-    <div class="form-group row">
-       <div class="col-12">
-           <input type="text" id="itemUrl" name="itemUrl" class="form-control" placeholder="URL to the item:" required />
-       </div>
-    </div>
-    <!--FORM FEES ROW
-    <div class="form-group row justify-content-between">
-    <!--Form Price field 
-      <div class="input-group col-3">
-          <div class="input-group-prepend">
-              <span class="input-group-text" id="priceSpan" required>Price:</span>
-          </div>
-          <input type="text" id= "price" class="form-control" name="itemprice" aria-describedby="price">
-      </div>
-     <!--Form Postage field               
-      <div class="input-group col-3">
-          <div class="input-group-prepend">
-             <span class="input-group-text" id="postpriceSpan">Postage:</span>
-          </div>
-          <input type="text" id="itempostage" class="form-control" name="itempostage" aria-describedby="postage">
-       </div>
-      <!--Form Additional Fees 
-          <div class="input-group col-4">
-              <div class="input-group-prepend">
-                  <span class="input-group-text" id="additionalFeesSpan">Additional fees:</span>
-              </div>
-              <input type="text" class="form-con trol"id="itemadditionalcharges" name="itemadditionalcharges" aria-describedby="additionalFees">
-          </div>                   
-     </div> <!--End of Fees row -->
   </div>
   
 </section>

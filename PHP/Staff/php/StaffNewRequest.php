@@ -173,7 +173,7 @@ session_start();
     
       <?php
       
-      echo getStudentInformation($userid);   
+          echo getStudentInformation($userid);   
       
       ?>
       

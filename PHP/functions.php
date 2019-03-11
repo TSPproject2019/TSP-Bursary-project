@@ -181,24 +181,46 @@
     function getStudentSubmittedForms($uID)
     {
           require 'connect.php';
-          $SQL_stmt = "SELECT bRequestsRequestDate as 'Date_submitted', COUNT(itemsAndRequests.ItemID) AS 'Item_count',
+          $SQL_stmt = "SELECT bRequestsID AS 'id', bRequestsRequestDate as 'Date_submitted', COUNT(itemsAndRequests.ItemID) AS 'Item_count',
           SUM(IFNULL(brItemPrice,0) + IFNULL(brItemPostage,0) + IFNULL(brItemAdditionalCharges,0))
-          AS 'Cost', bRequestsStatus AS 'Status' from bursaryRequests INNER JOIN itemsAndRequests
+          AS 'Cost', bRequestsStatus AS 'Status', bRequestsStaffApproved AS 'staff', 
+          bRequestsAdminApproved AS 'admin' from bursaryRequests INNER JOIN itemsAndRequests
           ON itemsAndRequests.RequestID = bursaryRequests.bRequestsID
           AND itemsAndRequests.StudentID = ".$uID." INNER JOIN bursaryRequestItems ON
           itemsAndRequests.ItemID = bursaryRequestItems.brItemID 
           AND bursaryRequests.bRequestsStatus = 'Submitted' OR bursaryRequests.bRequestsStatus = 'Approved' OR bursaryRequests.bRequestsStatus = 'Cancelled'
           GROUP BY bursaryRequests.bRequestsID ORDER BY bursaryRequests.bRequestsRequestDate ASC";
+        
+          $staff = 0;
+          $admin = 0;
             
           $result = $DBconnection->query($SQL_stmt);
           
           while ($row = $result->fetch())
           {
-            echo '<tr>
-            <th scope="row">'.$row['Date_submitted'].'</td>
-            <td>'.$row['Item_count'].'</td>
-            <td>'.$row['Cost'].'</td>
-            <td>'.$row['Status'].'</td></tr>';
+            $staff = $row['staff'];//Retrieve staff verdict
+            $admin = $row['admin'];//Retrieve admin verdict
+            //echo $admin;
+            //echo $staff;
+            //If staff or admin approves or hasnt approved yet
+            if($staff == 'No' || $admin == 'No')
+            {
+                //Output status as rejected
+                echo '<tr>
+                <th scope="row">'.$row['Date_submitted'].'</td>
+                <td>'.$row['Item_count'].'</td>
+                <td>'.$row['Cost'].'</td>
+                <td>Rejected</td>
+                <td><span style="float:left"><button type="submit" name="submit" value="open_'.$row['id'].'" class="btn btn-primary" data-toggle="modal" data-target="#ModalLong">Open</button></span></td></tr>';
+            }
+            else
+            {
+                echo '<tr>
+                <th scope="row">'.$row['Date_submitted'].'</td>
+                <td>'.$row['Item_count'].'</td>
+                <td>'.$row['Cost'].'</td>
+                <td>'.$row['Status'].'</td></tr>';
+            }
           }           
     }
 
@@ -378,54 +400,63 @@
           }
           else
           {
-            $result = $DBconnection->query($SQL_stmt);//Query needs to be executed again.
+              $result = $DBconnection->query($SQL_stmt);//Query needs to be executed again.
               while ($row = $result->fetch())
               {
                     echo '<tr>
                     <th scope="row">'.$row['request_Date'].'</th>
                     <td>'.$row['item_count'].'</td>
-                    <td>£'.$row['total_price'].'</td>
+                    <td>'.$row['total_price'].'</td>
                     <th><span style="float:left"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalLong">Edit </button></span></th>
                     <td><button type="button" class="btn btn-primary" >Delete</button></td></tr>';
               }
           }
       }
-
-        /* function getStudentInformation($uID) 
-      
-       require 'connect.php'; 
-      
-       $SQL_stmt = "SELECT userID as 'Student_ID', CONCAT(userFirstName, " ",userLastName) as 'Student_name',
-        student.availableBalance as 'Available_Balance' from users inner join student on users.userID = student.studentID
-        inner join departmentsStaffCourseStudents on users.userID = departmentsStaffCourseStudents.bscsStudentID
-        and departmentsStaffCourseStudents.bscsStaffID = '.$userid.' 
-        inner join course on departmentsStaffCourseStudents.bscsCourseID = course.courseID and 
-        course.courseTitle = '.$txbCourseTitle.' and course.courseLevel = '.$txbCourseLevel.' and 
-        course.courseYear = '.$txbCourseYear.' ORDER BY users.userID; 
-        
+      function getStudentInformation($uID, $courseTitle, $courseYear)
+      {
+          //is called within StaffNewRequest.php Line 176
+        //There is a mistake somewhere I cannot find it, like a missing semi colon or something
+           //course title, year and level not defined here. SO i would just select 
+           //from the course that the staff member is on instead.
+        require 'connect.php';
+        $courseTitle = $_SESSION['courseTitle'];
+        $SQL_stmt = "SELECT DISTINCT users.userID AS 'Student_ID', users.userFirstName AS 'first', 
+        users.userLastName AS 'last',
+        student.availableBalance AS 'Available_Balance' FROM users INNER JOIN student ON users.userID = student.studentID
+        INNER JOIN departmentsStaffCourseStudents ON users.userID = departmentsStaffCourseStudents.bscsStudentID
+        AND departmentsStaffCourseStudents.bscsStaffID = '". $uID ."' 
+        AND student.studentID = departmentsStaffCourseStudents.bscsStudentID
+        INNER JOIN course ON departmentsStaffCourseStudents.bscsCourseID = course.courseID 
+        AND course.courseTitle = '". $courseTitle ."'"; 
+          
+        $result = 0;
+          
+        //$studentName = 0;
+          
         $result = $DBconnection->query($SQL_stmt); 
         
         if ($result->fetch()==FALSE){
             echo '<tr>
-                <th scope="row">N/A</th>
-                <td>N/A</td>
-                <td>N/A</td>
+                <th scope="row">No Info</th>
+                <td>No Info</td>
+                <td>No Info</td>
                 <td><input type="checkbox"></td>
                 </tr>';
           }
           else
           {
-            $result = $DBconnection->query($SQL_stmt);
+              $result = $DBconnection->query($SQL_stmt);
               while ($row = $result->fetch())
               {
+                   // $studentName = $row['first'] . " " . $row['last'];
+                  
                     echo '<tr>
                     <th scope="row">'.$row['Student_ID'].'</th>
-                    <td>'.$row['Student_name'].'</td>
+                    <td>'.$row['first'].' '.$row['last'].'</td>
                     <td>'.$row['Available_Balance'].'</td>
                     <td><input type="checkbox"></td>
                     </tr>';
               }
           }
-      } */ 
-       
+      }
 ?>

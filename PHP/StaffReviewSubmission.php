@@ -176,12 +176,12 @@
                 echo '<div class="row">
                         <h5 class="m-2">Item ' . $count . '</h5>
                     </div>
-                    <div class="d-flex justify-content-between mb-3">
+                    <div class="d-flex mb-3">
                         
                         
-                        <div class="p-2 a">
+                        <div class="p-2 col-md-10 a">
                         
-                        <label for="categoryField" class="col-md-2 col-form-label">Category field:</label>
+                        <label for="categoryField" class="form-group  mr-auto">Category field:</label>
                             <select class="custom-select" id="categoryField" name="itemcategory' . $count . '">'
                     ;                    
                 echo '<option selected="'.$itemSelectedOptionNumber.'">' . $itemcategory . '</option>';
@@ -191,19 +191,19 @@
                 echo '<option value="4">Professional accreditation</option>';
                 echo '<option value="5">Vocational placement</option>';
                 echo '</select>';
-                echo '<input type="hidden" name="itemid" value="'.$itemId.'" /></div>';
+                echo '<input type="hidden" name="itemid'.$count.'" value="'.$itemId.'" /></div>';
                 
                 echo '<div class="p-2 b">
-                        <input type="radio" class ="form-control" name="radio'. $count . '" id="accept'. $count .'" value="approved" checked = "checked"/> 
+                        <input type="radio" style="width:20px; height:20px;  position:relative; top:30px;" class="form-control" name="radio'. $count . '" id="accept'. $count .'" value="approved" checked = "checked"/> 
                         
-                        <label for="accept'. $count .'">Approve</label>
+                        <label for="accept'. $count .'" style="position:relative; top:30px; ">Approve</label>
                      
                         </div>
                         
                         <div class="p-2 c">
-                        <input type="radio" class ="form-control" name="radio'. $count . '" id="reject'. $count .'" value="rejected" /> 
+                        <input type="radio" style="width:20px; height:20px;  position:relative; top:30px; " class="form-control" name="radio'. $count . '" id="reject'. $count .'" value="rejected" /> 
                         
-                        <label for="reject'. $count .'">Reject</label>
+                        <label for="reject'. $count .'" style="position:relative; top:30px; ">Reject</label>
                      
                         </div>';
                 
