@@ -151,9 +151,15 @@
                 
                 //echo "Item id is :$itemId"; //For testing
                 // output data from query
-                echo '<div class="row">
+                echo '<div class="form-group row justify-content-between">
                         <h5 id="hd05" name="numberOfItems" class="m-2">Item ' . $count . '</h5>
-                    </div>
+                        <div class="delete-group col-2">
+                            <div class="input-group-prepend">
+                                <a href="javascript:deleteItem(' . $count . ')" style="width: 5; height: 5;" class="btn btn-success" title="Delete this Item"><span>&#45;</span></a>
+                            </div>
+                        </div>
+                       </div>
+                        
                     <div class="form-group row">
                         <label for="categoryField" class="col-sm-2 col-form-label">Category field:</label>
                         <div class="col-sm-10 mt-2">
@@ -219,6 +225,12 @@
             echo '<div class="form-group">
             <textarea class="form-control" type="textarea" name="justification" value="'.$txbJustification.'" rows="3" placeholder="Justification:" required>'.$txbJustification.'</textarea>
             </div>';
+            //add items
+            echo '<div align="right" style="margin-bottom:5px;">
+                    <a href="javascript:addItem()" style="width: 15; height: 15;" class="btn btn-success" title="Add an Item"><span>&#43;</span></a>
+                </div>';
+
+            // stanard submit and save daft buttons
             echo '</div>
             <div class="row mt-3 mb-5">
                 
@@ -230,10 +242,10 @@
                     <button type="submit" name="submit" value="submitUpdated" style="width: 38%;" class="btn btn-success" id="Submit">Submit</button>
                 </div>
                 </div>
-                </form>
-                <div align="right" style="margin-bottom:5px;">
+                </form>';
+              /*  <div align="right" style="margin-bottom:5px;">
                    <a href="javascript:addItem()" style="width: 15; height: 15;" class="btn btn-success" title="Add an Item"><span>&#43;</span></a>
-                </div>';
+                </div>';*/
         }
         // for deleting selected file (need HTML code)
         if ($itemName == 'delete'){
