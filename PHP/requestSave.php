@@ -637,7 +637,8 @@
             $count = 1;
             $goToPage = 8;
             echo " start Step 2.1.a.<br>";
-            echo " start Step 2.1.'$requestid'.<br>";// for testing purposes
+            echo "Tutor comments: '$txbTutorComments'<br>";
+            echo " start Step 2.1.'$requestid'<br>";// for testing purposes
    
         // -loop through items which are in the form for items
             while (isset($_POST['itemprice' . $count]) > 0){
@@ -681,6 +682,8 @@
                         WHERE ItemID = '".$itemid."' AND RequestID = '".$requestid."'";
                         
                         $DBconnection->exec($SQL_stmt);//Execute query
+                        
+                        
                         echo " start Step 2.3 approved done.<br>";
                     }
                     elseif($acceptReject == "rejected")
@@ -712,7 +715,8 @@
                 
             }elseif($rejectCounter >= 1){ //If at least one item has been rejected
                 //Reject the whole request.
-                $SQL_stmt = "UPDATE bursaryRequests SET bRequestsStaffApproved = 'No'
+                $SQL_stmt = "UPDATE bursaryRequests SET bRequestsStaffApproved = 'No',
+                bRequestsTutorComments = '".$txbTutorComments."'
                 WHERE bRequestsID = '".$requestid."'";
                         
                 $DBconnection->exec($SQL_stmt);//Execute query
@@ -724,7 +728,7 @@
    // echo " SWITCH..CASE..End....<br>"; // for testing purposes
     #header("Location: student_home.php");
 // start with the if ($gTooPage == 2){/then  / th;eif ($userType == 'watevere'...)}else
- if($goToPage == 2)
+ /*if($goToPage == 2)
     {
        // echo $userType;
         if($userType == "Student")//This does not work.
@@ -745,7 +749,7 @@
       {
          header ("Location: staff_student_submissions.php? activity=submitted");
       }
-    }else{goBack();}
+    }else{goBack();}*/
          // new if here
    /* if($userType == "Student")
     {

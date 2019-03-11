@@ -232,7 +232,7 @@
                 </div>
                 </form>
                 <div align="right" style="margin-bottom:5px;">
-                   <a href="javascript:addItem()">Add New</a>
+                   <a href="javascript:addItem()" style="width: 15; height: 15;" class="btn btn-success" title="Add an Item"><span>&#43;</span></a>
                 </div>';
         }
         // for deleting selected file (need HTML code)

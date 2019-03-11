@@ -28,6 +28,52 @@
     $availableBalance = getStudentAvailableBalance($userid);
     require_once 'Shared/php/AllHeader.php';//connects to the header section for all pages
     require_once 'Student/php/StudentMenu.php';// Drop Down Menu for all student pages
+
+    if (isset($_SESSION['lastName'])){
+       # echo " start Step 2.0..<br>"; // for testing purposes
+        $firstName = $_SESSION['firstName'];
+        $lastName = $_SESSION['lastName'];
+        $userid = $_SESSION['userid'];
+        $userName = $firstName . " " . $lastName;
+        // get course title
+        $SQL_stmt = "SELECT DISTINCT courseTitle FROM course 
+        INNER JOIN studentToCourse ON course.courseID = studentToCourse.stcCourseID
+        INNER JOIN users ON users.userID = " . $userid . " and studentToCourse.stcStudentID = '" . $userid . "'";
+      
+        $result = $DBconnection->query($SQL_stmt);
+      
+        if ($row = $result->fetch()){
+            $courseTitle = $row['courseTitle'];
+            $_SESSION['courseTitle'] =  $courseTitle;
+        }
+        $SQL_stmt = "SELECT DISTINCT userid, userFirstName, userLastName FROM users
+        INNER JOIN departmentsStaffCourseStudents ON users.userID = departmentsStaffCourseStudents.bscsStaffID
+        AND departmentsStaffCourseStudents.bscsStudentID  = '" . $userid . "'";
+
+        $result = $DBconnection->query($SQL_stmt);
+
+        if ($row = $result->fetch()){
+
+            $courseTutorFirstName = $row['userFirstName'];
+            $courseTutorLastName = $row['userLastName'];
+            $courseTutorId = $row['userid'];
+           
+            $_SESSION['courseTutorFirstName'] =  $courseTutorFirstName;
+            $_SESSION['courseTutorLastName'] =  $courseTutorLastName;
+            $_SESSION['courseTutorId'] =  $courseTutorId;           
+        }
+     
+        $SQL_stmt = "SELECT stcCourseID AS 'courseid', stcStudentStatus AS 'status'
+        FROM studentToCourse WHERE stcStudentID = '" . $userid . "' and stcStudentStatus = 'Continuing'";
+      
+        $result = $DBconnection->query($SQL_stmt);
+      
+        if ($row = $result->fetch()) {
+          $courseid = $row['courseid'];
+          $_SESSION['courseid'] = $courseid;
+          
+        }
+    }
 ?>
 <!-- testing -->
 
@@ -56,7 +102,7 @@
         <!-- <div class="modal-dialog modal-lg" role="document"> -->
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="ModalLongTitle">Bursary request</h5>
+                    <h5 class="modal-title" id="ModalLongTitle"> Bursary Request </h5>
                    <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="false">&times;</span>
                     </button> -->
@@ -85,7 +131,7 @@
                              <label for="tutor" class="col-sm-2 col-form-label">Tutor:</label>
                              <div class="col-sm-10">
                                <?php
-                                 echo '<input type="text" class="form-control" id="tutor" disabled value="' . $courseTutorFirstName . ' ' . $courseTutorLastName . '" placeholder="Auto-generated field">';
+                                 echo '<input type="text" class="form-control" id="tutor" disabled value="'  .$courseTutorFirstName . ' ' . $courseTutorLastName . '" placeholder="Auto-generated field">';
                                 ?>
                              </div>
                         </div>
@@ -126,7 +172,7 @@
             itemsAndRequests.StaffItemApproved AS 'staff',
             itemsAndRequests.AdminItemApproved AS 'admin' FROM bursaryRequestItems
             INNER JOIN itemsAndRequests ON itemsAndRequests.ItemID = bursaryRequestItems.brItemID 
-            AND itemsAndRequests.RequestID = " . $requestid . "
+            AND itemsAndRequests.RequestID = '" . $requestid . "'
             AND itemsAndRequests.StudentID = '" . $userid . "'";
             
             $result = $DBconnection->query($SQL_stmt);
@@ -174,7 +220,7 @@
                     <div class="form-group row">
                         <label for="categoryField" class="col-sm-2 col-form-label">Category field:</label>
                         <div class="col-sm-10 mt-2">
-                            <select class="custom-select" id="categoryField" name="itemcategory' . $count . '">';                    
+                            <select class="custom-select" id="categoryField" value = "name="itemcategory' . $count . '"">';                    
                 echo '<option selected="'.$itemSelectedOptionNumber.'">' . $itemcategory . '</option>';
                 echo '<option value="1">Qualification</option>';
                 echo '<option value="2">Equipment</option>';
@@ -189,7 +235,7 @@
                         <div class="form-group">
                             <div>';
                                 echo '<label for="itemDescription' . $count . '">Item description:</label>';
-                                echo '<textarea class="form-control" id="itemDescription' . $count . '" name="itemdescription' . $count . '" rows="2">' . $itemdescription . '</textarea>';
+                                echo '<textarea class="form-control" id="itemDescription' . $count . '" value = "name="itemdescription' . $count . '" rows="2"">' . $itemdescription . '</textarea>';
                                 echo '</div>
                         </div>
             
@@ -203,7 +249,7 @@
                         <div class="form-row justify-content-between text-center">
                             <div class="form-group col-md-2">
                             <label for="price' . $count . '">Price:</label>
-                            <input type="text" class="form-control" name="itemprice' . $count . '" id="price" value="' . $itemprice . '" />
+                            <input type="text" class="form-control" name="itemprice' . $count . '" id="price"  value="' . $itemprice . '" />
                             </div>
                             <div class="form-group col-md-2">
                             <label for="postage' . $count . '">Postage:</label>
@@ -222,7 +268,8 @@
             }
             
             //Now select justification to display.
-            $SQL_stmt = "SELECT bRequestsTutorComments AS 'staffc', bRequestsAdminComments AS 'adminc', bRequestsJustification
+            $SQL_stmt = "SELECT bRequestsTutorComments AS 'staffc', 
+            bRequestsAdminComments AS 'adminc', bRequestsJustification
             FROM bursaryRequests WHERE bRequestsID = '". $requestid ."'";
             $txbJustification = 0;
             $staffc = 0;
@@ -245,10 +292,10 @@
             <textarea class="form-control" type="textarea" name="justification" value="'.$txbJustification.'" rows="3" placeholder="Justification:" required>'.$txbJustification.'</textarea>
             </div>';
             echo '<div class="form-group">
-            <textarea class="form-control" type="textarea" name="tutorcomments" value="'.$staffc.'" rows="3" placeholder="Tutor comments:" required>'.$txbJustification.'</textarea>
+            <textarea class="form-control" type="textarea" name="tutorcomments" value="'.$staffc.'" rows="3" placeholder="Tutor comments:" required>'.$staffc.'</textarea>
             </div>';
             echo '<div class="form-group">
-            <textarea class="form-control" type="textarea" name="admincomments" value="'.$adminc.'" rows="3" placeholder="Admin comments:" required>'.$txbJustification.'</textarea>
+            <textarea class="form-control" type="textarea" name="admincomments" value="'.$adminc.'" rows="3" placeholder="Admin comments:" required>'.$adminc.'</textarea>
             </div>';  
         }
     }

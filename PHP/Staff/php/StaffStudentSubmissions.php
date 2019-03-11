@@ -63,9 +63,6 @@ session_start();
                     ?>
           </div>
           </div>
-          
-          
-
         <div class="btn-group" style="text-align: center">
                   <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="true" align=right>
                     Year Selected
@@ -87,13 +84,13 @@ session_start();
       <th scope="col">Cost</th>
       <th scope="col">Available Funds</th>
       <th scope="col">Status</th>
+      <th> </th>
     </tr>
   </thead> 
   <tbody>
-      
      <?php 
       
-      echo getStaffStudentSubmitted($userid); 
+          echo getStaffStudentSubmitted($userid); 
       
       ?>
 </tbody>

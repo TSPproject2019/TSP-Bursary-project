@@ -13,7 +13,7 @@
                         <a class="dropdown-item" href="admin_staff_history.php">History Staff Requests</a>
                         <a class="dropdown-item" href="admin_faq.php">FAQ</a>
                         <a class="dropdown-item" href="admin_agreement.php">Agreement Form</a>
-                        <a class="dropdown-item" href="admin_home.php">Admin Home Page</a>
+                        <a class="dropdown-item" href="admin_home.php"> Home Page</a>
                     </div>
                </div>
           

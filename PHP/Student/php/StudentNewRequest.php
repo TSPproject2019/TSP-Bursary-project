@@ -118,10 +118,10 @@
     <div class="form-group row justify-content-between">
     <h5  id="hd05" name="numberOfItems"> Item 1 </h5>
     
-    <div class="delete-group col-3">
+    <div class="delete-group col-2">
          <div class="input-group-prepend">
-             <a href="javascript:addItem()" style="width: 5; height: 5;" class="btn btn-success"><span>&#43;</span></a>
-              <a href="javascript:deleteItem(1)" style="width: 5; height: 5;" class="btn btn-success"><span>&#45;</span></a>
+             <a href="javascript:addItem()" style="width: 6; height: 6;" class="btn btn-success" title="Add an Item"><span>&#43;</span>  </a>
+             <a href="javascript:deleteItem(1)" style="width: 5; height: 5;" class="btn btn-success" title="Delete this Item"><span>&#45;</span></a>
          </div>
     </div>
     </div>
@@ -185,7 +185,7 @@
   </form>
     
   <div align="right" style="margin-bottom:5px;">
-    <a href="javascript:addItem()">Add New</a>
+    <a href="javascript:addItem()" style="width: 15; height: 15;" class="btn btn-success" title="Add an Item"><span>&#43;</span></a>
   </div>
   
   </div>

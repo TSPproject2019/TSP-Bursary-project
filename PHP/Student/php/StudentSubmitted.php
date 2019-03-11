@@ -67,6 +67,7 @@
       <!---<th scope="col">Item Description</th> ---->
       <th scope="col">Cost</th>
       <th scope="col">Status</th>
+      <th scope="col"> </th>
     </tr>
   </thead>
   <tbody>

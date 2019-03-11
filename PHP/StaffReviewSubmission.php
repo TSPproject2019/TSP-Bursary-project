@@ -194,7 +194,7 @@
                 echo '<input type="hidden" name="itemid'.$count.'" value="'.$itemId.'" /></div>';
                 
                 echo '<div class="p-2 b">
-                        <input type="radio" style="width:20px; height:20px;  position:relative; top:30px;" class="form-control" name="radio'. $count . '" id="accept'. $count .'" value="approved" checked = "checked"/> 
+                        <input type="radio" style="width:20px; height:20px;  position:relative; top:30px;" class="form-control" name="radio'. $count . '" id="accept'. $count .'" value="approved" checked /> 
                         
                         <label for="accept'. $count .'" style="position:relative; top:30px; ">Approve</label>
                      
@@ -216,7 +216,7 @@
                         <div class="form-group">
                             <div>';
                                 echo '<label for="itemDescription' . $count . '">Item description:</label>';
-                                echo '<textarea class="form-control" id="itemDescription' . $count . '" name="itemdescription' . $count . '" rows="2" disabled value="'.$itemdescription.'">' . $itemdescription . '</textarea>';
+                                echo '<textarea class="form-control" id="itemDescription' . $count . '" name="itemdescription' . $count . '" rows="2" value="'.$itemdescription.'">' . $itemdescription . '</textarea>';
                                 echo '</div>
                         </div>';
                         echo '
@@ -261,9 +261,9 @@
             echo '<input type="hidden" name="numberOfItems" value="'.$count.'" />';
             //Display justification and tutor comments
             echo '<div class="form-group">
-            <textarea class="form-control" type="textarea" name="justification" disabled value="'.$txbJustification.'" rows="3" placeholder="Justification:" required>'.$txbJustification.'</textarea>
+            <textarea class="form-control" type="textarea" name="justification" value="'.$txbJustification.'" rows="3" placeholder="Justification:" required>'.$txbJustification.'</textarea>
             </div>';
-            echo '                  </div>
+            echo '
             <div class="form-group">
             <textarea class="form-control" type="textarea" name="tutorComments" value="'.$txbTutorComments.'" rows="3" placeholder="Tutor Comments:">'.$txbTutorComments.'</textarea>
             </div>

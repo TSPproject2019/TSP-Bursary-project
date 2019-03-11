@@ -7,15 +7,15 @@
                      <i class="fas fa-list-ul"></i></a>
                        
                       <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item" href="staff_agreement.php">Agreement form</a>
-                        <a class="dropdown-item" href="staff_faq.php">FAQ</a>
-                        <a class="dropdown-item" href="staff_student_history.php">History of Student Requests</a>
-                        <a class="dropdown-item" href="staff_home.php">Home Page</a>
-                        <a class="dropdown-item" href="staff_history.php">My History</a>
-                        <a class="dropdown-item" href="staff_submitted_forms.php">My Submitted Forms</a>
-                        <a class="dropdown-item" href="staff_review_drafts.php">Review My Drafts</a>
-                        <a class="dropdown-item" href="staff_new_bursary_request.php">New Bursary Request</a>
-                        <a class="dropdown-item" href="staff_student_submissions.php">Student Submissions</a>
+                        <a class="dropdown-item" href="staff_student_submissions.php"> Review Student Submissions</a>
+                        <a class="dropdown-item" href="staff_new_bursary_request.php"> Create New Bursary </a>
+                        <a class="dropdown-item" href="staff_submitted_forms.php"> My Submitted Forms </a>
+                        <a class="dropdown-item" href="staff_review_drafts.php"> Review My Drafts </a>
+                        <a class="dropdown-item" href="staff_history.php"> My History </a>
+                        <a class="dropdown-item" href="staff_student_history.php"> Student's History </a>
+                        <a class="dropdown-item" href="staff_faq.php"> FAQ </a>
+                        <a class="dropdown-item" href="staff_agreement.php"> Agreement Form </a>
+                        <a class="dropdown-item" href="staff_home.php"> Home Page </a>
                     </div>
             </div>
 <!-- </div> -->

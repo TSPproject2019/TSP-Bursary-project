@@ -267,14 +267,8 @@
         $result = $DBconnection->query($SQL_stmt); 
         
         if ($result->fetch()==FALSE){
-            echo '<tr>
-                <th scope="row">No info</th>
-                <td>No info</td>
-                <td>No info</td>
-                <td>No info</td>
-                <td>No info</td>
-                <td>No info</td>
-                <td>No info</td>
+            echo '<tr align="middle">
+                <th scope="row" colspan="7">No Submissions</th>
                 </tr>';
           }
           else
@@ -341,6 +335,7 @@
                 <th scope="row">No Drafts</th>
                 <td>No Drafts</td>
                 <td>No Drafts</td>
+                <td>No Drafts</td>
                 </tr>';
           }
           else //If there is a result
@@ -392,10 +387,8 @@
           $result = $DBconnection->query($SQL_stmt);
       
           if ($result->fetch()==FALSE){
-            echo '<tr>
-                <th scope="row">No Drafts</th>
-                <td>No Drafts</td>
-                <td>No Drafts</td>
+            echo '<tr style align ="middle">
+                <th scope="row" colspan="3" >No Existing Drafts</th>
                 </tr>';
           }
           else
