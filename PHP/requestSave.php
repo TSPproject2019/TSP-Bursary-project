@@ -280,6 +280,7 @@
             $tempString = $_SESSION['originalItems'];
             echo 'items stored as a string for the array: ' . $tempString . '</br>';
             $originalItems = split("_", $tempString);
+            $itemArrayLength = count($originalItems) - 1;
             echo 'items stored as a string split to an array: ' . $originalItems[0] . '</br>';
             // assign a counter
             $count = 1;
@@ -314,10 +315,41 @@
             
             echo " test echo 2.3.1.c : requestId id is:" . $requestid . "<br>";
             echo " test echo 2.3.1.c : Justification  is:" . $txbJustication . "<br>";
-            echo " start Step 2.1.d.<br>"; // for testing purposes
+            echo " start Step 2.3.1.d.<br>"; // for testing purposes
             #echo " test echo 2.1.a :" . $itemDescription . "<br>"; // for testing purposes
         // -loop through items which are in the form for items
-            while (isset($_POST['itemprice' . $count]) > 0){
+
+            // check to see if item 1 has been removed
+              // set post counter
+              $countItems = 0;
+              $countPost = 0;
+              $itemNum = array();
+              foreach($_POST as $varName => $varValue){
+                 #  echo ' start Step 2.3.2.a.  $varNameName: ' . $varName . ', $varValue: ' . $varValue . '<br>'; // for testing purposes
+                  // check to see if the item exists
+                  $varItem = "/itemid/";
+                  if(preg_match($varItem, $varName)){
+                      echo ' start Step 2.3.3.a.<br>'; // for testing purposes
+                      $tempA = split('d', $varName);
+                      $itemNum[$countPost] = $tempA[1];
+                      # - we need to get the number value from $varName - #
+
+                  #    echo ' start Step 2.3.3.a.$countPost: '.$tempA[0].'<br>'; // for testing purposes
+                  #    echo ' start Step 2.3.3.a.$count: '.$tempA[1].'<br>';// for testing purposes
+                      $countPost++;
+                  }
+                  //$count++;
+              }
+              echo ' start Step 2.3.4.a. : ' . $itemNum[0] . '<br>';
+  
+              // reset the standard counter
+              $countPost = 0;
+              $count = 1;
+              $testCounter = 0;
+            #  while (isset($_POST['itemprice' . $count])){
+            #  while ($_POST){
+              while (isset($_POST['itemprice' . $itemNum[$countPost]])){
+                $count = $itemNum[$countPost];
                 $testCounter++;
                 // add count to POST item variables (this will be linked to request ID)
                 $itemCategory = 'itemcategory' . $count;
@@ -383,54 +415,53 @@
                        
                        echo "New item inserted";
                     }
-                 
-                 // for loop here **
-                 for (int i=0, i<count($originalItems), i++){
-                      if ($originalItems[i] == $itemid){ /// find end of this field for the closing brace
-                 #}
-                 #   if($itemArray[$count-1] != $originalItems[$count-1])
-                    {
-                        if(!empty($itemid)) //update item and insert/update to request and student
-                        {
-                          echo "Updating item<br>";
-                          $SQL_stmt="UPDATE bursaryRequestItems SET brItemCategory = '$itemcategory',
-                          brItemDesc = '$itemdescription',brItemURL = '$itemUrl',brItemPrice = '$itemprice',
-                          brItemPostage = '$itempostage',brItemAdditionalCharges = '$itemadditionalcharges'
-                          WHERE brItemID = '".$itemid."'";
 
-                          $DBconnection->exec($SQL_stmt); //update item to the items table
+                      // for loop here **
+                     #$itemArrayLength = count($originalItems) - 1;
+                     echo 'Updating item, this is the array length: ' . $itemArrayLength . '<br>'; // for testing
+                     #$i = 0;
+                     for ($i = 0; $i <= $itemArrayLength; $i++){
+                          echo 'Updating item, for loop count: ' . $i . '<br>'; // for testing
+                          echo 'Updating item, for loop count itemID: ' . $originalItems[$i] . '<br>'; // for testing
+                          if ($originalItems[$i] == $itemid){ /// find end of this field for the closing brace
+                      #
+                      #   if($itemArray[$count-1] != $originalItems[$count-1]){
+                             if(!empty($itemid)) //update item and insert/update to request and student
+                             {
+                               echo "Updating item<br>";
+                               $SQL_stmt="UPDATE bursaryRequestItems SET brItemCategory = '$itemcategory',
+                               brItemDesc = '$itemdescription',brItemURL = '$itemUrl',brItemPrice = '$itemprice',
+                               brItemPostage = '$itempostage',brItemAdditionalCharges = '$itemadditionalcharges'
+                               WHERE brItemID = '".$itemid."'";
+
+                               $DBconnection->exec($SQL_stmt); //update item to the items table
 
 
-                          echo " test echo 2.3.1.b :" . $itemprice . "<br>"; // for testing purposes
+                               echo " test echo 2.3.1.b :" . $itemprice . "<br>"; // for testing purposes
 
 
-                          echo " test echo 2.3.1.c : Item id is:" . $itemid . "<br>"; // for testing purposes
-                          echo " test echo 2.3.1.c : request id is:" . $requestid . "<br>";
-                          echo "The item has been updated.";
+                               echo " test echo 2.3.1.c : Item id is:" . $itemid . "<br>"; // for testing purposes
+                               echo " test echo 2.3.1.c : request id is:" . $requestid . "<br>";
+                               echo "The item has been updated.";
 
-                          //Now update link items to the request and to student!
-                          //Removed for testing. Seems to be working fine without cause query doesnt execute
-                          /*$SQL_stmt = "INSERT INTO itemsAndRequests(ItemID,RequestID,StudentID) VALUES('$itemid','$requestid','$userid')
-                          ON DUPLICATE KEY UPDATE ItemID = '$itemid', RequestID = '$requestid', StudentID = '$userid' 
-                          WHERE RequestID = '$requestid' AND ItemID = '$itemid'";
+                               //Now update link items to the request and to student!
+                               //Removed for testing. Seems to be working fine without cause query doesnt execute
+                               /*$SQL_stmt = "INSERT INTO itemsAndRequests(ItemID,RequestID,StudentID) VALUES('$itemid','$requestid','$userid')
+                               ON DUPLICATE KEY UPDATE ItemID = '$itemid', RequestID = '$requestid', StudentID = '$userid' 
+                               WHERE RequestID = '$requestid' AND ItemID = '$itemid'";
 
-                          $DBconnection->exec($SQL_stmt);//Link and loop again. */
+                               $DBconnection->exec($SQL_stmt);//Link and loop again. */
 
-                          //Does not need an update on the link because item exists
+                               //Does not need an update on the link because item exists
 
-                          echo "Query executed.<br>";
-                          echo " test echo 2.3.1.d :" . $itemprice . "<br>"; // for testing purposes
-                        }
-                    }
-                    elseif($itemArray[$count-1] == $originalItems[$count-1])
-                    {
-                        
-                    }
-                    echo 'Array =' . $originalItems[$count-1] . '</br>';
-                
-                    
-                    }
-                 } 
+                               echo "Query executed.<br>";
+                               echo " test echo 2.3.1.d :" . $itemprice . "<br>"; // for testing purposes
+                             }
+                         
+                             echo 'Array =' . $originalItems[$count-1] . '</br>';
+
+                         }
+                      } 
                     //Add the item to the bursaryRequest items table
                     
                 if ($itemprice == NULL || $itemprice == 0 || $itemprice == ""){
