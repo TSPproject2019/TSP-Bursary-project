@@ -267,6 +267,7 @@
             #header("Location: student_review_draft.php? activity=request_saved");
             break;
         
+              // saving an updated draft
         case 'saveUpdated':
             echo " start Step 2.1..<br>"; // for testing purposes
             echo " We are in save updated<br>";
@@ -277,7 +278,9 @@
             $requestid = $_SESSION['requestId'];
             $itemArray = array(); //For comparison
             $tempString = $_SESSION['originalItems'];
+            echo 'items stored as a string for the array: ' . $tempString . '</br>';
             $originalItems = split("_", $tempString);
+            echo 'items stored as a string split to an array: ' . $originalItems[0] . '</br>';
             // assign a counter
             $count = 1;
             // assign whitch page to go back to.
@@ -349,8 +352,7 @@
                     if ($itemcategory == 4){$itemcategory = 'Professional accreditation';}
                     if ($itemcategory == 5){$itemcategory = 'Vocation placement';}
                     
-                    echo 'Array =' . $originalItems[$count-1] . '</br>';
-                
+                    
                     if(empty($itemid)) //If item id is empty, add the new item and link to request
                     {
                        $SQL_stmt="INSERT INTO bursaryRequestItems (brItemCategory,brItemDesc,brItemURL,brItemPrice,brItemPostage,brItemAdditionalCharges)
@@ -381,37 +383,54 @@
                        
                        echo "New item inserted";
                     }
-                    if(!empty($itemid)) //update item and insert/update to request and student
+                 
+                 // for loop here **
+                 for (int i=0, i<count($originalItems), i++){
+                      if ($originalItems[i] == $itemid){ /// find end of this field for the closing brace
+                 #}
+                 #   if($itemArray[$count-1] != $originalItems[$count-1])
                     {
-                      echo "Updating item<br>";
-                      $SQL_stmt="UPDATE bursaryRequestItems SET brItemCategory = '$itemcategory',
-                      brItemDesc = '$itemdescription',brItemURL = '$itemUrl',brItemPrice = '$itemprice',
-                      brItemPostage = '$itempostage',brItemAdditionalCharges = '$itemadditionalcharges'
-                      WHERE brItemID = '".$itemid."'";
+                        if(!empty($itemid)) //update item and insert/update to request and student
+                        {
+                          echo "Updating item<br>";
+                          $SQL_stmt="UPDATE bursaryRequestItems SET brItemCategory = '$itemcategory',
+                          brItemDesc = '$itemdescription',brItemURL = '$itemUrl',brItemPrice = '$itemprice',
+                          brItemPostage = '$itempostage',brItemAdditionalCharges = '$itemadditionalcharges'
+                          WHERE brItemID = '".$itemid."'";
 
-                      $DBconnection->exec($SQL_stmt); //update item to the items table
+                          $DBconnection->exec($SQL_stmt); //update item to the items table
 
 
-                      echo " test echo 2.3.1.b :" . $itemprice . "<br>"; // for testing purposes
+                          echo " test echo 2.3.1.b :" . $itemprice . "<br>"; // for testing purposes
 
 
-                      echo " test echo 2.3.1.c : Item id is:" . $itemid . "<br>"; // for testing purposes
-                      echo " test echo 2.3.1.c : request id is:" . $requestid . "<br>";
-                      echo "The item has been updated.";
+                          echo " test echo 2.3.1.c : Item id is:" . $itemid . "<br>"; // for testing purposes
+                          echo " test echo 2.3.1.c : request id is:" . $requestid . "<br>";
+                          echo "The item has been updated.";
 
-                      //Now update link items to the request and to student!
-                      //Removed for testing. Seems to be working fine without cause query doesnt execute
-                      /*$SQL_stmt = "INSERT INTO itemsAndRequests(ItemID,RequestID,StudentID) VALUES('$itemid','$requestid','$userid')
-                      ON DUPLICATE KEY UPDATE ItemID = '$itemid', RequestID = '$requestid', StudentID = '$userid' 
-                      WHERE RequestID = '$requestid' AND ItemID = '$itemid'";
+                          //Now update link items to the request and to student!
+                          //Removed for testing. Seems to be working fine without cause query doesnt execute
+                          /*$SQL_stmt = "INSERT INTO itemsAndRequests(ItemID,RequestID,StudentID) VALUES('$itemid','$requestid','$userid')
+                          ON DUPLICATE KEY UPDATE ItemID = '$itemid', RequestID = '$requestid', StudentID = '$userid' 
+                          WHERE RequestID = '$requestid' AND ItemID = '$itemid'";
 
-                      $DBconnection->exec($SQL_stmt);//Link and loop again. */
-                      
-                      //Does not need an update on the link because item exists
-                      
-                      echo "Query executed.<br>";
-                      echo " test echo 2.3.1.d :" . $itemprice . "<br>"; // for testing purposes
+                          $DBconnection->exec($SQL_stmt);//Link and loop again. */
+
+                          //Does not need an update on the link because item exists
+
+                          echo "Query executed.<br>";
+                          echo " test echo 2.3.1.d :" . $itemprice . "<br>"; // for testing purposes
+                        }
                     }
+                    elseif($itemArray[$count-1] == $originalItems[$count-1])
+                    {
+                        
+                    }
+                    echo 'Array =' . $originalItems[$count-1] . '</br>';
+                
+                    
+                    }
+                 } 
                     //Add the item to the bursaryRequest items table
                     
                 if ($itemprice == NULL || $itemprice == 0 || $itemprice == ""){
@@ -431,13 +450,14 @@
 
 
                         // now start the SQL script to post the request
-                    }
-                }*/
+                        */
+                   # }
+               # }
                 $count++;
             }
             break;
         
-        
+        // for submitting updated dtafts
         case 'submitUpdated':
             echo " start Step 2.1..<br>"; // for testing purposes
             echo " We are in submit updated<br>";
@@ -712,7 +732,7 @@
    // echo " SWITCH..CASE..End....<br>"; // for testing purposes
     #header("Location: student_home.php");
 // start with the if ($gTooPage == 2){/then  / th;eif ($userType == 'watevere'...)}else
- /*if($goToPage == 2)
+ /*if($goToPage == 2) // remember to un-remark this section after testing
     {
        // echo $userType;
         if($userType == "Student")//This does not work.
@@ -754,4 +774,5 @@
     {
         
     }*/
+ // remember to un-remark this section after testing
 ?>
