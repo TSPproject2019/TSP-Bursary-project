@@ -201,6 +201,7 @@
                 
                 $background = ""; //For background colour
                 
+                
                 //echo $admin;
                 //echo $staff;
                 if($staff == 'No' || $admin == 'No')

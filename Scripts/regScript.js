@@ -1,6 +1,12 @@
   var pass = document.getElementById('password');
   var popBox = document.getElementById('pPop');
   var sub = document.getElementById('but1');
+  var rePas = document.getElementById('repassword');
+
+  while(pass.valueOf != rePas.valueOf){
+      pass:focus.borderColor = "red";
+      rePas:focus.borderColor = "red";
+  }
   
   function pop(){
     popBox.style.display = "block";

@@ -177,6 +177,7 @@
         echo '<button class="dropdown-item" name="group" type="button" method="POST">  '.$row['Year']. '</button>';
       }          
     }
+
     //Get all student requests that are under status of submitted or approved
     function getStudentSubmittedForms($uID)
     {
@@ -224,34 +225,33 @@
           }           
     }
 
-    //IN DEVELOPMENT FOR STAFF TO VIEW STUDENT SUBMISSIONS (DANNY)
+    
     function getStaffStudentSubmitted($uID) 
     {
         require 'connect.php'; 
         $count = 0;
         
+        $courseTitle = $_SESSION['courseTitle'];
         //Because that staff member is on a particular course, all requests belonging to that course should show
         //Select all requests from all students that are on that course title and are linked to the staff member
-        $SQL_stmt = "SELECT itemsAndRequests.StudentID AS 'Student_ID',  CONCAT (userFirstName,' ',userLastName) AS 'Student_Name', 
+        $SQL_stmt = "SELECT users.userID AS 'Student_ID', 
         bursaryRequests.bRequestsID AS 'Request_ID',
-        bursaryRequests.bRequestsRequestDate AS 'Date_submitted',
-        SUM(IFNULL(bursaryRequestItems.brItemPrice,0) + IFNULL(bursaryRequestItems.brItemPostage,0) + 
-        IFNULL(bursaryRequestItems.brItemAdditionalCharges,0)) AS 'Total_price',
-        student.availableBalance AS 'Available_Balance',
-        bursaryRequests.bRequestsStatus AS 'Status' FROM bursaryRequests 
-        INNER JOIN itemsAndRequests ON itemsAndRequests.RequestID = bursaryRequests.bRequestsID 
-        AND itemsAndRequests.StaffItemApproved IS NULL
-        INNER JOIN course ON course.courseTitle = '". $_SESSION['courseTitle'] ."'
-        AND bursaryRequests.bRequestsCourseID = course.courseID
-        INNER JOIN bursaryRequestItems ON bursaryRequestItems.brItemID = itemsAndRequests.ItemID 
-        AND bursaryRequests.bRequestsStatus = 'Submitted'
-        AND bursaryRequests.bRequestsStudentRequest = TRUE
-        AND bursaryRequests.bRequestsStaffApproved IS NULL
-        INNER JOIN users ON users.userID = itemsAndRequests.StudentID
-        INNER JOIN student ON student.studentID = users.userID
-        INNER JOIN departmentsStaffCourseStudents ON departmentsStaffCourseStudents.bscsStaffID = '".$uID."'
-        AND departmentsStaffCourseStudents.bscsStudentID = student.studentID
-        GROUP BY bursaryRequests.bRequestsID";
+             CONCAT(users.userFirstName,' ',users.userLastName) AS 'Student_Name',
+             student.availableBalance AS 'balance',
+             bursaryRequests.bRequestsRequestDate AS 'Date_submitted',
+             SUM(IFNULL(bursaryRequestItems.brItemPrice,0) + IFNULL(bursaryRequestItems.brItemPostage,0) + IFNULL(bursaryRequestItems.brItemAdditionalCharges,0)) AS 'Total_price',
+             bursaryRequests.bRequestsStatus AS 'Status' FROM users
+             INNER JOIN itemsAndRequests ON users.userID = itemsAndRequests.StudentID
+             INNER JOIN student ON student.studentID = users.userID
+             INNER JOIN bursaryRequests ON bursaryRequests.bRequestsID = itemsAndRequests.RequestID
+             AND bursaryRequests.bRequestsStaffID = '".$uID."'
+             AND bursaryRequests.bRequestsStatus = 'Submitted'
+             AND bursaryRequests.bRequestsStaffApproved IS NULL
+             INNER JOIN bursaryRequestItems ON bursaryRequestItems.brItemID = itemsAndRequests.ItemID
+             INNER JOIN course ON course.courseID = bursaryRequests.bRequestsCourseID
+             AND course.courseTitle = '".$courseTitle."'
+             GROUP BY bursaryRequests.bRequestsID
+             ORDER BY bursaryRequests.bRequestsRequestDate DESC";
         
         $result = $DBconnection->query($SQL_stmt); 
         
@@ -272,7 +272,7 @@
                 <td>'.$row['Request_ID'].'</td>
                 <td>'.$row['Date_submitted'].'</td>
                 <td>'.$row['Total_price'].'</td>
-                <td>'.$row['Available_Balance'].'</td>
+                <td>'.$row['balance'].'</td>
                 <td>'.$row['Status'].'</td>
                 <td><span style="float:left"><button type="submit" name="submit" value="open_'.$row['Request_ID'].'" class="btn btn-primary" data-toggle="modal" data-target="#ModalLong">Open</button></span></td></tr>';
             }
@@ -320,11 +320,8 @@
           $result = $DBconnection->query($SQL_stmt);
     
           if ($result->fetch()==FALSE){//if query returns nothing
-            echo '<tr>
-                <th scope="row">No Drafts</th>
-                <td>No Drafts</td>
-                <td>No Drafts</td>
-                <td>No Drafts</td>
+            echo '<tr style align = "middle">
+                <th scope="row" colspan="4">No Existing Drafts</th>
                 </tr>';
           }
           else //If there is a result
@@ -417,10 +414,8 @@
         $result = $DBconnection->query($SQL_stmt); 
         
         if ($result->fetch()==FALSE){
-            echo '<tr>
-                <th scope="row">No Info</th>
-                <td>No Info</td>
-                <td>No Info</td>
+            echo '<tr style align = "middle">
+                <th scope="row" colspan ="3">No Info</th>
                 <td><input type="checkbox"></td>
                 </tr>';
           }
@@ -429,24 +424,86 @@
               $result = $DBconnection->query($SQL_stmt);
               while ($row = $result->fetch())
               {
+                  $count = 1;
                    // $studentName = $row['first'] . " " . $row['last'];
-                  
+                  //Store student id in the checkbox value
                     echo '<tr>
                     <th scope="row">'.$row['Student_ID'].'</th>
                     <td>'.$row['first'].' '.$row['last'].'</td>
                     <td>'.$row['Available_Balance'].'</td>
-                    <td><input type="checkbox"></td>
+                    <td><input type="checkbox" name="checkbox"'.$count.' value="'.$row['Student_ID'].'" ></td>
                     </tr>';
               }
           }
       }
-
-      /* get staffStudentHistory($uID)
-       * {
-       * require 'connect.php';
-       * 
-       * $SQL_stmt = ""; 
-       * 
-       * 
-       * }*/ 
+      function getstaffStudentHistory($uID)
+      {
+         require 'connect.php';
+         
+         $courseTitle = $_SESSION['courseTitle'];
+         
+         //Working solution. Outputs all requests under all statuses apart from Drafts
+         //Based on a specific course title and all students linked to the staff member through requests
+         $SQL_stmt =  "SELECT users.userID AS 'Student_ID', bursaryRequests.bRequestsID AS 'Request_ID',
+             CONCAT(users.userFirstName,' ',users.userLastName) AS 'Student_Name',
+             bursaryRequests.bRequestsStaffApproved AS 'Staff/Approved', bursaryRequests.bRequestsAdminApproved AS 'Admin/Approved',
+             bursaryRequests.bRequestsRequestDate AS 'Date_submitted',
+             SUM(IFNULL(bursaryRequestItems.brItemPrice,0) + IFNULL(bursaryRequestItems.brItemPostage,0) + IFNULL(bursaryRequestItems.brItemAdditionalCharges,0)) AS 'Total_price',
+             bursaryRequests.bRequestsStatus AS 'Status' FROM users
+             INNER JOIN itemsAndRequests ON users.userID = itemsAndRequests.StudentID
+             INNER JOIN bursaryRequests ON bursaryRequests.bRequestsID = itemsAndRequests.RequestID
+             AND bursaryRequests.bRequestsStaffID = '".$uID."'
+             AND bursaryRequests.bRequestsStatus NOT LIKE 'Draft'
+             INNER JOIN bursaryRequestItems ON bursaryRequestItems.brItemID = itemsAndRequests.ItemID
+             INNER JOIN course ON course.courseID = bursaryRequests.bRequestsCourseID
+             AND course.courseTitle = '".$courseTitle."'
+             GROUP BY bursaryRequests.bRequestsID
+             ORDER BY bursaryRequests.bRequestsRequestDate DESC";
+         $result = 0;
+        
+         $result = $DBconnection->query($SQL_stmt); 
+        
+          if ($result->fetch()==FALSE){
+            echo '<tr style align ="middle">
+                <th scope="row" colspan ="8">No Student History</th>
+                </tr>';
+          }
+          else
+          {
+              $result = $DBconnection->query($SQL_stmt);
+              
+              while ($row = $result->fetch())
+              {
+                  $staff = $row['Staff/Approved'];
+                  $admin = $row['Admin/Approved'];
+                  
+                  if($staff == 'No' || $admin == 'No')//Display rejected
+                  {
+                    echo '<tr>
+                    <th scope="row">'.$row['Student_ID'].'</th>
+                    <td>'.$row['Student_Name'].'</td>
+                    <td>'.$row['Request_ID'].'</td>                    
+                    <td>'.$row['Date_submitted'].'</td>
+                    <td>'.$row['Staff/Approved'].'</td>
+                    <td>'.$row['Admin/Approved'].'</td>
+                    <td>'.$row['Total_price'].'</td>
+                    <td>Rejected</td>
+                    </tr>';
+                  }
+                  else
+                  {
+                    echo '<tr>
+                    <th scope="row">'.$row['Student_ID'].'</th>
+                    <td>'.$row['Student_Name'].'</td>
+                    <td>'.$row['Request_ID'].'</td>                    
+                    <td>'.$row['Date_submitted'].'</td>
+                    <td>'.$row['Staff/Approved'].'</td>
+                    <td>'.$row['Admin/Approved'].'</td>
+                    <td>'.$row['Total_price'].'</td>
+                    <td>'.$row['Status'].'</td>
+                    </tr>';
+                  }
+              }
+          }
+      }
 ?>

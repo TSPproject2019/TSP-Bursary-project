@@ -33,6 +33,7 @@ function addItem(){ // to add item fields to a request
   var h = document.createElement('h5');
     h.setAttribute('id', "hd05"); // needs to be added to the source PHP
     h.setAttribute('name', "numberOfItems"); // needs to be added to the source PHP, as is used to count current items
+    h.setAttribute('class', "ml-4");//add left margin to item title
     h.innerHTML = "Item " + itemCounter;
   d0.appendChild(h);
   // span over 1 for (-) button

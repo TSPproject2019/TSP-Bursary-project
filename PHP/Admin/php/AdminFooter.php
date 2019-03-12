@@ -1,5 +1,5 @@
 <button onclick="goBack()" style="width: 20;" class="btn btn-success">Go Back</button>
-<footer class="jumbotron mb-0 mt-4">
+<footer class="jumbotron bg-secondary mb-0 mt-4">
 </footer>
 
 <script type="text/javascript" src="../Scripts/disabledButton.js"></script>

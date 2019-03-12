@@ -91,6 +91,8 @@
       <th scope="col">Request id</th>
       <th scope="col">Item</th>
       <th scope="col">Price (Total)</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
     </tr>
   </thead>
    <tbody>

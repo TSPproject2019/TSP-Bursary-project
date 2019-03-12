@@ -275,6 +275,9 @@
             $txbJustication = $_POST['justification'];  
             $bRequestsStatus = 'Draft'; //Draft because of saving the request
             $requestid = $_SESSION['requestId'];
+            $itemArray = array(); //For comparison
+            $tempString = $_SESSION['originalItems'];
+            $originalItems = split("|", $tempString);
             // assign a counter
             $count = 1;
             // assign whitch page to go back to.
@@ -336,6 +339,7 @@
                     $itempostage = $_POST[$itemPostage];
                     $itemadditionalcharges = $_POST[$itemAdditionalCharges];
                     $itemid = $_POST[$itemID]; //Gets item id of that item
+                    $itemArray = $itemid; //Push item id to array 
                     echo " test echo 2.3.1.a :" . $itemprice . "<br>"; // for testing purposes
                     echo " test echo 2.3.1.a :" . $itempostage . "<br>";
                     echo " test echo 2.3.1.a :" . $itemdescription . "<br>";
@@ -344,30 +348,9 @@
                     if ($itemcategory == 3){$itemcategory = 'Events';}
                     if ($itemcategory == 4){$itemcategory = 'Professional accreditation';}
                     if ($itemcategory == 5){$itemcategory = 'Vocation placement';}
+                    
+                    echo 'Array =' . $originalItems[$count-1] . '</br>';
                 
-                    // run SQL script to post the information..
-                    // Find item id of each item to update each item
-                    
-                   // echo "This is item category:". $itemcategory. "<br>"; //Category is currently empty
-                    //Now retrieve item id of each item in a loop
-                   /* $SQL_stmt = "SELECT brItemID AS 'itemId' FROM bursaryRequestItems
-                    WHERE brItemDesc = '$itemdescription' AND brItemURL = '$itemUrl' 
-                    AND brItemPrice = '$itemprice' AND brItemPostage = '$itempostage' 
-                    AND brItemAdditionalCharges = '$itemadditionalcharges'";
-
-                    $itemid = 0;
-
-                    $result = $DBconnection->query($SQL_stmt); //Run query
-                        
-                        if ($row = $result->fetch()){ //Retrieve item id result
-                            
-                            $itemid = $row['itemId'];
-                        }
-                        else{
-                          echo 'No item id found <br>';
-                        }*/
-                    //echo $itemid; //For testing
-                    
                     if(empty($itemid)) //If item id is empty, add the new item and link to request
                     {
                        $SQL_stmt="INSERT INTO bursaryRequestItems (brItemCategory,brItemDesc,brItemURL,brItemPrice,brItemPostage,brItemAdditionalCharges)
@@ -395,6 +378,8 @@
                        VALUES('$itemid', '$requestid', '$userid')";
 
                        $DBconnection->exec($SQL_stmt);//Link and loop again.
+                       
+                       echo "New item inserted";
                     }
                     if(!empty($itemid)) //update item and insert/update to request and student
                     {
@@ -412,6 +397,7 @@
 
                       echo " test echo 2.3.1.c : Item id is:" . $itemid . "<br>"; // for testing purposes
                       echo " test echo 2.3.1.c : request id is:" . $requestid . "<br>";
+                      echo "The item has been updated.";
 
                       //Now update link items to the request and to student!
                       //Removed for testing. Seems to be working fine without cause query doesnt execute
@@ -428,9 +414,6 @@
                     }
                     //Add the item to the bursaryRequest items table
                     
-
-                    
-#                }
                 if ($itemprice == NULL || $itemprice == 0 || $itemprice == ""){
                     echo " test echo 2.3.1.end :" . $itemprice . "<br>"; // for testing purposes
                     // return to page you were on as a fresh page
@@ -484,6 +467,7 @@
             #echo " test echo 2.1.a :" . $itemDescription . "<br>"; // for testing purposes
         // -loop through items which are in the form for items
             while (isset($_POST['itemprice' . $count]) > 0){
+                
                 $testCounter++;
                 // add count to POST item variables (this will be linked to request ID)
                 $itemCategory = 'itemcategory' . $count;

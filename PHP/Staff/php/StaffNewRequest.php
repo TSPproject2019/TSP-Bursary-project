@@ -38,9 +38,17 @@ session_start();
          $submittedTotal = getStaffTotals($userid,$userType,"Submitted");
          $approvedTotal = getStaffApproved($userid,$userType,"Approved");
          $awaitingDelivery = getStaffAwaitingDelivery($userid,$userType);
+         $availableBalance = getStudentAvailableBalance($userid);
     }
 
 ?>
+<div class="col-md-4 ml-3">
+     <?php
+        echo '<p>Outstanding balance: <span>' . $availableBalance . '</span></p>';
+      ?>
+ </div>
+
+
                 <div class="col-md-4 ml-4">
                     <ul class="list-group list-group-flush">
                        <?php
@@ -50,95 +58,104 @@ session_start();
                           ?>
                     </ul>
                 </div>
-                <div class="col-md-4 ml-3">
-            <p>Outstanding balance: <span>£500.00</span></p>
-        </div>
-    <section class="container-fluid mt-5">
-    <section class="row">
-     <div class="col-6">
-            
-         <form>
-              <div class="form-group row">
-    <label for="fullName" class="col-sm-2 col-form-label">Full Name:</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" disabled value="" id="fullName">
-    </div>
-  </div>
-            
+</div>
+        
+
+<section class="container-fluid mt-5"> <!--Container section start -->      
+    <section class="row"> <!-- Row left side start -->
+         <div class="col-6">           
              <div class="form-group row">
-    <label for="course" class="col-sm-2 col-form-label">Course:</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" id="course" placeholder="Auto-generated field">
-    </div>
-  </div>
-  
-              
-              <div class="form-group row">
-    <label for="tutor" class="col-sm-2 col-form-label">Tutor:</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" id="tutor" placeholder="Auto-generated field">
-    </div>
-  </div>
-  
-  <h5> Item 1 </h5>
-  
-  
-  <h6>Category field(Qualification, Equipment, Events, Professional accreditation, Vocational placement)</h6>
-         <form>
-             <div class="form-group">
-                 <div>
-                     <input type="text" class="form-control" placeholder="Item description:">
-                  </div>
+                <label for="course" class="col-sm-2 col-form-label">Course:</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="course" placeholder="Auto-generated field">
+                </div>
               </div>
-            
-              <div class="form-group">
-                 <div>
-                     <input type="text" class="form-control" placeholder="URL to the item:">
+                  <input type="hidden" class="form-control" id="tutor" placeholder="Auto-generated field">
+                   <input type="hidden" class="form-control" disabled value="" id="fullName">
+                
+
+      <form class="m-1">
+         <!--Staff ID using id stored in session storage at login page -->
+        <input type="hidden" name="courseTutorId" value="<?php echo $_SESSION['courseTutorId'] ?>" />
+        <!-- Turtor Course id stored in session storage at login page -->
+        <input type="hidden" name="courseid" value="<?php echo $_SESSION['courseid'] ?>" />
+        <!--Student id -->
+        <input type="hidden" name="userid" value="<?php echo $_SESSION['userid'] ?>" />
+      
+        <div id = "newlink">
+            <div class="form-group row justify-content-between">
+            <h5  id="hd05" name="numberOfItems" class="ml-4"> Item 1 </h5>
+    
+            <div class="delete-group col-2">
+                 <div class="input-group-prepend">
+                     <a href="javascript:addItem()" style="width: 6; height: 6;" class="btn btn-success m-1" title="Add an Item"><span>&#43;</span>  </a>
+                     <a href="javascript:deleteItem(1)" style="width: 6; height: 6;" class="btn btn-success m-1" title="Delete this Item"><span>&#45;</span></a>
                  </div>
+            </div>
+            </div>
+            <!--Category selection -->
+            <div class="col-12 mt-2 mb-5">
+                    <select class="custom-select" id="categoryField" name="itemcategory1">
+                        <option value ="" selected="">Choose Category...</option>
+                        <option value="Qualification">Qualification</option>
+                        <option value="Equipment">Equipment</option>
+                        <option value="Events">Events</option>
+                        <option value="Professional accreditation">Professional accreditation</option>
+                        <option value="Vocational placement">Vocational placement</option>
+                    </select>
+                </div>    
+            <!--Item description -->
+            <div class="form-group row">
+                <div class="col-12">
+                    <input type="text" name="itemdescription1" class="form-control" placeholder="Item description:" required>
                 </div>
-            
-                <div class="form-group row justify-content-between">
-                    <div class="input-group col-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="price">Price:</span>
-                        </div>
-                        <input type="text" class="form-control"   aria-describedby="price">
-                    </div>
-                    
-                    <div class="input-group col-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="price">Postage:</span>
-                        </div>
-                        <input type="text" class="form-control"   aria-describedby="postage">
-                    </div>
-                    
-                    <div class="input-group col-4">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="additionalFees">Additional fees:</span>
-                        </div>
-                        <input type="text" class="form-control"   aria-describedby="additionalFees">
-                    </div>
-                    
-                </div>
+            </div> 
+            <!--Item URL-->
+            <div class="form-group row">
+               <div class="col-12">
+                   <input type="text" name="itemUrl1" class="form-control" placeholder="URL to the item:" required
+                      value="<?php if (isset($_POST['itemUrl'])) echo $_POST['itemUrl']; ?>">
+               </div>
+            </div>
+            <!--FORM FEES ROW-->
+            <div class="form-group row justify-content-between">
+            <!--Form Price field -->
+              <div class="input-group col-3">
+                  <div class="input-group-prepend">
+                      <span class="input-group-text" id="price" required>Item Price:</span>
+                  </div>
+                  <input type="text" class="form-control" name="itemprice1" aria-describedby="price">
+              </div>
+             <!--Form Postage field -->              
+              <div class="input-group col-3">
+                  <div class="input-group-prepend">
+                     <span class="input-group-text" id="price">Postage:</span>
+                  </div>
+                  <input type="text" class="form-control" name="itempostage1" aria-describedby="postage">
+               </div>
+          <!--Form Additional Fees -->
+              <div class="input-group col-4">
+                  <div class="input-group-prepend">
+                      <span class="input-group-text" id="additionalFees">Additional fees:</span>
+                  </div>
+                  <input type="text" class="form-control" name="itemadditionalcharges1" aria-describedby="additionalFees">
+              </div>                   
+         </div> <!--End of Fees row -->
+      </div><!--newlink end -->
                 
-                <div class="form-group">
-                    <textarea class="form-control" type="textarea" name="justification" rows="3" placeholder="Justification:"></textarea>
-                </div>
-                <div class="form-group">
-                    <textarea class="form-control" type="textarea" name="tutorComments" rows="3" placeholder="Tutor Comments:"></textarea>
-                </div>
-                <div class="form-group">
-                    <textarea class="form-control" type="textarea" name="additionalComments" rows="4" placeholder="Additional Comments:"></textarea>
-                </div>
-                <div class="form-group">
-                    <textarea class="form-control" type="textarea" name="staffComments" rows="5" placeholder="Staff Comments (Additional comments to students)"></textarea>
-                </div>
-                
-               <button type="button" class="btn btn-primary btn-lg">Save as Draft</button>
-               <button type="button" class="btn btn-secondary btn-lg">Submit</button>
-                
-            </form>
-        <section class="col-6">
+          <!--Form Justification textarea -->
+          <div class="form-group">
+              <textarea class="form-control" type="textarea" name="justification" rows="3" placeholder="Justification:" required></textarea>
+          </div>
+           <div align="right" style="margin-bottom:5px;">
+             <a href="javascript:addItem()" style="width: 15; height: 15;" class="btn btn-success" title="Add an Item"><span>&#43;</span></a>
+           </div>
+             <button type="submit" name="submit" value="saveRequest" class="btn btn-warning btn-lg" id="Save">Save as Draft</button>
+             <button type="submit" name="submit" value="submitRequest" class="btn btn-success btn-lg" id="Submit">Submit</button>            
+            </div>
+      </form>
+     
+        <section class="col-6"> <!--Student row right side table -->
             <div class="row justify-content-center">
                 <select class="custom-select col-3 mr-2">
                     <option selected>Select group</option>
@@ -155,8 +172,7 @@ session_start();
                     <option value="3">Three</option>
                 </select>
           </div>
-          </section>
-                <input class="col-1 m-0" type="checkbox" id="checkbox3" value=""> </input>
+                <input class="col-1 m-0" type="checkbox" id="checkbox3" value="">
            
                 <label class="form-check-label" for="checkbox3">Select All Students</label>
             <div class="row justify-content-around mt-4 text-center"></div>
@@ -214,4 +230,9 @@ session_start();
       <td><input type="checkbox"></td>
     </tr> -->
   </tbody>
-</table>         
+</table>
+       </section><!--Student table section  END -->
+      </section><!-- Row left side END -->
+     </section><!--Container section END -->
+
+

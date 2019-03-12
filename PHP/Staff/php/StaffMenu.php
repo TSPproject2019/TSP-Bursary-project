@@ -17,5 +17,5 @@
                         <a class="dropdown-item" href="staff_agreement.php"> Agreement Form </a>
                         <a class="dropdown-item" href="staff_home.php"> Home Page </a>
                     </div>
-            </div>
+            </div><!-- Menu ends -->
 <!-- </div> -->

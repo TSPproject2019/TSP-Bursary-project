@@ -118,6 +118,8 @@
         $_SESSION['requestId'] = $requestid;
         // for editing drafts
         if ($itemName == 'edit'){
+            // we need an array to store the items currently being shown
+            $arrayItemsFirst = array();
             //Using the request id, find the item info 
             $SQL_stmt = "SELECT brItemID AS 'itemId', brItemCategory AS 'category', 
             brItemDesc AS 'item_description', brItemURL AS 'URL', 
@@ -149,6 +151,8 @@
                 if ($itemcategory == 'Professional accreditation'){$itemSelectedOptionNumber = 4;}
                 if ($itemcategory == 'Vocational placement'){$itemSelectedOptionNumber = 5;}
                 
+                // now store the iotem id's into the array 
+                array_push($arrayItemsFirst, $itemId);
                 //echo "Item id is :$itemId"; //For testing
                 // output data from query
                 echo '<div id="' . $count . '">
@@ -205,14 +209,23 @@
                             </div>
                             </div>
                             </div>';
+                            // testing only
+                            echo 'testing item ID array: ' . $arrayItemsFirst[$count - 1] . '</br>';
                             
                     // cycle counter
                     $count++;
             // break out of the for loop*/
             }
-            //Now select justification to display.
+            $stringOfItemNumbers = implode("|",$arrayItemsFirst);
+            // store the arrayed list of items
+            $_SESSION['originalItems'] = $stringOfItemNumbers;
+            
+             //Now select justification to display.
             $SQL_stmt = "SELECT bRequestsJustification FROM bursaryRequests WHERE bRequestsID = '".$requestid."'";
             $txbJustification = 0;
+             
+
+             // 
             //Execute query
             $result = $DBconnection->query($SQL_stmt);
             
@@ -222,8 +235,8 @@
             }
             // set the number of items counter for javascript to read
             //echo '<input type="hidden" name="numberOfItems" value="'.$count.'" />';
-            echo '</div><!--newlink end -->';
             //Display justification
+            echo '</div>'; //For new link end (Buttons are not within the form tag)
             echo '<div class="form-group">
             <textarea class="form-control" type="textarea" name="justification" value="'.$txbJustification.'" rows="3" placeholder="Justification:" required>'.$txbJustification.'</textarea>
             </div>';

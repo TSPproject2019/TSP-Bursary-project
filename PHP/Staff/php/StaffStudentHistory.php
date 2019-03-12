@@ -40,8 +40,8 @@
          $awaitingDelivery = getStaffAwaitingDelivery($userid,$userType);
     }
 ?>
-<div>
-                <div class="col-md-4 ml-4">
+
+                <div class="col-md-4 ml-5">
                     <ul class="list-group list-group-flush">
                        <?php
                        echo'<li class="list-group-item">Submitted: '. $submittedTotal .'</li>';
@@ -50,17 +50,22 @@
                           ?>
                     </ul>
                 </div>
-               <div class="btn-group" style="text-align: center" "display:block;">
-                  <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="true" align=right>
-                    Name of Group Selected
-                  </button>
-                  <div class="dropdown-menu dropdown-menu-lg-right">
-                  <?php
-                       echo getStaffAllCourses($userid);
-                    ?>
-          </div>
-          </div>
-        <div class="btn-group" style="text-align: center">
+</div>
+
+<div class="container">
+    
+    <div class="row m-5"><!--table selectiom START -->        
+         <div class="col btn-group">
+             <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="true" align=right>
+               Name of Group Selected
+             </button>
+              <div class="dropdown-menu dropdown-menu-lg-right">
+                <?php
+                     echo getStaffAllCourses($userid);
+                  ?>
+               </div>
+           </div>
+        <div class="col btn-group">
                   <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="true" align=right>
                     Year Selected
                   </button>
@@ -70,75 +75,53 @@
                     ?>
                   </div>
                </div>
-    
-        <div class="btn-group" style="text-align: center">
+        <div class="col btn-group">
                   <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="true" align=right>
-                    Sort by
+                    Level
                   </button>
                   <div class="dropdown-menu dropdown-menu-lg-right">
-                  <button class="dropdown-item" type="button">Pending</button>
-                  <button class="dropdown-item" type="button">Delivered</button>
-                  <button class="dropdown-item" type="button">Accepted</button>
-    
+                  <?php
+                       echo getStaffAllCourseYears($userid);
+                    ?>
                   </div>
-            </div>
-<div>     
-          
-          <table class="table table-striped">
+               </div>
+    
+        <div class="col btn-group">
+                  <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="true" align=right>
+                    Sort by
+                  </button> 
+                  <div class="dropdown-menu dropdown-menu-lg-right">
+                  <?php
+                      
+                    ?>
+                  </div>
+         </div>
+       </div><!--selection row END -->
+       
+  <!-- table start --> 
+<div class="row col-10 ml-4">              
+ <table class="table table-striped">
    <thead class="thead-dark">
               <tr>
-                <th>Student ID</th>
-                <th>Student Name</th>
-                <th>File Name</th>
-                <th>Date Submitted</th>
-                <th>Date Approved</th>
-                <th>Cost</th>
-                <th>Status</th>
-              </tr>
-              <tr>
-                <td>ID ONE</td>
-                <td>NAME ONE</td>
-                <td>WEBFORM 1</td>
-                <td>27/01/2019</td>
-                <td>28/01/2019</td>
-                <td>£153.50</td>
-                <td>ACCEPTED</td>
-              </tr>
-              <tr>
-                <td>ID TWO</td>
-                <td>NAME TWO</td>
-                <td>WEBFORM 2</td>
-                <td>27/01/2019</td>
-                <td>28/01/2019</td>
-                <td>£78.00</td>
-                <td>DELIVERED</td>
-              </tr>
-              <tr>
-                <td>ID THREE</td>
-                <td>NAME THREE</td>
-                <td>WEBFORM 3</td>
-                <td>27/01/2019</td>
-                <td>28/01/2019</td>
-                <td>£499.99</td>
-                <td>PENDING</td>
-              </tr>
-              <tr>
-                <td>ID FOUR</td>
-                <td>NAME FOUR</td>
-                <td>WEBFORM 4</td>
-                <td>27/01/2019</td>
-                <td>28/01/2019</td>
-                <td>£55.50</td>
-                <td>PENDING</td>
-              </tr>
-              <tr>
-                <td>ID FIVE</td>
-                <td>NAME FIVE</td>
-                <td>WEBFORM 5</td>
-                <td>27/01/2019</td>
-                <td>28/01/2019</td>
-                <td>£100.00</td>
-                <td>ACCEPTED</td>
+                <th scope="col">Student ID</th>
+                <th scope="col">Student Name</th>
+                <th scope="col">Request ID</th>
+                <th scope="col">Date Submitted</th>
+                <th scope="col">Staff</th>
+                <th scope="col">Admin</th>
+                <th scope="col">Cost</th>
+                <th scope="col">Status</th>
               </tr>
             </thead>
-            </table>
+     
+            <tbody> 
+             <?php 
+                 echo getstaffStudentHistory($userid);          
+                ?>
+                
+            </tbody>
+       </table> <!--table end-->
+    </div><!--table row END-->
+</div>    
+
+

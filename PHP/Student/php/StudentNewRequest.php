@@ -114,6 +114,7 @@
     <input type="hidden" name="courseid" value="<?php echo $_SESSION['courseid'] ?>" />
     <!--Student id -->
     <input type="hidden" name="userid" value="<?php echo $_SESSION['userid'] ?>" />
+      
     <div id = "newlink">
     <div class="form-group row justify-content-between">
     <h5  id="hd05" name="numberOfItems"> Item 1 </h5>
