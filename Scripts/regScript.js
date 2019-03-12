@@ -2,12 +2,16 @@
   var popBox = document.getElementById('pPop');
   var sub = document.getElementById('but1');
   var rePas = document.getElementById('repassword');
-
-  while(pass.valueOf != rePas.valueOf){
-      pass:focus.borderColor = "red";
-      rePas:focus.borderColor = "red";
-  }
   
+  if(pass.value != rePas.value){
+      sub.style.display = "none";
+      window.alert(pass.value);
+      //pass:focus.borderColor = "red";
+      //rePas:focus.borderColor = "red";
+  }
+
+  document.getElementById('password').innerHTML = "hello";
+
   function pop(){
     popBox.style.display = "block";
   }

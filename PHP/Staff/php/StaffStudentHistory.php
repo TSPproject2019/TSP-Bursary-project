@@ -81,7 +81,7 @@
                   </button>
                   <div class="dropdown-menu dropdown-menu-lg-right">
                   <?php
-                       echo getStaffAllCourseYears($userid);
+                       echo getStaffAllCourseLevels($userid);
                     ?>
                   </div>
                </div>

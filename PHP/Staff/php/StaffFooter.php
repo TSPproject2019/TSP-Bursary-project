@@ -12,4 +12,5 @@
 </body>
 <script src="../../../Scripts/pageFooterFunctions.js"></script>
 <script src="../../../Scripts/methodsMain.js"></script>
+<script src="../../../Scripts/selectAll.js"></script>
 </html>

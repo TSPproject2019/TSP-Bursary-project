@@ -48,7 +48,7 @@ function addItem(){ // to add item fields to a request
   var d0a1a = document.createElement('a');
     d0a1a.setAttribute('href', idel);
     d0a1a.setAttribute('style', "width: 5; height: 5;");
-    d0a1a.setAttribute('class', "btn btn-success");
+    d0a1a.setAttribute('class', "btn btn-danger");
     d0a1a.setAttribute('title', "Delete this Item");
     d0a1a.innerHTML = "<span>&#45;</span>";
   d0a1.appendChild(d0a1a);

@@ -165,10 +165,10 @@
     // Gets all course years of a particular staff member
     function getStaffAllCourseYears($uID){
       require 'connect.php';
-      $SQL_stmt = "SELECT courseYear AS 'Year' FROM course
+      $SQL_stmt = "SELECT DISTINCT courseYear AS 'Year' FROM course
       INNER JOIN departmentsStaffCourseStudents
       ON departmentsStaffCourseStudents.bscsCourseID = course.courseID
-      WHERE bscsStaffID = '". $uID ."'";
+      WHERE bscsStaffID = '". $uID ."' ORDER BY course.courseYear ASC";
       
       $result = $DBconnection->query($SQL_stmt);
                         
@@ -177,6 +177,22 @@
         echo '<button class="dropdown-item" name="group" type="button" method="POST">  '.$row['Year']. '</button>';
       }          
     }
+
+     function getStaffAllCourseLevels($uID){
+           require 'connect.php'; 
+      
+           $SQL_stmt = "SELECT DISTINCT courseLevel AS 'Level' FROM course
+           INNER JOIN departmentsStaffCourseStudents
+           ON departmentsStaffCourseStudents.bscsCourseID = course.courseID
+           WHERE bscsStaffID = '". $uID ."' ORDER BY course.courseLevel ASC";
+      
+          $result = $DBconnection->query($SQL_stmt);
+                        
+          while ($row = $result->fetch())
+          {
+            echo '<button class="dropdown-item" name="group" type="button" method="POST">  '.$row['Level']. '</button>';
+          }                
+      }          
 
     //Get all student requests that are under status of submitted or approved
     function getStudentSubmittedForms($uID)
@@ -431,7 +447,7 @@
                     <th scope="row">'.$row['Student_ID'].'</th>
                     <td>'.$row['first'].' '.$row['last'].'</td>
                     <td>'.$row['Available_Balance'].'</td>
-                    <td><input type="checkbox" name="checkbox"'.$count.' value="'.$row['Student_ID'].'" ></td>
+                    <td><input type="checkbox" class="checkbox" name="checkbox"'.$count.' value="'.$row['Student_ID'].'" ></td>
                     </tr>';
               }
           }

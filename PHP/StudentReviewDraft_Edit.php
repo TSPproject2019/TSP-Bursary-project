@@ -210,13 +210,13 @@
                             </div>
                             </div>';
                             // testing only
-                            echo 'testing item ID array: ' . $arrayItemsFirst[$count - 1] . '</br>';
+                            #echo 'testing item ID array: ' . $arrayItemsFirst[$count - 1] . '</br>';
                             
                     // cycle counter
                     $count++;
             // break out of the for loop*/
             }
-            $stringOfItemNumbers = implode("|",$arrayItemsFirst);
+            $stringOfItemNumbers = implode("_",$arrayItemsFirst);
             // store the arrayed list of items
             $_SESSION['originalItems'] = $stringOfItemNumbers;
             

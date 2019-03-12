@@ -42,11 +42,7 @@ session_start();
     }
 
 ?>
-<div class="col-md-4 ml-3">
-     <?php
-        echo '<p>Outstanding balance: <span>' . $availableBalance . '</span></p>';
-      ?>
- </div>
+
 
 
                 <div class="col-md-4 ml-4">
@@ -71,7 +67,7 @@ session_start();
                 </div>
               </div>
                   <input type="hidden" class="form-control" id="tutor" placeholder="Auto-generated field">
-                   <input type="hidden" class="form-control" disabled value="" id="fullName">
+                   <input type="hidden" "disabled" class="form-control" disabled value="" id="fullName">
                 
 
       <form class="m-1">
@@ -88,14 +84,14 @@ session_start();
     
             <div class="delete-group col-2">
                  <div class="input-group-prepend">
-                     <a href="javascript:addItem()" style="width: 6; height: 6;" class="btn btn-success m-1" title="Add an Item"><span>&#43;</span>  </a>
-                     <a href="javascript:deleteItem(1)" style="width: 6; height: 6;" class="btn btn-success m-1" title="Delete this Item"><span>&#45;</span></a>
+                     <a href="javascript:addItem()" style="width: 5; height: 5;" class="btn btn-success m-1" title="Add an Item"><span>&#43;</span>  </a>
+                     <a href="javascript:deleteItem(1)" style="width: 5; height: 5;" class="btn btn-danger m-1" title="Delete this Item"><span>&#45;</span></a>
                  </div>
             </div>
             </div>
             <!--Category selection -->
-            <div class="col-12 mt-2 mb-5">
-                    <select class="custom-select" id="categoryField" name="itemcategory1">
+            <div class="mt-2 mb-5">
+                    <select class="custom-select col-12" id="categoryField" name="itemcategory1">
                         <option value ="" selected="">Choose Category...</option>
                         <option value="Qualification">Qualification</option>
                         <option value="Equipment">Equipment</option>
@@ -120,14 +116,14 @@ session_start();
             <!--FORM FEES ROW-->
             <div class="form-group row justify-content-between">
             <!--Form Price field -->
-              <div class="input-group col-3">
+              <div class="input-group col-4">
                   <div class="input-group-prepend">
                       <span class="input-group-text" id="price" required>Item Price:</span>
                   </div>
                   <input type="text" class="form-control" name="itemprice1" aria-describedby="price">
               </div>
              <!--Form Postage field -->              
-              <div class="input-group col-3">
+              <div class="input-group col-4">
                   <div class="input-group-prepend">
                      <span class="input-group-text" id="price">Postage:</span>
                   </div>
@@ -136,7 +132,7 @@ session_start();
           <!--Form Additional Fees -->
               <div class="input-group col-4">
                   <div class="input-group-prepend">
-                      <span class="input-group-text" id="additionalFees">Additional fees:</span>
+                      <span class="input-group-text" id="additionalFees">Add. fees:</span>
                   </div>
                   <input type="text" class="form-control" name="itemadditionalcharges1" aria-describedby="additionalFees">
               </div>                   
@@ -156,27 +152,34 @@ session_start();
       </form>
      
         <section class="col-6"> <!--Student row right side table -->
-            <div class="row justify-content-center">
-                <select class="custom-select col-3 mr-2">
-                    <option selected>Select group</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                </select>
-           
-            
-                <select class="custom-select col-3">
+                <div class="row">
+                    <select class="custom-select col-12 mr-2 mb-5">
+                        <option selected>Select Group</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+                
+                <div class="row">
+                    <select class="custom-select col-12 mr-2 mb-5">
+                        <option selected>Select Level</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+                    
+            <div class="row">
+                <select class="custom-select col--2 mr-2 mb-5">
                     <option selected>Select Year</option>
                     <option value="1">One</option>
                     <option value="2">Two</option>
                     <option value="3">Three</option>
                 </select>
-          </div>
-                <input class="col-1 m-0" type="checkbox" id="checkbox3" value="">
-           
-                <label class="form-check-label" for="checkbox3">Select All Students</label>
-            <div class="row justify-content-around mt-4 text-center"></div>
-            <table class="table table-striped">
+            </div>
+     
+  <table class="table table-striped">
    <thead class="thead-dark">
     <tr>
       <th scope="col">Student ID</th>
@@ -184,7 +187,10 @@ session_start();
       <th scope="col">Additional Funds</th>
       <th scope="col">Selected</th>
     </tr>
-  </thead>
+       
+
+    </thead>
+                
   <tbody>
     
       <?php
@@ -230,7 +236,12 @@ session_start();
       <td><input type="checkbox"></td>
     </tr> -->
   </tbody>
+                
 </table>
+       <label class="form-check-label" for="checkbox3">Select All Students</label>
+      <input class="col-1 m-0" type="checkbox" id="select_all">
+       
+            
        </section><!--Student table section  END -->
       </section><!-- Row left side END -->
      </section><!--Container section END -->

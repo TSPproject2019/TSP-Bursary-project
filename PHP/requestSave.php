@@ -277,7 +277,7 @@
             $requestid = $_SESSION['requestId'];
             $itemArray = array(); //For comparison
             $tempString = $_SESSION['originalItems'];
-            $originalItems = split("|", $tempString);
+            $originalItems = split("_", $tempString);
             // assign a counter
             $count = 1;
             // assign whitch page to go back to.
