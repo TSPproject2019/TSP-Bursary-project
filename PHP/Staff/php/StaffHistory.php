@@ -40,8 +40,8 @@
          $awaitingDelivery = getStaffAwaitingDelivery($userid,$userType);
     }
 
-?>
-                <div class="col-md-4 ml-4">
+?>        
+                <div class="col-md-4 ml-5">
                     <ul class="list-group list-group-flush">
                        <?php
                        echo'<li class="list-group-item">Submitted: '. $submittedTotal .'</li>';
@@ -50,6 +50,10 @@
                           ?>
                     </ul>
                 </div>
+
+        <div class="container">
+            
+            <div class="row m-5"><!--table selectiom START -->  
                <div class="btn-group" style="text-align: center" "display:block;">
                   <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="true" align=right>
                     Name of Group Selected
@@ -85,7 +89,8 @@
     
                   </div>
             </div>
-          
+           </div><!--selection row END -->
+            
           
           
           <table class="table table-striped">
@@ -149,3 +154,4 @@
   </tbody>
 </table>
 </div>
+</div>    

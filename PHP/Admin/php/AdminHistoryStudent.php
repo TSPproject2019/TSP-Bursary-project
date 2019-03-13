@@ -2,26 +2,38 @@
     session_start();
     require_once 'connect.php';//connects to the SQL database.
     require 'functions.php';
-
-
-       //Query usernames  
-      $SQL_stmt = "SELECT userFirstName FROM users";
       
-       
-
-      //Establish connection
-        $result = $DBconnection->query($SQL_stmt);
-      
-      //Run and output results      
-       while ($row = $result->fetch())
-          {
-            echo $row['userFirstName'];
-          }
-          
 
 //This query is for student. Change to Admin query
   $total =  getTotals($_SESSION['userid'], 'Submitted');
+
+//////////////Retrieve courseTitles from DB  ///////////////////////////////
+  $sql = "SELECT DISTINCT courseTitle FROM course";                      
+  //prepare select statement
+  $stmt = $DBconnection->prepare($sql);
+  //Execute statement
+  $stmt->execute();
+  //Retrieve rows using fetchAll
+  $courseTitles = $stmt->fetchAll();
+/////////////////////////////////////////////////////////////////////////////
+
+//////////////////Retriece course years from DB//////////////////////////////
+  $sql = "SELECT DISTINCT courseYear as 'Year' FROM course";
+  $stmt = $DBconnection->prepare($sql);
+  $stmt->execute();
+  $courseYears = $stmt->fetchAll();
+/////////////////////////////////////////////////////////////////////////////
+
+//////////////////Retrieve all users from DB/////////////////////////////////        
+  $sql = "SELECT userFirstName, userLastName FROM users 
+  INNER JOIN student ON student.studentID = users.userID";
+  $stmt = $DBconnection->prepare($sql);
+  $stmt->execute();
+  $users = $stmt->fetchAll();
+////////////////////////////////////////////////////////////////////////////
+
 ?>
+
     <div class="col-3">
         <ul class="list-group">
           <?php 
@@ -38,25 +50,22 @@
  <!-- Choose course -->
     <div class="row">
         <select class="custom-select col-2 ml-2">
-          <option selected>Name of Group Selected</option>
-          <option value="1">BTECT IT</option>
-          <option value="2">BSc Computer Science</option>
+            <?php foreach ($courseTitles as $courseTitle): ?>
+            <option value="<?= $courseTitle['courseTitle']; ?>"><?= $courseTitle['courseTitle']?></option>
+            <?php endforeach; ?>
       </select>
        
   <!-- Choose Year -->       
     <select class="custom-select col-2 ml-2">
-          <option selected>Year Selected</option>
-          <option value="1">Level 4 19/20</option>
-          <option value="2">Level 4 18/19</option>
-          <option value="3">Level 5 19/20</option>
-          <option value="3">Level 5 20/21</option>
+        <?php foreach ($courseYears as $year): ?>
+          <option value="<?= $year['Year']; ?>"><?= $year['Year']?></option>
+        <?php endforeach; ?>
       </select>    
- <!-- Choose staff name --> 
+ <!-- Choose student name --> 
     <select class="custom-select col-2 ml-2">
-          <option selected>Name of student Selected</option>
-          <option value="1">Ben Stimson</option>
-          <option value="2">David Williams</option>
-          <option value="3">Danny McCombs</option>
+        <?php foreach ($users as $user): ?>
+          <option value="<?= $user['userFirstName'] ." ". $user['userLastName']; ?>"><?= $user['userFirstName'] . " " . $user['userLastName']?></option>
+        <?php endforeach; ?>  
     </select>
  <!-- Sort By -->       
     <select class="custom-select col-2 ml-2">

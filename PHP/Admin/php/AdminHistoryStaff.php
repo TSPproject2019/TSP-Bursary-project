@@ -1,7 +1,8 @@
 <?php
     session_start();
 
-    require_once 'mysql_connect.php';//connects to the SQL database.
+    require_once 'connect.php';//connects to the SQL database.
+    require_once 'functions.php';
 
    /* ----------------------TESTING CONNECTION TO DATABASE --------------------------
     //----Database connection credentials-------
@@ -40,15 +41,7 @@
     }
    */
 
-    //Query course titles from database
-    $query = 'SELECT courseTitle FROM course';
-    $results = mysqli_query($dbc, $query);
-    //Query course year from database
-    $queryYear = 'SELECT courseYear from course';
-    $resultsYear = mysqli_query($dbc, $queryYear);
-    //Query Staff member name
-    $queryStaff = "SELECT CONCAT(userFirstName, ', ', userLastName) AS name FROM users WHERE userType='Staff'";
-    $resultsStaff = mysqli_query($dbc, $queryStaff);
+   
 ?>     
     <div class="col-3">
         <ul class="list-group">

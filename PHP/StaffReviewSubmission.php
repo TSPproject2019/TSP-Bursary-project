@@ -39,16 +39,7 @@
                        // echo '<p>Outstanding balance: <span>' . $availableBalance . '</span></p>';
                    ?>
                 </div>
-            <div class="col-md-4 ml-4">
-                <ul class="list-group list-group-flush">
-                <!-- <ul class="list-group"> -->
-                    <?php
-                        echo '<li class="list-group-item">Submitted: <span>' . $submitTotal . '</span></li>';
-                        echo '<li class="list-group-item">Approved: <span>' . $approved . '</span></li>';
-                        echo '<li class="list-group-item">Awaiting delivery: <span>' . $pending . '</span></li>';
-                    ?>
-                </ul>
-            </div>
+           
         </div>
 <!-- <div class="modal fade" id="ModalLong" tabindex="-1" role="dialog" aria-labelledby="ModalLongTitle" aria-hidden="false"> -->
  <!-- <section class="container mt-5 w-50"> -->
@@ -79,7 +70,7 @@
            
            //Display content here because we need request id retrieved firstName
            // to get student id and name 
-          echo '<section class="container mt-5 w-50">   
+          echo '<section class="container w-51">   
           <div class="form-group row">
             <div class="modal-content">
                 <div class="modal-header">

@@ -33,7 +33,7 @@
       <p></p>
     </div>
     <div class="col">
-      <button style="width: 100%;" type="submit">Login</button>
+      <button id="logBut" style="width: 100%;" type="submit" onmouseover="butHov()" onmouseout="butLeave()">Login</button>
     </div>
     <div>
       <a id="register" class="loginText" style="font-size: 10pt; font-style: italic; text-align: left;" href="register.html" title="Please click this link if you do not already have an account">Register</a>
@@ -56,7 +56,7 @@
 </div>
 
 <script>
-// Get the modal
+var log = document.getElementById('logBut');
 var modal = document.getElementById('myModal');
 
 // Get the button that opens the modal
@@ -80,6 +80,16 @@ window.onclick = function(event) {
   if (event.target == modal) {
     modal.style.display = "none";
   }
+}
+
+function butHov(){
+  log.style.backgroundColor = "#93427c";
+  log.style.borderColor = "#93427c";
+}
+  
+function butLeave(){
+  log.style.backgroundColor = "rgba(32, 19, 76, 1)";
+  log.style.borderColor = "rgba(32, 19, 76, 1)";
 }
 </script>
 

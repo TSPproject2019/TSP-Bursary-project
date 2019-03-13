@@ -82,14 +82,14 @@
               <form class="mt-3">
               <!-- <div> -->
                   <div class="form-check" style="text-align: center">
-                      <input class="form-check-input" type="checkbox" value="" id="check1">
+                      <input class="form-check-input" type="checkbox" value="" id='agreeCheckbox'>
                       <label class="form-check-label" for="check1">I CONSENT THIS....</label>
                   </div>
                   <div class="form-check" style="text-align: center">
                       <input class="form-check-input" type="checkbox" value="" id="check2">
                       <label class="form-check-label" for="check2">I DO NOT CONSENT TO THIS....</label>
                       <div>
-                           <input type="submit" name="submit" class="btn btn-success mt-2" id="send" value="Submit" disabled />
+                           <input type="submit" name="submit" class="btn btn-success mt-2" id='send' value="Submit" disabled />
                       </div>
                   </div>
                </div>

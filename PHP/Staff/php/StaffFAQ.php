@@ -50,6 +50,10 @@
                           ?>
                     </ul>
                 </div>
+
+        <div class="container">
+            
+            <div class="row m-5"><!--table selectiom START -->  
          <div class="accordion z-depth-9" id="accordionExample">
   <div class="card">
     <div class="card-header" id="headingOne">
@@ -94,5 +98,7 @@
       </div>
     </div>
   </div>
+</div>
+</div>
 </div>
 </div>

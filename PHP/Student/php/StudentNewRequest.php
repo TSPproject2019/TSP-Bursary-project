@@ -116,13 +116,14 @@
     <input type="hidden" name="userid" value="<?php echo $_SESSION['userid'] ?>" />
       
     <div id = "newlink">
+    <div id="1">
     <div class="form-group row justify-content-between">
     <h5  id="hd05" name="numberOfItems"> Item 1 </h5>
     
     <div class="delete-group col-2">
          <div class="input-group-prepend">
              <a href="javascript:addItem()" style="width: 6; height: 6;" class="btn btn-success" title="Add an Item"><span>&#43;</span>  </a>
-             <a href="javascript:deleteItem(1)" style="width: 5; height: 5;" class="btn btn-success" title="Delete this Item"><span>&#45;</span></a>
+             <a href="javascript:deleteItem(1)" style="width: 5; height: 5;" class="btn btn-danger" title="Delete this Item"><span>&#45;</span></a>
          </div>
     </div>
     </div>
@@ -174,6 +175,7 @@
               <input type="text" class="form-control" name="itemadditionalcharges1" aria-describedby="additionalFees">
           </div>                   
      </div> <!--End of Fees row -->
+    </div> <!--div ID end -->
   </div><!--newlink end -->
        
     <!--Form Justification textarea -->

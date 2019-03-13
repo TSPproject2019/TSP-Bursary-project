@@ -8,7 +8,7 @@
                       <!-- <div class="dropdown-menu bg-secondary" aria-labelledby="dropdownMenuLink"> -->
                       <div class="dropdown-menu fg-secondary bg-primary" aria-labelledby="dropdownMenuLink">
                         <a class="dropdown-item" href="admin_student_submissions.php">Review Student Submissions</a>
-                        <a class="dropdown-item" href="admin_staff_submissions.php">Review Staff Submissions</a>
+                        <a class="dropdown-item" href="admin_staff_submissions.php">Review Staff Submissions</a><!-- Missing html page -->
                         <a class="dropdown-item" href="admin_student_history.php">History Student Requests</a>
                         <a class="dropdown-item" href="admin_staff_history.php">History Staff Requests</a>
                         <a class="dropdown-item" href="admin_faq.php">FAQ</a>

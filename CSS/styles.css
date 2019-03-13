@@ -144,7 +144,6 @@
     display: none;
     position: absolute;
     background-color: rgb(255,255,255,0.8);
-    border-radius: 15px;
     font-size: small;
     width: 40%;
     height: 60%;
@@ -160,8 +159,12 @@
     font-weight: bold;
 }
 
-
-
+#logBut {
+    background-color: rgba(32, 19, 76);
+    border-color: rgba(32, 19, 76); 
+    border-radius: 5px;
+    color: white;
+}
 
 p {
     text-align: center;

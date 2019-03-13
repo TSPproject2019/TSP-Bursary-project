@@ -19,8 +19,9 @@
             <li class="list-group-item  border-0">Awaiting delivery: <span>YES</span></li>
         </ul>
     </div>
-<section class="container-fluid mt-5">
-    <section class="row">
+</div>
+<section class="container-fluid mt-5"> <!--Container START -->
+    <section class="row"><!--Row Start -->
      <div class="col-6">
             <div class="col-12 mt-2 mb-5">
                                 <select class="custom-select" id="categoryField">
@@ -42,7 +43,7 @@
                  <div>
                      <input type="text" class="form-control" placeholder="URL to the item:">
                  </div>
-                </div>
+               </div>
             
                 <div class="form-group row justify-content-between">
                     <div class="input-group col-3">
@@ -124,7 +125,7 @@
         </form>
         
         </div>
-        <section class="col-6">
+        <section class="col-6"> <!-- Table left side START -->
             <div class="row justify-content-center">
                 <select class="custom-select col-3 mr-2">
                     <option selected>Select group</option>
@@ -144,40 +145,35 @@
                 <input class="col-1 m-0" type="checkbox" id="checkbox3" value="">
                 <label class="form-check-label" for="checkbox3">Select All Students</label>
             </div>
-            
-            <section>
-            <table class="table table-hover table-striped table-bordered mt-5">
-                <thead>
-                    <th>Student ID</th>
-                    <th>Student Name</th>
-                    <th>Submission Date</th>
-                    <th>Status</th>
-                </thead>
-                <tr>
-                    <td>317717</td>
-                    <td>Andrius Markusenka</td>
-                    <td>06/01/19</td>
-                    <td>Pending</td>
-                </tr>
+                <table class="table table-hover table-striped table-bordered mt-5">
+                    <thead>
+                        <th>Student ID</th>
+                        <th>Student Name</th>
+                        <th>Submission Date</th>
+                        <th>Status</th>
+                    </thead>
+                    <tr>
+                        <td>317717</td>
+                        <td>Andrius Markusenka</td>
+                        <td>06/01/19</td>
+                        <td>Pending</td>
+                    </tr>
                 
-                <tr>
-                    <td>123456</td>
-                    <td>Liviu Pussy Destroyer 300</td>
-                    <td>06/01/2018</td>
-                    <td>Confirmed</td>
-                </tr>
+                    <tr>
+                        <td>123456</td>
+                        <td>Liviu Pussy Destroyer 300</td>
+                        <td>06/01/2018</td>
+                        <td>Confirmed</td>
+                    </tr>
                 
-                <tr>
-                    <td>213456</td>
-                    <td>Nikita The Spy</td>
-                    <td>03/12/2018</td>
-                    <td>Pending</td>
-                </tr>
+                    <tr>
+                        <td>213456</td>
+                        <td>Nikita The Spy</td>
+                        <td>03/12/2018</td>
+                        <td>Pending</td>
+                    </tr>
             </table>
-            
-        </section>
-    </section>
-        
-        
-    </section>
-</section>
+       
+    </section><!-- Table left side END -->               
+  </section><!--Row END -->
+</section><!--Container END -->

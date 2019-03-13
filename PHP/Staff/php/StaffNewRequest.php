@@ -79,6 +79,7 @@ session_start();
         <input type="hidden" name="userid" value="<?php echo $_SESSION['userid'] ?>" />
       
         <div id = "newlink">
+           <div id="1">
             <div class="form-group row justify-content-between">
             <h5  id="hd05" name="numberOfItems" class="ml-4"> Item 1 </h5>
     
@@ -137,6 +138,7 @@ session_start();
                   <input type="text" class="form-control" name="itemadditionalcharges1" aria-describedby="additionalFees">
               </div>                   
          </div> <!--End of Fees row -->
+       </div>
       </div><!--newlink end -->
                 
           <!--Form Justification textarea -->

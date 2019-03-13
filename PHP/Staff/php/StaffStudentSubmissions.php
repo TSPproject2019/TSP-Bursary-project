@@ -49,30 +49,34 @@ session_start();
                        echo'<li class="list-group-item">Awaiting delivery: '. $awaitingDelivery .'</li>';
                           ?>
                     </ul>
-                </div>
-                 <div class="col-md-4 ml-3">
-                    <p>Outstanding balance:</p>
-                </div>
-               <div class="btn-group" style="text-align: center" "display:block;">
-                  <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="true" align=right>
-                    Name of Group Selected
-                  </button>
-                  <div class="dropdown-menu dropdown-menu-lg-right">
-                  <?php
-                       echo getStaffAllCourses($userid);
-                    ?>
-          </div>
-          </div>
-        <div class="btn-group" style="text-align: center">
-                  <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="true" align=right>
-                    Year Selected
-                  </button>
-                  <div class="dropdown-menu dropdown-menu-lg-right">
-                  <?php
-                       echo getStaffAllCourseYears($userid);
-                    ?>
-                  </div>
-               </div>
+                </div>   
+        </div>
+
+            <div class="container">
+            
+            <div class="row m-5"><!--table selectiom START -->
+               <div class="mb-5">                                
+                   <div class="btn-group" style="text-align: center" "display:block;">
+                          <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="true" align=right>
+                            Name of Group Selected
+                          </button>
+                          <div class="dropdown-menu dropdown-menu-lg-right">
+                          <?php
+                               echo getStaffAllCourses($userid);
+                            ?>
+                          </div>
+                      </div>
+            <div class="btn-group" style="text-align: center">
+                      <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="true" align=right>
+                        Year Selected
+                      </button>
+                      <div class="dropdown-menu dropdown-menu-lg-right">
+                      <?php
+                           echo getStaffAllCourseYears($userid);
+                        ?>
+                      </div>
+                   </div>
+              </div>
 <form action="StaffReviewSubmission.php" method="POST">
         <table class="table table-striped">
    <thead class="thead-dark">
@@ -271,4 +275,6 @@ session_start();
     </div>
   </div>
 </div></th>
-    </tr> --->        
+    </tr> --->    
+                </div>
+</div><!-- container end -->

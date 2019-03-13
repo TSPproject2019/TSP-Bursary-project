@@ -50,6 +50,11 @@
                           ?>
                     </ul>
                 </div>
+
+<div class="container">
+            
+            <div class="row m-5"><!--table selectiom START -->  
+
                <div class="btn-group" style="text-align: center" "display:block;">
                   <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="true" align=right>
                     Name of Group Selected
@@ -75,61 +80,21 @@
         <table class="table table-striped">
    <thead class="thead-dark">
     <tr>
-      <th scope="col">Student ID</th>
-      <th scope="col">Student Name</th>
-      <th scope="col">File Name</th>
+      <th scope="col">Request ID</th>
+      <th scope="col">Item Count</th>
       <th scope="col">Date Submitted</th>
-      <th scope="col">Date Approved</th>
       <th scope="col">Cost</th>
       <th scope="col">Status</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">ID ONE</th>
-      <td>NAME ONE</td>
-      <td>WEBFORM 1</td>
-      <td>27/01/2019</td>
-      <td>28/01/2019</td>
-      <td>£230.00</td>
-      <td>ACCEPTED</td>
-    </tr>
-    <tr>
-      <th scope="row">ID TWO</th>
-      <td>NAME TWO</td>
-      <td>WEBFORM 2</td>
-      <td>27/01/2019</td>
-      <td>28/01/2019</td>
-      <td>£78.00</td>
-      <td>DELIVERED</td>
-    </tr>
-    <tr>
-      <th scope="row">ID THREE</th>
-      <td>NAME THREE</td>
-      <td>WEBFORM 3</td>
-      <td>27/01/2019</td>
-      <td>28/01/2019</td>
-      <td>£499.99</td>
-      <td>PENDING</td>
-    </tr>
-     <tr>
-      <th scope="row">ID FOUR</th>
-      <td>NAME FOUR</td>
-      <td>WEBFORM 4</td>
-      <td>27/01/2019</td>
-      <td>28/01/2019</td>
-      <td>£79.50</td>
-      <td>PENDING</td>
-    </tr>
-     <tr>
-      <th scope="row">ID FIVE</th>
-      <td>NAME FIVE</td>
-      <td>WEBFORM 5</td>
-      <td>27/01/2019</td>
-      <td>28/01/2019</td>
-      <td>£99.99</td>
-      <td>PENDING</td>
-    </tr>
+     <?php 
+      
+      #code for getStaffSubmittedForms goes here.. writing function (danny)
+      
+      ?>
   </tbody>
 </table>
+</div>
+    </div>
 </div>

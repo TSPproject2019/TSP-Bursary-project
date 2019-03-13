@@ -206,7 +206,7 @@
           AND itemsAndRequests.StudentID = ".$uID." INNER JOIN bursaryRequestItems ON
           itemsAndRequests.ItemID = bursaryRequestItems.brItemID 
           AND bursaryRequests.bRequestsStatus = 'Submitted' OR bursaryRequests.bRequestsStatus = 'Approved' OR bursaryRequests.bRequestsStatus = 'Cancelled'
-          GROUP BY bursaryRequests.bRequestsID ORDER BY bursaryRequests.bRequestsRequestDate ASC";
+          GROUP BY bursaryRequests.bRequestsID ORDER BY bursaryRequests.bRequestsRequestDate DESC";
         
           $staff = 0;
           $admin = 0;
@@ -260,7 +260,7 @@
              INNER JOIN itemsAndRequests ON users.userID = itemsAndRequests.StudentID
              INNER JOIN student ON student.studentID = users.userID
              INNER JOIN bursaryRequests ON bursaryRequests.bRequestsID = itemsAndRequests.RequestID
-             AND bursaryRequests.bRequestsStaffID = '".$uID."'
+             AND bursaryRequests.bRequestsStaffID = '".$uID."'    
              AND bursaryRequests.bRequestsStatus = 'Submitted'
              AND bursaryRequests.bRequestsStaffApproved IS NULL
              INNER JOIN bursaryRequestItems ON bursaryRequestItems.brItemID = itemsAndRequests.ItemID
@@ -522,4 +522,31 @@
               }
           }
       }
+
+      /* function getStaffSubmittedForms() 
+       * {
+       * require 'connect.php'; 
+       * 
+       * $SQL_stmt = "SELECT users.userID AS 'Student_ID', 
+             bursaryRequests.bRequestsID AS 'Request_ID',
+     
+             student.availableBalance AS 'balance',
+             bursaryRequests.bRequestsRequestDate AS 'Date_submitted',
+             SUM(IFNULL(bursaryRequestItems.brItemPrice,0) + IFNULL(bursaryRequestItems.brItemPostage,0) + IFNULL(bursaryRequestItems.brItemAdditionalCharges,0)) AS 'Total_price',
+             bursaryRequests.bRequestsStatus AS 'Status' FROM users
+             INNER JOIN itemsAndRequests ON users.userID = itemsAndRequests.StudentID
+             INNER JOIN student ON student.studentID = users.userID
+             INNER JOIN bursaryRequests ON bursaryRequests.bRequestsID = itemsAndRequests.RequestID
+             AND bursaryRequests.bRequestsStaffID = '".$uID."'    
+             AND bursaryRequests.bRequestsStatus = 'Submitted'
+             AND bursaryRequests.bRequestsStaffApproved IS NULL
+             INNER JOIN bursaryRequestItems ON bursaryRequestItems.brItemID = itemsAndRequests.ItemID
+             INNER JOIN course ON course.courseID = bursaryRequests.bRequestsCourseID
+             AND course.courseTitle = '".$courseTitle."'
+             GROUP BY bursaryRequests.bRequestsID
+             ORDER BY bursaryRequests.bRequestsRequestDate DESC"; 
+       * 
+       * 
+       * } */ 
+    
 ?>

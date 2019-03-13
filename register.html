@@ -3,16 +3,18 @@
 
 <head>
     <link rel="stylesheet" type="text/css" href="CSS/styles.css">
-    <link rel="stylesheet" type="text/javaScript" href="Scripts/regScript.js">
+    
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 </head>
 
 <body id="backG" style="resize: both; overflow: auto;">
-<form id="form" class="flex-box-column" style="position: absolute; left: 27%; top: 20%; width: 50%; height: 370px; border-radius: 25px;" action="PHP/register.php" method="POST">
+<form id="form" class="flex-box-column" style="position: absolute; left: 27%; top: 20%; width: 50%; height: 390px; border-radius: 25px;" action="PHP/register.php" method="POST">
 
   <div class="flex-box-column" style="position: absolute; left: 5%; top: 10%;">
-    <label style="height: 5%;"></label>
+    <span style="text-align: left;">
+      <label id="message" style="text-align: center; height: 5%;"></label>
+    </span>
       
     <div class="flex-box-row">
       <label class="formText" for="collegeID" style="width: 50%;">College ID</label>
@@ -45,23 +47,23 @@
     </div>
     
     <div id="pPop">
-      <p style="color: #7d08d1; font-weight: bold;">A new password should have:</p>
+      <p style="color: black; font-weight: bold;">A new password should have:</p>
       <p class="popTxt">- at least 6 characters</p>
       <p class="popTxt">- at least 1 number</p>
       <p class="popTxt">- at least 1 special character e.g. !?#</p>
     </div>
     
     <div class="flex-box-row">
-      <input type="password" class="form-control" id="password" name="password" style="width: 40%;" placeholder="Enter your new password" onclick="pop()" onblur="popDown()">
+      <input type="password" class="form-control" id="password" name="password" style="width: 40%;" placeholder="Enter your new password" onclick="pop()" onblur="popDown()" onkeyup="check()">
       <label style="width: 10%;"></label>
-      <input type="password" class="form-control" id="repassword" name="repassword" style="width: 40%;" placeholder="Re-enter your password">
+      <input type="password" class="form-control" id="repassword" name="repassword" style="width: 40%;" placeholder="Re-enter your password" onkeyup="check()">
     </div>  
     
     <label style="height: 5%;"></label>
   </div>  
   
-  <button id="but1" style="position: absolute; top: 90%; width: 100%; border-radius: 10px; background-color: #20134c; border-color: #20134c;" type="submit" class="btn btn-primary btn-lg" onmouseover="butHov()" onmouseout="butLeave()">Register</button>
-    
+  <button id="but1" disabled="disabled" style="position: absolute; top: 90%; width: 100%; border-radius: 10px; background-color: rgba(32, 19, 76, 1); border-color: rgba(32, 19, 76, 1);" type="submit" class="btn btn-primary btn-lg" onmouseover="butHov()" onmouseout="butLeave()">Register</button>
+  <link rel="stylesheet" type="text/css" href="CSS/buttonCSS.css">  
 </form>
     
 </body>
