@@ -312,9 +312,9 @@
             $originArrayLen = count($originalItems);
             $itemNum = array();
             //$itemVal = array();
-            $itemToBeDeleted = array();
-            $itemToBeDeletedCounter = 0;
-            
+          #  $itemToBeDeleted = array();
+          #  $itemToBeDeletedCounter = 0;
+
             foreach($_POST as $varName => $varValue){
                 echo ' start Step 2.3.2.a.  $varNameName: ' . $varName . ', $varValue: ' . $varValue . '<br>'; // for testing purposes
                 // check to see if the item exists
@@ -330,17 +330,10 @@
                         for ($i=0;$i <= $originArrayLen; $i++){
                             if ($originalItems[$i] == $varValue){
                                 echo ' start Step 2.3.2.a.  item NOT to be deleted adding: ' . $varValue . '<br>'; // for testing purposes
-                                $forCounter++;
+                                unset($originalItems[$i]);
                             }
-                            
-                        }
-                        if ($forCounter == 0 ){
-                            $itemToBeDeleted[$itemToBeDeletedCounter] = $varValue;
-                            echo ' start Step 2.3.2.a.  item to be deleted adding: ' . $varValue . '<br>'; // for testing purposes
-                            $itemToBeDeletedCounter++;
                         }
                     }
-                    if ($forCounter >= 1){$itemToBeDeletedCounter = $forCounter;}
 
                   #    echo ' start Step 2.3.3.a.$countPost: '.$tempA[0].'<br>'; // for testing purposes
                       echo ' start Step 2.3.3.a.$count: '.$tempA[1].'<br>';// for testing purposes
@@ -353,17 +346,18 @@
                 // the now data versus the original data, and first establish
                 // which array is the biggest.
                 // compare new array length with old
-                if ($itemToBeDeletedCounter >= 1){
-                    $deleteArrayLen = count($itemToBeDeleted);
+                $originArrayLen = count($originalItems);
+                echo ' start Step 2.3.4.a. $originArrayLen new length: ' . $originArrayLen . ', '.$originalItems[0]. '<br>';
+                if ($originArrayLen > 0){
+                    #$deleteArrayLen = count($itemToBeDeleted);
                     echo 'Updating item, for loop start nedeleteArrayLenwLen: ' . $deleteArrayLen . '<br>'; // for testing
-                    foreach ($itemToBeDeleted as $e){
+                    foreach ($originalItems as $e){
                         echo 'Updating item, for loop itemid to be deleted: ' . $e . '<br>'; // for testing
                         // Nick's delete item script, using $e as the itemid **.
                         $SQL_stmt = "DELETE FROM bursaryRequestItems WHERE
                         brItemID = '".$e."'";
                         
                         $DBconnection->exec($SQL_stmt);//Execute
-                        
                     }
                 }
               // reset the standard counter
@@ -760,7 +754,7 @@
    // echo " SWITCH..CASE..End....<br>"; // for testing purposes
     #header("Location: student_home.php");
 // start with the if ($gTooPage == 2){/then  / th;eif ($userType == 'watevere'...)}else
- /*if($goToPage == 2) // remember to un-remark this section after testing
+ if($goToPage == 2) // remember to un-remark this section after testing
     {
        // echo $userType;
         if($userType == "Student")//This does not work.
@@ -781,7 +775,7 @@
       {
          header ("Location: staff_student_submissions.php? activity=submitted");
       }
-    }else{goBack();}*/
+    }else{goBack();}
          // new if here
    /* if($userType == "Student")
     {
@@ -801,6 +795,6 @@
     if($userType == "Staff")
     {
         
-    }*/
+    }
  // remember to un-remark this section after testing
 ?>
