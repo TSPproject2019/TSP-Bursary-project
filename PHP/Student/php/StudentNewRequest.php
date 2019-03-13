@@ -122,7 +122,7 @@
     
     <div class="delete-group col-2">
          <div class="input-group-prepend">
-             <a href="javascript:addItem()" style="width: 6; height: 6;" class="btn btn-success" title="Add an Item"><span>&#43;</span>  </a>
+             <a href="javascript:addItem()" style="width: 5; height: 5;" class="btn btn-success" title="Add an Item"><span>&#43;</span>  </a>
              <a href="javascript:deleteItem(1)" style="width: 5; height: 5;" class="btn btn-danger" title="Delete this Item"><span>&#45;</span></a>
          </div>
     </div>
@@ -168,7 +168,7 @@
           <input type="text" class="form-control" name="itempostage1" aria-describedby="postage">
        </div>
       <!--Form Additional Fees -->
-          <div class="input-group col-4">
+          <div class="input-group col-3">
               <div class="input-group-prepend">
                   <span class="input-group-text" id="additionalFees">Additional fees:</span>
               </div>

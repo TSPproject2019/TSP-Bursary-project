@@ -96,48 +96,73 @@
                                   <input type="text" class="form-control" id="tutor">
                              </div>
                         </div>
-                        <div class="row">
-                            <h5 class="m-2">ITEM 1</h5>
-                        </div>
-                        <div class="form-group row">
-                            <label for="categoryField" class="col-sm-2 col-form-label">Category field:</label>
-                            <div class="col-sm-10 mt-2">
-                                <select class="custom-select" id="categoryField">
-                                    <option selected>Qualification</option>
-                                    <option value="1">Equipment</option>
-                                    <option value="2">Events</option>
-                                    <option value="3">Professional acccreditation</option>
-                                    <option value="4">Vocational placement</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                             <div>
-                                <label for="itemDescription">Item description:</label>
-                                <textarea class="form-control" id="itemDescription" rows="5"></textarea>
-                              </div>
-                        </div>
-            
-                         <div class="form-group">
-                             <div>
-                                 <input type="text" class="form-control" placeholder="URL to the item:">
-                             </div>
-                        </div>
-                        
-                        <div class="form-row justify-content-between text-center">
-                            <div class="form-group col-md-2">
-                              <label for="price">Price:</label>
-                              <input type="text" class="form-control" id="price">
-                            </div>
-                            <div class="form-group col-md-2">
-                              <label for="postage">Postage:</label>
-                              <input type="text" class="form-control" id="postage">
-                            </div>
-                            <div class="form-group col-md-3">
-                              <label for="additionalFees">Additional Fees:</label>
-                              <input type="text" class="form-control" id="additionalFees">
-                            </div>
-                          </div>
+                         <div id = "newlink">
+    <div id="1">
+    <div class="form-group row justify-content-between">
+    <h5  id="hd05" name="numberOfItems"> Item 1 </h5>
+    
+    <div class="delete-group col-2">
+         <div class="input-group-prepend">
+             <a href="javascript:addItem()" style="width: 6; height: 6;" class="btn btn-success" title="Add an Item"><span>&#43;</span>  </a>
+             <a href="javascript:deleteItem(1)" style="width: 5; height: 5;" class="btn btn-danger" title="Delete this Item"><span>&#45;</span></a>
+         </div>
+    </div>
+    </div>
+    <!--Category selection -->
+    <div class="col-12 mt-2 mb-5">
+            <select class="custom-select" id="categoryField" name="itemcategory1">
+                <option value ="" selected="">Choose Category...</option>
+                <option value="Qualification">Qualification</option>
+                <option value="Equipment">Equipment</option>
+                <option value="Events">Events</option>
+                <option value="Professional accreditation">Professional accreditation</option>
+                <option value="Vocational placement">Vocational placement</option>
+            </select>
+        </div>    
+    <!--Item description -->
+    <div class="form-group row">
+        <div class="col-12">
+            <input type="text" name="itemdescription1" class="form-control" placeholder="Item description:" required>
+         </div>
+    </div> 
+    <!--Item URL-->
+    <div class="form-group row">
+       <div class="col-12">
+           <input type="text" name="itemUrl1" class="form-control" placeholder="URL to the item:" required
+                  value="<?php if (isset($_POST['itemUrl'])) echo $_POST['itemUrl']; ?>">
+       </div>
+    </div>
+    <!--FORM FEES ROW-->
+    <div class="form-group row justify-content-between">
+    <!--Form Price field -->
+      <div class="input-group col-3">
+          <div class="input-group-prepend">
+              <span class="input-group-text" id="price" required>Item Price:</span>
+          </div>
+          <input type="text" class="form-control" name="itemprice1" aria-describedby="price">
+      </div>
+     <!--Form Postage field -->              
+      <div class="input-group col-3">
+          <div class="input-group-prepend">
+             <span class="input-group-text" id="price">Postage:</span>
+          </div>
+          <input type="text" class="form-control" name="itempostage1" aria-describedby="postage">
+       </div>
+      <!--Form Additional Fees -->
+          <div class="input-group col-4">
+              <div class="input-group-prepend">
+                  <span class="input-group-text" id="additionalFees">Additional fees:</span>
+              </div>
+              <input type="text" class="form-control" name="itemadditionalcharges1" aria-describedby="additionalFees">
+          </div>                   
+     </div> <!--End of Fees row -->
+    </div> <!--div ID end -->
+  </div><!--newlink end -->
+       
+    <!--Form Justification textarea -->
+      <div class="form-group">
+          <textarea class="form-control" type="textarea" name="justification" rows="3" placeholder="Justification:" required></textarea>
+      </div>
 
                         
                        

@@ -57,7 +57,7 @@ session_start();
             <div class="row m-5"><!--table selectiom START -->
                <div class="mb-5">                                
                    <div class="btn-group" style="text-align: center" "display:block;">
-                          <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="true" align=right>
+                          <button id="pullGroup" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="true" align=right>
                             Name of Group Selected
                           </button>
                           <div class="dropdown-menu dropdown-menu-lg-right">
@@ -66,13 +66,23 @@ session_start();
                             ?>
                           </div>
                       </div>
-            <div class="btn-group" style="text-align: center">
-                      <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="true" align=right>
+            <div id="yearBtn" class="btn-group" style="text-align: center; visibility: hidden;">
+                      <button id="pullYear" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="true" align=right>
                         Year Selected
                       </button>
                       <div class="dropdown-menu dropdown-menu-lg-right">
                       <?php
                            echo getStaffAllCourseYears($userid);
+                        ?>
+                      </div>
+                   </div>
+                <div id="levelBtn" class="btn-group" style="text-align: center; visibility: hidden;">
+                      <button id="pullLevel" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="true" align=right>
+                        Course levels
+                      </button>
+                      <div class="dropdown-menu dropdown-menu-lg-right">
+                      <?php
+                           echo getStaffAllCourseLevels($userid);
                         ?>
                       </div>
                    </div>
@@ -91,7 +101,7 @@ session_start();
       <th> </th>
     </tr>
   </thead> 
-  <tbody>
+  <tbody id="table">
      <?php 
       
           echo getStaffStudentSubmitted($userid); 

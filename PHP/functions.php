@@ -159,7 +159,7 @@
                         
       while ($row = $result->fetch())
       {
-        echo '<button class="dropdown-item" type="button">  '.$row['Course']. '</button>';
+        echo '<button class="dropdown-item" type="button" value="'.$row['Course'].'" onclick="showYear(this.value)">  '.$row['Course']. '</button>';
       }                  
     }
     // Gets all course years of a particular staff member
@@ -174,7 +174,7 @@
                         
       while ($row = $result->fetch())
       {
-        echo '<button class="dropdown-item" name="group" type="button" method="POST">  '.$row['Year']. '</button>';
+        echo '<button class="dropdown-item" name="group" value="'.$row['Year'].'" type="button" onclick="showLevel(this.value)">  '.$row['Year']. '</button>';
       }          
     }
 
@@ -190,7 +190,7 @@
                         
           while ($row = $result->fetch())
           {
-            echo '<button class="dropdown-item" name="group" type="button" method="POST">  '.$row['Level']. '</button>';
+            echo '<button class="dropdown-item" name="group" type="button" value="'.$row['Level'].'" onclick="showCourses(this.value)">  '.$row['Level']. '</button>';
           }                
       }          
 
@@ -527,15 +527,13 @@
        * {
        * require 'connect.php'; 
        * 
-       * $SQL_stmt = "SELECT users.userID AS 'Student_ID', 
-             bursaryRequests.bRequestsID AS 'Request_ID',
-     
-             student.availableBalance AS 'balance',
+       * $SQL_stmt = "SELECT bursaryRequests.bRequestsID AS 'Request_ID',    
              bursaryRequests.bRequestsRequestDate AS 'Date_submitted',
+             COUNT(itemsAndRequests.ItemID) AS 'item_count',
              SUM(IFNULL(bursaryRequestItems.brItemPrice,0) + IFNULL(bursaryRequestItems.brItemPostage,0) + IFNULL(bursaryRequestItems.brItemAdditionalCharges,0)) AS 'Total_price',
              bursaryRequests.bRequestsStatus AS 'Status' FROM users
              INNER JOIN itemsAndRequests ON users.userID = itemsAndRequests.StudentID
-             INNER JOIN student ON student.studentID = users.userID
+             INNER JOIN student ON users.userID = users.userID
              INNER JOIN bursaryRequests ON bursaryRequests.bRequestsID = itemsAndRequests.RequestID
              AND bursaryRequests.bRequestsStaffID = '".$uID."'    
              AND bursaryRequests.bRequestsStatus = 'Submitted'
@@ -550,3 +548,4 @@
        * } */ 
     
 ?>
+<script src="../Scripts/ajaxTableUpdateDrop.js"></script>

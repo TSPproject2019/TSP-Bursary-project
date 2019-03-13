@@ -14,4 +14,5 @@
 <script src="../../../Scripts/methodsMain.js"></script>
 <script src="../../../Scripts/selectAll.js"></script>
 <script src="../../../Scripts/disabledButton.js"></script>
+<script src="../../../Scripts/ajaxTableUpdateDrop.js"></script>
 </html>
