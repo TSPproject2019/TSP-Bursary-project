@@ -488,6 +488,12 @@
             $txbJustication = $_POST['justification'];  
             $bRequestsStatus = 'Submitted'; //Submitted because of submitting the request
             $requestid = $_SESSION['requestId'];
+            $itemArray = array(); //For comparison
+            $tempString = $_SESSION['originalItems'];
+            echo 'items stored as a string for the array: ' . $tempString . '</br>';
+            $originalItems = split("_", $tempString);
+            $itemArrayLength = count($originalItems) - 1;
+            echo 'items stored as a string split to an array: ' . $originalItems[0] . '</br>';
             // assign a counter
             $count = 1;
             $goToPage = 5;
@@ -508,6 +514,64 @@
             echo " start Step 2.1.d.<br>"; // for testing purposes
             #echo " test echo 2.1.a :" . $itemDescription . "<br>"; // for testing purposes
         // -loop through items which are in the form for items
+
+            // check to see if item 1 has been removed
+            // set post counter
+            $countItems = 0;
+            $countPost = 0;
+            $originArrayLen = count($originalItems);
+            $itemNum = array();
+            //$itemVal = array();
+          #  $itemToBeDeleted = array();
+          #  $itemToBeDeletedCounter = 0;
+ 
+            foreach($_POST as $varName => $varValue){
+                echo ' start Step 2.3.2.a.  $varNameName: ' . $varName . ', $varValue: ' . $varValue . '<br>'; // for testing purposes
+                // check to see if the item exists
+                $varItem = "/itemid/";
+                if(preg_match($varItem, $varName)){
+                    echo ' start Step 2.3.3.a.<br>'; // for testing purposes
+                    $tempA = split('d', $varName);
+                    $itemNum[$countPost] = $tempA[1];
+                    //$itemVal[$countPost] = $tempA[0]; // takes the actual id of the itemid
+                    # - we need to get the number value from $varName - #
+                    $forCounter = 0;
+                    if ($varValue != NULL || $varValue != '' ){ //  check to ensure that it is not a new item
+                        for ($i=0;$i <= $originArrayLen; $i++){
+                            if ($originalItems[$i] == $varValue){
+                                echo ' start Step 2.3.2.a.  item NOT to be deleted adding: ' . $varValue . '<br>'; // for testing purposes
+                                unset($originalItems[$i]);
+                            }
+                        }
+                    }
+                      echo ' start Step 2.3.3.a.$count: '.$tempA[1].'<br>';// for testing purposes
+                      echo ' start Step 2.3.3.a.$count_: '.$itemNum[$countPost].', ' . $countPost . '<br>';// for testing purposes
+                      $countPost++;
+                }
+            }
+                echo ' start Step 2.3.4.a. : ' . $itemNum[0] . '<br>';
+                // the now data versus the original data, and first establish
+                // which array is the biggest.
+                // compare new array length with old
+                $originArrayLen = count($originalItems);
+                echo ' start Step 2.3.4.a. $originArrayLen new length: ' . $originArrayLen . ', '.$originalItems[0]. '<br>';
+                if ($originArrayLen > 0){
+                    #$deleteArrayLen = count($itemToBeDeleted);
+                    echo 'Updating item, for loop start nedeleteArrayLenwLen: ' . $deleteArrayLen . '<br>'; // for testing
+                    foreach ($originalItems as $e){
+                        echo 'Updating item, for loop itemid to be deleted: ' . $e . '<br>'; // for testing
+                        // Nick's delete item script, using $e as the itemid **.
+                        $SQL_stmt = "DELETE FROM bursaryRequestItems WHERE
+                        brItemID = '".$e."'";
+                        
+                        $DBconnection->exec($SQL_stmt);//Execute
+                    }
+                }
+              // reset the standard counter
+              #$countPost = 0;
+              $count = 1;
+              $testCounter = 0;
+              $count = $itemNum[$testCounter]; //Doesnt iterate through while loop without count
             while (isset($_POST['itemprice' . $count]) > 0){
                 
                 $testCounter++;
