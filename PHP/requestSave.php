@@ -314,6 +314,7 @@
             //$itemVal = array();
             $itemToBeDeleted = array();
             $itemToBeDeletedCounter = 0;
+            
             foreach($_POST as $varName => $varValue){
                 echo ' start Step 2.3.2.a.  $varNameName: ' . $varName . ', $varValue: ' . $varValue . '<br>'; // for testing purposes
                 // check to see if the item exists
@@ -325,15 +326,17 @@
                     //$itemVal[$countPost] = $tempA[0]; // takes the actual id of the itemid
                     # - we need to get the number value from $varName - #
                     $forCounter = 0;
-                    if ($tempA[0] != NULL || $tempA[0] != '' ){ //  check to ensure that it is not a new item
+                    if ($varValue != NULL || $varValue != '' ){ //  check to ensure that it is not a new item
                         for ($i=0;$i <= $originArrayLen; $i++){
-                            if ($originalItems[$i] == $tempA[0]){
+                            if ($originalItems[$i] == $varValue){
+                                echo ' start Step 2.3.2.a.  item NOT to be deleted adding: ' . $varValue . '<br>'; // for testing purposes
                                 $forCounter++;
                             }
                             
                         }
-                        if ($forCounter > 0 ){
-                            $itemToBeDeleted[$itemToBeDeletedCounter] = $tempA[0];
+                        if ($forCounter == 0 ){
+                            $itemToBeDeleted[$itemToBeDeletedCounter] = $varValue;
+                            echo ' start Step 2.3.2.a.  item to be deleted adding: ' . $varValue . '<br>'; // for testing purposes
                             $itemToBeDeletedCounter++;
                         }
                     }
@@ -353,16 +356,14 @@
                 if ($itemToBeDeletedCounter >= 1){
                     $deleteArrayLen = count($itemToBeDeleted);
                     echo 'Updating item, for loop start nedeleteArrayLenwLen: ' . $deleteArrayLen . '<br>'; // for testing
-                    foreach ($i=0;$i <= $deleteArrayLen; $i++){
-                        echo 'Updating item, for loop count delete Item counter: ' . $i . '<br>'; // for testing
-                        if ($originalItems[$i] == $itemArray[$i]){
-                            echo 'Updating item, this is the array length: ' . $itemArrayLength . '<br>'; // for testing
-                            #   if($itemArray[$count-1] != $originalItems[$count-1]){
-                            echo 'Array =' . $originalItems[$i] . '</br>';
-                        }
-                        if($i >= 50){
-                            break;
-                        }
+                    foreach ($itemToBeDeleted as $e){
+                        echo 'Updating item, for loop itemid to be deleted: ' . $e . '<br>'; // for testing
+                        // Nick's delete item script, using $e as the itemid **.
+                        $SQL_stmt = "DELETE FROM bursaryRequestItems WHERE
+                        brItemID = '".$e."'";
+                        
+                        $DBconnection->exec($SQL_stmt);//Execute
+                        
                     }
                 }
               // reset the standard counter
