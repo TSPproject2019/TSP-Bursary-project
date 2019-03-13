@@ -288,21 +288,7 @@
             $goToPage = 2;
             #$itemDescription = "'itemdescription" . $count. "'";
             echo " start Step 2.1.a.<br>"; // for testing purposes
-            //Acquire request id for that request (To link the items)
-            /*$SQL_stmt = "SELECT bursaryRequests.bRequestsID AS 'requestId' FROM bursaryRequests
-            WHERE bRequestsCourseID = '$courseId' AND bRequestsStaffID = '$courseTutorId' 
-            AND bRequestsStatus = '$bRequestsStatus'";
-    echo 'this is user:'$userType;
-            $requestid = 0;
-            echo " start Step 2.1.c.<br>"; // for testing purposes
-            //Get request id from query
-            $result = $DBconnection->query($SQL_stmt);
-            if ($row = $result->fetch()){
-                $requestid = $row['requestId'];
-            }
-            else{
-              echo 'No request id found <br>';
-            }*/
+            
             $dateNow = date('Y/m/d'); //Set date right now.
             // add new request section script here
             // create initial SQL query to update the Bursary request to the table/s
@@ -320,37 +306,75 @@
         // -loop through items which are in the form for items
 
             // check to see if item 1 has been removed
-              // set post counter
-              $countItems = 0;
-              $countPost = 0;
-              $itemNum = array();
-              foreach($_POST as $varName => $varValue){
-                 #  echo ' start Step 2.3.2.a.  $varNameName: ' . $varName . ', $varValue: ' . $varValue . '<br>'; // for testing purposes
-                  // check to see if the item exists
-                  $varItem = "/itemid/";
-                  if(preg_match($varItem, $varName)){
-                      echo ' start Step 2.3.3.a.<br>'; // for testing purposes
-                      $tempA = split('d', $varName);
-                      $itemNum[$countPost] = $tempA[1];
-                      # - we need to get the number value from $varName - #
+            // set post counter
+            $countItems = 0;
+            $countPost = 0;
+            $originArrayLen = count($originalItems);
+            $itemNum = array();
+            //$itemVal = array();
+            $itemToBeDeleted = array();
+            $itemToBeDeletedCounter = 0;
+            foreach($_POST as $varName => $varValue){
+                echo ' start Step 2.3.2.a.  $varNameName: ' . $varName . ', $varValue: ' . $varValue . '<br>'; // for testing purposes
+                // check to see if the item exists
+                $varItem = "/itemid/";
+                if(preg_match($varItem, $varName)){
+                    echo ' start Step 2.3.3.a.<br>'; // for testing purposes
+                    $tempA = split('d', $varName);
+                    $itemNum[$countPost] = $tempA[1];
+                    //$itemVal[$countPost] = $tempA[0]; // takes the actual id of the itemid
+                    # - we need to get the number value from $varName - #
+                    $forCounter = 0;
+                    if ($tempA[0] != NULL || $tempA[0] != '' ){ //  check to ensure that it is not a new item
+                        for ($i=0;$i <= $originArrayLen; $i++){
+                            if ($originalItems[$i] == $tempA[0]){
+                                $forCounter++;
+                            }
+                            
+                        }
+                        if ($forCounter > 0 ){
+                            $itemToBeDeleted[$itemToBeDeletedCounter] = $tempA[0];
+                            $itemToBeDeletedCounter++;
+                        }
+                    }
+                    if ($forCounter >= 1){$itemToBeDeletedCounter = $forCounter;}
 
                   #    echo ' start Step 2.3.3.a.$countPost: '.$tempA[0].'<br>'; // for testing purposes
-                  #    echo ' start Step 2.3.3.a.$count: '.$tempA[1].'<br>';// for testing purposes
+                      echo ' start Step 2.3.3.a.$count: '.$tempA[1].'<br>';// for testing purposes
+                      echo ' start Step 2.3.3.a.$count_: '.$itemNum[$countPost].', ' . $countPost . '<br>';// for testing purposes
                       $countPost++;
-                  }
+                }
                   //$count++;
-              }
-              echo ' start Step 2.3.4.a. : ' . $itemNum[0] . '<br>';
-  
+            }
+                echo ' start Step 2.3.4.a. : ' . $itemNum[0] . '<br>';
+                // the now data versus the original data, and first establish
+                // which array is the biggest.
+                // compare new array length with old
+                if ($itemToBeDeletedCounter >= 1){
+                    $deleteArrayLen = count($itemToBeDeleted);
+                    echo 'Updating item, for loop start nedeleteArrayLenwLen: ' . $deleteArrayLen . '<br>'; // for testing
+                    foreach ($i=0;$i <= $deleteArrayLen; $i++){
+                        echo 'Updating item, for loop count delete Item counter: ' . $i . '<br>'; // for testing
+                        if ($originalItems[$i] == $itemArray[$i]){
+                            echo 'Updating item, this is the array length: ' . $itemArrayLength . '<br>'; // for testing
+                            #   if($itemArray[$count-1] != $originalItems[$count-1]){
+                            echo 'Array =' . $originalItems[$i] . '</br>';
+                        }
+                        if($i >= 50){
+                            break;
+                        }
+                    }
+                }
               // reset the standard counter
-              $countPost = 0;
+              #$countPost = 0;
               $count = 1;
               $testCounter = 0;
             #  while (isset($_POST['itemprice' . $count])){
             #  while ($_POST){
-              while (isset($_POST['itemprice' . $itemNum[$countPost]])){
-                $count = $itemNum[$countPost];
-                $testCounter++;
+              $count = $itemNum[$testCounter]; //Doesnt iterate through while loop without count
+              while (isset($_POST['itemprice' . $count])){
+                echo $count;
+                //$count = 0;
                 // add count to POST item variables (this will be linked to request ID)
                 $itemCategory = 'itemcategory' . $count;
                 $itemDescription = 'itemdescription' . $count;
@@ -361,7 +385,8 @@
                 $itemID = 'itemid' . $count;
                 echo " test echo 2.2.b :" . $itemPrice . "<br>"; // for testing purposes
                 //$itemprice = $_POST[$itemPrice];
-                echo " test echo 2.2.b :" . $itemprice . "<br>"; // for testing purposes
+                echo " test echo 2.2.b :" . $itemprice . "<br>";
+                echo " test echo item id :" . $itemID . "<br>";// for testing purposes
 
 #                if (isset($_POST[$itemDescription]) && isset($_POST[$itemPrice])){
                     echo " start Step 2.3..<br>"; // for testing purposes
@@ -375,6 +400,7 @@
                     $itemadditionalcharges = $_POST[$itemAdditionalCharges];
                     $itemid = $_POST[$itemID]; //Gets item id of that item
                     $itemArray = $itemid; //Push item id to array 
+                    echo " test echo 2.3.1.a :" . $itemid . "<br>";
                     echo " test echo 2.3.1.a :" . $itemprice . "<br>"; // for testing purposes
                     echo " test echo 2.3.1.a :" . $itempostage . "<br>";
                     echo " test echo 2.3.1.a :" . $itemdescription . "<br>";
@@ -387,6 +413,7 @@
                     
                     if(empty($itemid)) //If item id is empty, add the new item and link to request
                     {
+                       echo 'Inserting item<br>';
                        $SQL_stmt="INSERT INTO bursaryRequestItems (brItemCategory,brItemDesc,brItemURL,brItemPrice,brItemPostage,brItemAdditionalCharges)
                        VALUES ('$itemcategory', '$itemdescription' ,'$itemUrl', '$itemprice', '$itempostage', '$itemadditionalcharges')";
             
@@ -412,22 +439,13 @@
                        VALUES('$itemid', '$requestid', '$userid')";
 
                        $DBconnection->exec($SQL_stmt);//Link and loop again.
+                        
+                       $itemArray = $itemid;//Push to array again.
                        
                        echo "New item inserted";
                     }
-
-                      // for loop here **
-                     #$itemArrayLength = count($originalItems) - 1;
-                     echo 'Updating item, this is the array length: ' . $itemArrayLength . '<br>'; // for testing
-                     #$i = 0;
-                     for ($i = 0; $i <= $itemArrayLength; $i++){
-                          echo 'Updating item, for loop count: ' . $i . '<br>'; // for testing
-                          echo 'Updating item, for loop count itemID: ' . $originalItems[$i] . '<br>'; // for testing
-                          if ($originalItems[$i] == $itemid){ /// find end of this field for the closing brace
-                      #
-                      #   if($itemArray[$count-1] != $originalItems[$count-1]){
-                             if(!empty($itemid)) //update item and insert/update to request and student
-                             {
+                    if(!empty($itemid)) //update item and insert/update to request and student
+                    {
                                echo "Updating item<br>";
                                $SQL_stmt="UPDATE bursaryRequestItems SET brItemCategory = '$itemcategory',
                                brItemDesc = '$itemdescription',brItemURL = '$itemUrl',brItemPrice = '$itemprice',
@@ -444,24 +462,12 @@
                                echo " test echo 2.3.1.c : request id is:" . $requestid . "<br>";
                                echo "The item has been updated.";
 
-                               //Now update link items to the request and to student!
-                               //Removed for testing. Seems to be working fine without cause query doesnt execute
-                               /*$SQL_stmt = "INSERT INTO itemsAndRequests(ItemID,RequestID,StudentID) VALUES('$itemid','$requestid','$userid')
-                               ON DUPLICATE KEY UPDATE ItemID = '$itemid', RequestID = '$requestid', StudentID = '$userid' 
-                               WHERE RequestID = '$requestid' AND ItemID = '$itemid'";
-
-                               $DBconnection->exec($SQL_stmt);//Link and loop again. */
-
-                               //Does not need an update on the link because item exists
-
                                echo "Query executed.<br>";
                                echo " test echo 2.3.1.d :" . $itemprice . "<br>"; // for testing purposes
-                             }
-                         
-                             echo 'Array =' . $originalItems[$count-1] . '</br>';
+                    }
 
-                         }
-                      } 
+                      // for loop here **
+                     #$itemArrayLength = count($originalItems) - 1;
                     //Add the item to the bursaryRequest items table
                     
                 if ($itemprice == NULL || $itemprice == 0 || $itemprice == ""){
@@ -470,21 +476,11 @@
                     break;
                   
                 }
-                if ($testCounter >= 100){break;}// for testing, Limits the overpopulation potential overflow loop occurring
-/*                if (empty($_POST[$itemDescription]) && empty($_POST[$itemPrice])){
-                    // now need to get the final secion of the request form
-                    if (isset($_POST['justification']) && isset($_POST['tutorComments'])){
-                        //  assign last variables..
-                        $justification = $_POST['justification'];
-                        $tutorComments = $_POST['tutorComments'];
-
-
-
-                        // now start the SQL script to post the request
-                        */
-                   # }
-               # }
+                
+                /*if (($testCounter >= $countPost) || ($testCounter >= 100)){break;}*/// for testing, Limits the overpopulation potential overflow loop occurring
                 $count++;
+                $testCounter++;
+                echo $count;
             }
             break;
         
