@@ -185,3 +185,14 @@ p {
     color: red;
     text-decoration: none;
 }
+
+#setLegend {
+    width: 20%;
+    margin-top: 0.5em;
+    background-color: #000;
+    color: #fff;
+    padding: 3px 6px;
+}
+
+
+

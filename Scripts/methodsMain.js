@@ -27,8 +27,19 @@ function addItem(){ // to add item fields to a request
 
   // start first div section
   var d0 = document.createElement('div');
+    //fieldset
+  var fieldset = document.createElement('fieldset');
+    fieldset.setAttribute('class', "border p-2");
+    div1.appendChild(fieldset);
+  var legend = document.createElement('legend');
+    legend.setAttribute('id', "setLegend");
+    legend.innerHTML = "Item Details";
+    fieldset.appendChild(legend);
+    
     d0.setAttribute('class', "form-group row justify-content-between");
-  div1.appendChild(d0);
+    fieldset.appendChild(d0);
+    
+    
   // item number header
   var h = document.createElement('h5');
     h.setAttribute('id', "hd05"); // needs to be added to the source PHP
@@ -38,7 +49,7 @@ function addItem(){ // to add item fields to a request
   d0.appendChild(h);
   // span over 1 for (-) button
   var d0a = document.createElement('div');
-    d0a.setAttribute('class',"delete-group col3")
+    d0a.setAttribute('class',"delete-group col-2")
   d0.appendChild(d0a);
     // span over 2 for (-) button
   var d0a1 = document.createElement('div');
@@ -47,8 +58,8 @@ function addItem(){ // to add item fields to a request
   // this is the deleteItem(-) button
   var d0a1a = document.createElement('a');
     d0a1a.setAttribute('href', idel);
-    d0a1a.setAttribute('style', "width: 5; height: 5;");
-    d0a1a.setAttribute('class', "btn btn-danger");
+    d0a1a.setAttribute('style', "width: 2.5em; height: 2.5em;");
+    d0a1a.setAttribute('class', "btn btn-warning m-1");
     d0a1a.setAttribute('title', "Delete this Item");
     d0a1a.innerHTML = "<span>&#45;</span>";
   d0a1.appendChild(d0a1a);
@@ -56,7 +67,11 @@ function addItem(){ // to add item fields to a request
   var d1 = document.createElement('div');
     d1.id = "optionDiv";
     d1.setAttribute('class',"col-12 mt-2 mb-5");
-  div1.appendChild(d1);
+  fieldset.appendChild(d1);
+  var selectLabel = document.createElement('label');
+    selectLabel.setAttribute('for', "categoryField");
+    selectLabel.innerHTML = "Choose Category";
+    d1.appendChild(selectLabel);
   var a = document.createElement('select');
     //element.appendChild('newlink');
     a.setAttribute('name',icat);
@@ -91,35 +106,53 @@ function addItem(){ // to add item fields to a request
   // item description section
   var d2 = document.createElement('div');
     d2.setAttribute('class', "form-group row");
-  div1.appendChild(d2);
+  fieldset.appendChild(d2);
   var d2a = document.createElement('div');
     d2a.setAttribute('class', "col-12");
   d2.appendChild(d2a);
+  var descLabel = document.createElement('label');
+    descLabel.setAttribute('for', 'itemDescription');
+    descLabel.innerHTML = "Item Description:";
+    d2a.appendChild(descLabel);
   var d2ai = document.createElement('input');
     d2ai.setAttribute('type', "text");
     d2ai.setAttribute('name', ides);
     d2ai.setAttribute('class', "form-control");
+    d2ai.setAttribute('id', "itemDescription");
     d2ai.setAttribute('placeholder', "Item description:");
     //d2ai.setAttribute('required',); // does not seem to work if the requried field is added
   d2a.appendChild(d2ai);
   // item URL section
   var d3 = document.createElement('div');
     d3.setAttribute('class', "form-group row");
-  div1.appendChild(d3);
+  fieldset.appendChild(d3);
   var d3a = document.createElement('div');
     d3a.setAttribute('class', "col-12");
   d3.appendChild(d3a);
+    var urlLabel = document.createElement('label');
+    urlLabel.setAttribute('for', 'itemAddress');
+    urlLabel.innerHTML = "Item URL:";
+    d3a.appendChild(urlLabel);
   var d3ai = document.createElement('input');
     d3ai.setAttribute('type', "text");
     d3ai.setAttribute('name', iurl);
     d3ai.setAttribute('class', "form-control");
+    d2ai.setAttribute('id', "itemAddress");
     d3ai.setAttribute('placeholder', "URL to the item:");
     //d2ai.setAttribute('required',); // does not seem to work if the requried field is added
   d3a.appendChild(d3ai);
+    //item cost fieldset
+  var itemCosts = document.createElement('fieldset');
+    itemCosts.setAttribute('class', "border p-2");
+    div1.appendChild(itemCosts);
+  var costsLegend = document.createElement('legend');
+    costsLegend.setAttribute('id', "setLegend");
+    costsLegend.innerHTML = "Costs";
+    itemCosts.appendChild(costsLegend);
   // item costing section
   var d4 = document.createElement('div');
     d4.setAttribute('class', "form-group row justify-content-between");
-  div1.appendChild(d4);
+  itemCosts.appendChild(d4);
   // itemprice section
   var d4a = document.createElement('div');
     d4a.setAttribute('class', "input-group col-3");
@@ -130,7 +163,7 @@ function addItem(){ // to add item fields to a request
   var d4a1s = document.createElement('span');
     d4a1s.setAttribute('class', "input-group-text");
     d4a1s.setAttribute('id', "price");
-    d4a1s.innerHTML = "Item price:";
+    d4a1s.innerHTML = "Price:";
   d4a1.appendChild(d4a1s);
   var d4a1i = document.createElement('input');
     d4a1i.setAttribute('type', "text");
@@ -166,7 +199,7 @@ function addItem(){ // to add item fields to a request
   var d4c1s = document.createElement('span');
     d4c1s.setAttribute('class', "input-group-text");
     d4c1s.setAttribute('id', "additionalFees");
-    d4c1s.innerHTML = "Additional fees:";
+    d4c1s.innerHTML = "Add. fees:";
   d4c1.appendChild(d4c1s);
   var d4c1i = document.createElement('input');
     d4c1i.setAttribute('type', "text");

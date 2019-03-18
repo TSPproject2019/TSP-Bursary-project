@@ -4,10 +4,6 @@ var yearSelected = 0;
 function showCourses(level) {
             courselevel = level;
             var xhttp;
-            /*if(str.length == 0) {
-                document.getElementById("txtHint").innerHTML = "";
-                return;
-            }*/
             xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
                 if(this.readyState == 4 && this.status == 200) {
@@ -17,11 +13,13 @@ function showCourses(level) {
             xhttp.open("GET", "../PHP/getTable.php?q=" + course + "&yr="+ yearSelected+"&lvl="+ courselevel, true);
             xhttp.send();
 }
-function showYear(courseChosen){
-    course = courseChosen;
-    document.getElementById("yearBtn").style.visibility = "visible";
+function showYear(courseChosen)
+{
+   document.getElementById("yearBtn").style.visibility = "visible";
+   course = courseChosen;
 }
-function showLevel(courseYear){
+function showLevel(courseYear)
+{
     yearSelected = courseYear;
     document.getElementById("levelBtn").style.visibility = "visible";
 }

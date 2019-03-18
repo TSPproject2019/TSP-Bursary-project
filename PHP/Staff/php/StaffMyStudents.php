@@ -35,21 +35,21 @@
             // this varisable is also used for posting.
 
         }
-         $submittedTotal = getStaffTotals($userid,$userType,"Submitted");
-         $approvedTotal = getStaffApproved($userid,$userType,"Approved");
-         $awaitingDelivery = getStaffAwaitingDelivery($userid,$userType);
+         //$submittedTotal = getStaffTotals($userid,$userType,"Submitted");
+         //$approvedTotal = getStaffApproved($userid,$userType,"Approved");
+         //$awaitingDelivery = getStaffAwaitingDelivery($userid,$userType);
     }
 
 ?>
-                <div class="col-md-4 ml-4">
+                <!---<div class="col-md-4 ml-4">
                     <ul class="list-group list-group-flush">
                        <?php
-                       echo'<li class="list-group-item">Submitted: '. $submittedTotal .'</li>';
-                       echo'<li class="list-group-item">Approved: '. $approvedTotal .'</li>';
-                       echo'<li class="list-group-item">Awaiting delivery: '. $awaitingDelivery .'</li>';
+                       //echo'<li class="list-group-item">Submitted: '. $submittedTotal .'</li>';
+                       //echo'<li class="list-group-item">Approved: '. $approvedTotal .'</li>';
+                       //echo'<li class="list-group-item">Awaiting delivery: '. $awaitingDelivery .'</li>';
                           ?>
                     </ul>
-                </div>
+                </div> -->
 
 <div class="container">
             
@@ -76,25 +76,29 @@
                     ?>
                   </div>
                </div>
-    
+    <form action ="my_students_register_activate.php" method="POST">
+        
         <table class="table table-striped">
    <thead class="thead-dark">
     <tr>
-      <th scope="col">Request ID</th>
-      <th scope="col">Item Count</th>
-      <th scope="col">Date Submitted</th>
-      <th scope="col">Cost</th>
-      <th scope="col">Status</th>
+      <th scope="col">Student ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Course</th>
+      <th scope="col">Registered</th>
+      <th scope="col">PIN CODE</th>
+      <th scope="col">SEND CODE</th>
+      <th scope="col">Approve</th>
     </tr>
   </thead>
   <tbody>
      <?php 
       
-          echo getStaffSubmittedForms($userid);
+          echo getStaffStudents($userid);
       
       ?>
   </tbody>
 </table>
+</form>
 </div>
     </div>
 </div>

@@ -26,6 +26,9 @@ CREATE TABLE users (
     userEmail VARCHAR(255) NOT NULL,
     userType ENUM('Staff', 'Student', 'Admin') NOT NULL,
     userActive TINYINT(1) NOT NULL DEFAULT 0,
+    userPIN INTEGER(4) DEFAULT NULL,
+    userRegistered TINYINT DEFAULT 0,
+    userAccessGranted TINYINT DEFAULT 0,
     userLastLoginDate DATE DEFAULT NULL,
     userAgreementGDPR TINYINT(1) DEFAULT 0,
     PRIMARY KEY(userID)

@@ -39,6 +39,8 @@
         $submitTotal = getTotals ($userid, "Submitted");
         $approved = getTotals ($userid, "Approved");
         $pending = getTotals ($userid, "Pending");
+        $deliveredTotal = getDelivered($userid);
+        
         $availableBalance = getStudentAvailableBalance($userid);
     }
 ?>
@@ -54,6 +56,7 @@
                          echo '<li class="list-group-item  border-0">Submitted: <span>' . $submitTotal . '</span></li>';
                          echo '<li class="list-group-item  border-0">Approved: <span>' . $approved . '</span></li>';
                          echo '<li class="list-group-item  border-0">Awaiting delivery: <span>' . $pending . '</span></li>';
+                         echo '<li class="list-group-item  border-0">Delivered: <span>' . $deliveredTotal . '</span></li>';
                       ?>
                     </ul>
                 </div>

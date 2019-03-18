@@ -25,8 +25,9 @@
     $submitTotal = getTotals ($userid, "Submitted");
     $approved = getTotals ($userid, "Approved");
     $pending = getTotals ($userid, "Pending");
+    $deliveredTotal = getDelivered($userid);
     $availableBalance = getStudentAvailableBalance($userid);
-    require_once 'Shared/php/AllHeader.php';//connects to the header section for all pages
+    require 'Shared/php/AllHeader.php';//connects to the header section for all pages
     require_once 'Student/php/StudentMenu.php';// Drop Down Menu for all student pages
 ?>
 <!-- testing -->
@@ -36,16 +37,16 @@
                         echo '<p>Outstanding balance: <span>' . $availableBalance . '</span></p>';
                     ?>
                 </div>
-            <div class="col-md-4 ml-4">
-                <ul class="list-group list-group-flush">
-                <!-- <ul class="list-group"> -->
-                    <?php
-                        echo '<li class="list-group-item">Submitted: <span>' . $submitTotal . '</span></li>';
-                        echo '<li class="list-group-item">Approved: <span>' . $approved . '</span></li>';
-                        echo '<li class="list-group-item">Awaiting delivery: <span>' . $pending . '</span></li>';
-                    ?>
-                </ul>
-            </div>
+            <div class="col-3">
+                    <ul class="list-group">
+                      <?php
+                         echo '<li class="list-group-item  border-0">Submitted: <span>' . $submitTotal . '</span></li>';
+                         echo '<li class="list-group-item  border-0">Approved: <span>' . $approved . '</span></li>';
+                         echo '<li class="list-group-item  border-0">Awaiting delivery: <span>' . $pending . '</span></li>';
+                         echo '<li class="list-group-item  border-0">Delivered: <span>' . $deliveredTotal . '</span></li>';
+                      ?>
+                    </ul>
+                </div>
         </div>
 <!-- <div class="modal fade" id="ModalLong" tabindex="-1" role="dialog" aria-labelledby="ModalLongTitle" aria-hidden="false"> -->
  <!-- <section class="container mt-5 w-50"> -->
@@ -160,7 +161,9 @@
                         <h5 id="hd05" name="numberOfItems" class="m-2">Item ' . $count . '</h5>
                         <div class="delete-group col-2">
                             <div class="input-group-prepend">
-                                <a href="javascript:deleteItem(' . $count . ')" style="width: 5; height: 5;" class="btn btn-success" title="Delete this Item"><span>&#45;</span></a>
+                                <a href="javascript:addItem()" style="width: 2.5em; height: 2.5em;" class="btn btn-info m-1" title="Add an Item"><span>&#43;</span></a>                       
+                                 <a href="javascript:deleteItem(1)" style="width: 2.5em; height: 2.5em;" class="btn btn-warning m-1" title="Delete this Item"><span>&#45;</span></a>
+                                
                             </div>
                         </div>
                        </div>
@@ -242,6 +245,7 @@
             </div>';
             //add items
             echo '<div align="right" style="margin-bottom:5px;">
+                    
                     <a href="javascript:addItem()" style="width: 15; height: 15;" class="btn btn-success" title="Add an Item"><span>&#43;</span></a>
                 </div>';
 
@@ -280,7 +284,7 @@
 
             try
             {
-                    $DBconnection->exec($SQL_stmt);
+                $DBconnection->exec($SQL_stmt);
             }
             catch(PDOException $e)
             {
@@ -290,8 +294,8 @@
             echo '                            <div class="form-group">
             <label for="DraftRequestDeleted">Draft Request Deleted</label>
             </div>';
-            #header("Location: student_review_draft.php? activity=request_delete_success");
-            #goBack();          
+            header("Location: student_review_draft.php? activity=request_delete_success");
+            goBack();          
         }
     }
 ?>

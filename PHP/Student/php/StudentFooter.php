@@ -6,8 +6,10 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>
 <script src="../../../Scripts/regScript.js"></script>
+<script src="../../../Scripts/changeBg.js"></script>
 <script src="../../../Scripts/pageFooterFunctions.js"></script>
 <script src="../../../Scripts/methodsMain.js"></script>
+<script src="../../../Scripts/inputsJS.js"></script>
 </html>
 
 

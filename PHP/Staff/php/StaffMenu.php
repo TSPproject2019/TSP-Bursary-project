@@ -16,6 +16,7 @@
                         <a class="dropdown-item" href="staff_faq.php"> FAQ </a>
                         <a class="dropdown-item" href="staff_agreement.php"> Agreement Form </a>
                         <a class="dropdown-item" href="staff_home.php"> Home Page </a>
+                        <a class="dropdown-item" href="staff_view_students.php">My students</a>
                     </div>
             </div><!-- Menu ends -->
 <!-- </div> -->

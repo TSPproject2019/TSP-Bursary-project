@@ -173,6 +173,7 @@
         <button type="submit" name="submit" value="saveRequest" style="width: 38%;" class="btn btn-primary" id="Save" wide="45">Save</button>
     </div>
   <!-- need to add button for adding new item (+)-->
+    <a href="javascript:addItem()" style="width: 2.5em; height: 2.5;" class="btn btn-info" title="Add an Item"><span>&#43;</span></a>
     <div class="col-5 mb-5 text-right">
         <button type="submit" name="submit" value="submitRequest" style="width: 38%;" class="btn btn-success" id="Submit">Submit</button>
     </div>

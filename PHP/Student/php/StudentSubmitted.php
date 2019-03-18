@@ -39,6 +39,7 @@
         $submitTotal = getTotals ($userid, "Submitted");
         $approved = getTotals ($userid, "Approved");
         $pending = getTotals ($userid, "Pending");
+        $deliveredTotal = getDelivered($userid);
         $availableBalance = getStudentAvailableBalance($userid);
     }
 ?>
@@ -51,14 +52,15 @@
         <div class="col-3">
                     <ul class="list-group">
                       <?php
-                       echo '<li class="list-group-item  border-0">Submitted: <span>' . $submitTotal . '</span></li>';
-                       echo '<li class="list-group-item  border-0">Approved: <span>' . $approved . '</span></li>';
-                       echo '<li class="list-group-item  border-0">Awaiting delivery: <span>' . $pending . '</span></li>';
+                         echo '<li class="list-group-item  border-0">Submitted: <span>' . $submitTotal . '</span></li>';
+                         echo '<li class="list-group-item  border-0">Approved: <span>' . $approved . '</span></li>';
+                         echo '<li class="list-group-item  border-0">Awaiting delivery: <span>' . $pending . '</span></li>';
+                         echo '<li class="list-group-item  border-0">Delivered: <span>' . $deliveredTotal . '</span></li>';
                       ?>
                     </ul>
                 </div>
           </div>
-<form action="Student_view_rejected.php" method="POST">
+<form action="Student_view_form.php" method="POST">
           <table class="table table-striped">
    <thead class="thead-dark">
     <tr>
@@ -67,7 +69,7 @@
       <!---<th scope="col">Item Description</th> ---->
       <th scope="col">Cost</th>
       <th scope="col">Status</th>
-      <th scope="col"> </th>
+      <th scope="col">View</th>
     </tr>
   </thead>
   <tbody>

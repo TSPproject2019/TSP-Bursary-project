@@ -44,36 +44,36 @@ which is then encrypted using md5, which is what is inserted into the database.*
 # Danny md5 = '357afb1752b2244d3dff0f9059c818ee'
 # Andrius md5  '741ff3f6dc942ef8422320452d0f4d40'
 # no md5 reference confirm for the 2 new student users.
-INSERT INTO users (userID, userFirstName, userLastName, userEmail, userType, userActive)
-  VALUES (293779, "Nikita", "Skripnikov", '293779@student.lincolncollege.ac.uk', "Student", '1');
-INSERT INTO users (userID, userFirstName, userLastName, userEmail, userType, userActive)
-  VALUES (29000, "Danny", "McCoombs", '29000@student.lincolncollege.ac.uk', "Student", '1');
-INSERT INTO users (userID, userFirstName, userLastName, userEmail, userType, userActive)
-  VALUES (27865, "Andrius", "Williams", '27865@student.lincolncollege.ac.uk', "Student", '1');
-INSERT INTO users (userID, userFirstName, userLastName, userEmail, userType, userActive)
-  VALUES (25789, "Ben", "Hugh", '25789@student.lincolncollege.ac.uk', "Student", '1');
-INSERT INTO users (userID, userFirstName, userLastName, userEmail, userType, userActive)
-  VALUES (25432, "Jessica", "Roberts", '25432@student.lincolncollege.ac.uk', "Student", '1');
+INSERT INTO users (userID, userFirstName, userLastName, userEmail, userType, userActive,userPIN)
+  VALUES (293779, "Nikita", "Skripnikov", '293779@student.lincolncollege.ac.uk', "Student", '1',FLOOR( RAND() * (9999-1000) + 1000));
+INSERT INTO users (userID, userFirstName, userLastName, userEmail, userType, userActive,userPIN)
+  VALUES (29000, "Danny", "McCoombs", '29000@student.lincolncollege.ac.uk', "Student", '1',FLOOR( RAND() * (9999-1000) + 1000));
+INSERT INTO users (userID, userFirstName, userLastName, userEmail, userType, userActive,userPIN)
+  VALUES (27865, "Andrius", "Williams", '27865@student.lincolncollege.ac.uk', "Student", '1',FLOOR( RAND() * (9999-1000) + 1000));
+INSERT INTO users (userID, userFirstName, userLastName, userEmail, userType, userActive,userPIN)
+  VALUES (25789, "Ben", "Hugh", '25789@student.lincolncollege.ac.uk', "Student", '1',FLOOR( RAND() * (9999-1000) + 1000));
+INSERT INTO users (userID, userFirstName, userLastName, userEmail, userType, userActive,userPIN)
+  VALUES (25432, "Jessica", "Roberts", '25432@student.lincolncollege.ac.uk', "Student", '1',FLOOR( RAND() * (9999-1000) + 1000));
 
 #-------Staff user insertion------------#
 # John md5 = '2a9d2ec24d4b9d69ebb7131e5767027f'
 # Jeremy md5 = '0efc26550cc2437061eec003dfe637cd'
 # Rebbeca md5 = 'f17c8ae0501ef044fab774e79792c170'
-INSERT INTO users (userID, userFirstName, userLastName, userEmail, userType, userActive)
-  VALUES (52354,"John","Rogers", 'JRogers@lincolncollege.ac.uk', "Staff", '1');
-INSERT INTO users (userID, userFirstName, userLastName, userPassword, userEmail, userType, userActive)
-  VALUES (59021,"Jeremy","Smith", "0efc26550cc2437061eec003dfe637cd", 'JSmith@lincolncollege.ac.uk', "Staff", '1');
-INSERT INTO users (userID, userFirstName, userLastName, userPassword, userEmail, userType, userActive)
-  VALUES (53270,"Rebbeca","Jenkins", "f17c8ae0501ef044fab774e79792c170", 'RJenkins@lincolncollege.ac.uk', "Staff", '1');
+INSERT INTO users (userID, userFirstName, userLastName, userEmail, userType, userActive,userPIN)
+  VALUES (52354,"John","Rogers", 'JRogers@lincolncollege.ac.uk', "Staff", '1',FLOOR( RAND() * (9999-1000) + 1000));
+INSERT INTO users (userID, userFirstName, userLastName, userPassword, userEmail, userType, userActive,userPIN)
+  VALUES (59021,"Jeremy","Smith", "0efc26550cc2437061eec003dfe637cd", 'JSmith@lincolncollege.ac.uk', "Staff", '1',FLOOR( RAND() * (9999-1000) + 1000));
+INSERT INTO users (userID, userFirstName, userLastName, userPassword, userEmail, userType, userActive,userPIN)
+  VALUES (53270,"Rebbeca","Jenkins", "f17c8ae0501ef044fab774e79792c170", 'RJenkins@lincolncollege.ac.uk', "Staff", '1',FLOOR( RAND() * (9999-1000) + 1000));
 
 #-------Admin user insertion------------#
 # Stephen md5 = 'eb64c27eb57c8f98c8a36d87d7464f3b'
-INSERT INTO users (userID, userFirstName, userLastName, userEmail, userType, userActive)
-  VALUES (4561,"Stephen","Smith", 'SSmith@lincolncollege.ac.uk', "Admin", '1');
+INSERT INTO users (userID, userFirstName, userLastName, userEmail, userType, userActive,userPIN)
+  VALUES (4561,"Stephen","Smith", 'SSmith@lincolncollege.ac.uk', "Admin", '1',FLOOR( RAND() * (9999-1000) + 1000));
 
 #-------Student table insertion------------#
 INSERT INTO student(studentID,dOB,gender,availableBalance) 
-  VALUES (293779,'1997-07-11',TRUE,500);
+  VALUES (293779,'1997-07-11',TRUE,250);
 INSERT INTO student(studentID,dOB,gender,availableBalance) 
   VALUES (29000,'1998-10-11',TRUE,500);
 INSERT INTO student(studentID,dOB,gender,availableBalance) 

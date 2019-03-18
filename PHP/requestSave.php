@@ -23,6 +23,7 @@
     $requestid = 0;
     $testCounter = 0; // this is for testing
     $goToPage = 0; // for switch end go back requirements
+    $status = "Proceed";
  
     // see which buttin is pressed and excecute a method accordingly, using switch
     switch ($_POST['submit']) {
@@ -160,9 +161,11 @@
             $txbJustication = $_POST['justification'];  
             $dateNow = date('Y/m/d');
             $bRequestsStatus = 'Submitted'; //Draft because of saving the request
+            $totalPrice = 0;
             // assign a counter
             $count = 1;
-            $goToPage = 1;
+            $goToPage = 5;
+            $proceed = TRUE;
             #$itemDescription = "'itemdescription" . $count. "'";
             echo " start Step 2.1.a.<br>"; // for testing purposes
             // add new request section script here
@@ -185,6 +188,17 @@
             if ($row = $result->fetch()){
                 $requestid = $row['requestId'];
             }
+            //get student balance
+             $SQL_stmt = "SELECT availableBalance FROM student WHERE studentID = '".$userid."'";
+             $balance = 0;
+                    
+             $result = $DBconnection->query($SQL_stmt); //Run query
+                        
+             if ($row = $result->fetch()){ //Retrieve item id result
+                            
+                    $balance = $row['availableBalance'];
+             }
+            
             echo " test echo 2.3.1.c : requestId id is:" . $requestid . "<br>";
             echo " start Step 2.1.d.<br>"; // for testing purposes
             #echo " test echo 2.1.a :" . $itemDescription . "<br>"; // for testing purposes
@@ -214,7 +228,30 @@
                     $itempostage = $_POST[$itemPostage];
                     $itemadditionalcharges = $_POST[$itemAdditionalCharges];
                     
-                    echo " test echo 2.3.1.a :" . $itemprice . "<br>"; // for testing purposes
+                    $totalPrice+=$itemprice+$itempostage+$itemadditionalcharges; //Adding total price of each item
+                    //To store the full amount of the item inc charges
+                    $itempriceTemp = $itemprice+$itempostage+$itemadditionalcharges;
+                    if($itempriceTemp > $balance)
+                    {
+                        $proceed = FALSE;
+                        $status = "Failed";
+                        //goback();
+                        //Need to somehow display an error message to the user
+                        //echo '<script type="text/javascript">alert("INFO:");</script>';
+                        //Delete entire request
+                        $SQL_stmt="DELETE FROM bursaryRequests WHERE bRequestsID = '".$requestid."'";
+                        //Redirecting user to the same page.
+                        //header ("Location: student_new_request.php? activity=request_submission_fail");
+                        $DBconnection->exec($SQL_stmt);
+                    }
+                    if($itempriceTemp < $balance)
+                    {
+                        $proceed = TRUE;
+                    }
+                    
+                    if($proceed == TRUE)
+                    {
+                        echo " test echo 2.3.1.a :" . $itemprice . "<br>"; // for testing purposes
                     // run SQL script to post the information..
             
                     //Add the item to the bursaryRequest items table
@@ -222,7 +259,7 @@
                     VALUES ('$itemcategory', '$itemdescription' ,'$itemUrl', '$itemprice', '$itempostage', '$itemadditionalcharges')";
             
                     $DBconnection->exec($SQL_stmt); //Insert item to the items table
-                  echo " test echo 2.3.1.b :" . $itemprice . "<br>"; // for testing purposes
+                    echo " test echo 2.3.1.b :" . $itemprice . "<br>"; // for testing purposes
                   
                     //Now retrieve item id of that item!
                     $SQL_stmt = "SELECT brItemID AS 'itemId' FROM bursaryRequestItems
@@ -238,16 +275,25 @@
                             
                             $itemid = $row['itemId'];
                         }
-                  echo " test echo 2.3.1.c : Item id is:" . $itemid . "<br>"; // for testing purposes
-                  echo " test echo 2.3.1.c : request id is:" . $requestid . "<br>";
+                      echo " test echo 2.3.1.c : Item id is:" . $itemid . "<br>"; // for testing purposes
+                      echo " test echo 2.3.1.c : request id is:" . $requestid . "<br>";
                   
                     //Now link item to the request and to student!
                     $SQL_stmt = "INSERT INTO itemsAndRequests(ItemID,RequestID,StudentID)
                     VALUES('$itemid', '$requestid', '$userid')";
 
                     $DBconnection->exec($SQL_stmt);//Link and loop again.
-                  echo " test echo 2.3.1.d :" . $itemprice . "<br>"; // for testing purposes
+                     echo " test echo 2.3.1.d :" . $itemprice . "<br>"; // for testing purposes
+                    }
+                }
+                if($totalPrice <=$balance)
+                {
+                    $balance = $balance - $totalPrice; //Minus the total price of items
                     
+                    $SQL_stmt = "UPDATE student SET availableBalance = '".$balance."'
+                    WHERE studentID = '".$userid."'"; //Update the balance
+                    
+                    $DBconnection->exec($SQL_stmt);//Execute query
                 }
                 if ($testCounter >= 100){break;}// for testing, Limits the overpopulation potential overflow loop occurring
 /*                if (empty($_POST["'"$itemDescription . 1"'"]) && empty($_POST["'"$itemPrice . 1"'"])){
@@ -684,11 +730,34 @@
                       //Does not need link here as the item exists already and is linked by default
                       echo " test echo 2.3.1.d :" . $itemprice . "<br>"; // for testing purposes
                     }
-                    //Add the item to the bursaryRequest items table
+                    //Select total price of the request
+                    $SQL_stmt = "SELECT SUM(IFNULL(brItemPrice,0) + IFNULL(brItemPostage,0) + IFNULL(brItemAdditionalCharges,0))
+                    AS 'Cost' FROM bursaryRequestItems INNER JOIN itemsAndRequests ON bursaryRequestItems.brItemID = itemsAndRequests.ItemID
+                    AND itemsAndRequests.RequestID = '".$requestid."'";
+                    $totalPrice = 0;
+                    $result = $DBconnection->query($SQL_stmt); //Run query
+                        
+                        if ($row = $result->fetch()){ //Retrieve item id result
+                            
+                            $totalPrice = $row['Cost'];
+                        }
+                     //get student balance
+                    $SQL_stmt = "SELECT availableBalance FROM student WHERE studentID = '".$userid."'";
+                    $balance = 0;
                     
+                    $result = $DBconnection->query($SQL_stmt); //Run query
+                        
+                        if ($row = $result->fetch()){ //Retrieve item id result
+                            
+                            $balance = $row['availableBalance'];
+                        }
+                    $balance = $balance - $totalPrice; //Minus the total price of items
+                    
+                    $SQL_stmt = "UPDATE student SET availableBalance = '".$balance."'
+                    WHERE studentID = '".$userid."'"; //Update the balance
+                    
+                    $DBconnection->exec($SQL_stmt);//Execute query
 
-                    
-#                }
                 if ($itemprice == NULL || $itemprice == 0 || $itemprice == ""){
                     echo " test echo 2.3.1.end :" . $itemprice . "<br>"; // for testing purposes
                     // return to page you were on as a fresh page
@@ -812,6 +881,47 @@
                 $DBconnection->exec($SQL_stmt);//Execute query
                 
                 echo 'Rejected request';
+                
+                //Now send the funds back to student account. Find the student first
+                $SQL_stmt = "SELECT DISTINCT itemsAndRequests.StudentID AS 'student' from itemsAndRequests
+                INNER JOIN bursaryRequests ON bursaryRequests.bRequestsID = itemsAndRequests.RequestID
+                AND bursaryRequests.bRequestsID = '".$requestid."'";
+                
+                $studentid = 0;
+                
+                $result = $DBconnection->query($SQL_stmt); //Run query
+                        
+                        if ($row = $result->fetch()){ //Retrieve item id result
+                            
+                            $studentid = $row['student'];
+                        }
+                //Now select the total price of that request.
+                $SQL_stmt = "SELECT SUM(IFNULL(brItemPrice,0) + IFNULL(brItemPostage,0) + IFNULL(brItemAdditionalCharges,0))
+                AS 'Cost' FROM bursaryRequestItems INNER JOIN itemsAndRequests ON bursaryRequestItems.brItemID = itemsAndRequests.ItemID
+                AND itemsAndRequests.RequestID = '".$requestid."'";
+                $totalPrice = 0;
+                $result = $DBconnection->query($SQL_stmt); //Run query
+                        
+                        if ($row = $result->fetch()){ //Retrieve item id result
+                            
+                            $totalPrice = $row['Cost'];
+                        }
+                //Now select the current student availableBalance
+                $SQL_stmt = "SELECT availableBalance FROM student WHERE studentID = '".$studentid."'";
+                $balance = 0;
+                    
+                $result = $DBconnection->query($SQL_stmt); //Run query
+                        
+                        if ($row = $result->fetch()){ //Retrieve balance result
+                            
+                            $balance = $row['availableBalance'];
+                        }
+                    $balance = $balance + $totalPrice; //Plus the total price of items
+                    
+                    $SQL_stmt = "UPDATE student SET availableBalance = '".$balance."'
+                    WHERE studentID = '".$studentid."'"; //Update the balance
+                    
+                    $DBconnection->exec($SQL_stmt);//Execute query
             }
             break;
     }
@@ -829,12 +939,17 @@
         {
             header ("Location: staff_review_drafts.php? activity=request_draft_updated");
         }
-    }elseif($goToPage == 5){
+    }elseif($goToPage == 5 && $status == "Proceed"){
         if($userType == "Student")
         {
            header ("Location: student_submitted.php? activity=request_submitted");
         }
-    }elseif($goToPage == 8){
+    }elseif($goToPage == 5 && $status == "Failed"){
+     if($userType == "Student")
+     {
+        header ("Location: student_new_request.php? activity=insuffient_funds");
+     }
+ }elseif($goToPage == 8){
       if($userType == "Staff")
       {
          header ("Location: staff_student_submissions.php? activity=submitted");
