@@ -17,6 +17,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    
     <link rel="stylesheet" type="text/css" href="../../../CSS/styles.css">
 
     <!-- Bootstrap 4.1 CND -->
@@ -25,6 +26,8 @@
     <!-- Font Awsome icons -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
     integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <script src="../../../Scripts/nightMode.js"></script>   
+    <script src="../../../Scripts/fontSize.js"></script>
    
    <!--Include page name in header -->
 
@@ -53,6 +56,25 @@
             <img src="Shared/images/logo.png" class="img-fluid" width="100px" height="50px" alt="Responsive image">
             <!-- <img src="../images/logo.png" ></img> -->
             <a href="logout.php" class="btn btn-success">Log out</a>
+            
+            
         </div>
+        
     </div>
+    <div class="text-right">
+        <div class="btn-group dropleft">
+             <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               Accessibility
+             </button>
+             <div class="dropdown-menu">
+               <a class="dropdown-item" id="button1" value="larger" type="button" onclick="changeFontSize(this)" href="#">Increase font size</a> 
+               <a class="dropdown-item" id="button2" vale="smaller" type="button" onclick="changeFontSize(this)"  href="#">Decrease font size</a>
+                 <a class="modeSelect" onclick="nightfall()">Nightfall Mode</a>
+                 <button onclick="summerJam()">Summer Jam</button>
+                 <button onclick="winterChill()">Winter Chill</button>
+                 <button onclick="autumnBreez()">Autumn Breez</button>
+                                  
+             </div>            
+        </div>
+</div>   
 </header>

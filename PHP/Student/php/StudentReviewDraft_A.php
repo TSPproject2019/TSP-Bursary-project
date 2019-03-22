@@ -1,3 +1,4 @@
+<body id="demo">
 <?php
     session_start();
 
@@ -62,7 +63,7 @@
         // get the data for the submitted requests
         $submitTotal = getTotals ($userid, "Submitted");
         $approved = getTotals ($userid, "Approved");
-        $pending = getTotals ($userid, "Pending");
+        $pending = getStudentAwaitingDelivery($userid);
         $deliveredTotal = getDelivered($userid);
         $availableBalance = getStudentAvailableBalance($userid);
     }
@@ -70,16 +71,16 @@
 <!-- <script src="./Scripts/studentJava.js" type="text/javascript"></script> -->
 <div class="col-md-4 ml-3">
                     <?php
-                        echo '<p>Outstanding balance: <span>' . $availableBalance . '</span></p>';
+                        echo '<h6>Outstanding balance: <span>' . $availableBalance . '</span></h6>';
                     ?>
                 </div>
             <div class="col-3">
-                    <ul class="list-group">
+                    <ul class="removeBullets">
                       <?php
-                         echo '<li class="list-group-item  border-0">Submitted: <span>' . $submitTotal . '</span></li>';
-                         echo '<li class="list-group-item  border-0">Approved: <span>' . $approved . '</span></li>';
-                         echo '<li class="list-group-item  border-0">Awaiting delivery: <span>' . $pending . '</span></li>';
-                         echo '<li class="list-group-item  border-0">Delivered: <span>' . $deliveredTotal . '</span></li>';
+                         echo '<li>Pending Approval: <span>' . $submitTotal . '</span></li>';
+                         echo '<li>Approved: <span>' . $approved . '</span></li>';
+                         echo '<li>Awaiting delivery: <span>' . $pending . '</span></li>';
+                         echo '<li>Delivered: <span>' . $deliveredTotal . '</span></li>';
                       ?>
                     </ul>
                 </div>
@@ -110,3 +111,4 @@
 <?php
     #require_once 'StudentReviewDraft_B.php';
 ?>
+</body>

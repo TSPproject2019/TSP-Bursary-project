@@ -53,31 +53,47 @@
         // get the data for the submitted requests
         $submitTotal = getTotals ($userid, "Submitted");
         $approved = getTotals ($userid, "Approved");
-        $pending = getTotals ($userid, "Pending");
+        $pending = getStudentAwaitingDelivery($userid);
         $deliveredTotal = getDelivered($userid);
         $availableBalance = getStudentAvailableBalance($userid);
     }
 ?>
 
-<div class="col-md-4 ml-3">
+<fieldset class="col-md-4 ml-3">
+    
+
+<div>
      <?php //Balance is not defined but in HTML the value is shown.
-        echo '<p id="balance1" value="'.$availableBalance.'">Outstanding balance: <span>' . $availableBalance . '</span></p>';
+        echo '<ul class="removeBullets">';
+            echo '<li id="balance1" value="'.$availableBalance.'">Outstanding balance: <span>' . $availableBalance . '</span></li>';
+            echo '<fieldset>';
+                echo '<legend class="text-center">Submitted</legend>';        
+                echo '<li>Pending Approval: <span>' . $submitTotal . '</span></li>';
+                echo '<li>Approved: <span>' . $approved . '</span></li>';
+                echo '<li>Awaiting delivery: <span>' . $pending . '</span></li>';
+                echo '<li>Delivered: <span>' . $deliveredTotal . '</span></li>';
+            echo '</fieldset>';
+        echo '</ul>'
       ?>
  </div>
+</fieldset>
         <!-- <div class="row col-lg-6 justify-content-start align-items-center"> -->
-     <div class="col-3">
+</div>
+
+<!--<fieldset class="col-lg-3 col-sm-1 border ml-1">
+     <div>        
+            <legend class="text-center">Header</legend>
                     <ul class="list-group">
-                      <?php
-                         echo '<li class="list-group-item  border-0">Submitted: <span>' . $submitTotal . '</span></li>';
-                         echo '<li class="list-group-item  border-0">Approved: <span>' . $approved . '</span></li>';
-                         echo '<li class="list-group-item  border-0">Awaiting delivery: <span>' . $pending . '</span></li>';
-                         echo '<li class="list-group-item  border-0">Delivered: <span>' . $deliveredTotal . '</span></li>';
-                      ?>
+                      
                     </ul>
                 </div>
-        </div>
+   </fieldset> -->
+     
+    
+        
+
           
-<section class="container mt-5 w-50">
+<section class="container-fluid mt-5 w-50">
   <!--Fieldset and legends for accessability (e.g, grouping information for screen readers) -->
     <!-- Bootstraps resets fieldset attributes e.g., removes border wrapping fieldset elements -->
   <fieldset class="border p-2">
@@ -124,11 +140,11 @@
     <input type="hidden" name="userid" value="<?php echo $_SESSION['userid'] ?>" />
     <div id = "newlink">
         <div id="1">
-            <fieldset class="border p-2">
-                <legend id="setLegend">Item Details</legend>
+            <fieldset class="border mb-2 mt-2 p-2">
+                <!--<legend id="setLegend">Item Details</legend> -->
                 
                 <div class="form-group row justify-content-between">   
-                    <h5 id="hd05" name="numberOfItems" class="ml-4 border">Item 1</h5>   
+                    <h5 id="hd05" name="numberOfItems" class="ml-4">Item 1</h5>   
                     <div class="col-lg-3">
                          <div>
                              <a href="javascript:addItem()" style="width: 2.5em; height: 2.5em;" class="btn btn-info m-1" title="Add an Item"><span>&#43;</span></a>                       
@@ -150,46 +166,46 @@
         <!--Item description -->
     <div class="form-group row">
         <div class="col-12">
-            <label for="itemDescription">Item Description:</label>
+            <!--<label for="itemDescription">Item Description:</label>-->
             <input type="text" id="itemDescription" name="itemdescription1" class="form-control" placeholder="Item description:" required>
          </div>
     </div> 
     <!--Item URL-->
     <div class="form-group row">
-       <div class="col-12">
-           <label for="itemAddress">Item URL:</label>
-           <input id="itemAddress" type="text" name="itemUrl1" class="form-control" placeholder="URL to the item:"
+       <div class="col-12" data-tip="Example: https://www.amazon.co.uk/Raspberry-Pi-Model-Quad-Motherboard/dp/B01CD5VC92" >
+           <label for="itemAddress">Item URL:</label>            
+           <input class="form-control" type="text" id="itemAddress"  name="itemUrl1" placeholder="URL to the item:"
                   value="<?php if (isset($_POST['itemUrl'])) echo $_POST['itemUrl']; ?>">
        </div>
     </div>
-  </fieldset> 
-    
-        <fieldset class="border p-2">
-            <legend id="setLegend">Item Costs</legend>
+  </fieldset>                  
+        <fieldset class="border mb-2 mt-2 p-2">
+            <!--<legend id="setLegend">Item Costs</legend> -->
             <!--FORM FEES ROW-->
-            <div class="form-group row justify-content-between">
+            <div class="form-group row align-items-center">
             <!--Form Price field -->
-                  <div  class="input-groupl co-3">
-                  <div class="input-group-prepend">
-                      <span class="input-group-text" id="price" required>Price:</span>
-                  </div>
+                  <div  class="input-group col-lg-4 col-md-4 col-sm-2 p-2">
+                      <div class="input-group-prepend">
+                          <span class="input-group-text" id="price" required>Price:</span>
+                      </div>
                   <input type="text" id="itemprice1" class="form-control" value="" name="itemprice1" aria-describedby="price">
               </div>
              <!--Form Postage field -->              
-              <div class="input-group col-lg-3">
+              <div class="input-group col-lg-4 col-md-4 col-sm-2 p-2">
                   <div class="input-group-prepend">
                      <span class="input-group-text" id="price" required>Postage:</span>
                   </div>
                   <input type="text" id="itempostage1" class="form-control" value="" name="itempostage1" aria-describedby="postage">
                </div>
               <!--Form Additional Fees -->
-                  <div class="input-group col-3">
+                  <div class="input-group col-lg-4 col-md-4 col-sm-2 p-2">
                       <div class="input-group-prepend">
                           <span class="input-group-text" id="additionalFees">Add. fees:</span>
                       </div>
                       <input type="text" id="itemaddionalcharges1" class="form-control" value="" name="itemadditionalcharges1" aria-describedby="additionalFees">
                   </div>                   
              </div> <!--End of Fees row -->
+            
         </fieldset>
     
     

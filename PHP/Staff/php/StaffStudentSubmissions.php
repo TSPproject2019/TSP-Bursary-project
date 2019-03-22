@@ -41,12 +41,13 @@ session_start();
     }
 
 ?>
+<body id="demo">
                 <div class="col-md-4 ml-4">
-                    <ul class="list-group list-group-flush">
+                    <ul class="removeBullets">
                        <?php
-                       echo'<li class="list-group-item">Submitted: '. $submittedTotal .'</li>';
-                       echo'<li class="list-group-item">Approved: '. $approvedTotal .'</li>';
-                       echo'<li class="list-group-item">Awaiting delivery: '. $awaitingDelivery .'</li>';
+                       echo'<li>Submitted: '. $submittedTotal .'</li>';
+                       echo'<li>Approved: '. $approvedTotal .'</li>';
+                       echo'<li>Awaiting delivery: '. $awaitingDelivery .'</li>';
                           ?>
                     </ul>
                 </div>   
@@ -288,3 +289,4 @@ session_start();
     </tr> --->    
                 </div>
 </div><!-- container end -->
+</body>

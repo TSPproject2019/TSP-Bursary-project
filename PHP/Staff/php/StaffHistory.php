@@ -3,7 +3,7 @@
    # echo " start Step 0.0..<br>"; // for testing purposes
    require_once 'connect.php';//connects to the SQL database.
    # echo " start Step 1.0..<br>"; // for testing purposes
-   require 'functions.php'; // connects to the functions.
+   require_once 'functions.php'; // connects to the functions.
     
     // Get the _SESSION user details.
     if (isset($_SESSION['lastName'])){
@@ -40,18 +40,21 @@
          $awaitingDelivery = getStaffAwaitingDelivery($userid,$userType);
     }
 
-?>        
+?>  
+<body id="demo">
+    
+
                 <div class="col-md-4 ml-5">
-                    <ul class="list-group list-group-flush">
+                    <ul class="removeBullets">
                        <?php
-                       echo'<li class="list-group-item">Submitted: '. $submittedTotal .'</li>';
-                       echo'<li class="list-group-item">Approved: '. $approvedTotal .'</li>';
-                       echo'<li class="list-group-item">Awaiting delivery: '. $awaitingDelivery .'</li>';
+                       echo'<li>Submitted: '. $submittedTotal .'</li>';
+                       echo'<li>Approved: '. $approvedTotal .'</li>';
+                       echo'<li>Awaiting delivery: '. $awaitingDelivery .'</li>';
                           ?>
                     </ul>
                 </div>
 
-        <div class="container">
+        <div  class="container">
             
             <div class="row m-5"><!--table selectiom START -->  
                <div class="btn-group" style="text-align: center" "display:block;">
@@ -100,58 +103,17 @@
       <th scope="col">Student Name</th>
       <th scope="col">File Name</th>
       <th scope="col">Date Submitted</th>
-      <th scope="col">Date Approved</th>
       <th scope="col">Cost</th>
       <th scope="col">Status</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">ID ONE</th>
-      <td>NAME ONE</td>
-      <td>WEBFORM 1</td>
-      <td>27/01/2019</td>
-      <td>28/01/2019</td>
-      <td>£230.00</td>
-      <td>ACCEPTED</td>
-    </tr>
-    <tr>
-      <th scope="row">ID TWO</th>
-      <td>NAME TWO</td>
-      <td>WEBFORM 2</td>
-      <td>27/01/2019</td>
-      <td>28/01/2019</td>
-      <td>£78.00</td>
-      <td>DELIVERED</td>
-    </tr>
-    <tr>
-      <th scope="row">ID THREE</th>
-      <td>NAME THREE</td>
-      <td>WEBFORM 3</td>
-      <td>27/01/2019</td>
-      <td>28/01/2019</td>
-      <td>£499.99</td>
-      <td>PENDING</td>
-    </tr>
-     <tr>
-      <th scope="row">ID FOUR</th>
-      <td>NAME FOUR</td>
-      <td>WEBFORM 4</td>
-      <td>27/01/2019</td>
-      <td>28/01/2019</td>
-      <td>£79.50</td>
-      <td>PENDING</td>
-    </tr>
-     <tr>
-      <th scope="row">ID FIVE</th>
-      <td>NAME FIVE</td>
-      <td>WEBFORM 5</td>
-      <td>27/01/2019</td>
-      <td>28/01/2019</td>
-      <td>£99.99</td>
-      <td>PENDING</td>
-    </tr>
+      <?php
+          echo getStaffHistory($userid);
+      ?>
+
   </tbody>
 </table>
 </div>
-</div>    
+</div>
+</body>

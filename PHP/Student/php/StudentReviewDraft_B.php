@@ -1,3 +1,4 @@
+<body id="demo">
 <?php
     // start the session
     session_start();
@@ -180,5 +181,8 @@
 </div>
 </form>
 <!-- </section> -->
-
+            </div>
+        </div>
+    </div>
+</body>
 

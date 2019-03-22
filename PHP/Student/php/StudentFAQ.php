@@ -1,3 +1,4 @@
+<body id="demo">
 <?php
     session_start();
    # echo " start Step 0.0..<br>"; // for testing purposes
@@ -37,29 +38,28 @@
         // get the data for the submitted requests
         $submitTotal = getTotals ($userid, "Submitted");
         $approved = getTotals ($userid, "Approved");
-        $pending = getTotals ($userid, "Pending");
+        $pending = getStudentAwaitingDelivery($userid);
         $deliveredTotal = getDelivered($userid);
         $availableBalance = getStudentAvailableBalance($userid);
     }
 ?>
 <div class="col-md-4 ml-3">
-                    <?php
-                        echo '<p>Outstanding balance: <span>' . $availableBalance . '</span></p>';
-                    ?>
-                </div>
-                <div class="col-3">
-                    <ul class="list-group">
-                      <?php
-                         echo '<li class="list-group-item  border-0">Submitted: <span>' . $submitTotal . '</span></li>';
-                         echo '<li class="list-group-item  border-0">Approved: <span>' . $approved . '</span></li>';
-                         echo '<li class="list-group-item  border-0">Awaiting delivery: <span>' . $pending . '</span></li>';
-                         echo '<li class="list-group-item  border-0">Delivered: <span>' . $deliveredTotal . '</span></li>';
-                      ?>
-                    </ul>
-                </div>
-                </div>
-          </div>
-         <div class="accordion" id="accordionExample">
+          <?php
+              echo '<h6>Outstanding balance: <span>' . $availableBalance . '</span></h6>';
+          ?>
+      </div>
+       <div class="col-3">
+           <ul class="removeBullets">
+             <?php
+                echo '<li>Submitted: <span>' . $submitTotal . '</span></li>';
+                echo '<li>Approved: <span>' . $approved . '</span></li>';
+                echo '<li>Awaiting delivery: <span>' . $pending . '</span></li>';
+                echo '<li>Delivered: <span>' . $deliveredTotal . '</span></li>';
+             ?>
+           </ul>
+       </div>           
+ </div>
+ <div class="accordion" id="accordionExample">
   <div class="card">
     <div class="card-header" id="headingOne">
       <h5 class="mb-0">
@@ -104,3 +104,4 @@
     </div>
   </div>
 </div>
+</body>

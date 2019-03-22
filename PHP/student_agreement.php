@@ -27,4 +27,7 @@
         session_destroy();
         header("Location: ../index.html? activity=Credentials_Not_User_Type_error");
     }
+
+
 ?>
+

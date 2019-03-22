@@ -15,4 +15,9 @@
 <script src="../../../Scripts/selectAll.js"></script>
 <script src="../../../Scripts/disabledButton.js"></script>
 <script src="../../../Scripts/ajaxTableUpdateDrop.js"></script>
+<script src="../../../Scripts/nightMode.js"></script>
+<script src="../../../Scripts/summerMode.js"></script>
+<script src="../../../Scripts/fontSize.js"></script>
+<script src="../../../Scripts/ajaxStaffNewRequest.js"></script>
+
 </html>

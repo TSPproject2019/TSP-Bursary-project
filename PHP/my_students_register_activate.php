@@ -7,7 +7,7 @@
     //include (Student/php/StudentReviewDraft_A.php);
     #require_once '../../Shared/php/AllHeader.php'; 
     //connect to the functions
-    require 'functions.php'; // connects to the functions.
+    require_once 'functions.php'; // connects to the functions.
     # echo " start Step 1.0..<br>"; // for testing purposes
 
     #require 'functions.php'; // connects to the functions. // seems to fails to load page if this is loaded.
@@ -78,7 +78,7 @@
             //SEND EMAIL HERE CODE the current code is re-marked out and does not work.
             //When you go back to the page, the page table gets lost for some reason.
             //Log out and log in again as the staff member to see the table again.
-            /*
+            
              $to = $email;
              $subject = "Bursary request system registration PIN code.";
 
@@ -94,13 +94,15 @@
              $header .= "Cc:skripnikovnikita@gmail.com \r\n";
 
              $retval = mail ($to,$subject,$message,$from);
+             
+             echo'<a href="mailto:'.$to.'S?ubject=Bursary Request PIN?Body=<b>'.$pin.'</b>" target=""></a>';
 
              if($retval == true ) {
                 echo "<p>Message sent successfully...</p>";
              }else {
                 echo "<p>Message could not be sent...</p>";
              }
-            //goBack(); */
+            //goBack(); 
         }
     }
 ?>

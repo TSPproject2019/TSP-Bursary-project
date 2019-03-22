@@ -6,12 +6,88 @@
         header("Location: {$_SERVER['HTTP_REFERER']}");
         exit;
     }
+    //function to get all requests under status submitted
+    function getAdminSubmitted()
+    {
+        require 'connect.php';
+        
+        $SQL_stmt = "SELECT COUNT(*) AS 'Total' FROM bursaryRequests 
+        WHERE bRequestsStatus = 'Submitted'";
+        
+        $totalResult = 0; 
+        
+        $result = $DBconnection->query($SQL_stmt);
+        
+        if ($row = $result->fetch()){
+            
+            $totalResult = $row['Total'];
+        }
+        return $totalResult;
+    }
+    //function to get all requests under status approved
+    function getAdminApproved()
+    {
+        require 'connect.php';
+        
+        $SQL_stmt = "SELECT COUNT(*) AS 'Total' FROM bursaryRequests
+        WHERE bRequestsStatus = 'Approved'";
+        
+        $totalResult = 0; 
+        
+        $result = $DBconnection->query($SQL_stmt);
+        
+        if ($row = $result->fetch()){
+            
+            $totalResult = $row['Total'];
+        }
+        return $totalResult;
+    }
+    //function to get all request items that are ordered but not delivered and are approved
+    function getAdminAwaitingDelivery()
+    {
+        require 'connect.php';
+        
+        $SQL_stmt = "SELECT COUNT(DISTINCT ItemID) AS 'Total' FROM itemsAndRequests
+        WHERE itemsAndRequests.Ordered = 'TRUE' AND itemsAndRequests.Delivered = 'FALSE'
+        AND itemsAndRequests.StaffItemApproved = 'Yes' 
+        AND itemsAndRequests.AdminItemApproved = 'Yes'";
+        
+        $totalResult = 0; 
+        
+        $result = $DBconnection->query($SQL_stmt);
+        
+        if ($row = $result->fetch()){
+            
+            $totalResult = $row['Total'];
+        }
+        return $totalResult;
+    }
+    function getStudentAwaitingDelivery($uID)
+    {
+        require 'connect.php';//connects to the SQL database.
+        $SQL_stmt = "SELECT COUNT(DISTINCT ItemID) AS 'Total' FROM itemsAndRequests
+        WHERE itemsAndRequests.StudentID = " . $uID . "
+        AND itemsAndRequests.Ordered = 'TRUE'
+        AND itemsAndRequests.Delivered IS NULL
+        AND itemsAndRequests.StaffItemApproved = 'Yes'
+        AND itemsAndRequests.AdminItemApproved = 'Yes'";
+        $totalResult = 0;
+        
+        $result = $DBconnection->query($SQL_stmt);
+       
+        if ($row = $result->fetch()){
+            
+            $totalResult = $row['Total'];
+          
+        }
+        return $totalResult;
+    }
     // get the totals from the bursaryRequests table using user ID and the request status.  
     function getTotals ($uID, $stat){
         global $totalResult;
         require 'connect.php';//connects to the SQL database.
        # echo " start Step 4.0..<br>"; // for testing purposes
-        $SQL_stmt = "SELECT COUNT(*) AS 'Total' FROM bursaryRequests
+        $SQL_stmt = "SELECT COUNT(bRequestsID) AS 'Total' FROM bursaryRequests
           INNER JOIN itemsAndRequests WHERE itemsAndRequests.RequestID = bursaryRequests.bRequestsID 
           AND itemsAndRequests.StudentID = " . $uID . "
           AND bRequestsStatus = '" . $stat . "'";
@@ -45,14 +121,11 @@
             $deliveredTotal = 0; 
         
             $result = $DBconnection->query($SQL_stmt);
-            # echo " start Step 4.2..<br>"; // for testing purposes
-            // now get the data
+            
             if ($row = $result->fetch()){
-                // varify that it is a valid userID
-                # echo " start Step 4.2.1..<br>"; // for testing purposes
-                // Bind results by column name
+                
                 $deliveredTotal = $row['Total'];
-                #return $submitTotal;
+  
             }
         return $deliveredTotal; 
     }
@@ -237,7 +310,16 @@
           $admin = 0;
             
           $result = $DBconnection->query($SQL_stmt);
-          
+        
+          if ($result->fetch()==FALSE){
+            echo '<tr align="middle">
+                <th scope="row" colspan="7">No Submissions</th>
+                </tr>';
+          }
+          else
+          {
+             $result = $DBconnection->query($SQL_stmt);
+              
           while ($row = $result->fetch())
           {
             $staff = $row['staff'];//Retrieve staff verdict
@@ -266,7 +348,8 @@
                 <td><span style="float:left"><button type="submit" name="submit" value="openSubmitted_'.$row['id'].'" class="btn btn-primary" data-toggle="modal" data-target="#ModalLong">Open</button></span></td>
                 </tr>';
             }
-          }           
+             }
+          }
     }
 
     
@@ -365,7 +448,7 @@
     
           if ($result->fetch()==FALSE){//if query returns nothing
             echo '<tr style align = "middle">
-                <th scope="row" colspan="4">No Existing Drafts</th>
+                <th scope="row" colspan="6">No Existing Drafts</th>
                 </tr>';
           }
           else //If there is a result
@@ -405,6 +488,7 @@
     { 
           require 'connect.php';
           $SQL_stmt = "SELECT bursaryRequests.bRequestsRequestDate AS 'request_Date', COUNT(itemsAndRequests.ItemID) AS 'item_count',
+          bursaryRequests.bRequestsID AS 'request_id',
           SUM(IFNULL(bursaryRequestItems.brItemPrice,0) + IFNULL(bursaryRequestItems.brItemPostage,0) + 
           IFNULL(bursaryRequestItems.brItemAdditionalCharges,0)) AS 'total_price' FROM bursaryRequests
           INNER JOIN itemsAndRequests ON itemsAndRequests.RequestID = bursaryRequests.bRequestsID
@@ -418,7 +502,7 @@
       
           if ($result->fetch()==FALSE){
             echo '<tr style align ="middle">
-                <th scope="row" colspan="3" >No Existing Drafts</th>
+                <th scope="row" colspan="6" >No Existing Drafts</th>
                 </tr>';
           }
           else
@@ -428,6 +512,7 @@
               {
                     echo '<tr>
                     <th scope="row">'.$row['request_Date'].'</th>
+                    <td>'.$row['request_id'].'</th>
                     <td>'.$row['item_count'].'</td>
                     <td>'.$row['total_price'].'</td>
                     <th><span style="float:left"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalLong">Edit </button></span></th>
@@ -435,6 +520,59 @@
               }
           }
       }
+
+    function getStaffHistory($uID) //Nick, This is a weird one.. The function works but it doesnt, 
+        //It shows a blank table but does not show "No History" like it should if there are no results, it displays 
+        //a blank table as if there ARE results but they're just not showing. I think line 539 might be the problem but cant quite figure it out
+        //The terminal is returning an empty set which is good because that means the query is right (I think lol)
+    {
+
+        require 'connect.php'; 
+
+        $courseTitle = $_SESSION['courseTitle'];
+        
+        $SQL_stmt = "SELECT users.userID AS 'Student_ID', bursaryRequests.bRequestsID AS 'Request_ID',
+             CONCAT(users.userFirstName,' ',users.userLastName) AS 'Student_Name',
+             bursaryRequests.bRequestsRequestDate AS 'Date_submitted',
+             SUM(IFNULL(bursaryRequestItems.brItemPrice,0) + IFNULL(bursaryRequestItems.brItemPostage,0) + IFNULL(bursaryRequestItems.brItemAdditionalCharges,0)) AS 'Total_price',
+             bursaryRequests.bRequestsStatus AS 'Status' FROM users
+             INNER JOIN itemsAndRequests ON users.userID = itemsAndRequests.StudentID 
+             INNER JOIN bursaryRequests ON bursaryRequests.bRequestsID = itemsAndRequests.RequestID
+             AND bursaryRequests.bRequestsStaffID = '".$uID."'
+             AND bursaryRequests.bRequestsStatus NOT LIKE 'Draft'
+             INNER JOIN bursaryRequestItems ON bursaryRequestItems.brItemID = itemsAndRequests.ItemID
+             INNER JOIN course ON course.courseID = bursaryRequests.bRequestsCourseID
+             AND course.courseTitle = '".$courseTitle."'
+             GROUP BY bursaryRequests.bRequestsID
+             ORDER BY bursaryRequests.bRequestsRequestDate DESC"; 
+
+        $result = $DBconnection->query($SQL_stmt); 
+
+        if ($result->fetch()==FALSE){
+           echo '<tr style align ="middle">
+              <th scope="row" colspan="6" >No History</th>
+              </tr>';
+            
+         }
+          else
+          {
+              $result = $DBconnection->query($SQL_stmt);
+              while ($row = $result->fetch())
+              { 
+                  echo '<tr>
+                    <th scope="row">'.$row['Student_ID'].'</th>
+                    <td>'.$row['Student_Name'].'</td>
+                    <td>'.$row['Request_ID'].'</td>
+                    <td>'.$row['Date_submitted'].'</td>
+                    <td>'.$row['Total_price'].'</td>
+                    <td>'.$row['Status'].'</td>
+                    </tr>';   
+              }
+              
+          }
+     
+     }  
+     
       function getStudentInformation($uID, $courseTitle, $courseYear)
       {
           //is called within StaffNewRequest.php Line 176
@@ -466,17 +604,16 @@
           else
           {
               $result = $DBconnection->query($SQL_stmt);
+              $count = 1;
               while ($row = $result->fetch())
               {
-                  $count = 1;
-                   // $studentName = $row['first'] . " " . $row['last'];
-                  //Store student id in the checkbox value
                     echo '<tr>
                     <th scope="row">'.$row['Student_ID'].'</th>
                     <td>'.$row['first'].' '.$row['last'].'</td>
                     <td>'.$row['Available_Balance'].'</td>
-                    <td><input type="checkbox" class="checkbox" name="checkbox"'.$count.' value="'.$row['Student_ID'].'" ></td>
+                    <td><input type="checkbox" class="checkbox" name="checkbox'.$count.'" value="'.$row['Student_ID'].'" ></td>
                     </tr>';
+                  $count++;
               }
           }
       }
@@ -586,7 +723,7 @@
         
           if ($result->fetch()==FALSE){
             echo '<tr style align ="middle">
-                <th scope="row" colspan ="8">No Submisions</th>
+                <th scope="row" colspan ="5">No Submisions</th>
                 </tr>';
           }
           else
@@ -608,8 +745,8 @@
 function getStaffStudents($uID)
 {
     require 'connect.php';
-    //Not a finished query
-    $SQL_stmt = "SELECT users.userID AS 'id', users.userPIN AS 'pin', users.userRegistered AS 'reg',
+    //Query that gets user details belonging to staff and their grants based on the system.
+    $SQL_stmt = "SELECT users.userID AS 'id', users.userAccessGranted AS 'activated', users.userPIN AS 'pin', users.userRegistered AS 'reg',
     CONCAT(users.userFirstName, ' ', users.userLastName) AS 'user',
     course.courseTitle AS 'course' FROM users
     INNER JOIN departmentsStaffCourseStudents ON users.userID = departmentsStaffCourseStudents.bscsStudentID
@@ -632,7 +769,8 @@ function getStaffStudents($uID)
               
               while ($row = $result->fetch())
               {
-                  $registed = $row['reg'];
+                  $registed = $row['reg'];//Getting value if user is registered or not.
+                  $accessGranted = $row['activated']; //Getting value if the access has been granted or not
                   
                   if($registed == 0)//Do not display activate buton if user is not registered
                   {
@@ -644,11 +782,13 @@ function getStaffStudents($uID)
                         <td>'.$row['course'].'</td>                    
                         <td>'.$registed.'</td>
                         <td>'.$row['pin'].'</td>
-                        <td><button type="submit" name="submit" class="btn btn-primary" value="send_'.$row['id'].'" >Send PIN</button></td>
+                        <!-- <td><button type="submit" name="submit" class="btn btn-primary" value="send_'.$row['id'].'" >Send PIN</button></td> -->
+                        <!-- <td><button href="mailto:'.$row['id'].'@student.lincolncollege.ac.uk?Subject=Bursary Request PIN?Body=<b>'.$row['pin'].'</b>" class="btn btn-primary" value="send_'.$row['id'].'" >Send PIN</button></td> -->
+                        <td><a href="mailto:'.$row['id'].'@student.lincolncollege.ac.uk?Subject=Bursary%20Request%20PIN&Body=Your%20Bursary%20Request%20PIN%20=%20'.$row['pin'].'" style="width: 35; height: 20;" class="btn btn-success" title="Email PIN">Email PIN</a></td>
                         <td></td>
                         </tr>';
                   }
-                  if($registed == 1) //Display activate button only if user is registered
+                  if($registed == 1 && $accessGranted == 0) //Display activate button only if user is registered
                   {
                        $registed = "Yes";
                        echo '<tr>
@@ -659,6 +799,19 @@ function getStaffStudents($uID)
                         <td>'.$row['pin'].'</td>
                         <td></td>
                         <td><button type="button" name="submit" class="btn btn-primary" value="activate_'.$row['id'].'" >Activate</button></td>
+                        </tr>';
+                  }
+                  if($registed == 1 && $accessGranted == 1) //Do not display buttons if user is registered and activated
+                  {
+                       $registed = "Yes";
+                       echo '<tr>
+                        <th scope="row">'.$row['id'].'</th>
+                        <td>'.$row['user'].'</td>
+                        <td>'.$row['course'].'</td>                    
+                        <td>'.$registed.'</td>
+                        <td>'.$row['pin'].'</td>
+                        <td>Registered</td>
+                        <td>Activated</td>
                         </tr>';
                   }
               }

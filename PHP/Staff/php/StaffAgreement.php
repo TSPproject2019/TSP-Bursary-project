@@ -39,13 +39,14 @@
          $approvedTotal = getStaffApproved($userid,$userType,"Approved");
          $awaitingDelivery = getStaffAwaitingDelivery($userid,$userType);
     }
-?>              
+?>     
+<body id="demo">
                 <div class="col-md-4 ml-4">
-                    <ul class="list-group list-group-flush">
+                    <ul class="removeBullets">
                        <?php
-                       echo'<li class="list-group-item">Submitted: '. $submittedTotal .'</li>';
-                       echo'<li class="list-group-item">Approved: '. $approvedTotal .'</li>';
-                       echo'<li class="list-group-item">Awaiting delivery: '. $awaitingDelivery .'</li>';
+                       echo'<li>Submitted: '. $submittedTotal .'</li>';
+                       echo'<li>Approved: '. $approvedTotal .'</li>';
+                       echo'<li>Awaiting delivery: '. $awaitingDelivery .'</li>';
                           ?>
                     </ul>
                 </div>
@@ -78,20 +79,8 @@
               </div>
           </section>
           
-          <section class="container mt-2">
-              <form class="mt-3">
-              <!-- <div> -->
-                  <div class="form-check" style="text-align: center">
-                      <input class="form-check-input" type="checkbox" value="" id='agreeCheckbox'>
-                      <label class="form-check-label" for="check1">I CONSENT THIS....</label>
-                  </div>
-                  <div class="form-check" style="text-align: center">
-                      <input class="form-check-input" type="checkbox" value="" id="check2">
-                      <label class="form-check-label" for="check2">I DO NOT CONSENT TO THIS....</label>
-                      <div>
-                           <input type="submit" name="submit" class="btn btn-success mt-2" id='send' value="Submit" disabled />
-                      </div>
-                  </div>
+          
                </div>
             </form>
           </section>
+</body>

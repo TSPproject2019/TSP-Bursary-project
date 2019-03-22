@@ -44,10 +44,10 @@ which is then encrypted using md5, which is what is inserted into the database.*
 # Danny md5 = '357afb1752b2244d3dff0f9059c818ee'
 # Andrius md5  '741ff3f6dc942ef8422320452d0f4d40'
 # no md5 reference confirm for the 2 new student users.
-INSERT INTO users (userID, userFirstName, userLastName, userEmail, userType, userActive,userPIN)
-  VALUES (293779, "Nikita", "Skripnikov", '293779@student.lincolncollege.ac.uk', "Student", '1',FLOOR( RAND() * (9999-1000) + 1000));
-INSERT INTO users (userID, userFirstName, userLastName, userEmail, userType, userActive,userPIN)
-  VALUES (29000, "Danny", "McCoombs", '29000@student.lincolncollege.ac.uk', "Student", '1',FLOOR( RAND() * (9999-1000) + 1000));
+INSERT INTO users (userID, userFirstName, userLastName, userEmail, userPassword, userType, userActive,userPIN)
+  VALUES (293779, "Nikita", "Skripnikov", '293779@student.lincolncollege.ac.uk','228367f8fa2f21aadceaedfae983e156',"Student", '1',FLOOR( RAND() * (9999-1000) + 1000));
+INSERT INTO users (userID, userFirstName, userLastName, userEmail, userPassword, userType, userActive,userPIN)
+  VALUES (29000, "Danny", "McCoombs", '29000@student.lincolncollege.ac.uk','357afb1752b2244d3dff0f9059c818ee', "Student", '1',FLOOR( RAND() * (9999-1000) + 1000));
 INSERT INTO users (userID, userFirstName, userLastName, userEmail, userType, userActive,userPIN)
   VALUES (27865, "Andrius", "Williams", '27865@student.lincolncollege.ac.uk', "Student", '1',FLOOR( RAND() * (9999-1000) + 1000));
 INSERT INTO users (userID, userFirstName, userLastName, userEmail, userType, userActive,userPIN)
@@ -59,8 +59,8 @@ INSERT INTO users (userID, userFirstName, userLastName, userEmail, userType, use
 # John md5 = '2a9d2ec24d4b9d69ebb7131e5767027f'
 # Jeremy md5 = '0efc26550cc2437061eec003dfe637cd'
 # Rebbeca md5 = 'f17c8ae0501ef044fab774e79792c170'
-INSERT INTO users (userID, userFirstName, userLastName, userEmail, userType, userActive,userPIN)
-  VALUES (52354,"John","Rogers", 'JRogers@lincolncollege.ac.uk', "Staff", '1',FLOOR( RAND() * (9999-1000) + 1000));
+INSERT INTO users (userID, userFirstName, userLastName, userEmail, userPassword, userType, userActive,userPIN)
+  VALUES (52354,"John","Rogers", 'JRogers@lincolncollege.ac.uk','2a9d2ec24d4b9d69ebb7131e5767027f', "Staff", '1',FLOOR( RAND() * (9999-1000) + 1000));
 INSERT INTO users (userID, userFirstName, userLastName, userPassword, userEmail, userType, userActive,userPIN)
   VALUES (59021,"Jeremy","Smith", "0efc26550cc2437061eec003dfe637cd", 'JSmith@lincolncollege.ac.uk', "Staff", '1',FLOOR( RAND() * (9999-1000) + 1000));
 INSERT INTO users (userID, userFirstName, userLastName, userPassword, userEmail, userType, userActive,userPIN)
@@ -68,8 +68,12 @@ INSERT INTO users (userID, userFirstName, userLastName, userPassword, userEmail,
 
 #-------Admin user insertion------------#
 # Stephen md5 = 'eb64c27eb57c8f98c8a36d87d7464f3b'
+INSERT INTO users (userID, userFirstName, userLastName, userEmail, userPassword, userType, userActive,userPIN)
+  VALUES (4561,"Stephen","Smith", 'SSmith@lincolncollege.ac.uk','eb64c27eb57c8f98c8a36d87d7464f3b', "Admin", '1',FLOOR( RAND() * (9999-1000) + 1000));
+  # ++++++ need to create a bursaryAdministator user account with a fixed Pin, and this is the account used to..
+  # ++++++ .. initialy log into the bursary system and register staff and supply staff with their pins ++++++ #
 INSERT INTO users (userID, userFirstName, userLastName, userEmail, userType, userActive,userPIN)
-  VALUES (4561,"Stephen","Smith", 'SSmith@lincolncollege.ac.uk', "Admin", '1',FLOOR( RAND() * (9999-1000) + 1000));
+  VALUES (4561,"Bursary","Administrator", 'SSmith@lincolncollege.ac.uk', "Admin", '1', '2877');
 
 #-------Student table insertion------------#
 INSERT INTO student(studentID,dOB,gender,availableBalance) 
@@ -93,7 +97,7 @@ INSERT INTO admin(adminID) VALUES (4561);
 
 #-------Course table insertion------------#
 INSERT INTO course(courseID, courseTitle, courseSubject, courseType, courseLevel, courseStartDate, courseEndDate, courseYear)
-VALUES ("HEBCSIT111", "BCs Computer Science", "Information Technology", "Full_Time",'4', "2017-09-05", "2018-06-30","2017/2018");
+VALUES ("HEBCSIT111", "BCs Computer Science", "Information Technology", "Full_Time", '4', "2017-09-05", "2018-06-30","2017/2018");
 INSERT INTO course(courseID, courseTitle, courseSubject, courseType, courseLevel, courseStartDate, courseEndDate, courseYear)
 VALUES ("HEBCSIT112", "BCs Computer Science", "Information Technology", "Part_Time", '4', "2017-09-05", "2018-06-30","2017/2018");
 INSERT INTO course(courseID, courseTitle, courseSubject, courseType, courseLevel, courseStartDate, courseEndDate, courseYear)
@@ -170,6 +174,7 @@ INSERT INTO staffToDepartment(stDepartmentID,stStaffID)
 VALUES ("SiemensLincCol1002",59021);
 
 #-------Bursary requests table insertion------------#
+/*
 INSERT INTO bursaryRequests(bRequestsCourseID,bRequestsStaffID,bRequestsJustification,bRequestsRequestDate,bRequestsStatus,bRequestsStudentRequest)
 VALUES ("HEBCSIT111",52354,"Rasberry Pi for course work.","2019-10-01","Submitted",TRUE); /*Student request for rasberry Pi for full time computer course*/
 INSERT INTO bursaryRequests(bRequestsCourseID,bRequestsStaffID,bRequestsJustification,bRequestsRequestDate,bRequestsStatus,bRequestsStudentRequest)
@@ -178,14 +183,14 @@ INSERT INTO bursaryRequests(bRequestsCourseID,bRequestsStaffID,bRequestsJustific
 VALUES ("HEMNG001",59021,"Spanner for each student.","2019-01-01","Submitted",TRUE); /*Staff request for bulk order for mechanical engineering course for 2 people*/ 
 INSERT INTO bursaryRequests(bRequestsCourseID,bRequestsStaffID,bRequestsJustification,bRequestsRequestDate,bRequestsStatus,bRequestsStudentRequest)
 VALUES ("HEHAIR001",53270,"Shampoo and hair brush for practicals.","2019-01-01","Submitted",TRUE); /*Student reqeust for hair and beauty course 2 items*/
-
+*/
 #-------Bursary request items table insertion------------#
 /*Bursary funds can be spent on any of the following:
 Additional qualifications (eg. FA Level 1, First Aid, Level 2 Safeguarding)
 Professional accreditation or membership (eg. Guild of Photographers, STA) 
 CPD workshops or events (eg. Therapy Expo, Guest speakers, industry visits)
 Vocational placements Equipment and resources* (eg. Books, uniform, IT*/
-INSERT INTO bursaryRequestItems(brItemCategory,brItemDesc,brItemURL,brItemPrice)
+/*INSERT INTO bursaryRequestItems(brItemCategory,brItemDesc,brItemURL,brItemPrice)
 VALUES("Equipment and resources","Small computer for practical work with subnetting.","https://www.amazon.co.uk/dp/B07BR61P39/ref=asc_df_B07BR61P3958142109/?tag=googshopuk-21&creative=22146&creativeASIN=B07BR61P39&linkCode=df0&hvadid=310876754081&hvpos=1o1&hvnetw=g&hvrand=17419777916425967809&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=1006876&hvtargid=pla-565320237828",64.99);
 INSERT INTO bursaryRequestItems(brItemCategory,brItemDesc,brItemURL,brItemPrice)
 VALUES("Equipment and resources","New computer keyboard","https://www.amazon.co.uk/dp/B00M75WPKO/ref=asc_df_B00M75WPKO58142109/?tag=googshopuk-21&creative=22146&creativeASIN=B00M75WPKO&linkCode=df0&hvadid=310665672682&hvpos=1o2&hvnetw=g&hvrand=3873864805278938592&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=1006876&hvtargid=pla-563720906553",9.99);
@@ -194,9 +199,10 @@ VALUES("Equipment and resources","14mm spanner.","https://www.zoro.co.uk/shop/ha
 INSERT INTO bursaryRequestItems(brItemCategory,brItemDesc,brItemURL,brItemPrice)
 VALUES("Equipment and resources","High quality shampoo","https://www.hairproductsonline.co.uk/krissell-high-protein-luxury-apple-shampoo-5-litre.html?gclid=Cj0KCQiA-c_iBRChARIsAGCOpB0zMIhhqMaZvJxEeLXV1AM-04AIP_kV2aD-NYCoCavxkj7ISxm0Fm0aAtWwEALw_wcB",15.49);
 INSERT INTO bursaryRequestItems(brItemCategory,brItemDesc,brItemURL,brItemPrice)
-VALUES("Equipment and resources","Hair brush","https://www2.hm.com/en_gb/productpage.0428290001.html?gclid=Cj0KCQiA-c_iBRChARIsAGCOpB1ZiLb0Xc4LWHuM6jssuUYUEd2poiJtZkqRbn9tTGC2DYax1BJXdUYaAkGYEALw_wcB&ef_id=Cj0KCQiA-c_iBRChARIsAGCOpB1ZiLb0Xc4LWHuM6jssuUYUEd2poiJtZkqRbn9tTGC2DYax1BJXdUYaAkGYEALw_wcB:G:s&s_kwcid=AL!850!3!316451590004!!!g!582526225888!#modal-1",6.99);
+VALUES("Equipment and resources","Hair brush","https://www2.hm.com/en_gb/productpage.0428290001.html?gclid=Cj0KCQiA-c_iBRChARIsAGCOpB1ZiLb0Xc4LWHuM6jssuUYUEd2poiJtZkqRbn9tTGC2DYax1BJXdUYaAkGYEALw_wcB&ef_id=Cj0KCQiA-c_iBRChARIsAGCOpB1ZiLb0Xc4LWHuM6jssuUYUEd2poiJtZkqRbn9tTGC2DYax1BJXdUYaAkGYEALw_wcB:G:s&s_kwcid=AL!850!3!316451590004!!!g!582526225888!#modal-1",6.99);*/
 
 #-------Items and requests table insertion------------#
+/*
 INSERT INTO itemsAndRequests(ItemID,RequestID,StudentID)
 VALUES(1,1,29000);
 INSERT INTO itemsAndRequests(ItemID,RequestID,StudentID,StaffItemApproved)/*Staff approved*/
@@ -208,7 +214,7 @@ VALUES(3,3,25789,"Yes");
 INSERT INTO itemsAndRequests(ItemID,RequestID,StudentID)
 VALUES(4,4,25432);
 INSERT INTO itemsAndRequests(ItemID,RequestID,StudentID)
-VALUES(5,4,25432);
+VALUES(5,4,25432); */
 
 #-------Departments,Staff,Course and Students table insertion------------#
 INSERT INTO departmentsStaffCourseStudents(bscsDepartmentID,bscsStaffID,bscsStudentID,bscsCourseID)

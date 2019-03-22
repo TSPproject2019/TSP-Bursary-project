@@ -1,17 +1,25 @@
 <?php
     session_start();
     require_once 'connect.php';//connects to the SQL database.
+    require_once 'functions.php';
+
+    $submitted = getAdminSubmitted();
+    $approved = getAdminApproved();
+    $waitDelivery = getAdminAwaitingDelivery();
 
     // drop down requirements on initial load (will run queries)
     // # - selectthat 
 ?>
      <div class="col-3">
-         <ul class="list-group">
-             <li class="list-group-item  border-0">Submitted: <span>10</span></li>
-             <li class="list-group-item  border-0">Approved: <span>8</span></li>
-             <li class="list-group-item  border-0">Awaiting delivery: <span>YES</span></li>
-         </ul>
-     </div>
+       <?php
+        echo '<ul class="list-group">
+              <li class="list-group-item  border-0">Submitted: <span>'.$submitted.'</span></li>
+              <li class="list-group-item  border-0">Approved: <span>'.$approved.'</span></li>
+              <li class="list-group-item  border-0">Awaiting delivery: <span>'.$waitDelivery.'</span></li>
+                        
+        </ul>';
+            ?>
+</div>
 </div>
             
     <section class="container">

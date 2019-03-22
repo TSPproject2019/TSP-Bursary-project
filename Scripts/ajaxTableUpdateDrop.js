@@ -15,11 +15,26 @@ function showCourses(level) {
 }
 function showYear(courseChosen)
 {
-   document.getElementById("yearBtn").style.visibility = "visible";
    course = courseChosen;
+   document.getElementById("yearBtn").style.visibility = "visible";
+   //showStaffStudents(course,yearSelected);
 }
 function showLevel(courseYear)
 {
     yearSelected = courseYear;
-    document.getElementById("levelBtn").style.visibility = "visible";
+    document.getElementById("courseBtn").style.visibility = "visible";
+    //document.getElementById("levelBtn").style.visibility = "visible";
+    //showStaffStudents(course,yearSelected);
 }
+/*
+function showStaffStudents(course,yearSelected) {
+           var xhttp;
+            xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if(this.readyState == 4 && this.status == 200) {
+                    document.getElementById("table").innerHTML = this.responseText;
+                }
+            };
+            xhttp.open("GET", "../PHP/StaffMyStudents.php?q=" + course + "&yr="+ yearSelected, true);
+            xhttp.send();
+}*/

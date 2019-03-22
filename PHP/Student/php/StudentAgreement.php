@@ -1,3 +1,4 @@
+<body id="demo">
 <?php
     session_start();
    # echo " start Step 0.0..<br>"; // for testing purposes
@@ -36,57 +37,48 @@
         }
         $submitTotal = getTotals ($userid, "Submitted");
         $approved = getTotals ($userid, "Approved");
-        $pending = getTotals ($userid, "Pending");
-        $deliveredTotal = getDelivered($userid;)
+        $pending = getStudentAwaitingDelivery($userid);
+        $deliveredTotal = getDelivered($userid);
         $availableBalance = getStudentAvailableBalance($userid);
     }
 ?>
-<div class="col-md-4 ml-3">
-                    <?php
-                        echo '<p>Outstanding balance: <span>' . $availableBalance . '</span></p>';
-                    ?>
-                </div>
-        <!-- <div class="row col-lg-6 justify-content-start align-items-center"> -->
-        <div class="col-3">
-                    <ul class="list-group">
-                      <?php
-                         echo '<li class="list-group-item  border-0">Submitted: <span>' . $submitTotal . '</span></li>';
-                         echo '<li class="list-group-item  border-0">Approved: <span>' . $approved . '</span></li>';
-                         echo '<li class="list-group-item  border-0">Awaiting delivery: <span>' . $pending . '</span></li>';
-                         echo '<li class="list-group-item  border-0">Delivered: <span>' . $deliveredTotal . '</span></li>';
-                      ?>
-                    </ul>
-                </div>
-          </div>
-          
+<div class="col-md-4 ml-3">   
+      <h6>Outstanding balance: <span><?php echo $availableBalance ?></span></h6>                   
+        <ul class="removeBullets">            
+             <li>Submitted: <span><?php echo $submitTotal ?></span></li>
+             <li>Approved: <span><?php echo $approved ?></span></li>
+             <li>Awaiting delivery: <span><?php echo $pending ?></span></li>
+             <li>Delivered: <span><?php $deliveredTotal ?></span></li>                      
+        </ul>
+    </div>
+</div>
           <section class="content">
-              <div class="row justify-content-center border">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Nemo reiciendis sit rerum aperiam velit, necessitatibus quae provident maxime veritatis cum dignissimos suscipit, vero quod explicabo.
-                  Repellat doloremque quasi similique a.
-            </p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Dicta beatae repudiandae quibusdam nihil, molestias temporibus enim deserunt, earum sequi!
-                  Perferendis quo error voluptate sed nostrum hic numquam magnam distinctio odit.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Dicta beatae repudiandae quibusdam nihil, molestias temporibus enim deserunt, earum sequi!
-                  Perferendis quo error voluptate sed nostrum hic numquam magnam distinctio odit.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Dicta beatae repudiandae quibusdam nihil, molestias temporibus enim deserunt, earum sequi!
-                  Perferendis quo error voluptate sed nostrum hic numquam magnam distinctio odit.</p>
-        </div>
-        
-        <form class="mt-3">
-            <div class="form-ckeck">
-                <input class="col-1 form-check-input" type="checkbox" name="accept" value="Submit" id="agreeCheckbox">
-                <label class="col-11 form-check-label text-center" for="agreeCheckbox">
-                    I CONSENT TO THIS...
-                </label>
-            </div>
-       
-            <div>
-                <input type="submit" name="submit" class="btn btn-success mt-2" id="send" value="Submit" disabled />
-                  </div>
-        </form>
-        
+              <div class="row justify-content-center">
+                  <article class="border col-lg-6 mt-2">
+                      
+                      Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+                      sed diam nonummy nibh euismod tincidunt ut laoreet dolore
+                      magna aliquam erat volutpat. Ut wisi enim ad minim veniam,
+                      quis nostrud exerci tation ullamcorper suscipit lobortis nisl
+                      ut aliquip ex ea commodo consequat. Duis autem vel eum iriure
+                      dolor in hendrerit in vulputate velit esse molestie consequat,
+                      vel illum dolore eu feugiat nulla facilisis at vero eros et
+                      accumsan et iusto odio dignissim qui blandit praesent luptatum
+                      zzril delenit augue duis dolore te feugait nulla facilisi.
+                      Nam liber tempor cum soluta nobis eleifend option congue
+                      nihil imperdiet doming id quod mazim placerat facer possim
+                      assum. Typi non habent claritatem insitam; est usus legentis
+                      in iis qui facit eorum claritatem. Investigationes
+                      demonstraverunt lectores legere me lius quod ii legunt saepius.
+                      Claritas est etiam processus dynamicus, qui sequitur mutationem
+                      consuetudium lectorum. Mirum est notare quam littera gothica,
+                      quam nunc putamus parum claram, anteposuerit litterarum formas
+                      humanitatis per seacula quarta decima et quinta decima. Eodem
+                      modo typi, qui nunc nobis videntur parum clari, fiant sollemnes
+                      in futurum.
+                      
+                  </article>
+              </div>
           </section>
+</body>                                       
+          

@@ -24,7 +24,7 @@
     // get the data for the submitted requests
     $submitTotal = getTotals ($userid, "Submitted");
     $approved = getTotals ($userid, "Approved");
-    $pending = getTotals ($userid, "Pending");
+    $pending = getStudentAwaitingDelivery($userid);
     $availableBalance = getStudentAvailableBalance($userid);
     require_once 'Shared/php/AllHeader.php';//connects to the header section for all pages
     require_once 'Student/php/StudentMenu.php';// Drop Down Menu for all student pages

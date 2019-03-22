@@ -2,7 +2,7 @@ document.getElementById("itemprice1").addEventListener("focusout", highlightPost
 document.getElementById("itempostage1").addEventListener("focusout", highlightPost);
 document.getElementById("itemaddionalcharges1").addEventListener("focusout", highlightPost);
 /*
-function highlightPrice()
+function highlightPrice() NO LONGER NEEDED - DANNY
 {
     var price = document.getElementById("itemprice1").value;//Captures that.
     var balance = document.getElementById("balance1").getAttribute("value"); //Does not capture that
@@ -52,7 +52,7 @@ function highlightPost()
         }
 }
 /*
-function highlightAdd()
+function highlightAdd() NO LONGER NEEDED - DANNY
 {
     var count = 1; //testing
     

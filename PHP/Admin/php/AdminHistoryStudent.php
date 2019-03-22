@@ -1,11 +1,14 @@
 <?php
     session_start();
     require_once 'connect.php';//connects to the SQL database.
-    require 'functions.php';
-      
+    require_once 'functions.php';
+
+    $submitted = getAdminSubmitted();
+    $approved = getAdminApproved();
+    $waitDelivery = getAdminAwaitingDelivery();  
 
 //This query is for student. Change to Admin query
-  $total =  getTotals($_SESSION['userid'], 'Submitted');
+  //$total =  getTotals($_SESSION['userid'], 'Submitted');
 
 //////////////Retrieve courseTitles from DB  ///////////////////////////////
   $sql = "SELECT DISTINCT courseTitle FROM course";                      
@@ -31,18 +34,16 @@
   $stmt->execute();
   $users = $stmt->fetchAll();
 ////////////////////////////////////////////////////////////////////////////
-
 ?>
-
-    <div class="col-3">
-        <ul class="list-group">
-          <?php 
-                  echo  '<li class="list-group-item  border-0">Submitted: <span>' . $total . '</span></li>';
-                  echo  '<li class="list-group-item  border-0">Approved: <span>8</span></li>';
-                  echo '<li class="list-group-item  border-0">Awaiting delivery: <span>YES</span></li>';
-              ?>
-        </ul>
-    </div>
+<div class="col-3">
+       <?php
+        echo '<ul class="list-group">
+              <li class="list-group-item  border-0">Submitted: <span>'.$submitted.'</span></li>
+              <li class="list-group-item  border-0">Approved: <span>'.$approved.'</span></li>
+              <li class="list-group-item  border-0">Awaiting delivery: <span>'.$waitDelivery.'</span></li>
+                        
+        </ul>';
+            ?>
 </div>
 
 <section class="container-fluid">

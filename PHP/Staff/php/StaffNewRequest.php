@@ -14,11 +14,11 @@ session_start();
         $userType = $_SESSION['userType'];
         $userName = $firstName . " " . $lastName;
         // get course title of a staff member
-        $SQL_stmt = "SELECT DISTINCT courseTitle from course 
+        $SQL_stmt = "SELECT DISTINCT courseTitle, courseID from course 
         inner join departmentsStaffCourseStudents on course.courseID = departmentsStaffCourseStudents.bscsCourseID
         and departmentsStaffCourseStudents.bscsStaffID = '" . $userid . "'";
         // now to run the query
-
+        $courseid=0;
         //
        # echo " start Step 2.0..<br>"; // for testing purposes
         // first prepare and excecurte
@@ -30,6 +30,9 @@ session_start();
            # echo " start Step 2.1.1..<br>"; // for testing purposes
             // Bind results by column name
             $courseTitle = $row['courseTitle'];
+            $courseid = $row['courseID'];
+            
+            $_SESSION['courseid'] = $courseid;
             // store session variables
             $_SESSION['courseTitle'] =  $courseTitle; // Course title is defined for staff to display
             // this varisable is also used for posting.
@@ -42,18 +45,16 @@ session_start();
     }
 
 ?>
-
-
-
-                <div class="col-md-4 ml-4">
-                    <ul class="list-group list-group-flush">
-                       <?php
-                       echo'<li class="list-group-item">Submitted: '. $submittedTotal .'</li>';
-                       echo'<li class="list-group-item">Approved: '. $approvedTotal .'</li>';
-                       echo'<li class="list-group-item">Awaiting delivery: '. $awaitingDelivery .'</li>';
-                          ?>
-                    </ul>
-                </div>
+<body id="demo">
+        <div class="col-md-4 ml-4">
+            <ul class="removeBullets">
+               <?php
+               echo'<li>Submitted: '. $submittedTotal .'</li>';
+               echo'<li>Approved: '. $approvedTotal .'</li>';
+               echo'<li>Awaiting delivery: '. $awaitingDelivery .'</li>';
+                  ?>
+            </ul>
+        </div>
 </div>
         
 
@@ -63,18 +64,12 @@ session_start();
              <div class="form-group row">
                 <label for="course" class="col-sm-2 col-form-label">Course:</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" id="course" placeholder="Auto-generated field">
+                  <input type="text" class="form-control" id="course" disabled value="<?php echo $_SESSION['courseTitle']; ?>" placeholder="Auto-generated field">
                 </div>
               </div>
-                  <input type="hidden" class="form-control" id="tutor" placeholder="Auto-generated field">
-                   <input type="hidden" "disabled" class="form-control" disabled value="" id="fullName">
-                
-
       <form class="m-1">
-         <!--Staff ID using id stored in session storage at login page -->
-        <input type="hidden" name="courseTutorId" value="<?php echo $_SESSION['courseTutorId'] ?>" />
-        <!-- Turtor Course id stored in session storage at login page -->
-        <input type="hidden" name="courseid" value="<?php echo $_SESSION['courseid'] ?>" />
+        <!-- Tutor Course id stored in session storage at login page -->
+        <input id="courseid" type="hidden" name="courseid" value="<?php echo $_SESSION['courseid'] ?>" />
         <!--Student id -->
         <input type="hidden" name="userid" value="<?php echo $_SESSION['userid'] ?>" />
       
@@ -119,7 +114,7 @@ session_start();
             <!--Form Price field -->
               <div class="input-group col-4">
                   <div class="input-group-prepend">
-                      <span class="input-group-text" id="price" required>Item Price:</span>
+                      <span class="input-group-text" id="price" required>Price:</span>
                   </div>
                   <input type="text" class="form-control" name="itemprice1" aria-describedby="price">
               </div>
@@ -148,36 +143,96 @@ session_start();
            <div align="right" style="margin-bottom:5px;">
              <a href="javascript:addItem()" style="width: 15; height: 15;" class="btn btn-success" title="Add an Item"><span>&#43;</span></a>
            </div>
-             <button type="submit" name="submit" value="saveRequest" class="btn btn-warning btn-lg" id="Save">Save as Draft</button>
-             <button type="submit" name="submit" value="submitRequest" class="btn btn-success btn-lg" id="Submit">Submit</button>            
-            </div>
-      </form>
-     
+             <button type="submit" name="submit" value="saveStaffRequest" class="btn btn-warning btn-lg" id="Save">Save as Draft</button>
+             <button type="submit" name="submit" value="submitStaffRequest" class="btn btn-success btn-lg" id="Submit">Submit</button>  
+            
+        </div>
         <section class="col-6"> <!--Student row right side table -->
                 <div class="row">
-                    <select class="custom-select col-12 mr-2 mb-5">
-                        <option selected>Select Group</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <select id="courses" onchange="selectCourse(this.value);" class="custom-select col-12 mr-2 mb-5">
+                        <option selected>Select course</option>
+                        <?php
+                              
+                              $SQL_stmt = "SELECT DISTINCT courseTitle AS 'Course' FROM course
+                              INNER JOIN departmentsStaffCourseStudents ON departmentsStaffCourseStudents.bscsCourseID = course.courseID
+                              WHERE bscsStaffID = '". $userid ."'";
+
+                              $result = $DBconnection->query($SQL_stmt);
+                                
+                              //$count = 1;
+
+                              while ($row = $result->fetch())
+                              {
+                                echo '<option value="'.$row['Course'].'">'.$row['Course'].'</option>';
+                                //$count++;
+                              }
+                        ?>
                     </select>
                 </div>
                 
                 <div class="row">
-                    <select class="custom-select col-12 mr-2 mb-5">
+                    <select id="levels" onchange="selectLevel(this.value);" class="custom-select col-12 mr-2 mb-5">
                         <option selected>Select Level</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                         <?php
+                           $SQL_stmt = "SELECT DISTINCT courseLevel AS 'Level' FROM course
+                           INNER JOIN departmentsStaffCourseStudents
+                           ON departmentsStaffCourseStudents.bscsCourseID = course.courseID
+                           WHERE bscsStaffID = '". $userid ."' ORDER BY course.courseLevel ASC";
+
+                          $result = $DBconnection->query($SQL_stmt);
+
+                          //$count = 1;
+
+                              while ($row = $result->fetch())
+                              {
+                                echo '<option value="'.$row['Level'].'">'.$row['Level'].'</option>';
+                                //$count++;
+                              }
+                        ?>
                     </select>
                 </div>
                     
             <div class="row">
-                <select class="custom-select col--2 mr-2 mb-5">
+                <select id="years" onchange="selectYear(this.value);" class="custom-select col--2 mr-2 mb-5">
                     <option selected>Select Year</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <?php
+                      $SQL_stmt = "SELECT DISTINCT courseYear AS 'Year' FROM course
+                      INNER JOIN departmentsStaffCourseStudents
+                      ON departmentsStaffCourseStudents.bscsCourseID = course.courseID
+                      WHERE bscsStaffID = '". $userid ."' ORDER BY course.courseYear ASC";
+                    
+                       $result = $DBconnection->query($SQL_stmt);
+
+                       //$count = 1;
+
+                              while ($row = $result->fetch())
+                              {
+                                echo '<option value="'.$row['Year'].'">'.$row['Year'].'</option>';
+                                //$count++;
+                              }
+                    ?>
+                </select>
+            </div>
+            <div class="row">
+                <select id="type" onchange="selectType(this.value);" class="custom-select col--2 mr-2 mb-5">
+                    <option selected>Select Type</option>
+                    <?php
+                      $SQL_stmt = "SELECT DISTINCT courseType AS 'Type' FROM course
+                      INNER JOIN departmentsStaffCourseStudents
+                      ON departmentsStaffCourseStudents.bscsCourseID = course.courseID
+                      WHERE bscsStaffID = '". $userid ."' ORDER BY course.courseType ASC";
+                    
+                       $result = $DBconnection->query($SQL_stmt);
+
+                       //$count = 1;
+
+                              while ($row = $result->fetch())
+                              {
+                                echo '<option value="'.$row['Type'].'">'.$row['Type'].'</option>';
+                                //$count++;
+                              }
+                    echo '<option value="All">All</option>';
+                    ?>
                 </select>
             </div>
      
@@ -193,50 +248,13 @@ session_start();
 
     </thead>
                 
-  <tbody>
+  <tbody id="students">
     
       <?php
       
           echo getStudentInformation($userid);   
       
       ?>
-      
-      <!--
-      <tr>
-      <th scope="row-1">ID ONE</th>
-      <td>NAME ONE</td>
-      <td>£500.00</td>
-      <td><input type="checkbox"></td>
-
-      
-    </tr>
-    <tr>
-      <th scope="row-2">ID TWO</th>
-      <td>NAME TWO</td>
-      <td>£150.00</td>
-      <td><input type="checkbox"></td>
-      
-    </tr>
-    <tr>
-      <th scope="row-3">ID THREE</th>
-      <td>NAME THREE</td>
-      <td>00.00</td>
-      <td><input type="checkbox"></td>
-     
-    </tr>
-     <tr>
-      <th scope="row-4">ID FOUR</th>
-      <td>NAME FOUR</td>
-      <td>20.00</td>
-      <td><input type="checkbox"></td>
-      
-    </tr>
-     <tr>
-      <th scope="row-5">ID FIVE</th>
-      <td>NAME FIVE</td>
-      <td>00.00</td>
-      <td><input type="checkbox"></td>
-    </tr> -->
   </tbody>
                 
 </table>
@@ -246,6 +264,7 @@ session_start();
             
        </section><!--Student table section  END -->
       </section><!-- Row left side END -->
-     </section><!--Container section END -->
+         </form>
+     </secion><!--Container section END -->
 
 

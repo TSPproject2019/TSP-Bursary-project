@@ -2,24 +2,23 @@
     session_start();
     require_once 'connect.php';//connects to the SQL database.
 
-    // drop down requirements on initial load (will run queries)
-    // # - select group (assume this is course group) all of them
-    
-    // # - select year, all available years irrelivant of group at this point
-    
-    
-?>   
-    <div>
-        <li class="list-group-item  border-1">Outstanding balance: <span>£500.00</span></li>
-    </div>       
-    <div class="col-3">
-        <ul class="list-group">
-                    <li class="list-group-item  border-0">Submitted: <span>10</span></li>
-                    <li class="list-group-item  border-0">Approved: <span>8</span></li>
-            <li class="list-group-item  border-0">Awaiting delivery: <span>YES</span></li>
-        </ul>
+require_once 'functions.php';
+
+    $submitted = getAdminSubmitted();
+    $approved = getAdminApproved();
+    $waitDelivery = getAdminAwaitingDelivery();
+?>  
+
+   <div class="col-3">
+       <?php
+        echo '<ul class="list-group">
+              <li class="list-group-item  border-0">Submitted: <span>'.$submitted.'</span></li>
+              <li class="list-group-item  border-0">Approved: <span>'.$approved.'</span></li>
+              <li class="list-group-item  border-0">Awaiting delivery: <span>'.$waitDelivery.'</span></li>
+                        
+        </ul>';
+            ?>
     </div>
-</div>
 <section class="container-fluid mt-5"> <!--Container START -->
     <section class="row"><!--Row Start -->
      <div class="col-6">

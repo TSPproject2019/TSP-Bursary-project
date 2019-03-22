@@ -1,3 +1,4 @@
+<body id="demo">
 <?php
     session_start();
 
@@ -38,24 +39,24 @@
         // get the data for the submitted requests
         $submitTotal = getTotals ($userid, "Submitted");
         $approved = getTotals ($userid, "Approved");
-        $pending = getTotals ($userid, "Pending");
+        $pending = getStudentAwaitingDelivery($userid);
         $deliveredTotal = getDelivered($userid);
         $availableBalance = getStudentAvailableBalance($userid);
     }
 ?>
 <div class="col-md-4 ml-3">
                     <?php
-                        echo '<p>Outstanding balance: <span>' . $availableBalance . '</span></p>';
+                        echo '<h6>Outstanding balance: <span>' . $availableBalance . '</span></h6>';
                     ?>
                 </div>
         <!-- <div class="row col-lg-6 justify-content-start align-items-center"> -->
         <div class="col-3">
-                    <ul class="list-group">
+                    <ul class="removeBullets">
                       <?php
-                         echo '<li class="list-group-item  border-0">Submitted: <span>' . $submitTotal . '</span></li>';
-                         echo '<li class="list-group-item  border-0">Approved: <span>' . $approved . '</span></li>';
-                         echo '<li class="list-group-item  border-0">Awaiting delivery: <span>' . $pending . '</span></li>';
-                         echo '<li class="list-group-item  border-0">Delivered: <span>' . $deliveredTotal . '</span></li>';
+                         echo '<li>Pending Approval: <span>' . $submitTotal . '</span></li>';
+                         echo '<li>Approved: <span>' . $approved . '</span></li>';
+                         echo '<li>Awaiting delivery: <span>' . $pending . '</span></li>';
+                         echo '<li>Delivered: <span>' . $deliveredTotal . '</span></li>';
                       ?>
                     </ul>
                 </div>
@@ -75,15 +76,10 @@
   <tbody>
     
       <?php
-          # just testing somthing.. 
           echo getStudentSubmittedForms($userid);//Standard wireframe function
-    
-          //Will need to add one more column called 'Item name/Description' for the functions below
-          
-         //echo getStudentForms ($userid, "Submitted"); //For new function test to display item name as well
-         //echo getStudentForms ($userid, "Approved");
       ?>
     
   </tbody>
 </table> 
 </form>
+</body>

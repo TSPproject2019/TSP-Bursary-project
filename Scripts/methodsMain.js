@@ -29,13 +29,8 @@ function addItem(){ // to add item fields to a request
   var d0 = document.createElement('div');
     //fieldset
   var fieldset = document.createElement('fieldset');
-    fieldset.setAttribute('class', "border p-2");
+    fieldset.setAttribute('class', "border mt-2 p-2");    
     div1.appendChild(fieldset);
-  var legend = document.createElement('legend');
-    legend.setAttribute('id', "setLegend");
-    legend.innerHTML = "Item Details";
-    fieldset.appendChild(legend);
-    
     d0.setAttribute('class', "form-group row justify-content-between");
     fieldset.appendChild(d0);
     
@@ -49,11 +44,11 @@ function addItem(){ // to add item fields to a request
   d0.appendChild(h);
   // span over 1 for (-) button
   var d0a = document.createElement('div');
-    d0a.setAttribute('class',"delete-group col-2")
+    d0a.setAttribute('class',"delete-group col-2");
   d0.appendChild(d0a);
     // span over 2 for (-) button
   var d0a1 = document.createElement('div');
-    d0a1.setAttribute('class', "input-group-prepend")
+    d0a1.setAttribute('class', "input-group-prepend");
   d0a.appendChild(d0a1);
   // this is the deleteItem(-) button
   var d0a1a = document.createElement('a');
@@ -143,12 +138,8 @@ function addItem(){ // to add item fields to a request
   d3a.appendChild(d3ai);
     //item cost fieldset
   var itemCosts = document.createElement('fieldset');
-    itemCosts.setAttribute('class', "border p-2");
-    div1.appendChild(itemCosts);
-  var costsLegend = document.createElement('legend');
-    costsLegend.setAttribute('id', "setLegend");
-    costsLegend.innerHTML = "Costs";
-    itemCosts.appendChild(costsLegend);
+    itemCosts.setAttribute('class', "border mt-2 p-2");
+    div1.appendChild(itemCosts); 
   // item costing section
   var d4 = document.createElement('div');
     d4.setAttribute('class', "form-group row justify-content-between");

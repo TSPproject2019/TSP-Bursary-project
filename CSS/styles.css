@@ -156,7 +156,6 @@
     color: red;
     text-align: left;
     font-family: sans-serif;
-    font-weight: bold;
 }
 
 #logBut {
@@ -168,7 +167,7 @@
 
 p {
     text-align: center;
-    color: black;
+    
 }
 
 #but1 {
@@ -187,12 +186,201 @@ p {
 }
 
 #setLegend {
-    width: 20%;
+    width: 30%;
     margin-top: 0.5em;
     background-color: #000;
     color: #fff;
     padding: 3px 6px;
 }
+
+
+/* TESTING BELOW - danny */
+/* Code below is for the URL field to display an example of what the user has to input: Referenced from http://jsfiddle.net/cwlanca/BumU5/1/ */
+[data-tip] {
+	position:relative;
+
+}
+[data-tip]:before {
+	content:;
+	display:block;
+	content:;
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-bottom: 5px solid #1a1a1a;	
+	position:static;
+	top:40px;
+	left:35px;
+	z-index:8;
+	font-size:0;
+	line-height:0;
+	width:0;
+	height:; 
+}
+[data-tip]:after {
+	display:block;
+	content:attr(data-tip);
+	position:static;
+	top:40px;
+	left:35px;
+	padding:15px 10px;
+	background:#3d1fa8;
+	color:#fff;
+	z-index:15;
+	font-size: 0.91em;
+	height:20px;
+	line-height:0px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 10px;
+	white-space:nowrap;
+	word-wrap:normal; 
+}
+[data-tip]:hover:before,
+[data-tip]:hover:after {
+	display:block;
+}
+
+
+/*night mode*/
+/* preparation layer */
+
+* {
+  /* quick reset, do not use in production! */
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+
+/* element layer */
+
+body {
+  font-family: sans-serif;
+}
+
+
+/* general layer */
+
+/* light theme */
+.t--light {
+  background-color: hsl(0, 0%, 99.99%);
+  color: hsl(0, 0%, 5%);
+}
+
+.t--light .t-menu {
+  background-color: hsl(0, 0, 0);
+}
+
+.t--light .t-menu__item {
+  background-color: hsl(0, 0%, 85%);
+  color: hsl(0, 0%, 5%);
+}
+
+/* dark theme */
+.t--dark {
+  background-color: hsl(0, 0%, 15%);
+  color: hsl(0, 0%, 95%);
+  
+  /* font hack for dark themes */
+  -webkit-font-smoothing: antialiased !important;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
+  -webkit-text-stroke: 1px transparent;
+}
+
+.t--dark .t-menu__item {
+  background-color: hsl(0, 0%, 15%);
+  color: hsl(0, 0%, 95%);
+}
+
+/* object layer */
+
+.o-menu__item {
+  height: 25px;
+  width: 100px;
+    
+  transition-duration: .3s;
+  transition-property: *;
+}
+
+
+/* component layer */
+
+.c-container {
+  height: 100%;
+  width: 100%;
+  
+  transition-duration: .3s;
+  transition-property: *;
+}
+
+.c-menu {
+  width: calc(100% - 25px);
+  height: 40px;
+  padding-left: 25px;
+  
+  transition-duration: .3s;
+  transition-property: *;
+}
+
+.removeBullets {
+    padding: 0.5em;
+    list-style-type: none;
+}
+
+
+/*summer mode*/
+
+.t--summer {
+  background-color: hsl(45, 100%, 44%);
+  color: hsl(0, 0%, 95%);
+  
+  /* font hack for dark themes */
+  -webkit-font-smoothing: antialiased !important;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
+  -webkit-text-stroke: 1px transparent;
+}
+
+.t--summer .t-menu__item {
+  background-color: hsl(0, 0%, 15%);
+  color: hsl(0, 0%, 95%);
+}
+
+/*Winter Chill*/
+
+.t--winter {
+    background-color: hsl(212, 100%, 50%);
+    color: hsl(0, 0%, 95%);
+    
+    -webkit-font-smoothing: antialiased !important;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
+   -webkit-text-stroke: 1px transparent;
+}
+
+.t--winter .t-menu__item {
+   background-color: hsl(0, 0%, 15%);
+   color: hsl(0, 0%, 95%); 
+}
+
+.t--autumn {
+    background-color: hsl(39, 54%, 76%);
+    color: hsl(13, 62%, 50%);
+    
+    -webkit-font-smoothing: antialiased !important;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
+   -webkit-text-stroke: 1px transparent;
+}
+
+.t-autumn .t-menu__item {
+    background-color: hsl(0, 0%, 15%);
+    color: hsl(0, 0%, 95%);
+}
+
+.modeSelect:hover {
+    font-size: 150%;
+}
+
+
+
 
 
 

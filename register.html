@@ -9,7 +9,7 @@
 </head>
 
 <body id="backG" style="resize: both; overflow: auto;">
-<form id="form" class="flex-box-column" style="position: absolute; left: 27%; top: 20%; width: 50%; height: 390px; border-radius: 25px;" action="PHP/register.php" method="POST">
+<form id="form" class="flex-box-column" style="position: absolute; left: 27%; top: 20%; width: 50%; height: 420px; border-radius: 25px;" action="PHP/register.php" method="POST">
 
   <div class="flex-box-column" style="position: absolute; left: 5%; top: 10%;">
     <span style="text-align: left;">
@@ -18,36 +18,27 @@
       
     <div class="flex-box-row">
       <label class="formText" for="collegeID" style="width: 50%;">College ID</label>
-      <label class="formText" for="inputEmail" style="width: 50%;">Email address</label>
+      <label class="formText" for="pin" style="width: 22%;">Unique PIN</label>
+      <img id="hint" style="height: 50%; width: 3%;" src="https://cdn3.iconfinder.com/data/icons/web-and-internet-icons/512/Information-512.png" alt="Information" onclick="hDown()" onblur="hUp()">
+      <p style="display: none; font-size: 8px; color: black; background-color: white">"You need a unique PIN to register. Your PIN should be sent as an email from your tutor to your student email. Please contact your faculty head if you haven't recieved your PIN"</p>
     </div>
       
     <div class="flex-box-row">
       <input type="text" class="form-control" id="collegeID" name="userid" style="width: 40%;" placeholder="Enter your college ID">
       <label style="width: 10%;"></label>
-      <input type="email" class="form-control" id="inputEmail" name="email" style="width: 40%;" placeholder="Enter email">
+      <input type="password" class="form-control" id="pin" name="pin" style="width: 40%;" placeholder="Enter PIN">
+    </div>
+    
+    <div class="flex-box-row">
+      <label style="height: 30px"></label>
     </div>
       
-    <label style="height: 5%;"></label>
-    
-    <div class="flex-box-row">
-      <label class="formText" for="fName" style="width: 50%;">First name</label>
-      <label class="formText" for="lName" style="width: 50%;">Last name</label>
-    </div>
-    
-    <div class="flex-box-row">
-      <input type="text" class="form-control" id="fName" name="firstname" style="width: 40%;" placeholder="Enter your first name">
-      <label style="width: 10%;"></label>
-      <input type="text" class="form-control" id="lName" name="lastname"  style="width: 40%;" placeholder="Enter your last name">
-    </div>
-  
-    <label style="height: 5%;"></label>
-    
     <div class="flex-box-row">
       <label class="formText" for="collegeID" style="width: 50%;">Password</label>
     </div>
     
     <div id="pPop">
-      <p style="color: black; font-weight: bold;">A new password should have:</p>
+      <p style="color: black;">A new password should have:</p>
       <p class="popTxt">- at least 6 characters</p>
       <p class="popTxt">- at least 1 number</p>
       <p class="popTxt">- at least 1 special character e.g. !?#</p>
@@ -57,18 +48,64 @@
       <input type="password" class="form-control" id="password" name="password" style="width: 40%;" placeholder="Enter your new password" onclick="pop()" onblur="popDown()" onkeyup="check()">
       <label style="width: 10%;"></label>
       <input type="password" class="form-control" id="repassword" name="repassword" style="width: 40%;" placeholder="Re-enter your password" onkeyup="check()">
-    </div>  
-    
-    <label style="height: 5%;"></label>
+    </div> 
+      
+      
+    <div class="flex-box-row">
+       <input class="col-1 form-check-input" type="checkbox" name="accept" id="agreeCheckbox" onclick="check()" onfocus="check()">
+       <label class="col-11 form-check-label" for="agreeCheckbox">I consent to the agreement form</label>    
+    </div>
+      
+    <div class="flex-box-row">
+         <input class="btn btn-success mt-2" id="agform" value="Agreement form" style="border-radius: 10px; background-color: rgba(32, 19, 76, 1); border-color: rgba(32, 19, 76, 1);">
+         <label id="message2" style="width: 50%; text-align: right;"></label>
+    </div>
   </div>  
   
   <button id="but1" disabled="disabled" style="position: absolute; top: 90%; width: 100%; border-radius: 10px; background-color: rgba(32, 19, 76, 1); border-color: rgba(32, 19, 76, 1);" type="submit" class="btn btn-primary btn-lg" onmouseover="butHov()" onmouseout="butLeave()">Register</button>
   <link rel="stylesheet" type="text/css" href="CSS/buttonCSS.css">  
 </form>
     
+    <div id="myModal" class="modal">
+    <!-- Modal content -->
+      <div style="text-align: center;" class="modal-content">
+        <span class="close">&times;</span>
+        <p> Agreement Form :</p>
+        <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                  Dicta beatae repudiandae quibusdam nihil, molestias temporibus enim deserunt, earum sequi!
+                  Perferendis quo error voluptate sed nostrum hic numquam magnam distinctio odit.</p>
+      </div>
+    </div>
+    
 </body>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="Scripts/regScript.js"></script>
+<script>
+var modal = document.getElementById('myModal');
+
+// Get the button that opens the modal
+var btn = document.getElementById("agform");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
 </html>

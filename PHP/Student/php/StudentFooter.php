@@ -10,6 +10,10 @@
 <script src="../../../Scripts/pageFooterFunctions.js"></script>
 <script src="../../../Scripts/methodsMain.js"></script>
 <script src="../../../Scripts/inputsJS.js"></script>
+<script src="../../../Scripts/nightMode.js"></script>
+<script src="../../../Scripts/summerMode.js"></script>
+<script src="../../../Scripts/winterMode.js"></script>
+<script src="../../../Scripts/autumnMode.js"></script>
 </html>
 
 

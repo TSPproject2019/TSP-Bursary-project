@@ -38,7 +38,7 @@
         // get the data for the submitted requests
         $submitTotal = getTotals ($userid, "Submitted");
         $approved = getTotals ($userid, "Approved");
-        $pending = getTotals ($userid, "Pending");
+        $pending = getStudentAwaitingDelivery($userid);
         $deliveredTotal = getDelivered($userid);
         
         $availableBalance = getStudentAvailableBalance($userid);
@@ -46,23 +46,25 @@
 ?>
 <div class="col-md-4 ml-3">
                     <?php
-                        echo '<p>Outstanding balance: <span>' . $availableBalance . '</span></p>';
+                        echo '<h6>Outstanding balance: <span>' . $availableBalance . '</span></h6>';
                     ?>
                 </div>
         <!-- <div class="row col-lg-6 justify-content-start align-items-center"> -->
             <div class="col-3">
-                    <ul class="list-group">
+                    <ul class="removeBullets">
                       <?php
-                         echo '<li class="list-group-item  border-0">Submitted: <span>' . $submitTotal . '</span></li>';
-                         echo '<li class="list-group-item  border-0">Approved: <span>' . $approved . '</span></li>';
-                         echo '<li class="list-group-item  border-0">Awaiting delivery: <span>' . $pending . '</span></li>';
-                         echo '<li class="list-group-item  border-0">Delivered: <span>' . $deliveredTotal . '</span></li>';
+                         echo '<li>Submitted: <span>' . $submitTotal . '</span></li>';
+                         echo '<li>Approved: <span>' . $approved . '</span></li>';
+                         echo '<li>Awaiting delivery: <span>' . $pending . '</span></li>';
+                         echo '<li>Delivered: <span>' . $deliveredTotal . '</span></li>';
                       ?>
                     </ul>
                 </div>
 </div>
- <section class="container">         
-            <h1 class="text-center">Student Home</h1>
+          
+<h1 class="text-center">Student Home</h1>
+<section class="container">
+    <article>
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi et voluptate nam, aliquid amet maiores fuga,
                     facilis ipsam soluta,
@@ -113,4 +115,5 @@
                     facilis ipsam soluta,
                     reprehenderit, explicabo repellat. Maiores libero mollitia esse illo. Nam, officia, quisquam!
                 </p>
+        </article>
    </section>   

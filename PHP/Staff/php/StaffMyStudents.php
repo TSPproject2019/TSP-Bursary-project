@@ -41,6 +41,7 @@
     }
 
 ?>
+<body id="demo">
                 <!---<div class="col-md-4 ml-4">
                     <ul class="list-group list-group-flush">
                        <?php
@@ -59,14 +60,14 @@
                   <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="true" align=right>
                     Name of Group Selected
                   </button>
-                  <div class="dropdown-menu dropdown-menu-lg-right">
+                  <div id="courseBtn" class="dropdown-menu dropdown-menu-lg-right">
                   <?php
                        echo getStaffAllCourses($userid);
                     ?>
     
           </div>
           </div>
-        <div class="btn-group" style="text-align: center">
+        <div id="yearBtn" class="btn-group" style="text-align: center">
                   <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="true" align=right>
                     Year Selected
                   </button>
@@ -76,7 +77,9 @@
                     ?>
                   </div>
                </div>
-    <form action ="my_students_register_activate.php" method="POST">
+                <div id="levelBtn"></div>
+    <form >
+    <!--     <form action ="my_students_register_activate.php" method="POST"> -->
         
         <table class="table table-striped">
    <thead class="thead-dark">
@@ -90,7 +93,7 @@
       <th scope="col">Approve</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody id="table">
      <?php 
       
           echo getStaffStudents($userid);
@@ -102,3 +105,4 @@
 </div>
     </div>
 </div>
+</body>
