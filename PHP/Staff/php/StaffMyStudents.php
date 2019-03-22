@@ -51,7 +51,15 @@
                           ?>
                     </ul>
                 </div> -->
-
+<form class="form-horizontal" action="staff_import_students_csv.php" method="post" name="upload_excel" enctype="multipart/form-data">
+    <fieldset>
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="filebutton">Select Student List CSV File for Import</label>
+             <input type="file" name="file" id="file" class="btn btn-primary button-loading">
+                <button type="submit" id="submit" name="import" class="btn btn-primary button-loading" data-loading-text="Loading...">Import</button>
+            </div>
+    </fieldset>
+ </form>
 <div class="container">
             
             <div class="row m-5"><!--table selectiom START -->  

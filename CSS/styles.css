@@ -375,8 +375,14 @@ body {
     color: hsl(0, 0%, 95%);
 }
 
+.modeSelect {
+    color: black;
+    padding: 0.5em;
+    display: inline-block;
+}
+
 .modeSelect:hover {
-    font-size: 150%;
+    font-size: 120%;
 }
 
 

@@ -540,6 +540,7 @@
              INNER JOIN bursaryRequests ON bursaryRequests.bRequestsID = itemsAndRequests.RequestID
              AND bursaryRequests.bRequestsStaffID = '".$uID."'
              AND bursaryRequests.bRequestsStatus NOT LIKE 'Draft'
+             AND bursaryRequests.bRequestsStaffRequest = 'TRUE'
              INNER JOIN bursaryRequestItems ON bursaryRequestItems.brItemID = itemsAndRequests.ItemID
              INNER JOIN course ON course.courseID = bursaryRequests.bRequestsCourseID
              AND course.courseTitle = '".$courseTitle."'

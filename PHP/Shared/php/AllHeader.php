@@ -70,9 +70,9 @@
                <a class="dropdown-item" id="button1" value="larger" type="button" onclick="changeFontSize(this)" href="#">Increase font size</a> 
                <a class="dropdown-item" id="button2" vale="smaller" type="button" onclick="changeFontSize(this)"  href="#">Decrease font size</a>
                  <a class="modeSelect" onclick="nightfall()">Nightfall Mode</a>
-                 <button onclick="summerJam()">Summer Jam</button>
-                 <button onclick="winterChill()">Winter Chill</button>
-                 <button onclick="autumnBreez()">Autumn Breez</button>
+                 <a class="modeSelect" onclick="summerJam()">Summer Jam</a>
+                 <a class="modeSelect" onclick="winterChill()">Winter Chill</a>
+                 <a class="modeSelect" onclick="autumnBreez()">Autumn Breez</a>
                                   
              </div>            
         </div>
