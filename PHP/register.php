@@ -16,7 +16,7 @@
 
     echo " start Step 2.1.1..<br>"; // for testing purposes
 //    if (isset($_POST['userid']) and isset($_POST['userFirstName']) and isset($_POST['userLastName']) and isset($_POST['userEmail']) and isset($_POST['password'])){
-    if (isset($_POST['userid']) && isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['email']) && isset($_POST['password']) && isset($_POST['repassword'])){
+    if (isset($_POST['userid']) && isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['pin']) && isset($_POST['password']) && isset($_POST['repassword'])){
       
       echo " start Step 2.1.1.1..<br>"; // for testing purposes
         if(isset($_POST) & !empty($_POST)){
@@ -24,12 +24,12 @@
             $userid = $_POST['userid'];
             $userfirstname = $_POST['firstname'];
             $userlastname  = $_POST['lastname'];
-            $useremail = $_POST['email'];
+            $userpin = $_POST['pin'];
             $password = $_POST['password'];
             $repassword = $_POST['repassword'];
             
             //echo "User pre-password encrypt merged :'$pwad'";
-            $SQL_stmt = "SELECT userID, userPassword, userFirstName, userLastName, userType, userActive, userEmail FROM users WHERE userID = '" . $userid . "'";   
+            $SQL_stmt = "SELECT userID, userPassword, userFirstName, userLastName, userType, userActive, userPIN FROM users WHERE userID = '" . $userid . "'";   
             // now to run the query
             echo " start Step 2.1.1.2..<br>"; // for testing purposes
             //echo "<p> start Step 2.1.1.2a..'$SQL_stmt'</p>"; // for testing purposes
@@ -53,7 +53,7 @@
                   echo " start Step 2.1.1.3e..'$userType'<br>"; // for testing purposes
                   $userActive = $row['userActive'];
                   echo " start Step 2.1.1.3f..'$userActive'<br>"; // for testing purposes
-                  $userEmail = $row['userEmail'];
+                  $userPin = $row['userPIN'];
                   echo " start Step 2.1.1.3f..'$userEmail'<br>"; // for testing purposes
 
                   if ($userPassword == NULL) {
@@ -63,7 +63,7 @@
                       if ($userActive == 1){
                           // ensure that the users is valid and is who they say they are
                           echo " start Step 2.1.1.5..<br>"; // for testing purposes
-                          if (($userfirstname == $userFirstName) & ($userlastname == $userLastName) & ($useremail == $userEmail)){
+                          if (($userfirstname == $userFirstName) & ($userlastname == $userLastName) & ($userpin == $userPin)){
                               // Verification success! User has loggedin!
                               // and create a sesssion store of user credentials
                               $_SESSION['loggedin'] = TRUE;
