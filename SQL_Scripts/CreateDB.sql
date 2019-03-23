@@ -39,7 +39,7 @@ DROP TABLE IF EXISTS student CASCADE;
 CREATE TABLE student (
   studentID INTEGER NOT NULL UNIQUE, 
   dOB DATE NOT NULL,
-  gender BOOLEAN NOT NULL, 
+  gender TINYINT(1) NOT NULL, 
   availableBalance DECIMAL(5,2) NOT NULL, 
   PRIMARY KEY (studentID),
   FOREIGN KEY (studentID) REFERENCES users(userID) /*Linking to user CHILD TABLE OF USER*/
