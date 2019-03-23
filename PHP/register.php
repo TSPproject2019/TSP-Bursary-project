@@ -54,7 +54,7 @@
                   $userActive = $row['userActive'];
                   echo " start Step 2.1.1.3f..'$userActive'<br>"; // for testing purposes
                   $userPin = $row['userPIN'];
-                  echo " start Step 2.1.1.3f..'$userEmail'<br>"; // for testing purposes
+                  echo " start Step 2.1.1.3f..'$userPin'<br>"; // for testing purposes
 
                   if ($userPassword == NULL) {
 
